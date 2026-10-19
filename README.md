@@ -1,4 +1,4 @@
-# ⌨️ TypeMaster - سباق الطباعة السريعة التفاعلي (Online Touch Typing & Multiplayer Race)
+# ⚡ Barqtype - سباق الطباعة السريعة التفاعلي (Online Touch Typing & Multiplayer Race)
 
 منصة متطورة واحترافية للتدريب على الطباعة باللمس والسباق عبر الشبكة مع منافسين في الوقت الفعلي، بتصميم مستوحى من لوحات المفاتيح الميكانيكية الفاخرة (IQUNIX A80) وتأثيرات صوتية واقعية (Razer Green Switches).
 
@@ -37,10 +37,12 @@ node server.js
 ```
 سيعمل الخادم على المنفذ `http://localhost:3001`.
 
-### 2. فتح اللعبة (Frontend):
-يمكنك فتح ملف `TypeMaster.html` في أي متصفح مباشرة، أو فتح الرابط من الخادم:
+### 2. فتح المنصة (Frontend):
+يمكنك فتح ملف `Barqtype.html` مباشرة في أي متصفح، أو فتح الرابط من السيرفر المحلي:
 ```
-http://localhost:3001
+http://localhost:8080/Barqtype.html
+# أو مباشرة
+http://localhost:8080/
 ```
 
 ---
