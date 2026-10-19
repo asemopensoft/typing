@@ -1,0 +1,4466 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>TypeMaster - Interactive Touch Typing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Outfit:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<style>
+:root{
+  --bg:#17242d;
+  --bg2:#213442;
+  --bg3:#2c4354;
+  --bg4:#385266;
+  --text:#f4f3ef;
+  --sub:#7993a4;
+  --accent:#e8af47;
+  --accent-glow:rgba(232,175,71,0.45);
+  --ok:#48bb78;
+  --err:#e55656;
+  --bdr:rgba(255,255,255,0.09);
+  --fen:'Roboto Mono',monospace;
+  --far:'Cairo',sans-serif;
+  --fui:'Outfit',sans-serif;
+  --k-unit:min(44px, calc((100vw - 32px) / 15.6));
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:radial-gradient(circle at 50% 15%, #253947 0%, #17242d 55%, #111a21 100%);color:var(--text);font-family:var(--fui);min-height:100vh;overflow-x:hidden}
+#app{display:flex;flex-direction:column;min-height:100vh}
+
+/* HEADER (STABLE FIXED LTR LAYOUT) */
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 clamp(16px,2.5vw,32px);height:56px;border-bottom:1px solid var(--bdr);
+  background:rgba(23,36,45,0.85);backdrop-filter:blur(14px);position:sticky;top:0;z-index:50;
+  direction:ltr !important;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;letter-spacing:-0.02em;
+  direction:ltr !important;
+}
+.logo-ico{
+  width:32px;height:32px;border-radius:8px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+  font-family:var(--fen);color:#17242d;font-weight:800;
+  box-shadow:0 0 16px var(--accent-glow);
+}
+.logo-text{
+  background:linear-gradient(135deg,#ffffff 40%,var(--accent) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  font-family:var(--fui);font-weight:800;
+  display:flex;align-items:center;gap:6px;
+  direction:ltr !important;
+}
+.logo-badge{
+  font-size:9px;font-family:var(--fen);padding:2px 7px;
+  background:rgba(232,175,71,0.18);border:1px solid rgba(232,175,71,0.5);
+  color:var(--accent);border-radius:4px;letter-spacing:.1em;
+  -webkit-text-fill-color:var(--accent);
+}
+nav{
+  display:flex;gap:4px;
+  direction:ltr !important;
+}
+.nb{
+  padding:5px 14px;border-radius:7px;border:none;cursor:pointer;
+  font-size:13px;font-weight:600;font-family:var(--far);
+  background:transparent;color:var(--sub);transition:all .2s;
+}
+.nb:hover{background:var(--bg3);color:var(--text)}
+.nb.on{background:var(--accent);color:#17242d;box-shadow:0 0 14px var(--accent-glow)}
+#n-race{
+  color:var(--accent);
+  border:1px solid rgba(232,175,71,0.35);
+  background:rgba(232,175,71,0.08);
+  display:inline-flex;align-items:center;gap:6px;
+}
+#n-race:hover{background:rgba(232,175,71,0.22);color:#ffffff}
+#n-race.on{
+  background:var(--accent) !important;
+  color:#17242d !important;
+  font-weight:700;
+  box-shadow:0 0 16px var(--accent-glow);
+}
+.ctrls{
+  display:flex;align-items:center;gap:8px;
+  direction:ltr !important;
+}
+.pg{
+  display:flex;background:rgba(18,29,37,0.7);border-radius:7px;padding:2px;border:1px solid var(--bdr);gap:2px;
+  direction:ltr !important;
+}
+.pb{
+  padding:4px 10px;border-radius:5px;border:none;cursor:pointer;
+  font-size:11px;font-weight:700;background:transparent;color:var(--sub);
+  transition:all .2s;font-family:var(--fen);
+}
+.pb:hover{color:var(--text)}
+.pb.on{background:var(--accent);color:#17242d}
+select{
+  background:var(--bg2);border:1px solid var(--bdr);border-radius:7px;
+  padding:4px 10px;font-size:11px;color:var(--text);cursor:pointer;
+  font-family:var(--far);outline:none;font-weight:600;
+  direction:ltr !important;
+}
+
+/* MAIN */
+main{
+  flex:1;padding:12px clamp(12px,2vw,28px);
+  max-width:1160px;width:100%;margin:0 auto;display:flex;flex-direction:column;
+}
+.bar{
+  display:flex;justify-content:center;gap:clamp(18px,3.5vw,46px);
+  margin-bottom:12px;align-items:center;flex-wrap:wrap;
+}
+.tmr{position:relative;width:72px;height:72px;flex-shrink:0}
+.tmr svg{transform:rotate(-90deg)}
+.tmr .num{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:700;font-family:var(--fen);color:var(--accent);
+}
+.tmr .num.red{color:var(--err)}
+.stat-pill{text-align:center}
+.big{font-size:clamp(28px,3vw,38px);font-weight:700;font-family:var(--fen);line-height:1}
+.lbl{font-size:11px;color:var(--sub);margin-top:4px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+
+/* TYPING CARD (SPACIOUS, ELEGANT & NO TOP CLIPPING) */
+.card{
+  background:linear-gradient(180deg,#1f313f 0%,#172530 100%);
+  border-radius:18px;padding:22px clamp(20px,3vw,42px) 32px;
+  border:1px solid rgba(255,255,255,0.1);border-top:3px solid var(--accent);
+  cursor:text;position:relative;user-select:none;
+  height:242px;min-height:242px;max-height:242px;
+  box-shadow:0 16px 45px -8px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.08);
+  width:100%;max-width:1040px;margin:0 auto;box-sizing:border-box;
+  transition:border-color .2s,box-shadow .2s;
+}
+.card.glow{border-color:rgba(232,175,71,0.5);box-shadow:0 16px 50px -8px rgba(232,175,71,0.25)}
+#words{
+  font-size:clamp(22px,2.2vw,26px);line-height:1.85;
+  height:156px;max-height:156px;overflow:hidden;
+  letter-spacing:.025em;font-family:var(--fen);text-align:left;
+  position:relative;scroll-behavior:smooth;box-sizing:border-box;
+  padding:12px 6px 12px 6px;
+}
+#words.ar{
+  font-family:var(--far) !important;direction:rtl !important;text-align:right !important;
+  letter-spacing:normal !important;word-spacing:normal !important;
+  font-size:clamp(22px,2.2vw,26px);line-height:2.05;
+  height:156px;max-height:156px;
+  padding:14px 8px 14px 8px;
+}
+#words.ar .word,
+#words.ar .c{
+  font-family:var(--far) !important;
+  letter-spacing:normal !important;
+  word-spacing:normal !important;
+}
+.word{display:inline-block;white-space:nowrap;margin:0 5px}
+.c{display:inline;position:relative;transition:color .05s;color:var(--sub)}
+.c.sp{display:inline-block;width:0.35em}
+.c.w{color:#6c8a9e}
+.c.ok{color:var(--text)}
+.c.bad{color:var(--err);text-decoration:underline;text-underline-offset:4px}
+.c.now{color:var(--text)}
+.c.now::before{
+  content:'';position:absolute;left:-2px;top:2px;bottom:2px;width:3px;
+  background:var(--accent);border-radius:2px;
+  animation:blink 1s step-end infinite;box-shadow:0 0 10px var(--accent);
+}
+#words.ar .c.now::before{left:auto;right:-2px}
+@keyframes blink{50%{opacity:0}}
+.hint{
+  position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+  font-size:11px;color:var(--sub);pointer-events:none;white-space:nowrap;opacity:.85;
+  font-family:var(--far);
+}
+
+/* ACTIONS */
+.acts{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:10px;gap:10px;max-width:1040px;width:100%;margin-left:auto;margin-right:auto;
+  direction:ltr !important;
+}
+.gbtn{
+  background:transparent;border:1px solid var(--bdr);border-radius:7px;
+  padding:6px 16px;color:var(--sub);cursor:pointer;font-size:12px;
+  font-family:var(--far);transition:all .2s;font-weight:600;display:flex;align-items:center;gap:6px;
+}
+.gbtn:hover{color:var(--accent);border-color:var(--accent);background:var(--bg3)}
+.kbtoggle{
+  background:transparent;border:1px solid var(--bdr);border-radius:7px;
+  padding:6px 14px;color:var(--sub);cursor:pointer;font-size:11px;
+  font-family:var(--far);transition:all .2s;display:flex;align-items:center;gap:6px;font-weight:600;
+}
+.kbtoggle.on{background:rgba(232,175,71,0.14);border-color:rgba(232,175,71,0.5);color:var(--accent)}
+.kbtoggle:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ==============================================================
+   IQUNIX A80 MECHANICAL INTERACTIVE KEYBOARD
+   PHYSICAL LTR ALIGNMENT: ALWAYS LTR (NEVER FLIPPED HORIZONTALLY)
+   ============================================================== */
+#kb-wrap{
+  margin-top:12px;width:100%;max-width:1040px;margin-left:auto;margin-right:auto;
+  transition:all .3s cubic-bezier(0.4,0,0.2,1);
+  direction:ltr !important; /* CRITICAL: Hardware keyboard is physically LTR worldwide */
+}
+#kb-wrap.hidden{opacity:0;max-height:0;margin-top:0;pointer-events:none;transform:scale(0.97)}
+#kb-panel{
+  background:linear-gradient(180deg,#283c4b 0%,#1b2933 100%);
+  border:1px solid rgba(255,255,255,0.12);
+  border-top:3px solid var(--accent);
+  border-radius:18px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.65),inset 0 1px 0 rgba(255,255,255,0.12);
+  padding:10px 12px 14px;user-select:none;position:relative;overflow:hidden;
+  direction:ltr !important;
+}
+
+/* IQUNIX A80 RETRO CHASSIS TOP BAR */
+.kb-chassis-top{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:6px 10px 10px;margin-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,0.08);direction:ltr !important;
+}
+.kb-chassis-brand{display:flex;align-items:center;gap:8px}
+.hex-badge{
+  width:18px;height:18px;background:var(--accent);
+  color:#17242d;display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:900;border-radius:4px;box-shadow:0 0 10px var(--accent-glow);
+}
+.kb-chassis-title{
+  font-family:var(--fen);font-size:11px;font-weight:800;letter-spacing:.15em;
+  color:var(--text);text-transform:uppercase;
+}
+.kb-chassis-sub{
+  font-family:var(--fen);font-size:9px;font-weight:700;letter-spacing:.1em;
+  color:var(--accent);text-transform:uppercase;
+}
+.kb-chassis-bumper{display:flex;align-items:center;gap:12px}
+.kb-chassis-ribs{
+  display:flex;gap:4px;background:rgba(0,0,0,0.25);
+  padding:3px 6px;border-radius:4px;border:1px solid rgba(232,175,71,0.3);
+}
+.kb-chassis-ribs span{
+  width:12px;height:4px;border-radius:2px;
+  background:var(--accent);display:inline-block;opacity:.85;
+}
+.kb-chassis-knob{
+  width:18px;height:18px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #ffd67a 20%, #e8af47 60%, #ab771d 100%);
+  border:1px solid #142028;box-shadow:0 2px 5px rgba(0,0,0,0.6),inset 0 1px 1px rgba(255,255,255,0.6);
+  position:relative;
+}
+.kb-chassis-knob::after{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:5px;height:5px;border-radius:50%;background:#1d2c38;
+}
+
+/* GUIDE BAR (NEXT KEY & FINGER HINT) */
+.kb-guide{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:2px 8px 8px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:8px;
+  direction:ltr !important;
+}
+.kb-guide-left{display:flex;align-items:center;gap:10px}
+.kb-guide-title{
+  font-size:10px;font-family:var(--fen);letter-spacing:.2em;
+  color:var(--sub);text-transform:uppercase;font-weight:700;
+}
+.kb-guide-next{display:flex;align-items:center;gap:8px}
+.kb-next-badge{
+  background:rgba(232,175,71,0.18);border:1px solid var(--accent);
+  color:var(--accent);padding:2px 10px;border-radius:6px;font-family:var(--fen);
+  font-size:14px;font-weight:800;box-shadow:0 0 14px var(--accent-glow);
+  min-width:32px;text-align:center;
+}
+.kb-guide-right{display:flex;align-items:center;gap:10px}
+.kb-finger-badge{
+  display:flex;align-items:center;gap:8px;padding:3px 10px;
+  background:rgba(0,0,0,0.22);border:1px solid rgba(255,255,255,0.1);
+  border-radius:7px;font-size:11px;font-weight:600;font-family:var(--far);
+  transition:all .15s ease;
+}
+.kb-finger-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* KEYBOARD GRID & KEYS */
+.kb-rows{
+  display:flex;flex-direction:column;gap:calc(var(--k-unit) * 0.12);
+  align-items:center;width:100%;direction:ltr !important;
+}
+.kb-row{
+  display:flex;gap:calc(var(--k-unit) * 0.1);justify-content:center;
+  align-items:center;width:100%;direction:ltr !important;
+}
+.kb-key{
+  height:calc(var(--k-unit) * 0.88);border-radius:7px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;
+  transition:transform 0.05s cubic-bezier(0.2,0,0.4,1),
+              background 0.07s ease,
+              border-color 0.07s ease,
+              box-shadow 0.05s ease;
+  flex-shrink:0;box-sizing:border-box;cursor:default;
+}
+.kb-lbl-main{
+  font-family:var(--fen);font-weight:700;font-size:clamp(11px, calc(var(--k-unit) * 0.32), 15px);
+  line-height:1;z-index:2;
+}
+.kb-lbl-sub{
+  position:absolute;top:3px;left:5px;
+  font-size:clamp(8px, calc(var(--k-unit) * 0.2), 10px);
+  font-family:var(--fen);font-weight:600;z-index:1;
+}
+.kb-key.special .kb-lbl-main{
+  font-size:clamp(9px, calc(var(--k-unit) * 0.22), 11px);
+  letter-spacing:.03em;
+}
+.kb-key.special .kb-lbl-sub{display:none}
+
+/* 1. ALPHA / NUMBER KEYS: WARM PORCELAIN CREAM (IQUNIX A80 ALPHAS) */
+.kb-key.key-alpha{
+  background:linear-gradient(180deg,#fcfbf8 0%,#ebe6da 100%);border:1px solid rgba(0,0,0,0.08);
+  box-shadow:0 4px 0 #bebcb0,0 6px 14px rgba(0,0,0,0.25),inset 0 1px 0 #ffffff;
+}
+.kb-key.key-alpha .kb-lbl-main{color:#1d2c38}
+.kb-key.key-alpha .kb-lbl-sub{color:#6c8596}
+
+/* 2. MODIFIER KEYS: SLATE PETROL BLUE (IQUNIX A80 MODIFIERS) */
+.kb-key.key-mod{
+  background:linear-gradient(180deg,#3b5163 0%,#2c3e4e 100%);border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 4px 0 #1b2732,0 6px 14px rgba(0,0,0,0.32),inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.kb-key.key-mod .kb-lbl-main{color:#f8fafc}
+.kb-key.key-mod .kb-lbl-sub{color:rgba(255,255,255,0.45)}
+
+/* 3. ACCENT KEY (SPACEBAR): VINTAGE OCHRE YELLOW (IQUNIX A80 ACCENT) */
+.kb-key.key-accent{
+  background:linear-gradient(180deg,#f5bd55 0%,#dfa037 100%);border:1px solid rgba(0,0,0,0.08);
+  box-shadow:0 4px 0 #ad781b,0 6px 14px rgba(0,0,0,0.28),inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.kb-key.key-accent .kb-lbl-main{color:#17242d;font-weight:800}
+
+/* TACTILE BUMP ON F AND J */
+.kb-key.has-bump::after{
+  content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
+  width:12px;height:2px;background:rgba(29,44,56,0.45);border-radius:1px;
+}
+
+/* FINGER ZONE INDICATOR STRIP */
+.kb-finger-strip{
+  position:absolute;bottom:0;left:4px;right:4px;height:3px;
+  border-radius:2px 2px 0 0;opacity:0.8;
+}
+
+/* TARGET KEY HIGHLIGHT (IQUNIX GOLD PULSE) */
+.kb-key.target-key{
+  border-color:var(--accent) !important;
+  box-shadow:0 0 20px var(--accent),0 4px 0 rgba(0,0,0,0.35),inset 0 0 10px rgba(232,175,71,0.55) !important;
+  animation:targetPulse 1.2s infinite ease-in-out;z-index:5;
+}
+@keyframes targetPulse{
+  0%,100%{
+    box-shadow:0 0 14px rgba(232,175,71,0.6),0 4px 0 rgba(0,0,0,0.3),inset 0 0 8px rgba(232,175,71,0.3);
+    border-color:rgba(232,175,71,0.8);
+  }
+  50%{
+    box-shadow:0 0 28px rgba(232,175,71,1),0 4px 0 rgba(0,0,0,0.3),inset 0 0 16px rgba(232,175,71,0.7);
+    border-color:#ffd67a;
+  }
+}
+.kb-key.shift-needed{
+  border-color:#e8af47 !important;
+  box-shadow:0 0 18px rgba(232,175,71,0.9),0 4px 0 #21323e !important;
+  animation:shiftPulse 1.2s infinite ease-in-out;z-index:4;
+}
+@keyframes shiftPulse{
+  0%,100%{box-shadow:0 0 12px rgba(232,175,71,0.5),0 4px 0 #21323e}
+  50%{box-shadow:0 0 24px rgba(232,175,71,1),0 4px 0 #21323e}
+}
+
+/* KEY PRESS STATES */
+.kb-key.pressed-ok{
+  transform:translateY(3px) !important;
+}
+.kb-key.key-alpha.pressed-ok{
+  background:var(--accent) !important;border-color:#f5bc54 !important;
+  box-shadow:0 1px 0 #9e6f1a,0 0 24px rgba(232,175,71,0.9) !important;
+}
+.kb-key.key-alpha.pressed-ok .kb-lbl-main,
+.kb-key.key-alpha.pressed-ok .kb-lbl-sub{color:#17242d !important}
+
+.kb-key.key-mod.pressed-ok{
+  background:#4d6d84 !important;border-color:#6589a3 !important;
+  box-shadow:0 1px 0 #1f2f3b,0 0 24px rgba(77,109,132,0.9) !important;
+}
+.kb-key.key-mod.pressed-ok .kb-lbl-main{color:#ffffff !important}
+
+.kb-key.key-accent.pressed-ok{
+  background:#f5bc54 !important;border-color:#ffd67a !important;
+  box-shadow:0 1px 0 #9e6f1a,0 0 26px rgba(245,188,84,0.95) !important;
+}
+.kb-key.key-accent.pressed-ok .kb-lbl-main{color:#17242d !important}
+
+.kb-key.pressed-err{
+  transform:translateY(3px) !important;
+  background:#e55656 !important;border-color:#ff7878 !important;
+  box-shadow:0 1px 0 #962828,0 0 26px rgba(229,86,86,0.9) !important;
+  animation:shake 0.14s ease-in-out;
+}
+.kb-key.pressed-err .kb-lbl-main,
+.kb-key.pressed-err .kb-lbl-sub{color:#ffffff !important}
+@keyframes shake{
+  0%,100%{transform:translateY(3px) translateX(0)}
+  25%{transform:translateY(3px) translateX(-3px)}
+  75%{transform:translateY(3px) translateX(3px)}
+}
+
+/* FINGER LEGEND */
+.kb-legend{
+  display:flex;justify-content:center;gap:12px;margin-top:12px;flex-wrap:wrap;
+  padding-top:8px;border-top:1px solid rgba(255,255,255,0.05);
+  direction:ltr !important;
+}
+.kb-legend-item{display:flex;align-items:center;gap:6px}
+.kb-legend-dot{width:8px;height:8px;border-radius:2px;opacity:0.85}
+.kb-legend-lbl{font-size:10px;color:rgba(255,255,255,0.4);font-family:var(--far);font-weight:600}
+
+/* PAGES (STATS, RESULTS, LEARN) */
+.page{display:none;max-width:1120px;width:100%;margin:0 auto}
+.page.show{display:block;animation:fadeUp .3s ease forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.rbox{display:flex;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.rst{flex:1;min-width:110px;background:var(--bg3);border:1px solid var(--bdr);border-radius:12px;padding:18px 20px;text-align:center}
+.rst .v{font-size:40px;font-weight:700;font-family:var(--fen);line-height:1}
+.rst .l{font-size:11px;color:var(--sub);margin-top:6px;text-transform:uppercase;letter-spacing:.08em}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.abox{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:20px}
+.abox h4{font-size:12px;color:var(--sub);margin-bottom:14px;text-transform:uppercase;letter-spacing:.08em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--bg3);border:1px solid rgba(229,86,86,.35);border-radius:8px;padding:8px 12px;text-align:center;min-width:56px}
+.chip .ch2{font-size:20px;font-family:var(--fen);color:var(--err);font-weight:700}
+.chip .cn{font-size:11px;color:var(--sub);margin-top:2px}
+.trow{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.trow .k{font-family:var(--fen);background:var(--bg3);padding:2px 8px;border-radius:4px;font-size:14px;color:var(--accent);min-width:32px;text-align:center}
+.trow .bwrap{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.trow .bfill{height:100%;border-radius:3px}
+.trow .ms{font-size:11px;color:var(--sub);font-family:var(--fen);min-width:42px}
+.tip{background:rgba(232,175,71,.08);border:1px solid rgba(232,175,71,.25);border-radius:12px;padding:16px 20px;margin-bottom:22px;display:flex;gap:12px}
+.tip p{font-size:13px;color:var(--sub);line-height:1.65}
+.tip strong{color:var(--accent);display:block;margin-bottom:4px}
+.btns{display:flex;gap:12px;justify-content:center}
+.pri{background:var(--accent);border:none;border-radius:10px;padding:12px 36px;color:#17242d;cursor:pointer;font-size:14px;font-weight:700;font-family:var(--far)}
+.sec{background:transparent;border:1px solid var(--bdr);border-radius:10px;padding:12px 36px;color:var(--sub);cursor:pointer;font-size:14px;font-family:var(--far)}
+.og{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:22px}
+.oc{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:16px;text-align:center}
+.oc .v{font-size:28px;font-weight:700;font-family:var(--fen)}
+.oc .l{font-size:11px;color:var(--sub);margin-top:4px;text-transform:uppercase}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.cc{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:20px}
+.cc h4{font-size:12px;color:var(--sub);margin-bottom:12px;text-transform:uppercase}
+.cc .cl{display:flex;justify-content:space-between;margin-top:8px}
+.cc .cl span{font-size:11px;color:var(--sub)}
+.hmcard{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:24px;margin-bottom:22px}
+.hmcard h4{font-size:13px;color:var(--sub);margin-bottom:18px;text-transform:uppercase}
+.hmwrap{display:flex;flex-direction:column;gap:6px;align-items:center}
+.hmrow{display:flex;gap:5px}
+.hmk{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-family:var(--fen);cursor:default;border:1px solid var(--bdr);background:var(--bg3);color:var(--text);position:relative;transition:transform .15s}
+.hmk:hover{transform:translateY(-3px)}
+.hleg{display:flex;gap:16px;margin-top:14px;justify-content:center}
+.hleg div{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--sub)}
+.hleg span{width:12px;height:12px;border-radius:3px;display:inline-block}
+.achcard{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:20px;margin-bottom:22px}
+.achcard h4{font-size:13px;color:var(--sub);margin-bottom:16px;text-transform:uppercase}
+.achg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.ach{background:var(--bg3);border:1px solid var(--bdr);border-radius:10px;padding:12px;opacity:.4}
+.ach.got{opacity:1;background:rgba(232,175,71,.12);border-color:rgba(232,175,71,.4)}
+.ach .ico{font-size:24px;margin-bottom:6px}
+.ach .nm{font-size:13px;font-weight:600;color:var(--sub);margin-bottom:2px}
+.ach.got .nm{color:var(--accent)}
+.ach .ds{font-size:11px;color:var(--sub);line-height:1.4}
+.reccard{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:20px}
+.reccard h4{font-size:13px;color:var(--sub);margin-bottom:16px;text-transform:uppercase}
+.recrow{display:grid;grid-template-columns:1fr auto auto auto auto;gap:16px;align-items:center;padding:10px 14px;background:var(--bg3);border-radius:8px;font-size:13px;margin-bottom:8px}
+.lnh{margin-bottom:28px}
+.lnh h2{font-size:22px;font-weight:700;margin-bottom:6px}
+.lnh p{font-size:14px;color:var(--sub)}
+.lvs{margin-bottom:28px}
+.lvh{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.lvb{width:28px;height:28px;border-radius:50%;background:var(--bg3);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--sub);font-family:var(--fen)}
+.lvb.g{background:var(--accent);border-color:var(--accent);color:#17242d}
+.lvl{font-size:13px;color:var(--sub);text-transform:uppercase;letter-spacing:.08em}
+.lvline{flex:1;height:1px;background:var(--bdr)}
+.lgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.lc{background:var(--bg2);border:1px solid var(--bdr);border-radius:12px;padding:16px 18px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;transition:all .2s}
+.lc:hover{border-color:var(--accent);background:var(--bg4)}
+.lc .ico{font-size:28px;flex-shrink:0}
+.lc .tt{font-size:14px;font-weight:600;margin-bottom:4px}
+.lc .ds{font-size:12px;color:var(--sub);line-height:1.5}
+.lc .ks{display:flex;gap:4px;margin-top:8px;flex-wrap:wrap}
+.lc .ks span{background:var(--bg3);border:1px solid var(--bdr);border-radius:4px;padding:1px 6px;font-size:11px;font-family:var(--fen);color:var(--sub)}
+footer{padding:14px 24px;border-top:1px solid var(--bdr);display:flex;justify-content:center;gap:20px;font-size:12px;color:var(--sub);margin-top:auto}
+#toasts{position:fixed;bottom:24px;left:24px;z-index:999;display:flex;flex-direction:column;gap:10px}
+.toast2{background:var(--bg2);border:1px solid var(--accent);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:12px;min-width:260px;box-shadow:0 8px 32px rgba(0,0,0,.4);animation:fadeUp .3s ease}
+
+/* ============================================================
+   RACE MODE STYLES (GHOST DUEL + AI BOT + SPACIOUS BOX)
+   ============================================================ */
+.race-wrap{max-width:1040px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+
+/* Countdown overlay */
+#race-countdown{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(17,26,33,0.88);backdrop-filter:blur(10px);
+  pointer-events:none;
+}
+#race-countdown.hidden{display:none}
+.cd-number{
+  font-family:var(--fen);font-weight:900;font-size:clamp(80px,18vw,160px);
+  color:var(--accent);text-shadow:0 0 60px var(--accent-glow),0 0 120px var(--accent-glow);
+  animation:cdPop 0.7s cubic-bezier(0.175,0.885,0.32,1.275);
+  line-height:1;
+}
+.cd-go{
+  font-family:var(--fen);font-weight:900;font-size:clamp(60px,14vw,120px);
+  color:var(--ok);text-shadow:0 0 60px rgba(72,187,120,0.6),0 0 120px rgba(72,187,120,0.4);
+  animation:cdPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+  line-height:1;
+}
+@keyframes cdPop{from{transform:scale(2.2);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* Race header bar */
+.race-header{
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,#1f313f,#17242d);
+  border:1px solid var(--bdr);border-top:3px solid var(--accent);
+  border-radius:14px;padding:12px 22px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.4);
+}
+.race-title{display:flex;align-items:center;gap:10px}
+.race-title-ico{font-size:24px}
+.race-title-txt{font-family:var(--fen);font-weight:800;font-size:16px;letter-spacing:.05em}
+.race-title-sub{font-size:11px;color:var(--sub);font-family:var(--far);letter-spacing:.02em}
+.race-timer-badge{
+  background:rgba(232,175,71,0.15);border:1px solid var(--accent);
+  border-radius:10px;padding:6px 16px;text-align:center;
+}
+.race-timer-num{font-family:var(--fen);font-size:24px;font-weight:800;color:var(--accent);line-height:1}
+.race-timer-lbl{font-size:9px;color:var(--sub);font-family:var(--fen);letter-spacing:.15em;text-transform:uppercase}
+
+/* Race Mode Selector Toolbar */
+.race-subnav{
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(33,52,66,0.5);border:1px solid var(--bdr);border-radius:12px;
+  padding:8px 14px;gap:12px;flex-wrap:wrap;
+}
+.race-mode-pills{display:flex;gap:8px;align-items:center}
+.rm-pill{
+  background:var(--bg2);border:1px solid var(--bdr);color:var(--sub);
+  padding:7px 16px;border-radius:8px;font-size:12px;cursor:pointer;
+  font-family:var(--far);font-weight:600;display:flex;align-items:center;gap:8px;
+  transition:all .2s ease;
+}
+.rm-pill:hover{color:var(--text);border-color:var(--sub);background:var(--bg3)}
+.rm-pill.on{background:rgba(232,175,71,0.18);border-color:var(--accent);color:var(--accent);font-weight:700;box-shadow:0 0 12px var(--accent-glow)}
+.rm-bot-select{
+  background:var(--bg3);border:1px solid var(--bdr);color:var(--text);
+  border-radius:8px;padding:6px 12px;font-size:12px;font-family:var(--far);outline:none;cursor:pointer;
+}
+
+/* Player track row */
+.race-track-section{
+  background:linear-gradient(180deg,#1f313f 0%,#172530 100%);
+  border:1px solid rgba(255,255,255,0.1);border-radius:16px;
+  padding:16px 20px;
+  box-shadow:0 12px 36px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.race-player{
+  display:flex;flex-direction:column;gap:10px;
+  padding-bottom:14px;margin-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.race-player:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
+.race-player-header{display:flex;align-items:center;justify-content:space-between}
+.race-player-info{display:flex;align-items:center;gap:10px}
+.race-player-avatar{
+  width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;font-family:var(--fen);
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+.race-p1-avatar{background:linear-gradient(135deg,#e8af47,#c88b1a);color:#17242d}
+.race-p2-avatar{background:linear-gradient(135deg,#6366f1,#4338ca);color:#fff}
+.race-player-name{font-size:14px;font-weight:700;font-family:var(--far)}
+.race-player-hint{font-size:11px;color:var(--sub);font-family:var(--far)}
+.race-stat-chip{
+  background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.08);
+  border-radius:7px;padding:3px 10px;font-size:11px;
+  font-family:var(--fen);font-weight:700;
+}
+.race-stat-chip span{color:var(--sub);font-weight:400;margin-right:4px}
+.race-pct-lbl{font-size:22px;font-weight:800;font-family:var(--fen);color:var(--accent);min-width:52px;text-align:right}
+
+/* Progress track */
+.race-track{
+  position:relative;height:52px;
+  background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);
+  border-radius:10px;overflow:hidden;
+}
+.race-track-lanes{
+  position:absolute;inset:0;
+  background-image:repeating-linear-gradient(90deg,transparent,transparent calc(10% - 1px),rgba(255,255,255,0.03) calc(10% - 1px),rgba(255,255,255,0.03) 10%);
+}
+.race-finish-flag{
+  position:absolute;right:0;top:0;bottom:0;width:38px;
+  background:linear-gradient(135deg,rgba(232,175,71,0.25),rgba(232,175,71,0.08));
+  border-left:2px solid rgba(232,175,71,0.5);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.race-bar-fill{
+  position:absolute;left:0;top:8px;height:calc(100% - 16px);
+  border-radius:6px;transition:width 0.2s cubic-bezier(0.4,0,0.2,1);
+  min-width:4px;
+}
+.race-p1-fill{
+  background:linear-gradient(90deg,#e8af47,#f5d078);
+  box-shadow:0 0 14px rgba(232,175,71,0.5);
+}
+.race-p2-fill{
+  background:linear-gradient(90deg,#6366f1,#818cf8);
+  box-shadow:0 0 14px rgba(99,102,241,0.5);
+}
+.race-car{
+  position:absolute;top:50%;transform:translateY(-50%);
+  font-size:24px;line-height:1;
+  transition:left 0.2s cubic-bezier(0.4,0,0.2,1);
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  z-index:5;
+}
+
+/* BIG SPACIOUS RACE TYPING CARD */
+.race-main-card{
+  background:linear-gradient(180deg,#1f313f 0%,#172530 100%);
+  border-radius:18px;padding:20px clamp(20px,3vw,38px) 30px;
+  border:1px solid rgba(255,255,255,0.1);border-top:3px solid var(--accent);
+  cursor:text;position:relative;user-select:none;
+  height:250px;min-height:250px;max-height:250px;
+  box-shadow:0 16px 45px -8px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.08);
+  width:100%;margin:0 auto;box-sizing:border-box;
+  transition:border-color .2s,box-shadow .2s;
+}
+.race-main-card.glow-p1{border-color:var(--accent);box-shadow:0 16px 50px -8px rgba(232,175,71,0.28)}
+.race-main-card.glow-p2{border-color:#6366f1;box-shadow:0 16px 50px -8px rgba(99,102,241,0.28)}
+.race-turn-banner{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 0 10px;border-bottom:1px solid rgba(255,255,255,0.07);margin-bottom:8px;
+}
+.race-turn-badge{
+  font-size:13px;font-weight:700;font-family:var(--far);
+  display:flex;align-items:center;gap:8px;
+}
+.race-turn-sub{
+  font-size:11px;color:var(--sub);font-family:var(--far);
+}
+.race-words{
+  font-size:clamp(22px,2.2vw,26px);line-height:1.85;
+  height:142px;max-height:142px;overflow:hidden;
+  letter-spacing:.025em;font-family:var(--fen);text-align:left;
+  position:relative;scroll-behavior:smooth;box-sizing:border-box;
+  padding:12px 6px 12px 6px;
+}
+.race-words.ar{
+  font-family:var(--far) !important;direction:rtl !important;text-align:right !important;
+  letter-spacing:normal !important;word-spacing:normal !important;
+  font-size:clamp(22px,2.2vw,26px);line-height:2.05;
+  height:142px;max-height:142px;
+  padding:14px 8px 14px 8px;
+}
+.race-words.ar .word,
+.race-words.ar .c{
+  font-family:var(--far) !important;
+  letter-spacing:normal !important;
+  word-spacing:normal !important;
+}
+
+/* Winner podium */
+#race-result{
+  display:none;
+  background:linear-gradient(180deg,#1f313f,#172530);
+  border:1px solid rgba(255,255,255,0.1);border-top:3px solid var(--accent);
+  border-radius:16px;padding:32px 24px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.5);
+  text-align:center;animation:fadeUp .4s ease;
+}
+#race-result.show{display:block}
+.race-winner-badge{
+  font-size:60px;margin-bottom:8px;display:block;
+  animation:winPop 0.6s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+@keyframes winPop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.race-winner-title{
+  font-family:var(--far);font-weight:800;font-size:26px;letter-spacing:.02em;
+  margin-bottom:4px;
+}
+.race-winner-sub{font-size:13px;color:var(--sub);margin-bottom:28px;font-family:var(--far)}
+.race-podium{
+  display:flex;justify-content:center;gap:20px;margin-bottom:28px;flex-wrap:wrap;
+}
+.race-podium-card{
+  background:var(--bg3);border:1px solid var(--bdr);
+  border-radius:14px;padding:20px 28px;min-width:180px;
+  transition:transform .2s;
+}
+.race-podium-card:hover{transform:translateY(-4px)}
+.race-podium-card.gold{
+  background:rgba(232,175,71,0.12);border-color:rgba(232,175,71,0.4);
+  box-shadow:0 8px 28px rgba(232,175,71,0.2);
+}
+.race-podium-card.silver{
+  background:rgba(148,163,184,0.1);border-color:rgba(148,163,184,0.3);
+}
+.race-podium-medal{font-size:36px;margin-bottom:8px}
+.race-podium-name{font-size:15px;font-weight:700;font-family:var(--far);margin-bottom:12px}
+.race-podium-wpm{
+  font-size:40px;font-weight:800;font-family:var(--fen);
+  color:var(--accent);line-height:1;margin-bottom:2px;
+}
+.race-podium-card.silver .race-podium-wpm{color:#94a3b8}
+.race-podium-wpm-lbl{font-size:11px;color:var(--sub);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.race-podium-stats{display:flex;flex-direction:column;gap:4px}
+.race-podium-stat{font-size:12px;color:var(--sub);font-family:var(--far)}
+.race-podium-stat strong{color:var(--text);font-family:var(--fen)}
+.race-btns{display:flex;gap:12px;justify-content:center}
+
+@media(max-width:768px){
+  header{padding:0 12px;height:52px}
+  .logo-text{display:none}
+  .grid2,.cg{grid-template-columns:1fr}
+  .og{grid-template-columns:repeat(3,1fr)}
+  .kb-guide{flex-direction:column;gap:6px;align-items:stretch}
+  .kb-guide-right{justify-content:center}
+  .race-inputs{grid-template-columns:1fr}
+  .race-podium{flex-direction:column;align-items:center}
+}
+.blueprint-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bp-mark{
+  position:absolute;font-family:var(--fen);font-size:11px;font-weight:700;
+  letter-spacing:.25em;color:rgba(255,255,255,0.035);text-transform:uppercase;
+  user-select:none;
+}
+.bp-tl{top:72px;left:28px}
+.bp-tr{top:72px;right:28px}
+.bp-br{bottom:24px;right:28px}
+.bp-bl{bottom:24px;left:28px}
+#app{position:relative;z-index:1}
+
+/* ── ONLINE RACE BUTTON ──────────────────────────────── */
+.nb-online{
+  color:var(--accent) !important;
+  border:1px solid rgba(232,175,71,0.35) !important;
+  background:rgba(232,175,71,0.08) !important;
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--far) !important;
+  font-weight:600;
+  transition:all .2s ease;
+}
+.nb-online:hover{background:rgba(232,175,71,0.22) !important;color:#fff !important}
+.nb-online.on{
+  background:var(--accent) !important;
+  color:#17242d !important;
+  font-weight:700;
+  box-shadow:0 0 16px var(--accent-glow);
+}
+.nb-online.connected{
+  color:var(--ok) !important;
+  border-color:rgba(72,187,120,0.45) !important;
+  background:rgba(72,187,120,0.1) !important;
+}
+
+/* ── ONLINE RACE MODAL OVERLAY ───────────────────────── */
+#online-modal{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(10,18,25,0.88);backdrop-filter:blur(18px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+#online-modal.show{opacity:1;pointer-events:all}
+.om-box{
+  background:linear-gradient(175deg,#1f313f 0%,#17242d 100%);
+  border:1px solid rgba(255,255,255,0.12);border-top:3px solid var(--accent);
+  border-radius:22px;width:min(96vw,1040px);max-width:1040px;
+  box-shadow:0 32px 80px -8px rgba(0,0,0,0.7),0 0 60px rgba(232,175,71,0.1);
+  overflow:hidden;position:relative;transition:all .3s ease;
+}
+.om-header{
+  padding:20px 24px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.om-title{font-size:16px;font-weight:700;display:flex;align-items:center;gap:10px;color:var(--text);font-family:var(--far)}
+.om-title-ico{
+  width:34px;height:34px;border-radius:9px;
+  background:var(--accent);color:#17242d;
+  display:flex;align-items:center;justify-content:center;font-size:17px;
+  font-family:var(--fen);font-weight:800;
+  box-shadow:0 0 16px var(--accent-glow);
+}
+.om-close{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px;width:30px;height:30px;cursor:pointer;
+  color:var(--sub);font-size:16px;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.om-close:hover{background:rgba(229,86,86,.25);color:var(--err);border-color:var(--err)}
+.om-body{padding:20px 24px 24px}
+
+/* ── SCREEN SYSTEM ────────────────────────────────────── */
+.om-screen{display:none}
+.om-screen.active{display:block}
+
+/* Server URL setting */
+.om-srv-row{
+  display:flex;gap:8px;margin-bottom:18px;align-items:center;
+}
+.om-srv-inp{
+  flex:1;background:rgba(18,29,37,0.7);border:1px solid var(--bdr);
+  border-radius:8px;padding:7px 12px;color:var(--text);font-size:11px;
+  font-family:var(--fen);outline:none;transition:all .2s;
+}
+.om-srv-inp:focus{border-color:var(--accent);box-shadow:0 0 10px var(--accent-glow)}
+.om-srv-status{font-size:10px;font-family:var(--fen);padding:5px 10px;
+  border-radius:6px;font-weight:700;white-space:nowrap;
+}
+.om-srv-status.ok{background:rgba(72,187,120,0.15);color:var(--ok)}
+.om-srv-status.err{background:rgba(229,86,86,0.15);color:var(--err)}
+.om-srv-status.loading{background:rgba(232,175,71,0.15);color:var(--accent)}
+
+/* Tabs: create / join */
+.om-tabs{display:flex;gap:6px;margin-bottom:18px;background:rgba(18,29,37,0.7);border:1px solid var(--bdr);border-radius:10px;padding:4px}
+.om-tab{
+  flex:1;padding:8px 12px;border:none;border-radius:7px;cursor:pointer;
+  font-size:12px;font-weight:700;font-family:var(--far);
+  background:transparent;color:var(--sub);transition:all .2s;
+}
+.om-tab:hover{color:var(--text);background:var(--bg3)}
+.om-tab.on{
+  background:rgba(232,175,71,0.18);color:var(--accent);
+  border:1px solid rgba(232,175,71,0.45);
+  box-shadow:0 0 14px var(--accent-glow);
+}
+
+/* Input fields */
+.om-label{font-size:12px;color:var(--sub);margin-bottom:6px;font-weight:600;font-family:var(--far)}
+.om-inp{
+  width:100%;background:rgba(18,29,37,0.7);border:1px solid var(--bdr);
+  border-radius:9px;padding:10px 14px;color:var(--text);font-size:14px;
+  font-family:var(--far);outline:none;transition:border-color .15s ease, box-shadow .15s ease;margin-bottom:12px;
+  box-sizing:border-box;
+}
+.om-inp:focus{border-color:var(--accent);box-shadow:0 0 12px var(--accent-glow)}
+.om-inp.code-inp{
+  font-family:var(--fen);font-size:24px;font-weight:800;text-align:center;
+  letter-spacing:.25em;text-transform:uppercase;color:var(--accent);
+}
+
+/* Buttons */
+.om-btn{
+  width:100%;padding:11px;border:none;border-radius:10px;cursor:pointer;
+  font-size:14px;font-weight:700;font-family:var(--far);transition:all .25s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.om-btn-primary{
+  background:var(--accent);
+  color:#17242d;box-shadow:0 4px 18px var(--accent-glow);
+}
+.om-btn-primary:hover{transform:translateY(-2px);background:#f0be5e;box-shadow:0 8px 24px var(--accent-glow);color:#17242d}
+.om-btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.om-btn-sec{
+  background:rgba(255,255,255,0.06);color:var(--sub);
+  border:1px solid rgba(255,255,255,0.1);
+  margin-top:8px;
+}
+.om-btn-sec:hover{background:rgba(255,255,255,0.1);color:var(--text)}
+.om-err{color:var(--err);font-size:12px;text-align:center;margin-top:8px;min-height:18px;font-family:var(--far)}
+
+/* ── LOBBY SCREEN ─────────────────────────────────────── */
+.om-lobby-code{
+  text-align:center;margin:16px 0;
+}
+.om-lobby-code-lbl{font-size:11px;color:var(--sub);margin-bottom:8px;font-family:var(--far)}
+.om-code-display{
+  font-family:var(--fen);font-size:42px;font-weight:800;letter-spacing:.3em;
+  color:var(--accent);text-shadow:0 0 24px var(--accent-glow);
+  background:rgba(232,175,71,0.08);border:2px solid rgba(232,175,71,0.3);
+  border-radius:14px;padding:14px 20px;display:inline-block;
+}
+.om-copy-btn{
+  background:rgba(232,175,71,0.12);border:1px solid rgba(232,175,71,0.35);
+  border-radius:7px;padding:6px 14px;color:var(--accent);cursor:pointer;
+  font-size:11px;font-weight:700;font-family:var(--far);margin-top:8px;
+  transition:all .2s;display:inline-flex;align-items:center;gap:5px;
+}
+.om-copy-btn:hover{background:rgba(232,175,71,0.25);color:#fff}
+.om-players-row{
+  display:flex;gap:10px;margin:14px 0;
+}
+.om-player-slot{
+  flex:1;border:2px dashed rgba(255,255,255,0.1);border-radius:12px;
+  padding:12px;text-align:center;transition:all .3s;
+}
+.om-player-slot.filled{
+  border-style:solid;border-color:rgba(232,175,71,0.45);
+  background:rgba(232,175,71,0.08);
+}
+.om-player-slot.filled.p2{
+  border-color:rgba(72,187,120,0.45);
+  background:rgba(72,187,120,0.08);
+}
+.om-player-avatar{
+  width:42px;height:42px;border-radius:50%;margin:0 auto 6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:800;font-family:var(--fen);
+}
+.om-pa-p1{background:linear-gradient(135deg,#e8af47,#c88b1a);color:#17242d;box-shadow:0 0 14px var(--accent-glow)}
+.om-pa-p2{background:linear-gradient(135deg,#48bb78,#2f855a);color:#fff;box-shadow:0 0 14px rgba(72,187,120,0.35)}
+.om-pa-empty{background:rgba(255,255,255,0.05);color:var(--sub);border:2px dashed rgba(255,255,255,0.1)}
+.om-player-name{font-size:13px;font-weight:700;color:var(--text);font-family:var(--far)}
+.om-player-role{font-size:10px;color:var(--sub);font-family:var(--far)}
+.om-waiting-pulse{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  color:var(--sub);font-size:12px;font-family:var(--far);
+  margin:8px 0;
+}
+.om-waiting-pulse .dot{
+  width:7px;height:7px;border-radius:50%;background:var(--accent);
+  animation:pulse-dot 1.4s ease-in-out infinite;
+}
+.om-waiting-pulse .dot:nth-child(2){animation-delay:.2s}
+.om-waiting-pulse .dot:nth-child(3){animation-delay:.4s}
+@keyframes pulse-dot{0%,80%,100%{opacity:.2;transform:scale(.7)}40%{opacity:1;transform:scale(1)}}
+
+/* ── DURATION SELECTOR ──────────────────────────────── */
+.om-dur-row{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin:12px 0 16px;background:rgba(18,29,37,0.7);border-radius:12px;padding:8px 16px;
+  border:1px solid var(--bdr);flex-wrap:wrap;
+}
+.om-dur-lbl{font-size:12px;color:var(--sub);font-family:var(--far);font-weight:700}
+.om-dur-pills{display:flex;gap:6px;align-items:center}
+.om-dur-pill{
+  background:var(--bg2);border:1px solid var(--bdr);color:var(--sub);
+  padding:5px 14px;border-radius:8px;font-size:12px;font-weight:700;
+  font-family:var(--fen);cursor:pointer;transition:all .2s;
+}
+.om-dur-pill:hover{color:var(--text);border-color:var(--accent)}
+.om-dur-pill.on{
+  background:rgba(232,175,71,0.2);border-color:var(--accent);color:var(--accent);
+  box-shadow:0 0 12px var(--accent-glow);
+}
+
+/* ── ONLINE RACE DASHBOARD ──────────────────────────── */
+.om-race-dash{
+  display:grid;grid-template-columns:1fr 100px 1fr;gap:16px;align-items:center;
+  background:linear-gradient(180deg,#1f313f 0%,#172530 100%);border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;padding:14px 20px;margin-bottom:14px;
+}
+.om-track-col{display:flex;flex-direction:column;gap:6px}
+.om-track-meta{display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.om-track-name{font-weight:700;display:flex;align-items:center;gap:6px;font-family:var(--far)}
+.om-track-wpm{
+  font-family:var(--fen);font-weight:700;color:var(--accent);
+  background:rgba(232,175,71,0.15);border:1px solid rgba(232,175,71,0.25);
+  padding:2px 8px;border-radius:6px;font-size:11px;
+}
+.om-track-line{
+  height:24px;background:rgba(0,0,0,0.4);border-radius:12px;position:relative;
+  overflow:hidden;border:1px solid rgba(255,255,255,0.06);
+}
+.om-track-fill{
+  height:100%;border-radius:12px;transition:width .25s ease-out;width:0%;
+  display:flex;align-items:center;justify-content:flex-end;padding-right:4px;
+}
+.om-track-fill.me{background:linear-gradient(90deg,#e8af47,#f59e0b);box-shadow:0 0 14px var(--accent-glow)}
+.om-track-fill.opp{background:linear-gradient(90deg,#48bb78,#38a169);box-shadow:0 0 14px rgba(72,187,120,0.4)}
+.om-track-car{font-size:15px;line-height:1}
+.om-track-timer-col{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.3);border-radius:12px;padding:8px 12px;border:1px solid rgba(255,255,255,0.06);
+}
+.om-big-timer{
+  font-size:32px;font-weight:800;font-family:var(--fen);
+  color:var(--accent);line-height:1;text-shadow:0 0 16px var(--accent-glow);
+}
+.om-big-timer.danger{color:var(--err);text-shadow:0 0 16px rgba(229,86,86,0.8);animation:blink .6s infinite}
+.om-timer-sub{font-size:10px;color:var(--sub);font-weight:600;text-transform:uppercase;margin-top:2px;font-family:var(--far)}
+
+/* ── EXACT TRAINING CARD STYLING FOR RACE ───────────── */
+.om-race-card{
+  background:linear-gradient(180deg,#1f313f 0%,#172530 100%);
+  border-radius:18px;padding:22px clamp(20px,3vw,42px) 32px;
+  border:1px solid rgba(255,255,255,0.1);border-top:3px solid var(--accent);
+  cursor:text;position:relative;user-select:none;
+  height:242px;min-height:242px;max-height:242px;
+  box-shadow:0 16px 45px -8px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.08);
+  width:100%;margin:0 auto;box-sizing:border-box;
+}
+#om-words{
+  font-size:clamp(22px,2.2vw,26px);line-height:1.85;
+  height:156px;max-height:156px;overflow:hidden;
+  letter-spacing:.025em;font-family:var(--fen);text-align:left;
+  position:relative;scroll-behavior:smooth;box-sizing:border-box;
+  padding:12px 6px;
+}
+#om-words.ar{
+  font-family:var(--far) !important;direction:rtl !important;text-align:right !important;
+  letter-spacing:normal !important;word-spacing:normal !important;
+  font-size:clamp(22px,2.2vw,26px);line-height:2.05;
+  height:156px;max-height:156px;padding:14px 8px;
+}
+#om-words .word{display:inline-block;white-space:nowrap;margin:0 5px}
+#om-words .c{display:inline;position:relative;transition:color .05s;color:var(--sub)}
+#om-words .c.sp{display:inline-block;width:0.35em}
+#om-words .c.ok{color:var(--text)}
+#om-words .c.bad{color:var(--err);text-decoration:underline;text-underline-offset:4px}
+#om-words .c.now{color:var(--text)}
+#om-words .c.now::before{
+  content:'';position:absolute;left:-2px;top:2px;bottom:2px;width:3px;
+  background:var(--accent);border-radius:2px;
+  animation:blink 1s step-end infinite;box-shadow:0 0 10px var(--accent-glow);
+}
+#om-words.ar .c.now::before{left:auto;right:-2px}
+
+/* ── SPECTACULAR ESPORTS RESULTS & CELEBRATION STYLES ──── */
+#om-confetti-canvas{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:90;border-radius:18px;
+}
+.om-result-hero{
+  position:relative;text-align:center;padding:8px 10px 14px;
+  margin-bottom:12px;
+}
+.om-trophy-wrapper{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;
+  width:84px;height:84px;margin:0 auto 8px;
+}
+.om-trophy-rays{
+  position:absolute;width:120px;height:120px;
+  background:radial-gradient(circle, rgba(232,175,71,0.45) 0%, rgba(232,175,71,0) 70%);
+  border-radius:50%;animation:champRays 5s linear infinite;
+}
+@keyframes champRays{
+  0%{transform:rotate(0deg) scale(0.9);opacity:0.6}
+  50%{transform:rotate(180deg) scale(1.15);opacity:1}
+  100%{transform:rotate(360deg) scale(0.9);opacity:0.6}
+}
+.om-trophy-ico{
+  font-size:52px;line-height:1;position:relative;z-index:2;
+  filter:drop-shadow(0 0 20px rgba(232,175,71,0.85));
+  animation:trophyBounce 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes trophyBounce{
+  0%{transform:scale(0) translateY(20px);opacity:0}
+  70%{transform:scale(1.2) translateY(-4px);opacity:1}
+  100%{transform:scale(1) translateY(0);opacity:1}
+}
+.om-champ-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 16px;border-radius:20px;font-size:11px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;font-family:var(--far);
+  background:linear-gradient(90deg,rgba(232,175,71,0.2),rgba(232,175,71,0.35),rgba(232,175,71,0.2));
+  border:1px solid rgba(232,175,71,0.6);color:var(--accent);
+  box-shadow:0 0 16px rgba(232,175,71,0.3);margin-bottom:6px;
+}
+.om-champ-name-display{
+  font-size:clamp(24px, 3vw, 34px);font-weight:900;font-family:var(--far);
+  background:linear-gradient(135deg, #fff275 0%, #e8af47 50%, #f59e0b 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 14px rgba(232,175,71,0.5));
+  margin-bottom:4px;line-height:1.2;
+}
+.om-champ-submsg{
+  font-size:13px;color:var(--sub);font-weight:600;font-family:var(--far);max-width:560px;margin:0 auto;line-height:1.4;
+}
+.om-champ-submsg.win{color:#86efac}
+.om-champ-submsg.lose{color:#93c5fd}
+
+/* Side by side esports cards */
+.om-podium{
+  display:flex;gap:12px;margin-bottom:14px;align-items:stretch;
+}
+.om-podium-card{
+  flex:1;border-radius:16px;padding:16px 14px;text-align:center;
+  position:relative;transition:transform .2s ease;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.om-podium-card:hover{transform:translateY(-2px)}
+.om-podium-card.winner{
+  background:linear-gradient(180deg,rgba(232,175,71,0.18) 0%,rgba(23,37,48,0.95) 100%);
+  border:2px solid rgba(232,175,71,0.75);
+  box-shadow:0 10px 30px -6px rgba(232,175,71,0.35),inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.om-podium-card.loser{
+  background:linear-gradient(180deg,rgba(56,189,248,0.08) 0%,rgba(23,37,48,0.85) 100%);
+  border:1.5px solid rgba(255,255,255,0.12);
+  box-shadow:0 8px 24px -6px rgba(0,0,0,0.4);
+}
+.om-pod-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.om-pod-medal-badge{font-size:20px;display:flex;align-items:center;gap:4px}
+.om-pod-rank-lbl{
+  font-size:10px;font-weight:800;letter-spacing:.05em;padding:3px 8px;border-radius:6px;
+  text-transform:uppercase;font-family:var(--far);
+}
+.winner .om-pod-rank-lbl{background:rgba(232,175,71,0.25);color:var(--accent);border:1px solid rgba(232,175,71,0.4)}
+.loser .om-pod-rank-lbl{background:rgba(255,255,255,0.08);color:var(--sub);border:1px solid rgba(255,255,255,0.1)}
+
+.om-pod-avatar{
+  width:42px;height:42px;border-radius:50%;margin:0 auto 8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:900;
+}
+.winner .om-pod-avatar{
+  background:linear-gradient(135deg,var(--accent),#f59e0b);color:#17242d;
+  box-shadow:0 0 18px var(--accent-glow);border:2px solid #fff;
+}
+.loser .om-pod-avatar{
+  background:linear-gradient(135deg,#38bdf8,#0284c7);color:#17242d;
+  box-shadow:0 0 14px rgba(56,189,248,0.35);border:2px solid rgba(255,255,255,0.2);
+}
+
+.om-pod-name{
+  font-size:15px;font-weight:800;color:var(--text);font-family:var(--far);margin-bottom:10px;
+}
+.om-pod-name .you-badge{
+  font-size:11px;padding:2px 7px;border-radius:10px;margin-inline-start:4px;
+  background:rgba(72,187,120,0.2);color:var(--ok);border:1px solid rgba(72,187,120,0.35);
+  font-weight:700;
+}
+
+.om-pod-big-wpm{
+  font-size:38px;font-weight:900;font-family:var(--fen);line-height:1;margin-bottom:2px;
+}
+.winner .om-pod-big-wpm{color:var(--accent);text-shadow:0 0 18px var(--accent-glow)}
+.loser .om-pod-big-wpm{color:#93c5fd}
+.om-pod-wpm-sub{font-size:11px;color:var(--sub);font-weight:700;letter-spacing:.05em;margin-bottom:12px;font-family:var(--fen)}
+
+/* Mini stats grid */
+.om-pod-stats-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:6px;
+  background:rgba(0,0,0,0.25);border-radius:10px;padding:8px;
+  border:1px solid rgba(255,255,255,0.06);font-family:var(--far);
+}
+.om-pod-s-item{text-align:center}
+.om-pod-s-val{font-size:13px;font-weight:800;color:var(--text);font-family:var(--fen)}
+.om-pod-s-lbl{font-size:10px;color:var(--sub);margin-top:2px}
+
+/* Match differential bar */
+.om-match-diff-bar{
+  background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.08);border-radius:10px;
+  padding:7px 14px;display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:12px;font-weight:700;font-family:var(--far);margin-bottom:14px;color:var(--text);
+}
+.om-diff-badge{color:var(--accent);font-family:var(--fen);font-weight:800}
+
+/* Grace countdown alert in race screen */
+.om-grace-alert{
+  background:linear-gradient(90deg,rgba(229,86,86,0.25),rgba(232,175,71,0.3));
+  border:1px solid rgba(232,175,71,0.5);border-radius:8px;padding:7px 14px;
+  text-align:center;font-size:12px;font-weight:700;font-family:var(--far);
+  color:var(--text);margin-bottom:8px;animation:pulse .8s infinite alternate;
+  display:none;
+}
+</style>
+</head>
+<body>
+<div class="blueprint-bg">
+  <div class="bp-mark bp-tl">A80 // 2020 NEW SERIES</div>
+  <div class="bp-mark bp-tr">MECHANICAL KEYBOARD</div>
+  <div class="bp-mark bp-br">IQUNIX &bull; DESIGNED BY IQUNIX</div>
+  <div class="bp-mark bp-bl">&#x25C7; VERY COOL KEYBOARD</div>
+</div>
+<div id="app">
+ <header>
+  <div class="logo">
+    <div class="logo-ico">T</div>
+    <div class="logo-text">TypeMaster <span class="logo-badge">A80 SERIES</span></div>
+  </div>
+  <nav>
+    <button class="nb on" id="n-test" onclick="showTab('test')">تدريب</button>
+    <button class="nb" id="n-stats" onclick="showTab('stats')">إحصاءات</button>
+    <button class="nb" id="n-learn" onclick="showTab('learn')">تعلم</button>
+    <button class="nb" id="n-race" onclick="showTab('race')">🏁 سباق</button>
+    <button class="nb nb-online" id="n-online" onclick="openOnlineRace()">🌐 <span id="n-online-lbl">شبكي</span></button>
+  </nav>
+  <div class="ctrls">
+    <div class="pg">
+      <button class="pb on" id="l-en" onclick="setLang('en')">EN</button>
+      <button class="pb" id="l-ar" onclick="setLang('ar')">AR</button>
+    </div>
+    <div class="pg">
+      <button class="pb" id="d-15" onclick="setDur(15)">15</button>
+      <button class="pb on" id="d-30" onclick="setDur(30)">30</button>
+      <button class="pb" id="d-60" onclick="setDur(60)">60</button>
+    </div>
+    <select id="msel" onchange="setMode(this.value)">
+      <option value="common">common</option>
+      <option value="medium">medium</option>
+      <option value="code">code</option>
+      <option value="quotes">quotes</option>
+    </select>
+  </div>
+ </header>
+
+ <main>
+  <!-- TYPING TAB -->
+  <div class="page show" id="p-test">
+    <div class="bar">
+      <div class="tmr">
+        <svg width="72" height="72" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="32" stroke="var(--bg3)" stroke-width="4.5" fill="none"/>
+          <circle id="ring" cx="36" cy="36" r="32" stroke="var(--accent)" stroke-width="4.5" fill="none"
+            stroke-dasharray="201.06" stroke-dashoffset="0" stroke-linecap="round" style="transition:stroke-dashoffset 1s linear,stroke .3s ease"/>
+        </svg>
+        <div class="num" id="timer">30</div>
+      </div>
+      <div class="stat-pill"><div class="big" id="xwpm">&mdash;</div><div class="lbl">WPM</div></div>
+      <div class="stat-pill"><div class="big" id="xacc">&mdash;</div><div class="lbl" id="lbl-acc">دقة %</div></div>
+      <div class="stat-pill"><div class="big" id="xerr">0</div><div class="lbl" id="lbl-err">أخطاء</div></div>
+    </div>
+
+    <!-- TEXT CARD (3 FULL LINES DISPLAY) -->
+    <div class="card" id="tcard" onclick="document.getElementById('inp').focus()">
+      <div id="words"></div>
+      <div class="hint" id="hint">ابدأ الكتابة للبدء &bull; اضغط Tab للإعادة السريعة</div>
+    </div>
+    <input id="inp" style="position:absolute;opacity:0;width:0;height:0" autocomplete="off" spellcheck="false">
+
+    <!-- ACTIONS -->
+    <div class="acts">
+      <button class="gbtn" onclick="initTest()">
+        <span>&#8634;</span> <span id="gbtn-lbl">إعادة</span> <kbd style="font-size:10px;opacity:.5;font-family:var(--fen)">Tab</kbd>
+      </button>
+      <button class="kbtoggle on" id="kb-toggle-btn" onclick="toggleKeyboard()">
+        <span>⌨</span> <span id="kb-toggle-lbl">إخفاء الكيبورد</span>
+      </button>
+    </div>
+
+    <!-- IQUNIX A80 INTERACTIVE MECHANICAL KEYBOARD -->
+    <div id="kb-wrap">
+      <div id="kb-panel">
+        <div class="kb-chassis-top">
+          <div class="kb-chassis-brand">
+            <span class="hex-badge">&#x2B21;</span>
+            <span class="kb-chassis-title">IQUNIX A80</span>
+            <span class="kb-chassis-sub">// MECHANICAL SERIES</span>
+          </div>
+          <div class="kb-chassis-bumper">
+            <div class="kb-chassis-ribs" title="A80 Ribbed Bumper">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="kb-chassis-knob" title="A80 Dial Knob"></div>
+          </div>
+        </div>
+        <div class="kb-guide">
+          <div class="kb-guide-left">
+            <span class="kb-guide-title">⌨ KEYBOARD</span>
+            <div class="kb-guide-next">
+              <span id="kb-next-lbl" style="font-size:11px;color:var(--sub);font-family:var(--far)">الحرف التالي:</span>
+              <span class="kb-next-badge" id="kb-next-badge">-</span>
+            </div>
+          </div>
+          <div class="kb-guide-right">
+            <div class="kb-finger-badge" id="kb-finger-badge">
+              <div class="kb-finger-dot" id="kb-finger-dot" style="background:#e2b714"></div>
+              <span id="kb-finger-text" style="color:var(--text)">الإبهام</span>
+            </div>
+          </div>
+        </div>
+        <div class="kb-rows" id="kb-rows"></div>
+        <div class="kb-legend" id="kb-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS TAB -->
+  <div class="page" id="p-result">
+    <h2 style="text-align:center;font-size:16px;color:var(--sub);margin-bottom:26px">نتائج الاختبار</h2>
+    <div class="rbox">
+      <div class="rst"><div class="v" id="rw">0</div><div class="l">WPM</div></div>
+      <div class="rst"><div class="v" id="rr">0</div><div class="l">RAW</div></div>
+      <div class="rst"><div class="v" id="ra">0</div><div class="l">دقة %</div></div>
+      <div class="rst"><div class="v" id="re">0</div><div class="l">أخطاء</div></div>
+      <div class="rst"><div class="v" id="rt">0</div><div class="l">وقت</div></div>
+    </div>
+    <div class="grid2">
+      <div class="abox"><h4>الحروف الأكثر خطأً</h4><div class="chips" id="rerr"></div></div>
+      <div class="abox"><h4>أبطأ الحروف</h4><div id="rslow"></div></div>
+    </div>
+    <div class="tip" id="rtip" style="display:none"><span style="font-size:22px">&#127919;</span><div><strong>توصية</strong><p id="rtiptext"></p></div></div>
+    <div class="btns">
+      <button class="pri" onclick="initTest()">أعد الاختبار</button>
+      <button class="sec" onclick="initTest()">نص جديد</button>
+    </div>
+  </div>
+
+  <!-- STATS TAB -->
+  <div class="page" id="p-stats">
+    <div id="semp" style="display:none;text-align:center;padding:80px 20px;color:var(--sub)"><div style="font-size:48px;margin-bottom:16px">&#128202;</div><p style="font-size:16px">لا توجد إحصاءات بعد</p></div>
+    <div id="scon">
+      <div class="og">
+        <div class="oc"><div class="v" id="sb">0</div><div class="l">أفضل</div></div>
+        <div class="oc"><div class="v" id="sa">0</div><div class="l">متوسط</div></div>
+        <div class="oc"><div class="v" id="sac">0%</div><div class="l">دقة</div></div>
+        <div class="oc"><div class="v" id="st">0</div><div class="l">اختبارات</div></div>
+        <div class="oc"><div class="v" id="stm">0m</div><div class="l">وقت</div></div>
+      </div>
+      <div class="cg">
+        <div class="cc"><h4>تطور السرعة</h4><svg id="cwpm" width="100%" height="80" viewBox="0 0 300 80" preserveAspectRatio="none"></svg><div class="cl"><span>قديم</span><span>حديث</span></div></div>
+        <div class="cc"><h4>تطور الدقة</h4><svg id="cacc" width="100%" height="80" viewBox="0 0 300 80" preserveAspectRatio="none"></svg><div class="cl"><span>قديم</span><span>حديث</span></div></div>
+      </div>
+      <div class="hmcard">
+        <h4>خريطة لوحة المفاتيح</h4>
+        <div class="hmwrap" id="hmap"></div>
+        <div class="hleg">
+          <div><span style="background:rgba(76,175,125,.5)"></span>ممتاز</div>
+          <div><span style="background:rgba(226,183,20,.4)"></span>جيد</div>
+          <div><span style="background:rgba(229,146,86,.5)"></span>متوسط</div>
+          <div><span style="background:rgba(229,86,86,.55)"></span>ضعيف</div>
+        </div>
+      </div>
+      <div class="achcard"><h4>الإنجازات</h4><div class="achg" id="achg"></div></div>
+      <div class="reccard"><h4>آخر الاختبارات</h4><div id="rlist"></div></div>
+    </div>
+  </div>
+
+  <!-- LEARN TAB -->
+  <div class="page" id="p-learn">
+    <div class="lnh"><h2>مسار التعلم</h2><p>اتبع الدروس بالترتيب لتبني أساساً قوياً</p></div>
+    <div id="lgrid"></div>
+  </div>
+
+  <!-- RACE TAB -->
+  <div class="page" id="p-race">
+    <div class="race-wrap">
+      <!-- Race Header -->
+      <div class="race-header">
+        <div class="race-title">
+          <span class="race-title-ico">🏁</span>
+          <div>
+            <div class="race-title-txt" id="race-title-txt">RACE DUEL</div>
+            <div class="race-title-sub" id="race-title-sub">سباق تفاعلي على نفس الكيبورد</div>
+          </div>
+        </div>
+        <div class="race-timer-badge">
+          <div class="race-timer-num" id="race-timer">—</div>
+          <div class="race-timer-lbl">TIME</div>
+        </div>
+      </div>
+
+      <!-- Mode Selector Toolbar -->
+      <div class="race-subnav">
+        <div class="race-mode-pills">
+          <button class="rm-pill on" id="rm-ghost-btn" onclick="setRaceModeType('ghost')">
+            <span>👥</span> <span id="rm-ghost-lbl">سباق التناوب (شبح المنافس)</span>
+          </button>
+          <button class="rm-pill" id="rm-bot-btn" onclick="setRaceModeType('bot')">
+            <span>🤖</span> <span id="rm-bot-lbl">سباق ضد الروبوت</span>
+          </button>
+        </div>
+        <div id="rm-bot-config" style="display:none;align-items:center;gap:8px">
+          <span style="font-size:11px;color:var(--sub);font-family:var(--far)" id="rm-bot-cfg-lbl">مستوى الروبوت:</span>
+          <select class="rm-bot-select" id="rm-bot-level" onchange="setBotSpeed(this.value)">
+            <option value="35">🟢 مبتدئ (35 WPM)</option>
+            <option value="65" selected>🟡 متوسط (65 WPM)</option>
+            <option value="95">🔴 محترف (95 WPM)</option>
+            <option value="125">⚡ خارق (125 WPM)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Race Track Section -->
+      <div class="race-track-section">
+        <!-- Player 1 / Human -->
+        <div class="race-player">
+          <div class="race-player-header">
+            <div class="race-player-info">
+              <div class="race-player-avatar race-p1-avatar">1</div>
+              <div>
+                <div class="race-player-name" id="rp1-name">اللاعب 1 (أنت)</div>
+                <div class="race-player-hint" id="rp1-hint">جاهز للبدء</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div class="race-stat-chip"><span>WPM</span><span id="rp1-wpm">—</span></div>
+              <div class="race-stat-chip"><span>دقة</span><span id="rp1-acc">—</span></div>
+              <div class="race-pct-lbl" id="rp1-pct">0%</div>
+            </div>
+          </div>
+          <div class="race-track" id="rtrack1">
+            <div class="race-track-lanes"></div>
+            <div class="race-bar-fill race-p1-fill" id="rbar1" style="width:0%"></div>
+            <div class="race-car" id="rcar1" style="left:2px">🚗</div>
+            <div class="race-finish-flag">🏁</div>
+          </div>
+        </div>
+
+        <!-- Player 2 (Ghost) / AI Bot -->
+        <div class="race-player">
+          <div class="race-player-header">
+            <div class="race-player-info">
+              <div class="race-player-avatar race-p2-avatar" id="rp2-avatar">2</div>
+              <div>
+                <div class="race-player-name" id="rp2-name">اللاعب 2 (المنافس)</div>
+                <div class="race-player-hint" id="rp2-hint">في انتظار دوره</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px">
+              <div class="race-stat-chip"><span>WPM</span><span id="rp2-wpm">—</span></div>
+              <div class="race-stat-chip"><span>دقة</span><span id="rp2-acc">—</span></div>
+              <div class="race-pct-lbl" id="rp2-pct" style="color:#818cf8">0%</div>
+            </div>
+          </div>
+          <div class="race-track" id="rtrack2">
+            <div class="race-track-lanes"></div>
+            <div class="race-bar-fill race-p2-fill" id="rbar2" style="width:0%"></div>
+            <div class="race-car" id="rcar2" style="left:2px">🚙</div>
+            <div class="race-finish-flag">🏁</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Single Big Spacious Typing Card -->
+      <div class="race-main-card glow-p1" id="r-main-card" onclick="document.getElementById('r-inp').focus()">
+        <div class="race-turn-banner">
+          <div class="race-turn-badge" id="r-turn-badge">
+            <span id="r-turn-ico" style="font-size:16px">🟡</span>
+            <span id="r-turn-txt">الجولة 1: دور اللاعب 1 — اكتب الآن لتسجيل مسار سيارتك!</span>
+          </div>
+          <span class="race-turn-sub" id="r-turn-sub">اضغط أي حرف للبدء فوراً</span>
+        </div>
+        <div class="race-words" id="r-words"></div>
+        <div class="hint" id="r-card-hint">اكتب النص أعلاه بأقصى سرعة &bull; اضغط Tab أو أعد للانطلاق</div>
+      </div>
+
+      <!-- Single hidden input -->
+      <input id="r-inp" style="position:absolute;opacity:0;width:0;height:0" autocomplete="off" spellcheck="false">
+
+      <!-- Winner Results -->
+      <div id="race-result">
+        <span class="race-winner-badge" id="race-winner-badge">🏆</span>
+        <div class="race-winner-title" id="race-winner-title">انتهى السباق!</div>
+        <div class="race-winner-sub" id="race-winner-sub">النتائج النهائية للمنافسة</div>
+        <div class="race-podium">
+          <div class="race-podium-card gold" id="race-pod1">
+            <div class="race-podium-medal">🥇</div>
+            <div class="race-podium-name" id="race-pod1-name">Player 1</div>
+            <div class="race-podium-wpm" id="race-pod1-wpm">0</div>
+            <div class="race-podium-wpm-lbl">WPM</div>
+            <div class="race-podium-stats">
+              <div class="race-podium-stat">دقة: <strong id="race-pod1-acc">0%</strong></div>
+              <div class="race-podium-stat">وقت: <strong id="race-pod1-time">0s</strong></div>
+            </div>
+          </div>
+          <div class="race-podium-card silver" id="race-pod2">
+            <div class="race-podium-medal">🥈</div>
+            <div class="race-podium-name" id="race-pod2-name">Player 2</div>
+            <div class="race-podium-wpm" id="race-pod2-wpm">0</div>
+            <div class="race-podium-wpm-lbl">WPM</div>
+            <div class="race-podium-stats">
+              <div class="race-podium-stat">دقة: <strong id="race-pod2-acc">0%</strong></div>
+              <div class="race-podium-stat">وقت: <strong id="race-pod2-time">0s</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="race-btns">
+          <button class="pri" onclick="initRace()">🔄 سباق مجدداً</button>
+          <button class="sec" onclick="showTab('test')">🚪 الخروج إلى التدريب</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ </main>
+
+<!-- COUNTDOWN OVERLAY -->
+<div id="race-countdown" class="hidden">
+  <div id="race-cd-display" class="cd-number">3</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     ONLINE RACE MODAL
+═══════════════════════════════════════════════════════ -->
+<div id="online-modal">
+  <div class="om-box">
+    <!-- Header -->
+    <div class="om-header">
+      <div class="om-title">
+        <div class="om-title-ico">🌐</div>
+        <span id="om-header-title">السباق عبر الشبكة</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div id="om-conn-dot" style="width:8px;height:8px;border-radius:50%;background:#4b5563;box-shadow:none;transition:all .4s" title="حالة الاتصال"></div>
+        <button class="om-gear" onclick="omToggleSettings()" title="إعدادات الخادم" style="background:transparent;border:none;color:var(--sub);cursor:pointer;font-size:14px;padding:2px;display:flex;align-items:center;opacity:0.65;transition:opacity .2s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.65'">⚙️</button>
+        <button class="om-close" onclick="closeOnlineRace()" title="إغلاق">✕</button>
+      </div>
+    </div>
+
+    <div class="om-body">
+
+      <!-- Optional server config drawer (hidden by default) -->
+      <div id="om-settings-drawer" style="display:none;padding:10px 12px;background:rgba(0,0,0,0.3);border-radius:8px;margin-bottom:12px;border:1px solid var(--bdr)">
+        <div style="font-size:11px;color:var(--sub);margin-bottom:6px" id="om-settings-hint">عنوان خادم السباق (اتركه فارغاً للاتصال التلقائي):</div>
+        <div style="display:flex;gap:6px">
+          <input id="om-custom-srv-inp" class="om-inp" style="margin-bottom:0;font-size:12px;padding:6px 10px;height:34px" placeholder="تلقائي: http://localhost:3001" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="event.stopPropagation()" onkeyup="if(event.key==='Enter')omSaveCustomServer()" />
+          <button class="om-btn om-btn-primary" style="padding:6px 14px;font-size:12px;width:auto;margin-top:0;height:34px" onclick="omSaveCustomServer()">حفظ</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 1: SETUP (Create / Join) ─────────────── -->
+      <div class="om-screen active" id="om-screen-setup">
+
+        <!-- Tabs -->
+        <div class="om-tabs">
+          <button class="om-tab on" id="om-tab-create" onclick="omSwitchTab('create')">➕ إنشاء غرفة</button>
+          <button class="om-tab" id="om-tab-join" onclick="omSwitchTab('join')">🔗 الانضمام برمز</button>
+        </div>
+
+        <!-- CREATE panel -->
+        <div id="om-panel-create">
+          <div class="om-label" id="om-name-lbl-c">اسمك في السباق</div>
+          <input class="om-inp" id="om-name-c" placeholder="اكتب اسمك هنا..." maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="event.stopPropagation()" onkeyup="if(event.key==='Enter')omCreateRoom()" />
+          <div class="om-dur-row">
+            <div class="om-dur-lbl">مدة السباق:</div>
+            <div class="om-dur-pills">
+              <button type="button" class="om-dur-pill" data-dur="15" onclick="omSelectDuration(15)">15s</button>
+              <button type="button" class="om-dur-pill on" data-dur="30" onclick="omSelectDuration(30)">30s</button>
+              <button type="button" class="om-dur-pill" data-dur="60" onclick="omSelectDuration(60)">60s</button>
+              <button type="button" class="om-dur-pill" data-dur="0" onclick="omSelectDuration(0)">كامل (Full)</button>
+            </div>
+          </div>
+          <button class="om-btn om-btn-primary" id="om-create-btn" onclick="omCreateRoom()">
+            <span>⚡</span> <span id="om-create-lbl">إنشاء غرفة جديدة</span>
+          </button>
+        </div>
+
+        <!-- JOIN panel -->
+        <div id="om-panel-join" style="display:none">
+          <div class="om-label" id="om-name-lbl-j">اسمك في السباق</div>
+          <input class="om-inp" id="om-name-j" placeholder="اكتب اسمك هنا..." maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="event.stopPropagation()" onkeyup="if(event.key==='Enter')document.getElementById('om-code-inp').focus()" />
+          <div class="om-label" id="om-code-lbl">رمز الغرفة (4 أحرف)</div>
+          <input class="om-inp code-inp" id="om-code-inp" placeholder="A7X3" maxlength="4" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="event.stopPropagation()" oninput="this.value=this.value.toUpperCase()" onkeyup="if(event.key==='Enter')omJoinRoom()" />
+          <button class="om-btn om-btn-primary" id="om-join-btn" onclick="omJoinRoom()">
+            <span>🚀</span> <span id="om-join-lbl">الانضمام للسباق</span>
+          </button>
+        </div>
+
+        <div class="om-err" id="om-err"></div>
+      </div>
+
+      <!-- ── SCREEN 2: LOBBY ─────────────────────────────── -->
+      <div class="om-screen" id="om-screen-lobby">
+        <div class="om-lobby-code">
+          <div class="om-lobby-code-lbl" id="om-code-share-lbl">شارك هذا الرمز مع منافسك</div>
+          <div class="om-code-display" id="om-lobby-code-display">----</div><br>
+          <button class="om-copy-btn" onclick="omCopyCode()" id="om-copy-btn">📋 <span id="om-copy-lbl">نسخ الرمز</span></button>
+        </div>
+
+        <div class="om-players-row">
+          <!-- Player 1 slot -->
+          <div class="om-player-slot filled" id="om-slot-p1">
+            <div class="om-player-avatar om-pa-p1" id="om-av-p1">1</div>
+            <div class="om-player-name" id="om-pname-p1">—</div>
+            <div class="om-player-role" id="om-prole-p1">المضيف 👑</div>
+          </div>
+          <!-- Player 2 slot -->
+          <div class="om-player-slot" id="om-slot-p2">
+            <div class="om-player-avatar om-pa-empty" id="om-av-p2">?</div>
+            <div class="om-player-name" id="om-pname-p2" style="color:var(--sub)">في انتظار المنافس...</div>
+            <div class="om-player-role" id="om-prole-p2">—</div>
+          </div>
+        </div>
+
+        <!-- Duration Selector in Lobby -->
+        <div class="om-dur-row" id="om-lobby-dur-row">
+          <div class="om-dur-lbl" id="om-dur-lbl-lobby">مدة السباق:</div>
+          <div class="om-dur-pills" id="om-dur-pills-lobby">
+            <button type="button" class="om-dur-pill" data-dur="15" onclick="omChangeLobbyDuration(15)">15s</button>
+            <button type="button" class="om-dur-pill on" data-dur="30" onclick="omChangeLobbyDuration(30)">30s</button>
+            <button type="button" class="om-dur-pill" data-dur="60" onclick="omChangeLobbyDuration(60)">60s</button>
+            <button type="button" class="om-dur-pill" data-dur="0" onclick="omChangeLobbyDuration(0)">كامل (Full)</button>
+          </div>
+        </div>
+
+        <div class="om-waiting-pulse" id="om-waiting-pulse">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span id="om-waiting-lbl">في انتظار الانضمام</span>
+        </div>
+
+        <button class="om-btn om-btn-primary" id="om-start-btn" onclick="omStartRace()" style="display:none">
+          <span>🏁</span> <span id="om-start-lbl">ابدأ السباق!</span>
+        </button>
+        <button class="om-btn om-btn-sec" onclick="omLeaveRoom()" id="om-leave-btn">
+          <span id="om-leave-lbl">← مغادرة الغرفة</span>
+        </button>
+      </div>
+
+      <!-- ── SCREEN 3: COUNTDOWN ─────────────────────────── -->
+      <div class="om-screen" id="om-screen-countdown">
+        <div style="text-align:center;padding:30px 0">
+          <div id="om-cd-num" style="font-size:90px;font-weight:900;font-family:var(--fen);color:var(--accent);text-shadow:0 0 50px var(--accent-glow);animation:blink .15s">3</div>
+          <div style="font-size:16px;color:var(--sub);margin-top:8px" id="om-cd-lbl">استعد للانطلاق!</div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 4: RACE ──────────────────────────────── -->
+      <div class="om-screen" id="om-screen-race">
+        <!-- Dual Racer Dashboard -->
+        <!-- Grace countdown alert -->
+        <div id="om-grace-alert" class="om-grace-alert">⚠️ المنافس وصل لخط النهاية! متبقي 5 ثوانٍ لإنهاء ما تستطيع!</div>
+
+        <!-- Dual Racer Dashboard -->
+        <div class="om-race-dash">
+          <!-- Player 1 lane (You) -->
+          <div class="om-track-col">
+            <div class="om-track-meta">
+              <div class="om-track-name">
+                <span style="font-size:15px">🏎️</span>
+                <span id="om-my-name-lbl">أنت</span>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center">
+                <span class="om-track-wpm" id="om-my-wpm-badge">0 WPM</span>
+                <span style="font-family:var(--fen);font-weight:700;color:var(--text);font-size:12px" id="om-my-pct-badge">0%</span>
+              </div>
+            </div>
+            <div class="om-track-line">
+              <div class="om-track-fill me" id="om-my-fill"><span class="om-track-car">🚗</span></div>
+            </div>
+          </div>
+
+          <!-- Center Timer -->
+          <div class="om-track-timer-col">
+            <div class="om-big-timer" id="om-race-timer">30</div>
+            <div class="om-timer-sub" id="om-race-timer-lbl">الوقت</div>
+          </div>
+
+          <!-- Player 2 lane (Opponent) -->
+          <div class="om-track-col">
+            <div class="om-track-meta">
+              <div class="om-track-name">
+                <span style="font-size:15px">🏁</span>
+                <span id="om-opp-name-lbl">المنافس</span>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center">
+                <span class="om-track-wpm" style="color:var(--ok);background:rgba(72,187,120,0.15);border:1px solid rgba(72,187,120,0.25)" id="om-opp-wpm-badge">0 WPM</span>
+                <span style="font-family:var(--fen);font-weight:700;color:var(--text);font-size:12px" id="om-opp-pct-badge">0%</span>
+              </div>
+            </div>
+            <div class="om-track-line">
+              <div class="om-track-fill opp" id="om-opp-fill"><span class="om-track-car">🚙</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Big Spacious Typing Card (Identical to training card) -->
+        <div class="om-race-card" onclick="document.getElementById('om-inp').focus()">
+          <div id="om-words"></div>
+        </div>
+        <input id="om-inp" style="position:absolute;opacity:0;pointer-events:none;width:0;height:0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+
+        <div style="text-align:center;margin-top:8px;font-size:12px;color:var(--sub)">
+          <span id="om-race-hint">ابدأ بالكتابة فوراً • يمكنك استخدام زر Backspace للتصحيح</span>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 5: RESULTS (ESPORTS CHAMPION CELEBRATION) ──── -->
+      <div class="om-screen" id="om-screen-results" style="position:relative">
+        <canvas id="om-confetti-canvas"></canvas>
+
+        <!-- Champion Spotlight Hero -->
+        <div class="om-result-hero">
+          <div class="om-trophy-wrapper">
+            <div class="om-trophy-rays"></div>
+            <div class="om-trophy-ico">🏆</div>
+          </div>
+          <div class="om-champ-pill" id="om-champ-pill">👑 بطل السباق الفائز • CHAMPION</div>
+          <div class="om-champ-name-display" id="om-champ-name">—</div>
+          <div class="om-champ-submsg" id="om-champ-msg">مبروك الفوز يا بطل! أداء أسطوري وتفوق كاسح!</div>
+        </div>
+
+        <!-- Differential Banner -->
+        <div class="om-match-diff-bar" id="om-diff-bar" style="display:none">
+          <span>⚡</span> <span id="om-diff-text">فارق السرعة: +12 WPM لصالح الفائز</span>
+        </div>
+
+        <!-- Side-by-side Match Podium -->
+        <div class="om-podium" id="om-podium"></div>
+
+        <!-- Action Buttons -->
+        <div style="display:flex;gap:10px;margin-top:6px">
+          <button class="om-btn om-btn-primary" id="om-again-btn" onclick="omPlayAgain()" style="flex:1">
+            <span>🔄</span> <span id="om-again-lbl">سباق مجدداً (Rematch)</span>
+          </button>
+          <button class="om-btn om-btn-sec" id="om-share-btn" onclick="omShareResults()" style="flex:1;margin-top:0">
+            <span>📋</span> <span id="om-share-lbl">مشاركة النتيجة</span>
+          </button>
+          <button class="om-btn om-btn-sec" onclick="omGoSetup()" id="om-new-room-btn" style="flex:0 0 auto;width:auto;padding:11px 18px;margin-top:0">
+            <span id="om-newroom-lbl">🚪 غرفة جديدة</span>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /om-body -->
+  </div><!-- /om-box -->
+</div><!-- /#online-modal -->
+
+ <footer><span>TypeMaster &bull; IQUNIX A80 Mechanical Design &bull; Razer Green Audio</span></footer>
+ <div id="toasts"></div>
+</div>
+
+<script>
+// ==============================================================
+// 1. DATA AND STATE
+// ==============================================================
+var POOLS={
+  en:{
+    common:"the be to of and a in that have it for not on with he as you do at this but his by from they we say her she or an will my one all would there their what so up out if about who get which go me when make can like time no just him know take people into year your good some could them see other than then now look only come its over think also back after use two how our work first well way even new want because any these give day most us great need large often hand high place hold world found still learn cover food state keep eye never last let thought city tree far sea draw left late run while press close night real life few open seem next white begin walk paper always music those both mark book letter until mile river car feet care second enough girl young ready above ever red list feel talk bird soon body dog family".split(" "),
+    medium:"important different following however become number through development between something national against before system company around believe public already everything another government power change together interest provide children across question within business without office process whether include continue economic social person member example research program problem support general control recent possible political market science level service create student consider complete usually remain certainly information relationship experience performance environment technology community available condition education throughout understand population management significant opportunity".split(" "),
+    code:"function const return import export interface async await typeof string number boolean undefined null array object class extends implements private public readonly static while switch case break continue try catch finally throw delete void let var true false this super module require console log error map filter reduce Promise resolve reject fetch params router component useState useEffect callback timeout interval length index value result input output default type enum".split(" "),
+    quotes:["The quick brown fox jumps over the lazy dog.","To be or not to be, that is the question.","All that glitters is not gold.","The only way to do great work is to love what you do.","In the middle of every difficulty lies opportunity.","Life is what happens when you are busy making other plans.","The journey of a thousand miles begins with one step.","Be the change that you wish to see in the world.","You only live once, but if you do it right, once is enough."]
+  },
+  ar:{
+    common:"في من إلى على هذا هذه كان كانت ما لا مع عن أن إن لم لن قد قال يقول التي الذي الذين وهو وهي هو هي نحن أنت الله كل بعض مثل حتى فإن وقد كما بما وما ولا لأن لكن بعد قبل يكون أكثر أقل حيث عند منذ خلال بين فوق تحت أمام خلف داخل خارج يوم ليلة ساعة سنة شهر وقت مكان بلد مدينة شارع بيت باب غرفة كتاب قلم ورقة طاولة كرسي مدرسة معلم طالب علم عمل مال حياة صحة قوة جميل كبير صغير طويل قصير سريع بطيء قريب بعيد جديد قديم حار بارد".split(" "),
+    medium:"الحكومة المجتمع التعليم الاقتصاد السياسة الثقافة التكنولوجيا المعلومات التطوير البرمجة الحاسوب المستقبل التغيير الابتكار التفكير التخطيط المشروع الهدف النجاح التجربة المعرفة الحكمة العدالة الحرية المساواة التعاون التواصل الاحترام الصداقة العائلة المجموعة الحضارة التاريخ الجغرافيا العلوم الرياضيات الفيزياء الكيمياء الأدب الشعر الموسيقى الرياضة".split(" "),
+    code:"دالة ثابت إرجاع استيراد تصدير واجهة انتظار سلسلة رقم منطقي مصفوفة كائن صنف يمتد خاص عام بينما مفتاح حالة توقف محاولة رمي حذف افتراضي نوع".split(" "),
+    quotes:["العلم في الصغر كالنقش على الحجر.","من جد وجد ومن زرع حصد.","اطلب العلم من المهد إلى اللحد.","الصبر مفتاح الفرج.","العقل السليم في الجسم السليم.","الوقت كالسيف إن لم تقطعه قطعك.","خير الكلام ما قل ودل.","من تعلم لغة قوم أمن شرهم."]
+  }
+};
+
+var LESSONS=[
+  {id:"home",lv:1,ic:"🏠",t:"الصف الأساسي",d:"ASDF JKL",ks:"a s d f j k l".split(" "),pe:"fall flask glad half jag lads safe ask",pa:"في من إلى على هذا كان ما لا"},
+  {id:"top",lv:2,ic:"⬆️",t:"الصف العلوي",d:"QWER YUIOP",ks:"q w e r t y u i o p".split(" "),pe:"your type quite port write tower power quiet",pa:"التي يكون تكون الذي وهو وهي"},
+  {id:"bot",lv:2,ic:"⬇️",t:"الصف السفلي",d:"ZXCV BNM",ks:"z x c v b n m".split(" "),pe:"black zinc move verb next calm brim",pa:"مثل حتى فإن وقد كما بما ولا"},
+  {id:"num",lv:3,ic:"🔢",t:"الأرقام",d:"0-9",ks:"1 2 3 4 5 6 7 8 9 0".split(" "),pe:"score 42 win by 100 order 7",pa:"يوم 24 ساعة عام 365"},
+  {id:"cap",lv:3,ic:"🔠",t:"الحروف الكبيرة",d:"Shift",ks:["Shift"],pe:"The Quick Brown Fox Jumps",pa:"اللغة العربية جميلة"},
+  {id:"pun",lv:3,ic:"✏️",t:"علامات الترقيم",d:".,!?:",ks:". , ! ? :".split(" "),pe:"Hello, world! How are you?",pa:"مرحبا كيف حالك؟"},
+  {id:"spd",lv:4,ic:"⚡",t:"تدريب السرعة",d:"كلمات شائعة",ks:[],pe:"the quick brown fox jumps over",pa:"من جد وجد ومن زرع حصد"},
+  {id:"cod",lv:4,ic:"💻",t:"مفاتيح البرمجة",d:"(){}[]=",ks:"( ) { } [ ] = /".split(" "),pe:"function hello() { return true; }",pa:"دالة مرحبا() إرجاع صحيح"}
+];
+
+var ACHS=[
+  {id:"ft",ic:"🎯",n:"الخطوة الأولى",d:"أكمل اختبارك الأول"},
+  {id:"w50",ic:"⚡",n:"50 WPM",d:"حقق 50 كلمة/دقيقة"},
+  {id:"w80",ic:"🚀",n:"80 WPM",d:"حقق 80 كلمة/دقيقة"},
+  {id:"a100",ic:"✨",n:"الكمال",d:"دقة 100%"},
+  {id:"t10",ic:"🏅",n:"المداوم",d:"أكمل 10 اختبارات"}
+];
+
+var KR=[
+  ["q","w","e","r","t","y","u","i","o","p"],
+  ["a","s","d","f","g","h","j","k","l"],
+  ["z","x","c","v","b","n","m"]
+];
+var FM={q:"lp",w:"lr",e:"lm",r:"li",t:"li",y:"ri",u:"ri",i:"rm",o:"rr",p:"rp",a:"lp",s:"lr",d:"lm",f:"li",g:"li",h:"ri",j:"ri",k:"rm",l:"rr",z:"lp",x:"lr",c:"lm",v:"li",b:"li",n:"ri",m:"ri"};
+var FN={lp:"خنصر يسار",lr:"بنسر يسار",lm:"وسطى يسار",li:"سبابة يسار",ri:"سبابة يمين",rm:"وسطى يمين",rr:"بنسر يمين",rp:"خنصر يمين"};
+
+var S={lang:"en",dur:30,mode:"common",text:"",ch:[],idx:0,on:false,fin:false,left:30,ks:[],t0:0,tk:0,ti:null,ec:0};
+
+// Local storage
+function gR(){try{return JSON.parse(localStorage.getItem("tm2")||"[]")}catch(e){return[]}}
+function pR(r){var a=gR();a.unshift(r);localStorage.setItem("tm2",JSON.stringify(a.slice(0,200)))}
+function gS(){try{return JSON.parse(localStorage.getItem("ts2")||"{}")}catch(e){return{}}}
+function pS(o){localStorage.setItem("ts2",JSON.stringify(o))}
+function gA(){try{return JSON.parse(localStorage.getItem("ta2")||"[]")}catch(e){return[]}}
+function pA(a){localStorage.setItem("ta2",JSON.stringify(a))}
+
+function calcWPM(c,ms){return ms<=0?0:Math.round(c/5/(ms/60000))}
+function calcAcc(c,t){return t?Math.round(c/t*100):100}
+
+// ==============================================================
+// 2. QWERTY <-> ARABIC MAPPING (PREVENTS MISMATCH ERRORS)
+// ==============================================================
+var QWERTY_TO_AR = {
+  "`":"ذ", "~":"ّ", "1":"1", "!":"!", "2":"2", "@":"@", "3":"3", "#":"#",
+  "4":"4", "$":"$", "5":"5", "%":"%", "6":"6", "^":"^", "7":"7", "&":"&",
+  "8":"8", "*":"*", "9":"9", "(":"(", "0":"0", ")":")", "-":"-", "_":"_",
+  "=":"=", "+":"+",
+  "q":"ض", "Q":"َ", "w":"ص", "W":"ً", "e":"ث", "E":"ُ", "r":"ق", "R":"ٌ",
+  "t":"ف", "T":"لإ", "y":"غ", "Y":"إ", "u":"ع", "U":"‘", "i":"ه", "I":"÷",
+  "o":"خ", "O":"×", "p":"ح", "P":"؛", "[":"ج", "{":"<", "]":"د", "}":">",
+  "\\":"\\", "|":"|",
+  "a":"ش", "A":"ِ", "s":"س", "S":"ٍ", "d":"ي", "D":"]", "f":"ب", "F":"[",
+  "g":"ل", "G":"لأ", "h":"ا", "H":"أ", "j":"ت", "J":"ـ", "k":"ن", "K":"،",
+  "l":"م", "L":"/", ";":"ك", ":":":", "'":"ط", "\"":"\"",
+  "z":"ئ", "Z":"~", "x":"ء", "X":"ْ", "c":"ؤ", "C":"}", "v":"ر", "V":"{",
+  "b":"لا", "B":"لآ", "n":"ى", "N":"آ", "m":"ة", "M":"’", ",":"و", "<":",",
+  ".":"ز", ">":".", "/":"ظ", "?":"؟", " ":" "
+};
+
+function normalizeAr(c){
+  if(!c) return "";
+  if(c === "أ" || c === "إ" || c === "آ" || c === "ٱ") return "ا";
+  if(c === "ة") return "ه";
+  if(c === "ى") return "ي";
+  return c;
+}
+
+function matchChar(inputKey, expectedChar){
+  if(inputKey === expectedChar) return true;
+
+  if(S.lang === "ar"){
+    // 1. Direct Arabic match or normalized match
+    if(normalizeAr(inputKey) === normalizeAr(expectedChar)) return true;
+
+    // 2. If user pressed physical key on English layout, convert to Arabic key
+    var mapped = QWERTY_TO_AR[inputKey];
+    if(mapped){
+      if(mapped === expectedChar) return true;
+      if(normalizeAr(mapped) === normalizeAr(expectedChar)) return true;
+    }
+  } else {
+    // English: case-insensitive match
+    if(inputKey.toLowerCase() === expectedChar.toLowerCase()) return true;
+  }
+  return false;
+}
+
+// ==============================================================
+// 3. EDCLUB KEYBOARD DEFINITION & ENGINE (PHYSICAL LTR LAYOUT)
+// ==============================================================
+var FINGER_DATA = {
+  lp: { color: "#6366f1", hand: "L", ar: "الخنصر الأيسر", en: "Left Pinky" },
+  lr: { color: "#a855f7", hand: "L", ar: "البنسر الأيسر", en: "Left Ring" },
+  lm: { color: "#3b82f6", hand: "L", ar: "الوسطى اليسرى", en: "Left Middle" },
+  li: { color: "#06b6d4", hand: "L", ar: "السبابة اليسرى", en: "Left Index" },
+  th: { color: "#e2b714", hand: "B", ar: "الإبهام", en: "Thumbs" },
+  ri: { color: "#10b981", hand: "R", ar: "السبابة اليمنى", en: "Right Index" },
+  rm: { color: "#84cc16", hand: "R", ar: "الوسطى اليمنى", en: "Right Middle" },
+  rr: { color: "#f59e0b", hand: "R", ar: "البنسر الأيمن", en: "Right Ring" },
+  rp: { color: "#ef4444", hand: "R", ar: "الخنصر الأيمن", en: "Right Pinky" }
+};
+
+// Standard Physical Keyboard rows from Left to Right (Worldwide Physical Layout)
+var KB_ROWS = [
+  // Row 0: ~ to Backspace
+  [
+    { k:"~`", ar:"ذ", w:1, f:"lp" },
+    { k:"1!", ar:"1", w:1, f:"lp" },
+    { k:"2@", ar:"2", w:1, f:"lr" },
+    { k:"3#", ar:"3", w:1, f:"lm" },
+    { k:"4$", ar:"4", w:1, f:"li" },
+    { k:"5%", ar:"5", w:1, f:"li" },
+    { k:"6^", ar:"6", w:1, f:"ri" },
+    { k:"7&", ar:"7", w:1, f:"ri" },
+    { k:"8*", ar:"8", w:1, f:"rm" },
+    { k:"9(", ar:"9", w:1, f:"rr" },
+    { k:"0)", ar:"0", w:1, f:"rp" },
+    { k:"-_", ar:"-", w:1, f:"rp" },
+    { k:"=+", ar:"=", w:1, f:"rp" },
+    { k:"Backspace", ar:"Backspace", w:2, f:"rp", special:true }
+  ],
+  // Row 1: Tab, Q(ض), W(ص)... to P(ح), [(ج), ](د), \
+  [
+    { k:"Tab", ar:"Tab", w:1.5, f:"lp", special:true },
+    { k:"q", ar:"ض", w:1, f:"lp" },
+    { k:"w", ar:"ص", w:1, f:"lr" },
+    { k:"e", ar:"ث", w:1, f:"lm" },
+    { k:"r", ar:"ق", w:1, f:"li" },
+    { k:"t", ar:"ف", w:1, f:"li" },
+    { k:"y", ar:"غ", w:1, f:"ri" },
+    { k:"u", ar:"ع", w:1, f:"ri" },
+    { k:"i", ar:"ه", w:1, f:"rm" },
+    { k:"o", ar:"خ", w:1, f:"rr" },
+    { k:"p", ar:"ح", w:1, f:"rp" },
+    { k:"[{", ar:"ج", w:1, f:"rp" },
+    { k:"]}", ar:"د", w:1, f:"rp" },
+    { k:"\\|", ar:"\\", w:1.5, f:"rp", special:true }
+  ],
+  // Row 2: Caps, A(ش), S(س)... to ;(ك), '(ط), Enter
+  [
+    { k:"Caps", ar:"Caps", w:1.75, f:"lp", special:true },
+    { k:"a", ar:"ش", w:1, f:"lp" },
+    { k:"s", ar:"س", w:1, f:"lr" },
+    { k:"d", ar:"ي", w:1, f:"lm" },
+    { k:"f", ar:"ب", w:1, f:"li", bump:true },
+    { k:"g", ar:"ل", w:1, f:"li" },
+    { k:"h", ar:"ا", w:1, f:"ri" },
+    { k:"j", ar:"ت", w:1, f:"ri", bump:true },
+    { k:"k", ar:"ن", w:1, f:"rm" },
+    { k:"l", ar:"م", w:1, f:"rr" },
+    { k:";:", ar:"ك", w:1, f:"rp" },
+    { k:"'\"", ar:"ط", w:1, f:"rp" },
+    { k:"Enter", ar:"Enter", w:2.25, f:"rp", special:true }
+  ],
+  // Row 3: Shift, Z(ئ), X(ء)... to /(ظ), Shift
+  [
+    { k:"Shift", ar:"Shift", w:2.25, f:"lp", special:true, side:"left" },
+    { k:"z", ar:"ئ", w:1, f:"lp" },
+    { k:"x", ar:"ء", w:1, f:"lr" },
+    { k:"c", ar:"ؤ", w:1, f:"lm" },
+    { k:"v", ar:"ر", w:1, f:"li" },
+    { k:"b", ar:"لا", w:1, f:"li" },
+    { k:"n", ar:"ى", w:1, f:"ri" },
+    { k:"m", ar:"ة", w:1, f:"ri" },
+    { k:",<", ar:"و", w:1, f:"rm" },
+    { k:".>", ar:"ز", w:1, f:"rr" },
+    { k:"/?", ar:"ظ", w:1, f:"rp" },
+    { k:"Shift", ar:"Shift", w:2.75, f:"rp", special:true, side:"right" }
+  ],
+  // Row 4: Space Row
+  [
+    { k:"Ctrl", ar:"Ctrl", w:1.5, f:"lp", special:true },
+    { k:"Alt", ar:"Alt", w:1.5, f:"th", special:true },
+    { k:"Space", ar:"Space", w:7, f:"th", special:true },
+    { k:"Alt", ar:"Alt", w:1.5, f:"th", special:true },
+    { k:"Ctrl", ar:"Ctrl", w:1.5, f:"rp", special:true }
+  ]
+];
+
+var _kbVisible = true;
+var _kbTimeouts = {};
+
+function buildKeyboard(){
+  var rowsEl = document.getElementById("kb-rows");
+  if(!rowsEl) return;
+  rowsEl.innerHTML = "";
+  var isAr = (S.lang === "ar");
+
+  for(var ri = 0; ri < KB_ROWS.length; ri++){
+    var row = KB_ROWS[ri];
+    var rowEl = document.createElement("div");
+    rowEl.className = "kb-row";
+
+    for(var ki = 0; ki < row.length; ki++){
+      var kd = row[ki];
+      var fInfo = FINGER_DATA[kd.f] || FINGER_DATA.th;
+      var el = document.createElement("div");
+      var isAccent = (kd.k === "Space");
+      var isMod = kd.special && !isAccent;
+      var keyTypeClass = isAccent ? " key-accent" : (isMod ? " key-mod" : " key-alpha");
+      el.className = "kb-key" + keyTypeClass + (kd.special ? " special" : "") + (kd.bump ? " has-bump" : "");
+      el.id = "kbk_" + ri + "_" + ki;
+      el.style.width = "calc(var(--k-unit) * " + kd.w + ")";
+
+      // Metadata for key matching
+      el.dataset.k = kd.k;
+      el.dataset.ar = kd.ar;
+      el.dataset.f = kd.f;
+      el.dataset.side = kd.side || "";
+
+      // Labeling
+      var mainLbl = "", subLbl = "";
+      if(kd.special){
+        if(kd.k === "Space"){
+          mainLbl = isAr ? "مسافة (SPACE)" : "SPACE";
+        } else if(kd.k === "Backspace"){
+          mainLbl = "⌫ Backspace";
+        } else if(kd.k === "Enter"){
+          mainLbl = "↵ Enter";
+        } else if(kd.k === "Shift"){
+          mainLbl = "⇧ Shift";
+        } else {
+          mainLbl = kd.k;
+        }
+      } else {
+        if(isAr){
+          mainLbl = kd.ar;
+          subLbl = kd.k.length === 1 ? kd.k.toLowerCase() : kd.k[0];
+        } else {
+          mainLbl = kd.k.length === 1 ? kd.k.toLowerCase() : kd.k[0];
+          subLbl = kd.ar;
+        }
+      }
+
+      // Sub label
+      if(subLbl){
+        var subSpan = document.createElement("span");
+        subSpan.className = "kb-lbl-sub";
+        subSpan.textContent = subLbl;
+        el.appendChild(subSpan);
+      }
+
+      // Main label
+      var mainSpan = document.createElement("span");
+      mainSpan.className = "kb-lbl-main";
+      mainSpan.textContent = mainLbl;
+      el.appendChild(mainSpan);
+
+      // Finger colored bottom strip
+      var strip = document.createElement("div");
+      strip.className = "kb-finger-strip";
+      strip.style.background = fInfo.color;
+      el.appendChild(strip);
+
+      rowEl.appendChild(el);
+    }
+    rowsEl.appendChild(rowEl);
+  }
+
+  buildLegend();
+  updateTargetKey();
+}
+
+function buildLegend(){
+  var leg = document.getElementById("kb-legend");
+  if(!leg) return;
+  var isAr = (S.lang === "ar");
+  var list = [
+    { c: FINGER_DATA.lp.color, l: isAr ? "خنصر يسار" : "L-Pinky" },
+    { c: FINGER_DATA.lr.color, l: isAr ? "بنسر يسار" : "L-Ring" },
+    { c: FINGER_DATA.lm.color, l: isAr ? "وسطى يسار" : "L-Middle" },
+    { c: FINGER_DATA.li.color, l: isAr ? "سبابة يسار" : "L-Index" },
+    { c: FINGER_DATA.th.color, l: isAr ? "إبهام" : "Thumbs" },
+    { c: FINGER_DATA.ri.color, l: isAr ? "سبابة يمين" : "R-Index" },
+    { c: FINGER_DATA.rm.color, l: isAr ? "وسطى يمين" : "R-Middle" },
+    { c: FINGER_DATA.rr.color, l: isAr ? "بنسر يمين" : "R-Ring" },
+    { c: FINGER_DATA.rp.color, l: isAr ? "خنصر يمين" : "R-Pinky" }
+  ];
+  var h = "";
+  for(var i = 0; i < list.length; i++){
+    h += '<div class="kb-legend-item"><div class="kb-legend-dot" style="background:'+list[i].c+'"></div><span class="kb-legend-lbl">'+list[i].l+'</span></div>';
+  }
+  leg.innerHTML = h;
+}
+
+// Find key element corresponding to target character
+function findKeyElForChar(char){
+  if(!char) return null;
+  var isAr = (S.lang === "ar");
+  var all = document.querySelectorAll(".kb-key");
+
+  if(char === " "){
+    for(var i = 0; i < all.length; i++) if(all[i].dataset.k === "Space") return all[i];
+  }
+
+  for(var j = 0; j < all.length; j++){
+    var el = all[j];
+    var k = el.dataset.k;
+    var ar = el.dataset.ar;
+    if(isAr){
+      if(ar === char || normalizeAr(ar) === normalizeAr(char)) return el;
+      if(QWERTY_TO_AR[k] === char || normalizeAr(QWERTY_TO_AR[k]) === normalizeAr(char)) return el;
+    } else {
+      if(k.toLowerCase() === char.toLowerCase()) return el;
+      if(k.length === 2 && (k[0] === char || k[1] === char)) return el;
+    }
+  }
+
+  // Fallback check
+  for(var m = 0; m < all.length; m++){
+    var k2 = all[m].dataset.k;
+    if(k2.toLowerCase() === char.toLowerCase()) return all[m];
+  }
+  return null;
+}
+
+function updateKeyboardCasing(isShiftActive){
+  if(S.lang === "ar") return;
+  var allKeys = document.querySelectorAll(".kb-key");
+  for(var i = 0; i < allKeys.length; i++){
+    var el = allKeys[i];
+    var k = el.dataset.k;
+    if(!k || el.classList.contains("special")) continue;
+    var mainLblEl = el.querySelector(".kb-lbl-main");
+    if(!mainLblEl) continue;
+    if(k.length === 1 && k.toLowerCase() >= 'a' && k.toLowerCase() <= 'z'){
+      mainLblEl.textContent = isShiftActive ? k.toUpperCase() : k.toLowerCase();
+    } else if(k.length === 2){
+      // Pairs like "1!", "2@", "-_", "=+", "[{", "]}", ";:", "'\"", ",<", ".>", "/?"
+      mainLblEl.textContent = isShiftActive ? k[1] : k[0];
+    }
+  }
+}
+
+// Update Target Key in EdClub style (pulsing glow + finger indicator)
+function updateTargetKey(){
+  var prev = document.querySelectorAll(".kb-key.target-key, .kb-key.shift-needed");
+  for(var i = 0; i < prev.length; i++){
+    prev[i].classList.remove("target-key","shift-needed");
+  }
+
+  var badge = document.getElementById("kb-next-badge");
+  var fBadge = document.getElementById("kb-finger-badge");
+  var fDot = document.getElementById("kb-finger-dot");
+  var fText = document.getElementById("kb-finger-text");
+  var isAr = (S.lang === "ar");
+
+  if(!S.text || S.idx >= S.text.length){
+    if(badge) badge.textContent = "—";
+    if(fText) fText.textContent = isAr ? "مكتمل" : "Complete";
+    updateKeyboardCasing(false);
+    return;
+  }
+
+  var nextCh = S.text[S.idx];
+  var el = findKeyElForChar(nextCh);
+
+  if(badge){
+    badge.textContent = (nextCh === " ") ? (isAr ? "مسافة" : "SPACE") : nextCh;
+  }
+
+  var isUpperEn = (nextCh >= "A" && nextCh <= "Z");
+  var isShiftSym = '~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0;
+  var needsShift = (isUpperEn || isShiftSym);
+
+  // Dynamic casing: displays lowercase for lowercase text, uppercase for uppercase text
+  updateKeyboardCasing(needsShift);
+
+  if(el){
+    el.classList.add("target-key");
+    var fCode = el.dataset.f;
+    var fInfo = FINGER_DATA[fCode] || FINGER_DATA.th;
+    if(fDot) fDot.style.background = fInfo.color;
+    if(fText) fText.textContent = isAr ? fInfo.ar : fInfo.en;
+    if(fBadge) fBadge.style.borderColor = fInfo.color;
+
+    // Shift helper
+    if(needsShift){
+      var oppSide = (fInfo.hand === "L") ? "right" : "left";
+      var shifts = document.querySelectorAll(".kb-key[data-k='Shift']");
+      for(var s = 0; s < shifts.length; s++){
+        if(shifts[s].dataset.side === oppSide){
+          shifts[s].classList.add("shift-needed");
+        }
+      }
+    }
+  } else {
+    if(fDot) fDot.style.background = "#e2b714";
+    if(fText) fText.textContent = isAr ? "إبهام" : "Thumbs";
+  }
+}
+
+// Highlight key on press (ok / err)
+function highlightPressedKey(evKey, ok){
+  var all = document.querySelectorAll(".kb-key");
+  var evL = evKey.toLowerCase();
+
+  for(var i = 0; i < all.length; i++){
+    var el = all[i];
+    var k = el.dataset.k;
+    var ar = el.dataset.ar;
+    var match = false;
+
+    if(k === "Space" && evKey === " ") match = true;
+    else if(k.toLowerCase() === evL) match = true;
+    else if(ar === evKey || normalizeAr(ar) === normalizeAr(evKey)) match = true;
+    else if(QWERTY_TO_AR[evKey] === ar || QWERTY_TO_AR[k] === evKey) match = true;
+    else if(k === "Backspace" && evL === "backspace") match = true;
+    else if(k.length === 2 && (k[0] === evKey || k[1] === evKey)) match = true;
+
+    if(match){
+      _animateKeyPress(el, ok);
+    }
+  }
+}
+
+function _animateKeyPress(el, ok){
+  var id = el.id;
+  if(_kbTimeouts[id]){
+    clearTimeout(_kbTimeouts[id]);
+    _kbTimeouts[id] = null;
+  }
+  el.classList.remove("pressed-ok","pressed-err");
+  void el.offsetWidth;
+  el.classList.add(ok ? "pressed-ok" : "pressed-err");
+
+  _kbTimeouts[id] = setTimeout(function(){
+    el.classList.remove("pressed-ok","pressed-err");
+    _kbTimeouts[id] = null;
+  }, 120);
+}
+
+function toggleKeyboard(){
+  _kbVisible = !_kbVisible;
+  var wrap = document.getElementById("kb-wrap");
+  var btn = document.getElementById("kb-toggle-btn");
+  var lbl = document.getElementById("kb-toggle-lbl");
+  var isAr = (S.lang === "ar");
+
+  if(_kbVisible){
+    wrap.classList.remove("hidden");
+    btn.classList.add("on");
+    lbl.textContent = isAr ? "إخفاء الكيبورد" : "Hide Keyboard";
+  } else {
+    wrap.classList.add("hidden");
+    btn.classList.remove("on");
+    lbl.textContent = isAr ? "إظهار الكيبورد" : "Show Keyboard";
+  }
+}
+
+// ==============================================================
+// 4. ZERO-LATENCY RAZER GREEN MECHANICAL SWITCH AUDIO
+// ==============================================================
+var _actx = null, _masterGain = null;
+var _rgSounds = [], _spaceSound = null, _errSound = null;
+
+function _initAudio(){
+  if(_actx){
+    if(_actx.state === 'suspended') _actx.resume();
+    return;
+  }
+  try {
+    var AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if(!AudioCtx) return;
+    _actx = new AudioCtx({ latencyHint: 0, sampleRate: 44100 });
+    if(_actx.state === 'suspended') _actx.resume();
+
+    _masterGain = _actx.createGain();
+    _masterGain.gain.setValueAtTime(0.85, _actx.currentTime);
+    _masterGain.connect(_actx.destination);
+
+    var silentBuf = _actx.createBuffer(1, 128, _actx.sampleRate);
+    var silentSrc = _actx.createBufferSource();
+    silentSrc.buffer = silentBuf;
+    silentSrc.loop = true;
+    silentSrc.connect(_actx.destination);
+    silentSrc.start(0);
+
+    _rgSounds = [
+      _synthesizeRGSound(_actx, 0),
+      _synthesizeRGSound(_actx, 1),
+      _synthesizeRGSound(_actx, 2),
+      _synthesizeRGSound(_actx, 3)
+    ];
+    _spaceSound = _synthesizeSpaceSound(_actx);
+    _errSound = _synthesizeErrorSound(_actx);
+  } catch(e){}
+}
+
+function _synthesizeRGSound(actx, variant){
+  var sr = actx.sampleRate;
+  var len = Math.floor(sr * 0.045);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+  var pitch = 1 + (variant - 1.5) * 0.04;
+  var clickFreq = 4300 * pitch, clackFreq = 1100 * pitch, thudFreq = 260 * pitch;
+
+  for(var i = 0; i < len; i++){
+    var t = i / sr;
+    var impulse = (i === 0) ? 0.95 : (i === 1) ? -0.75 : (i === 2) ? 0.55 : (i < 8) ? (Math.random()*2-1)*0.25 : 0;
+    var click = Math.cos(2 * Math.PI * clickFreq * t) * Math.exp(-t * 680) * 0.45;
+    var clack = Math.sin(2 * Math.PI * clackFreq * t) * Math.exp(-t * 220) * 0.35;
+    var thud = Math.sin(2 * Math.PI * thudFreq * t) * Math.exp(-t * 110) * 0.25;
+    d[i] = (impulse * 0.4 + click + clack + thud) * 0.85;
+  }
+  return buf;
+}
+
+function _synthesizeSpaceSound(actx){
+  var sr = actx.sampleRate;
+  var len = Math.floor(sr * 0.065);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+
+  for(var i = 0; i < len; i++){
+    var t = i / sr;
+    var impulse = (i === 0) ? 0.85 : (i === 1) ? -0.65 : (i < 8) ? (Math.random()*2-1)*0.2 : 0;
+    var click = Math.cos(2 * Math.PI * 3000 * t) * Math.exp(-t * 500) * 0.3;
+    var clack = Math.sin(2 * Math.PI * 750 * t) * Math.exp(-t * 160) * 0.45;
+    var thud = Math.sin(2 * Math.PI * 210 * t) * Math.exp(-t * 70) * 0.45;
+    d[i] = (impulse * 0.3 + click + clack + thud) * 0.9;
+  }
+  return buf;
+}
+
+function _synthesizeErrorSound(actx){
+  var sr = actx.sampleRate;
+  var len = Math.floor(sr * 0.07);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+
+  for(var i = 0; i < len; i++){
+    var t = i / sr;
+    var impulse = (i === 0) ? 0.7 : (i === 1) ? -0.5 : 0;
+    var lowThud = Math.sin(2 * Math.PI * 190 * t) * Math.exp(-t * 90) * 0.55;
+    var woodPop = Math.sin(2 * Math.PI * 380 * t) * Math.exp(-t * 140) * 0.35;
+    d[i] = (impulse * 0.25 + lowThud + woodPop) * 0.8;
+  }
+  return buf;
+}
+
+window.addEventListener("pointerdown", _initAudio, { passive: true });
+window.addEventListener("mousedown", _initAudio, { passive: true });
+window.addEventListener("keydown", _initAudio, { passive: true });
+
+function playCorrectSound(isSpace){
+  if(!_actx) _initAudio();
+  if(!_actx) return;
+  if(_actx.state === 'suspended') _actx.resume();
+  try {
+    var src = _actx.createBufferSource();
+    src.buffer = (isSpace && _spaceSound) ? _spaceSound : _rgSounds[Math.floor(Math.random() * _rgSounds.length)];
+    src.connect(_masterGain);
+    src.start(_actx.currentTime);
+  } catch(e){}
+}
+
+function playErrorSound(){
+  if(!_actx) _initAudio();
+  if(!_actx) return;
+  if(_actx.state === 'suspended') _actx.resume();
+  try {
+    var src = _actx.createBufferSource();
+    if(_errSound) src.buffer = _errSound;
+    src.connect(_masterGain);
+    src.start(_actx.currentTime);
+  } catch(e){}
+}
+
+// ==============================================================
+// 5. TEST FLOW AND KEYBOARD EVENT HANDLERS
+// ==============================================================
+function genText(){
+  var p = POOLS[S.lang][S.mode];
+  if(S.mode === "quotes") return p[Math.floor(Math.random() * p.length)];
+  var w = [];
+  for(var i = 0; i < 80; i++) w.push(p[Math.floor(Math.random() * p.length)]);
+  return w.join(" ");
+}
+
+function initTest(){
+  if(S.ti) clearInterval(S.ti);
+  S.text = genText();
+  S.ch = [];
+  for(var i = 0; i < S.text.length; i++) S.ch.push({ c: S.text[i], s: i === 0 ? "now" : "w" });
+  S.idx = 0;
+  S.on = false;
+  S.fin = false;
+  S.left = S.dur;
+  S.ks = [];
+  S.ec = 0;
+  S.t0 = 0;
+  S.tk = 0;
+
+  document.getElementById("xwpm").innerHTML = "&mdash;";
+  document.getElementById("xacc").innerHTML = "&mdash;";
+  document.getElementById("xerr").textContent = "0";
+  document.getElementById("timer").textContent = S.dur;
+  document.getElementById("timer").className = "num";
+  document.getElementById("hint").style.display = "block";
+  document.getElementById("tcard").className = "card";
+
+  var w = document.getElementById("words");
+  w.scrollTop = 0;
+  w.className = S.lang === "ar" ? "ar" : "";
+  renderChars();
+  updRing(S.dur, S.dur);
+  updateTargetKey();
+
+  var nTest = document.getElementById("n-test");
+  if(!nTest || nTest.classList.contains("on")){
+    document.getElementById("p-test").className = "page show";
+  }
+  document.getElementById("p-result").className = "page";
+  document.getElementById("inp").value = "";
+  document.getElementById("inp").focus();
+}
+
+function renderChars(){
+  var words = [];
+  var curWord = [];
+
+  for(var i = 0; i < S.ch.length; i++){
+    var o = S.ch[i];
+    if(o.c === " "){
+      if(curWord.length > 0){
+        words.push('<span class="word">' + curWord.join("") + '</span>');
+        curWord = [];
+      }
+      var cls = "c sp " + o.s;
+      words.push('<span class="' + cls + '">&nbsp;</span>');
+    } else {
+      var cls2 = "c " + o.s;
+      curWord.push('<span class="' + cls2 + '">' + o.c + '</span>');
+    }
+  }
+  if(curWord.length > 0){
+    words.push('<span class="word">' + curWord.join("") + '</span>');
+  }
+
+  var wordsEl = document.getElementById("words");
+  wordsEl.innerHTML = words.join("");
+
+  // Smooth scroll active char into view (protects top padding & Arabic ascenders)
+  var curEl = wordsEl.querySelector(".c.now");
+  if(curEl){
+    var cardHeight = wordsEl.clientHeight;
+    var topPos = curEl.offsetTop;
+    if(topPos > cardHeight * 0.55){
+      wordsEl.scrollTop = topPos - cardHeight * 0.28;
+    } else {
+      wordsEl.scrollTop = 0;
+    }
+  }
+}
+
+function updRing(l, t){
+  var r = document.getElementById("ring");
+  r.style.strokeDashoffset = 201.06 * (1 - l / t);
+  r.style.stroke = (l <= 5 && S.on) ? "var(--err)" : "var(--accent)";
+}
+
+function finishTest(){
+  if(S.ti) clearInterval(S.ti);
+  S.fin = true;
+  S.on = false;
+  document.getElementById("tcard").className = "card";
+  document.getElementById("hint").style.display = "none";
+
+  var el = (performance.now() - S.t0) / 1000;
+  var cor = 0, em = {}, tm = {};
+  for(var i = 0; i < S.ks.length; i++){
+    var k = S.ks[i];
+    if(k.ok) cor++;
+    else em[k.ex] = (em[k.ex] || 0) + 1;
+    if(k.ok && k.dur > 0 && k.dur < 2000){
+      if(!tm[k.ch]) tm[k.ch] = [];
+      tm[k.ch].push(k.dur);
+    }
+  }
+  var errs = 0;
+  for(var x in em) errs += em[x];
+
+  var res = {
+    wpm: calcWPM(cor, el * 1000),
+    raw: calcWPM(S.ks.length, el * 1000),
+    acc: calcAcc(cor, S.ks.length),
+    cor: cor,
+    errs: errs,
+    tot: S.ks.length,
+    dur: el,
+    em: em,
+    tm: tm,
+    ts: Date.now(),
+    lang: S.lang
+  };
+  pR(res);
+  showResult(res);
+  chkAch();
+}
+
+function showResult(r){
+  document.getElementById("p-test").className = "page";
+  var rp = document.getElementById("p-result");
+  rp.className = "page show";
+
+  document.getElementById("rw").textContent = r.wpm;
+  document.getElementById("rw").style.color = r.wpm >= 80 ? "var(--ok)" : r.wpm >= 50 ? "var(--accent)" : "var(--text)";
+  document.getElementById("rr").textContent = r.raw;
+  document.getElementById("ra").textContent = r.acc + "%";
+  document.getElementById("ra").style.color = r.acc >= 98 ? "var(--ok)" : r.acc >= 90 ? "var(--accent)" : "var(--err)";
+  document.getElementById("re").textContent = r.errs;
+  document.getElementById("re").style.color = r.errs > 0 ? "var(--err)" : "var(--ok)";
+  document.getElementById("rt").textContent = Math.round(r.dur) + "s";
+
+  var te = [];
+  for(var c in r.em) te.push([c, r.em[c]]);
+  te.sort(function(a,b){ return b[1] - a[1]; });
+  te = te.slice(0, 8);
+  var ec = document.getElementById("rerr");
+  if(!te.length){
+    ec.innerHTML = "<p style='color:var(--ok)'>لا أخطاء! 🎉</p>";
+  } else {
+    var h = "";
+    for(var i = 0; i < te.length; i++){
+      var ch = te[i][0] === " " ? "⎵" : te[i][0];
+      h += "<div class='chip'><div class='ch2'>" + ch + "</div><div class='cn'>x" + te[i][1] + "</div></div>";
+    }
+    ec.innerHTML = h;
+  }
+
+  var tents = [];
+  for(var c2 in r.tm){
+    var arr = r.tm[c2], sum = 0;
+    for(var j = 0; j < arr.length; j++) sum += arr[j];
+    tents.push({ c: c2, av: Math.round(sum / arr.length) });
+  }
+  tents.sort(function(a,b){ return b.av - a.av; });
+  tents = tents.slice(0, 5);
+  var sk = document.getElementById("rslow");
+  if(!tents.length){
+    sk.innerHTML = "<p style='color:var(--sub);font-size:13px'>بيانات غير كافية</p>";
+  } else {
+    var h2 = "";
+    for(var i2 = 0; i2 < tents.length; i2++){
+      var bc = tents[i2].av > 400 ? "var(--err)" : tents[i2].av > 250 ? "var(--accent)" : "var(--ok)";
+      var pct = Math.min((tents[i2].av / 600) * 100, 100);
+      var ch3 = tents[i2].c === " " ? "⎵" : tents[i2].c;
+      h2 += "<div class='trow'><span class='k'>" + ch3 + "</span><div class='bwrap'><div class='bfill' style='width:" + pct + "%;background:" + bc + "'></div></div><span class='ms'>" + tents[i2].av + "ms</span></div>";
+    }
+    sk.innerHTML = h2;
+  }
+
+  var tip = document.getElementById("rtip");
+  if(te.length > 0){
+    tip.style.display = "flex";
+    var chars = [];
+    for(var i3 = 0; i3 < Math.min(te.length, 3); i3++){
+      chars.push(te[i3][0] === " " ? "المسافة" : '"' + te[i3][0] + '"');
+    }
+    document.getElementById("rtiptext").textContent = "تكرر لديك أخطاء في: " + chars.join("، ") + ". سيخصص التمرين القادم لتحسينها.";
+  } else {
+    tip.style.display = "none";
+  }
+}
+
+// KEYDOWN LISTENER (INSTANT ZERO-LATENCY DISPATCH + DUAL-LAYOUT MATCHING)
+document.addEventListener("keydown", function(e){
+  if(e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
+  var omModal = document.getElementById('online-modal');
+  if(omModal && omModal.classList.contains('show')) return;
+
+  var tp = document.getElementById("p-test");
+  var rp = document.getElementById("p-result");
+  if(tp.className.indexOf("show") < 0 && rp.className.indexOf("show") < 0) return;
+
+  if(e.key === "Tab"){ e.preventDefault(); initTest(); return; }
+  if(e.key === "Escape"){ initTest(); return; }
+  if(S.fin) return;
+  if(e.ctrlKey || e.altKey || e.metaKey) return;
+
+  if(e.key === "Backspace"){
+    e.preventDefault();
+    if(S.idx > 0){
+      playCorrectSound(false);
+      highlightPressedKey("Backspace", true);
+      S.idx--;
+      S.ch[S.idx].s = "now";
+      if(S.idx + 1 < S.ch.length) S.ch[S.idx + 1].s = "w";
+      renderChars();
+      updateTargetKey();
+    }
+    return;
+  }
+
+  if(e.key.length !== 1) return;
+  var ex = S.text[S.idx];
+  if(!ex) return;
+
+  // ROBUST DUAL-LAYOUT KEYSTROKE MATCHING (ACCURATE ARABIC & ENGLISH MATCHING)
+  var ok = matchChar(e.key, ex);
+
+  // IMMEDIATE DISPATCH: AUDIO + VISUAL KEYBOARD HIGHLIGHT
+  if(ok){
+    playCorrectSound(ex === " ");
+  } else {
+    playErrorSound();
+  }
+  highlightPressedKey(e.key, ok);
+
+  // START TIMER ON FIRST KEYSTROKE
+  if(!S.on && S.idx === 0){
+    S.on = true;
+    S.t0 = performance.now();
+    S.tk = S.t0;
+    document.getElementById("hint").style.display = "none";
+    document.getElementById("tcard").className = "card glow";
+    startTimer();
+  }
+
+  var now = performance.now();
+  var dur = S.tk > 0 ? (now - S.tk) : 0;
+  S.tk = now;
+  if(!ok) S.ec++;
+  S.ks.push({ ch: e.key, ex: ex, ok: ok, dur: dur });
+  S.ch[S.idx].s = ok ? "ok" : "bad";
+  S.idx++;
+  if(S.idx < S.ch.length) S.ch[S.idx].s = "now";
+
+  var el2 = now - S.t0;
+  var cor2 = 0;
+  for(var i = 0; i < S.ks.length; i++) if(S.ks[i].ok) cor2++;
+  var w = calcWPM(cor2, el2);
+  var a = calcAcc(cor2, S.ks.length);
+
+  document.getElementById("xwpm").textContent = w;
+  document.getElementById("xwpm").style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)";
+  document.getElementById("xacc").textContent = a;
+  document.getElementById("xacc").style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)";
+  document.getElementById("xerr").textContent = S.ec;
+  document.getElementById("xerr").style.color = S.ec > 0 ? "var(--err)" : "var(--text)";
+
+  renderChars();
+  updateTargetKey();
+
+  if(S.idx >= S.text.length) finishTest();
+});
+
+document.getElementById("tcard").addEventListener("click", function(){
+  document.getElementById("inp").focus();
+});
+
+function startTimer(){
+  S.ti = setInterval(function(){
+    S.left--;
+    document.getElementById("timer").textContent = S.left;
+    if(S.left <= 5) document.getElementById("timer").className = "num red";
+    updRing(S.left, S.dur);
+    if(S.left <= 0) finishTest();
+  }, 1000);
+}
+
+// UI LOCALIZATION FOR NAV TABS AND LABELS
+function updateUILanguage(l){
+  var isAr = (l === "ar");
+  // Race Tab & Subnav Translations
+  var nRace = document.getElementById("n-race");
+  if(nRace) nRace.textContent = isAr ? "🏁 سباق" : "🏁 Race";
+  var raceTitle = document.getElementById("race-title-txt");
+  if(raceTitle) raceTitle.textContent = isAr ? "سباق السرعة" : "RACE DUEL";
+  var raceSub = document.getElementById("race-title-sub");
+  if(raceSub) raceSub.textContent = isAr ? "سباق تفاعلي على نفس الكيبورد" : "Interactive Duel on Same Keyboard";
+  var rmGhost = document.getElementById("rm-ghost-lbl");
+  if(rmGhost) rmGhost.textContent = isAr ? "سباق التناوب (شبح المنافس)" : "1v1 Ghost Duel";
+  var rmBot = document.getElementById("rm-bot-lbl");
+  if(rmBot) rmBot.textContent = isAr ? "سباق ضد الروبوت" : "Race vs AI Bot";
+  var rmBotCfg = document.getElementById("rm-bot-cfg-lbl");
+  if(rmBotCfg) rmBotCfg.textContent = isAr ? "مستوى الروبوت:" : "Bot Level:";
+  var rCardHint = document.getElementById("r-card-hint");
+  if(rCardHint){
+    rCardHint.textContent = isAr ?
+      "اكتب النص أعلاه بأقصى سرعة • اضغط Tab للإعادة" :
+      "Type the text above as fast as possible • Press Tab to restart";
+  }
+  var botSel = document.getElementById("rm-bot-level");
+  if(botSel){
+    var curBotVal = botSel.value;
+    if(isAr){
+      botSel.innerHTML = "<option value='35'>🟢 مبتدئ (35 WPM)</option><option value='65'>🟡 متوسط (65 WPM)</option><option value='95'>🔴 محترف (95 WPM)</option><option value='125'>⚡ خارق (125 WPM)</option>";
+    } else {
+      botSel.innerHTML = "<option value='35'>🟢 Beginner (35 WPM)</option><option value='65'>🟡 Medium (65 WPM)</option><option value='95'>🔴 Pro (95 WPM)</option><option value='125'>⚡ Beast (125 WPM)</option>";
+    }
+    botSel.value = curBotVal;
+  }
+
+
+  // 1. Header Navigation Tabs
+  var nTest = document.getElementById("n-test");
+  if(nTest) nTest.textContent = isAr ? "تدريب" : "Practice";
+  var nStats = document.getElementById("n-stats");
+  if(nStats) nStats.textContent = isAr ? "إحصاءات" : "Stats";
+  var nLearn = document.getElementById("n-learn");
+  if(nLearn) nLearn.textContent = isAr ? "تعلم" : "Learn";
+
+  // 2. Mode Select Dropdown
+  var ms = document.getElementById("msel");
+  if(ms){
+    var curVal = ms.value;
+    if(isAr){
+      ms.innerHTML = "<option value='common'>شائع</option><option value='medium'>متوسط</option><option value='code'>كود</option><option value='quotes'>اقتباسات</option>";
+    } else {
+      ms.innerHTML = "<option value='common'>common</option><option value='medium'>medium</option><option value='code'>code</option><option value='quotes'>quotes</option>";
+    }
+    ms.value = curVal;
+  }
+
+  // 3. Stats Bar Labels
+  var lblAcc = document.getElementById("lbl-acc");
+  if(lblAcc) lblAcc.textContent = isAr ? "دقة %" : "Accuracy %";
+  var lblErr = document.getElementById("lbl-err");
+  if(lblErr) lblErr.textContent = isAr ? "أخطاء" : "Errors";
+
+  // 4. Typing Box Hint
+  var hintEl = document.getElementById("hint");
+  if(hintEl) hintEl.textContent = isAr ? "ابدأ الكتابة للبدء • اضغط Tab للإعادة السريعة" : "Start typing to begin • Press Tab to restart";
+
+  // 5. Actions Bar
+  var gbtnLbl = document.getElementById("gbtn-lbl");
+  if(gbtnLbl) gbtnLbl.textContent = isAr ? "إعادة" : "Restart";
+  var kbToggleLbl = document.getElementById("kb-toggle-lbl");
+  if(kbToggleLbl){
+    kbToggleLbl.textContent = _kbVisible ? (isAr ? "إخفاء الكيبورد" : "Hide Keyboard") : (isAr ? "إظهار الكيبورد" : "Show Keyboard");
+  }
+
+  // 6. Keyboard Guide Next Key Label
+  var nextLbl = document.getElementById("kb-next-lbl");
+  if(nextLbl) nextLbl.textContent = isAr ? "الحرف التالي:" : "Next Key:";
+}
+
+// CONTROL FUNCTIONS
+function setLang(l){
+  S.lang = l;
+  document.documentElement.lang = l;
+  document.documentElement.dir = (l === "ar" ? "rtl" : "ltr");
+  document.getElementById("l-en").className = "pb" + (l === "en" ? " on" : "");
+  document.getElementById("l-ar").className = "pb" + (l === "ar" ? " on" : "");
+  updateUILanguage(l);
+  pS({ lang: l, dur: S.dur, mode: S.mode });
+  buildKeyboard();
+
+  var curTab = "test";
+  var tabs = ["test","stats","learn","race"];
+  for(var i = 0; i < tabs.length; i++){
+    var nb = document.getElementById("n-" + tabs[i]);
+    if(nb && nb.classList.contains("on")) curTab = tabs[i];
+  }
+  showTab(curTab);
+}
+
+function setDur(d){
+  S.dur = d;
+  document.getElementById("d-15").className = "pb" + (d === 15 ? " on" : "");
+  document.getElementById("d-30").className = "pb" + (d === 30 ? " on" : "");
+  document.getElementById("d-60").className = "pb" + (d === 60 ? " on" : "");
+  pS({ lang: S.lang, dur: d, mode: S.mode });
+  initTest();
+}
+
+function setMode(m){
+  S.mode = m;
+  pS({ lang: S.lang, dur: S.dur, mode: m });
+  initTest();
+}
+
+function showTab(t){
+  var tabs = ["test","stats","learn","race"];
+  for(var i = 0; i < tabs.length; i++){
+    var nb = document.getElementById("n-" + tabs[i]);
+    if(nb) nb.className = "nb" + (tabs[i] === t ? " on" : "");
+    var pg = document.getElementById("p-" + tabs[i]);
+    if(pg) pg.className = "page" + (tabs[i] === t ? " show" : "");
+  }
+  document.getElementById("p-result").className = "page";
+  if(t === "test") initTest();
+  if(t === "stats") renderStats();
+  if(t === "learn") renderLearn();
+  if(t === "race") initRace();
+}
+
+// STATS RENDERING
+function renderStats(){
+  var rs = gR();
+  var con = document.getElementById("scon");
+  var emp = document.getElementById("semp");
+  if(!rs.length){ emp.style.display = "block"; con.style.display = "none"; return; }
+  emp.style.display = "none"; con.style.display = "block";
+
+  var best = 0, sum = 0, sumA = 0;
+  for(var i = 0; i < rs.length; i++){
+    if(rs[i].wpm > best) best = rs[i].wpm;
+    sum += rs[i].wpm;
+    sumA += rs[i].acc;
+  }
+  var avg = Math.round(sum / rs.length);
+  var avgA = Math.round(sumA / rs.length);
+  var tt = 0;
+  for(var j = 0; j < rs.length; j++) tt += rs[j].dur;
+
+  document.getElementById("sb").textContent = best;
+  document.getElementById("sb").style.color = "var(--accent)";
+  document.getElementById("sa").textContent = avg;
+  document.getElementById("sac").textContent = avgA + "%";
+  document.getElementById("st").textContent = rs.length;
+  document.getElementById("stm").textContent = tt < 3600 ? Math.round(tt / 60) + "m" : (tt / 3600).toFixed(1) + "h";
+
+  var l20 = rs.slice(0, 20).reverse();
+  drawChart("cwpm", l20.map(function(r){ return r.wpm; }), "var(--accent)");
+  drawChart("cacc", l20.map(function(r){ return r.acc}), "var(--ok)");
+
+  var ge = {}, gt = {};
+  for(var k = 0; k < rs.length; k++){
+    var r = rs[k];
+    if(r.em) for(var c in r.em) ge[c] = (ge[c] || 0) + r.em[c];
+    if(r.tm) for(var c2 in r.tm){
+      if(!gt[c2]) gt[c2] = [];
+      for(var m = 0; m < r.tm[c2].length; m++) gt[c2].push(r.tm[c2][m]);
+    }
+  }
+  renderHeatmap(ge, gt);
+  renderAch();
+
+  var rl = document.getElementById("rlist");
+  var rh = "";
+  var sl = rs.slice(0, 10);
+  for(var n = 0; n < sl.length; n++){
+    var d = new Date(sl[n].ts);
+    var ds = d.getDate() + "/" + (d.getMonth() + 1) + " " + d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
+    var acl = sl[n].acc >= 95 ? "var(--ok)" : sl[n].acc >= 85 ? "var(--accent)" : "var(--err)";
+    rh += "<div class='recrow'><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + ds + "</span><span style='font-family:monospace;font-weight:700;color:var(--accent)'>" + sl[n].wpm + " WPM</span><span style='font-family:monospace;color:" + acl + "'>" + sl[n].acc + "%</span><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + Math.round(sl[n].dur) + "s</span><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + (sl[n].lang || "en").toUpperCase() + "</span></div>";
+  }
+  rl.innerHTML = rh;
+}
+
+function drawChart(id, data, color){
+  var svg = document.getElementById(id);
+  if(!data || data.length < 2){ svg.innerHTML = ""; return; }
+  var W = 300, H = 80;
+  var max = data[0], min = data[0];
+  for(var i = 1; i < data.length; i++){
+    if(data[i] > max) max = data[i];
+    if(data[i] < min) min = data[i];
+  }
+  var range = max - min || 1;
+  var pts = "";
+  for(var j = 0; j < data.length; j++){
+    var x = (j / (data.length - 1)) * W;
+    var y = H - ((data[j] - min) / range) * (H - 10) - 5;
+    pts += x + "," + y + " ";
+  }
+  svg.innerHTML = "<defs><linearGradient id='g" + id + "' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='" + color + "' stop-opacity='.3'/><stop offset='100%' stop-color='" + color + "' stop-opacity='0'/></linearGradient></defs><polygon points='0," + H + " " + pts + W + "," + H + "' fill='url(#g" + id + ")'/><polyline points='" + pts + "' fill='none' stroke='" + color + "' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>";
+}
+
+function mastery(e, ts){
+  var t = ts.length;
+  if(!t && !e) return 50;
+  var avg = 0;
+  if(t){
+    var s = 0;
+    for(var i = 0; i < t; i++) s += ts[i];
+    avg = s / t;
+  } else avg = 500;
+  var sp = Math.max(0, Math.min(100, 100 - (avg - 100) / 4));
+  var er = e / (t + e + 1);
+  return Math.round(sp * .4 + (1 - er) * 100 * .6);
+}
+
+function renderHeatmap(em, tm){
+  var w = document.getElementById("hmap");
+  var h = "";
+  for(var ri = 0; ri < KR.length; ri++){
+    h += "<div class='hmrow' style='padding-left:" + (ri * 14) + "px'>";
+    for(var ci = 0; ci < KR[ri].length; ci++){
+      var k = KR[ri][ci];
+      var e = em[k] || 0;
+      var ts = tm[k] || [];
+      var m = mastery(e, ts);
+      var has = (e > 0 || ts.length > 0);
+      var bg, bd;
+      if(m >= 80){ bg = "rgba(76,175,125,.4)"; bd = "rgba(76,175,125,.6)"; }
+      else if(m >= 60){ bg = "rgba(226,183,20,.35)"; bd = "rgba(226,183,20,.6)"; }
+      else if(m >= 40){ bg = "rgba(229,146,86,.45)"; bd = "rgba(229,146,86,.7)"; }
+      else { bg = "rgba(229,86,86,.5)"; bd = "rgba(229,86,86,.7)"; }
+      var sty = has ? "background:" + bg + ";border-color:" + bd : "";
+      var avg2 = 0;
+      if(ts.length){
+        var s2 = 0;
+        for(var z = 0; z < ts.length; z++) s2 += ts[z];
+        avg2 = Math.round(s2 / ts.length);
+      }
+      var fn = FM[k] ? FN[FM[k]] : "";
+      var tip2 = "إتقان: " + m + "%\nأخطاء: " + e;
+      if(avg2) tip2 += "\nمتوسط: " + avg2 + "ms";
+      if(fn) tip2 += "\n" + fn;
+      h += "<div class='hmk' style='" + sty + "' title='" + tip2 + "'>" + k + "</div>";
+    }
+    h += "</div>";
+  }
+  w.innerHTML = h;
+}
+
+function renderAch(){
+  var ul = gA();
+  var g = document.getElementById("achg");
+  var h = "";
+  for(var i = 0; i < ACHS.length; i++){
+    var a = ACHS[i];
+    var u = null;
+    for(var j = 0; j < ul.length; j++){
+      if(ul[j].id === a.id){ u = ul[j]; break; }
+    }
+    h += "<div class='ach" + (u ? " got" : "") + "'><div class='ico'>" + a.ico + "</div><div class='nm'>" + a.n + "</div><div class='ds'>" + a.d + "</div></div>";
+  }
+  g.innerHTML = h;
+}
+
+function chkAch(){
+  var rs = gR();
+  var ul = gA();
+  var nu = [];
+  var best = 0;
+  for(var i = 0; i < rs.length; i++) if(rs[i].wpm > best) best = rs[i].wpm;
+  var cks = [
+    { id: "ft", c: rs.length >= 1 },
+    { id: "w50", c: best >= 50 },
+    { id: "w80", c: best >= 80 },
+    { id: "a100", c: false },
+    { id: "t10", c: rs.length >= 10 }
+  ];
+  for(var j = 0; j < rs.length; j++) if(rs[j].acc === 100) cks[3].c = true;
+  for(var k = 0; k < cks.length; k++){
+    if(cks[k].c){
+      var found = false;
+      for(var m = 0; m < ul.length; m++) if(ul[m].id === cks[k].id) found = true;
+      if(!found){
+        ul.push({ id: cks[k].id, date: new Date().toISOString() });
+        nu.push(cks[k].id);
+      }
+    }
+  }
+  if(nu.length){
+    pA(ul);
+    for(var n = 0; n < nu.length; n++) showToast(nu[n]);
+  }
+}
+
+function showToast(id){
+  var a = null;
+  for(var i = 0; i < ACHS.length; i++) if(ACHS[i].id === id) a = ACHS[i];
+  if(!a) return;
+  var con = document.getElementById("toasts");
+  var d = document.createElement("div");
+  d.className = "toast2";
+  d.innerHTML = "<span style='font-size:28px'>" + a.ico + "</span><div><div style='font-size:11px;color:var(--accent);text-transform:uppercase'>إنجاز جديد!</div><div style='font-size:14px;font-weight:600'>" + a.n + "</div><div style='font-size:12px;color:var(--sub)'>" + a.d + "</div></div>";
+  con.appendChild(d);
+  setTimeout(function(){
+    d.style.opacity = "0";
+    d.style.transition = "opacity .4s";
+    setTimeout(function(){ d.remove(); }, 400);
+  }, 4000);
+}
+
+function renderLearn(){
+  var g = document.getElementById("lgrid");
+  var h = "";
+  var lvs = [1, 2, 3, 4, 5];
+  for(var li = 0; li < lvs.length; li++){
+    var lv = lvs[li];
+    var ls = [];
+    for(var j = 0; j < LESSONS.length; j++) if(LESSONS[j].lv === lv) ls.push(LESSONS[j]);
+    if(!ls.length) continue;
+    h += "<div class='lvs'><div class='lvh'><div class='lvb" + (lv === 1 ? " g" : "") + "'>" + lv + "</div><span class='lvl'>المستوى " + lv + "</span><div class='lvline'></div></div><div class='lgrid'>";
+    for(var k = 0; k < ls.length; k++){
+      var l = ls[k];
+      var ksh = "";
+      for(var m = 0; m < Math.min(l.ks.length, 6); m++) ksh += "<span>" + l.ks[m] + "</span>";
+      h += "<div class='lc'><div class='ico'>" + l.ic + "</div><div><div class='tt'>" + l.t + "</div><div class='ds'>" + l.d + "</div>" + (l.ks.length ? "<div class='ks'>" + ksh + "</div>" : "") + "</div></div>";
+    }
+    h += "</div></div>";
+  }
+  g.innerHTML = h;
+}
+
+// ==============================================================
+// 7. RACE MODE ENGINE (GHOST DUEL + AI BOT SYSTEM)
+// ==============================================================
+var RACE = {
+  modeType: "ghost", // "ghost" or "bot"
+  botSpeed: 65,      // WPM
+  turn: 1,           // 1 = Player 1, 2 = Player 2 (Ghost race)
+  text: "",
+  p1: { idx:0, ks:[], t0:0, on:false, fin:false, wpm:0, acc:100, finTime:0 },
+  p2: { idx:0, ks:[], t0:0, on:false, fin:false, wpm:0, acc:100, finTime:0 },
+  ch: [],
+  ghostTimeline: [], // [{ t: ms, pct: %, wpm: N, acc: N }] recorded from Player 1
+  ghostInterval: null,
+  botInterval: null,
+  timerInterval: null,
+  elapsed: 0,
+  started: false,
+  done: false
+};
+
+function setRaceModeType(type){
+  RACE.modeType = type;
+  document.getElementById("rm-ghost-btn").className = "rm-pill" + (type === "ghost" ? " on" : "");
+  document.getElementById("rm-bot-btn").className = "rm-pill" + (type === "bot" ? " on" : "");
+  document.getElementById("rm-bot-config").style.display = (type === "bot" ? "flex" : "none");
+  initRace();
+}
+
+function setBotSpeed(spd){
+  RACE.botSpeed = parseInt(spd, 10) || 65;
+  initRace();
+}
+
+function genRaceText(){
+  var p = POOLS[S.lang]["common"];
+  var w = [];
+  for(var i = 0; i < 50; i++) w.push(p[Math.floor(Math.random() * p.length)]);
+  return w.join(" ");
+}
+
+function initRace(){
+  if(RACE.timerInterval) clearInterval(RACE.timerInterval);
+  if(RACE.ghostInterval) clearInterval(RACE.ghostInterval);
+  if(RACE.botInterval) clearInterval(RACE.botInterval);
+
+  RACE.turn = 1;
+  RACE.text = genRaceText();
+  RACE.done = false;
+  RACE.started = false;
+  RACE.elapsed = 0;
+  RACE.ghostTimeline = [];
+
+  RACE.p1 = { idx:0, ks:[], t0:0, on:false, fin:false, wpm:0, acc:100, finTime:0 };
+  RACE.p2 = { idx:0, ks:[], t0:0, on:false, fin:false, wpm:0, acc:100, finTime:0 };
+
+  RACE.ch = [];
+  for(var i = 0; i < RACE.text.length; i++) RACE.ch.push({ c: RACE.text[i], s: i === 0 ? "now" : "w" });
+
+  var isAr = (S.lang === "ar");
+
+  // Reset Track UI
+  document.getElementById("race-result").className = "";
+  document.getElementById("rbar1").style.width = "0%";
+  document.getElementById("rbar2").style.width = "0%";
+  updateCarPosition("rcar1", 0);
+  updateCarPosition("rcar2", 0);
+  document.getElementById("rp1-wpm").textContent = "—";
+  document.getElementById("rp1-acc").textContent = "—";
+  document.getElementById("rp2-wpm").textContent = "—";
+  document.getElementById("rp2-acc").textContent = "—";
+  document.getElementById("rp1-pct").textContent = "0%";
+  document.getElementById("rp2-pct").textContent = "0%";
+  document.getElementById("race-timer").textContent = "—";
+
+  if(RACE.modeType === "ghost"){
+    document.getElementById("rp1-name").textContent = isAr ? "اللاعب 1 (أنت)" : "Player 1 (You)";
+    document.getElementById("rp2-name").textContent = isAr ? "اللاعب 2 (المنافس)" : "Player 2 (Opponent)";
+    document.getElementById("rp2-avatar").textContent = "2";
+    document.getElementById("rp2-avatar").className = "race-player-avatar race-p2-avatar";
+    document.getElementById("rp1-hint").textContent = isAr ? "ابدأ الكتابة للتسجيل" : "Type to record run";
+    document.getElementById("rp2-hint").textContent = isAr ? "في انتظار دوره" : "Waiting for turn";
+
+    // Card banner
+    document.getElementById("r-main-card").className = "race-main-card glow-p1";
+    document.getElementById("r-turn-ico").textContent = "🟡";
+    document.getElementById("r-turn-txt").textContent = isAr ? "الجولة 1: دور اللاعب 1 — اكتب الآن لتسجيل مسار سيارتك!" : "Round 1: Player 1 Turn — Type to record your ghost car!";
+    document.getElementById("r-turn-sub").textContent = isAr ? "اضغط أي حرف للانطلاق" : "Press any key to start";
+  } else {
+    // Bot mode
+    document.getElementById("rp1-name").textContent = isAr ? "أنت (السيارة الصفراء)" : "You (Yellow Car)";
+    document.getElementById("rp2-name").textContent = (isAr ? "🤖 الروبوت الذكي (" : "🤖 AI Bot (") + RACE.botSpeed + " WPM)";
+    document.getElementById("rp2-avatar").textContent = "🤖";
+    document.getElementById("rp2-avatar").className = "race-player-avatar race-p2-avatar";
+    document.getElementById("rp1-hint").textContent = isAr ? "انطلق وتجاوز الروبوت" : "Beat the bot!";
+    document.getElementById("rp2-hint").textContent = isAr ? "جاهز للانطلاق" : "Ready to race";
+
+    document.getElementById("r-main-card").className = "race-main-card glow-p1";
+    document.getElementById("r-turn-ico").textContent = "🤖";
+    document.getElementById("r-turn-txt").textContent = isAr ? "تحدي الروبوت: اكتب وتغلب على سيارة الذكاء الاصطناعي!" : "Bot Duel: Beat the AI car to the finish line!";
+    document.getElementById("r-turn-sub").textContent = isAr ? "انطلق فوراً بالطباعة" : "Start typing to race";
+  }
+
+  var rw = document.getElementById("r-words");
+  rw.className = isAr ? "race-words ar" : "race-words";
+  rw.scrollTop = 0;
+  renderRaceWords();
+
+  document.getElementById("r-inp").value = "";
+  document.getElementById("r-inp").focus();
+}
+
+function updateCarPosition(carId, pct){
+  var car = document.getElementById(carId);
+  var track = document.getElementById(carId === "rcar1" ? "rtrack1" : "rtrack2");
+  if(!car || !track) return;
+  var trackW = track.clientWidth;
+  var carW = 30;
+  var flagW = 38;
+  var available = trackW - flagW - carW - 6;
+  var pos = Math.max(2, Math.min(available, (pct / 100) * available));
+  car.style.left = pos + "px";
+}
+
+function renderRaceWords(){
+  var words = [];
+  var curWord = [];
+  for(var i = 0; i < RACE.ch.length; i++){
+    var o = RACE.ch[i];
+    if(o.c === " "){
+      if(curWord.length > 0){ words.push('<span class="word">' + curWord.join("") + '</span>'); curWord = []; }
+      var cls = "c sp " + o.s;
+      words.push('<span class="' + cls + '">&nbsp;</span>');
+    } else {
+      var cls2 = "c " + o.s;
+      curWord.push('<span class="' + cls2 + '">' + o.c + '</span>');
+    }
+  }
+  if(curWord.length > 0) words.push('<span class="word">' + curWord.join("") + '</span>');
+  var el = document.getElementById("r-words");
+  el.innerHTML = words.join("");
+
+  // Smooth scroll
+  var cur = el.querySelector(".c.now");
+  if(cur){
+    var h = el.clientHeight;
+    var top = cur.offsetTop;
+    if(top > h * 0.55) el.scrollTop = top - h * 0.28;
+    else el.scrollTop = 0;
+  }
+}
+
+function startRaceTimer(){
+  var t0 = performance.now();
+  RACE.timerInterval = setInterval(function(){
+    RACE.elapsed = Math.round((performance.now() - t0) / 1000);
+    document.getElementById("race-timer").textContent = RACE.elapsed + "s";
+  }, 500);
+}
+
+function calcRaceStats(player){
+  var cor = 0;
+  for(var i = 0; i < player.ks.length; i++) if(player.ks[i].ok) cor++;
+  var el = player.t0 > 0 ? (performance.now() - player.t0) : 1;
+  player.wpm = calcWPM(cor, el);
+  player.acc = calcAcc(cor, player.ks.length);
+  return { wpm: player.wpm, acc: player.acc };
+}
+
+function updateRaceUI(playerNum, pct, wpm, acc){
+  var barId = "rbar" + playerNum;
+  var carId = "rcar" + playerNum;
+  var wpmId = "rp" + playerNum + "-wpm";
+  var accId = "rp" + playerNum + "-acc";
+  var pctId = "rp" + playerNum + "-pct";
+
+  var barPct = Math.min(pct / RACE.text.length * 100, 93);
+  document.getElementById(barId).style.width = barPct + "%";
+  updateCarPosition(carId, barPct);
+  document.getElementById(wpmId).textContent = wpm > 0 ? wpm : "—";
+  document.getElementById(accId).textContent = acc > 0 ? acc + "%" : "—";
+  document.getElementById(pctId).textContent = Math.round(barPct) + "%";
+}
+
+// Start AI Bot car movement
+function startAIBot(){
+  var botCharsPerSec = (RACE.botSpeed * 5) / 60;
+  var botIdx = 0;
+  var botT0 = performance.now();
+  var totalChars = RACE.text.length;
+
+  RACE.botInterval = setInterval(function(){
+    if(RACE.done) { clearInterval(RACE.botInterval); return; }
+    var el = (performance.now() - botT0) / 1000;
+    botIdx = Math.min(totalChars, Math.floor(el * botCharsPerSec));
+    var pct = Math.min(botIdx / totalChars * 100, 93);
+
+    document.getElementById("rbar2").style.width = pct + "%";
+    updateCarPosition("rcar2", pct);
+    document.getElementById("rp2-wpm").textContent = RACE.botSpeed;
+    document.getElementById("rp2-acc").textContent = "98%";
+    document.getElementById("rp2-pct").textContent = Math.round(pct) + "%";
+
+    if(botIdx >= totalChars){
+      clearInterval(RACE.botInterval);
+      document.getElementById("rbar2").style.width = "100%";
+      updateCarPosition("rcar2", 100);
+      document.getElementById("rp2-pct").textContent = "100%";
+      document.getElementById("rp2-hint").textContent = "🏁 وصل الروبوت!";
+      RACE.p2.fin = true;
+      RACE.p2.finTime = Math.round(el * 10) / 10;
+      RACE.p2.wpm = RACE.botSpeed;
+      RACE.p2.acc = 98;
+      if(RACE.p1.fin) showRaceResult();
+    }
+  }, 100);
+}
+
+// Start Player 1 Ghost Replay during Player 2's turn
+function startGhostReplay(){
+  var t0 = performance.now();
+  var timeline = RACE.ghostTimeline;
+  if(!timeline || !timeline.length) return;
+
+  var currentTlIdx = 0;
+  RACE.ghostInterval = setInterval(function(){
+    if(RACE.done) { clearInterval(RACE.ghostInterval); return; }
+    var el = performance.now() - t0;
+
+    while(currentTlIdx < timeline.length - 1 && timeline[currentTlIdx + 1].t <= el){
+      currentTlIdx++;
+    }
+    var pt = timeline[currentTlIdx];
+    if(pt){
+      var barPct = Math.min(pt.idx / RACE.text.length * 100, 93);
+      document.getElementById("rbar1").style.width = barPct + "%";
+      updateCarPosition("rcar1", barPct);
+      document.getElementById("rp1-wpm").textContent = pt.wpm;
+      document.getElementById("rp1-acc").textContent = pt.acc + "%";
+      document.getElementById("rp1-pct").textContent = Math.round(barPct) + "%";
+    }
+
+    if(currentTlIdx >= timeline.length - 1){
+      clearInterval(RACE.ghostInterval);
+      document.getElementById("rbar1").style.width = "100%";
+      updateCarPosition("rcar1", 100);
+      document.getElementById("rp1-pct").textContent = "100%";
+    }
+  }, 100);
+}
+
+function handleRaceKey(e){
+  if(RACE.done) return;
+  var isAr = (S.lang === "ar");
+
+  // Determine current active player
+  var curPlayer = (RACE.modeType === "ghost" && RACE.turn === 2) ? RACE.p2 : RACE.p1;
+  var curPlayerNum = (RACE.modeType === "ghost" && RACE.turn === 2) ? 2 : 1;
+
+  if(curPlayer.fin) return;
+
+  if(e.key === "Backspace"){
+    e.preventDefault();
+    if(curPlayer.idx > 0){
+      curPlayer.idx--;
+      RACE.ch[curPlayer.idx].s = "now";
+      if(curPlayer.idx + 1 < RACE.ch.length) RACE.ch[curPlayer.idx + 1].s = "w";
+      renderRaceWords();
+      playCorrectSound(false);
+    }
+    return;
+  }
+
+  if(e.key.length !== 1) return;
+  var ex = RACE.text[curPlayer.idx];
+  if(!ex) return;
+
+  var ok = matchChar(e.key, ex);
+
+  // Player starts typing
+  if(!curPlayer.on){
+    curPlayer.on = true;
+    curPlayer.t0 = performance.now();
+
+    if(!RACE.started){
+      RACE.started = true;
+      startRaceTimer();
+    }
+
+    if(RACE.modeType === "bot"){
+      startAIBot();
+      document.getElementById("rp1-hint").textContent = isAr ? "تكتب الآن..." : "Typing now...";
+    } else {
+      if(RACE.turn === 1){
+        document.getElementById("rp1-hint").textContent = isAr ? "تسجيل الجولة 1..." : "Recording P1...";
+      } else {
+        document.getElementById("rp2-hint").textContent = isAr ? "تتحدى الشبح الآن!" : "Challenging Ghost!";
+        startGhostReplay();
+      }
+    }
+  }
+
+  curPlayer.ks.push({ ch: e.key, ex: ex, ok: ok });
+  RACE.ch[curPlayer.idx].s = ok ? "ok" : "bad";
+  curPlayer.idx++;
+  if(curPlayer.idx < RACE.ch.length) RACE.ch[curPlayer.idx].s = "now";
+
+  if(ok) playCorrectSound(ex === " "); else playErrorSound();
+
+  var stats = calcRaceStats(curPlayer);
+  updateRaceUI(curPlayerNum, curPlayer.idx, stats.wpm, stats.acc);
+
+  // If Player 1 in ghost mode, record point to ghost timeline
+  if(RACE.modeType === "ghost" && RACE.turn === 1){
+    RACE.ghostTimeline.push({
+      t: performance.now() - curPlayer.t0,
+      idx: curPlayer.idx,
+      wpm: stats.wpm,
+      acc: stats.acc
+    });
+  }
+
+  renderRaceWords();
+
+  // Check finish
+  if(curPlayer.idx >= RACE.text.length){
+    finishPlayerRun(curPlayerNum, curPlayer);
+  }
+}
+
+function finishPlayerRun(playerNum, player){
+  player.fin = true;
+  var isAr = (S.lang === "ar");
+  var el = (performance.now() - player.t0) / 1000;
+  player.finTime = Math.round(el * 10) / 10;
+  var cor = 0;
+  for(var i = 0; i < player.ks.length; i++) if(player.ks[i].ok) cor++;
+  player.wpm = calcWPM(cor, el * 1000);
+  player.acc = calcAcc(cor, player.ks.length);
+
+  document.getElementById("rbar" + playerNum).style.width = "100%";
+  updateCarPosition("rcar" + playerNum, 100);
+  document.getElementById("rp" + playerNum + "-pct").textContent = "100%";
+  document.getElementById("rp" + playerNum + "-hint").textContent = "🏁 " + (isAr ? "انتهى!" : "Finished!");
+  playCorrectSound(true);
+
+  if(RACE.modeType === "bot"){
+    showRaceResult();
+  } else if(RACE.modeType === "ghost"){
+    if(RACE.turn === 1){
+      // Transition to Player 2
+      RACE.turn = 2;
+      startRaceCountdown(function(){
+        // Reset text for Player 2
+        RACE.ch = [];
+        for(var i = 0; i < RACE.text.length; i++) RACE.ch.push({ c: RACE.text[i], s: i === 0 ? "now" : "w" });
+        renderRaceWords();
+
+        // Reset track 1 back to 0 for replay
+        document.getElementById("rbar1").style.width = "0%";
+        updateCarPosition("rcar1", 0);
+        document.getElementById("rp1-pct").textContent = "0%";
+        document.getElementById("rp1-hint").textContent = isAr ? "سيارة الشبح جاهزة" : "Ghost car ready";
+
+        // Card banner for Player 2
+        document.getElementById("r-main-card").className = "race-main-card glow-p2";
+        document.getElementById("r-turn-ico").textContent = "🔵";
+        document.getElementById("r-turn-txt").textContent = isAr ?
+          ("الجولة 2: دور اللاعب 2 — انطلق وتغلب على شبح اللاعب 1 (" + RACE.p1.wpm + " WPM)!") :
+          ("Round 2: Player 2 Turn — Beat Player 1 Ghost (" + RACE.p1.wpm + " WPM)!");
+        document.getElementById("r-turn-sub").textContent = isAr ? "انطلق فوراً بالطباعة" : "Start typing to race";
+
+        document.getElementById("r-inp").value = "";
+        document.getElementById("r-inp").focus();
+      });
+    } else {
+      // Both done
+      showRaceResult();
+    }
+  }
+}
+
+function showRaceResult(){
+  if(RACE.timerInterval) clearInterval(RACE.timerInterval);
+  if(RACE.ghostInterval) clearInterval(RACE.ghostInterval);
+  if(RACE.botInterval) clearInterval(RACE.botInterval);
+  RACE.done = true;
+
+  var isAr = (S.lang === "ar");
+  var p1Wins = false;
+
+  if(RACE.modeType === "bot"){
+    p1Wins = RACE.p1.fin && (!RACE.p2.fin || RACE.p1.finTime <= RACE.p2.finTime);
+  } else {
+    p1Wins = RACE.p1.finTime <= RACE.p2.finTime;
+    if(!RACE.p1.fin) p1Wins = false;
+    if(!RACE.p2.fin) p1Wins = true;
+  }
+
+  var winnerName = "";
+  if(RACE.modeType === "bot"){
+    winnerName = p1Wins ? (isAr ? "أنت (الإنسان)" : "You (Human)") : (isAr ? "الروبوت الذكي 🤖" : "AI Bot 🤖");
+  } else {
+    winnerName = p1Wins ? (isAr ? "اللاعب 1" : "Player 1") : (isAr ? "اللاعب 2" : "Player 2");
+  }
+
+  document.getElementById("race-winner-badge").textContent = p1Wins ? "🥇" : "🏆";
+  document.getElementById("race-winner-title").textContent = winnerName + (isAr ? " يفوز بالسباق!" : " Wins the Race!");
+  document.getElementById("race-winner-sub").textContent = isAr ? "انتهى التحدي — منصة التتويج والنتائج" : "Challenge Complete — Final Podium";
+
+  var pod1 = document.getElementById("race-pod1");
+  var pod2 = document.getElementById("race-pod2");
+
+  if(p1Wins){
+    pod1.className = "race-podium-card gold";
+    pod2.className = "race-podium-card silver";
+    pod1.querySelector(".race-podium-medal").textContent = "🥇";
+    pod2.querySelector(".race-podium-medal").textContent = "🥈";
+  } else {
+    pod1.className = "race-podium-card silver";
+    pod2.className = "race-podium-card gold";
+    pod1.querySelector(".race-podium-medal").textContent = "🥈";
+    pod2.querySelector(".race-podium-medal").textContent = "🥇";
+  }
+
+  var p1Label = (RACE.modeType === "bot") ? (isAr ? "أنت" : "You") : (isAr ? "اللاعب 1" : "Player 1");
+  var p2Label = (RACE.modeType === "bot") ? (isAr ? "الروبوت" : "AI Bot") : (isAr ? "اللاعب 2" : "Player 2");
+
+  document.getElementById("race-pod1-name").textContent = p1Label;
+  document.getElementById("race-pod1-wpm").textContent = RACE.p1.fin ? RACE.p1.wpm : "—";
+  document.getElementById("race-pod1-acc").textContent = RACE.p1.fin ? RACE.p1.acc + "%" : "—";
+  document.getElementById("race-pod1-time").textContent = RACE.p1.fin ? RACE.p1.finTime + "s" : "DNF";
+
+  document.getElementById("race-pod2-name").textContent = p2Label;
+  document.getElementById("race-pod2-wpm").textContent = RACE.p2.fin ? RACE.p2.wpm : "—";
+  document.getElementById("race-pod2-acc").textContent = RACE.p2.fin ? RACE.p2.acc + "%" : "—";
+  document.getElementById("race-pod2-time").textContent = RACE.p2.fin ? RACE.p2.finTime + "s" : "DNF";
+
+  document.getElementById("race-result").className = "show";
+
+  // Toast
+  var toastEl = document.createElement("div");
+  toastEl.className = "toast2";
+  var winWpm = p1Wins ? RACE.p1.wpm : RACE.p2.wpm;
+  toastEl.innerHTML = "<span style='font-size:28px'>🏆</span><div><div style='font-size:11px;color:var(--accent);text-transform:uppercase'>" + (isAr ? "مبروك الفوز!" : "Race Winner!") + "</div><div style='font-size:14px;font-weight:600'>" + winnerName + " (" + winWpm + " WPM)</div></div>";
+  document.getElementById("toasts").appendChild(toastEl);
+  setTimeout(function(){ toastEl.style.opacity="0"; toastEl.style.transition="opacity .4s"; setTimeout(function(){ toastEl.remove(); }, 400); }, 5000);
+}
+
+function startRaceCountdown(cb){
+  var cd = document.getElementById("race-countdown");
+  var display = document.getElementById("race-cd-display");
+  cd.className = "";
+  var n = 3;
+  display.className = "cd-number";
+  display.textContent = n;
+
+  var interval = setInterval(function(){
+    n--;
+    if(n > 0){
+      display.textContent = n;
+      display.className = "";
+      void display.offsetWidth;
+      display.className = "cd-number";
+    } else if(n === 0){
+      display.textContent = "GO!";
+      display.className = "";
+      void display.offsetWidth;
+      display.className = "cd-go";
+    } else {
+      clearInterval(interval);
+      cd.className = "hidden";
+      if(cb) cb();
+    }
+  }, 750);
+}
+
+// Global Race keydown listener
+document.addEventListener("keydown", function(e){
+  if(e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
+  var omModal = document.getElementById('online-modal');
+  if(omModal && omModal.classList.contains('show')) return;
+
+  var racePage = document.getElementById("p-race");
+  if(!racePage || racePage.className.indexOf("show") < 0) return;
+  if(RACE.done) return;
+
+  if(e.key === "Tab" && !e.ctrlKey){
+    e.preventDefault();
+    initRace();
+    return;
+  }
+  if(e.key === "Escape"){
+    e.preventDefault();
+    initRace();
+    return;
+  }
+
+  handleRaceKey(e);
+});
+
+// Initialize state and app
+var sv = gS();
+if(sv.lang) S.lang = sv.lang;
+if(sv.dur) S.dur = sv.dur;
+if(sv.mode) S.mode = sv.mode;
+
+if(sv.lang === "ar"){
+  document.getElementById("l-en").className = "pb";
+  document.getElementById("l-ar").className = "pb on";
+  document.documentElement.lang = "ar";
+  document.documentElement.dir = "rtl";
+} else {
+  document.getElementById("l-en").className = "pb on";
+  document.getElementById("l-ar").className = "pb";
+  document.documentElement.lang = "en";
+  document.documentElement.dir = "ltr";
+}
+if(sv.dur){
+  document.getElementById("d-15").className = "pb" + (sv.dur === 15 ? " on" : "");
+  document.getElementById("d-30").className = "pb" + (sv.dur === 30 ? " on" : "");
+  document.getElementById("d-60").className = "pb" + (sv.dur === 60 ? " on" : "");
+}
+if(sv.mode) document.getElementById("msel").value = sv.mode;
+
+updateUILanguage(S.lang);
+buildKeyboard();
+initTest();
+
+// ══════════════════════════════════════════════════════════════
+// ONLINE RACE MODULE  (Socket.io)
+// ══════════════════════════════════════════════════════════════
+var OM = {
+  socket: null,
+  roomCode: null,
+  myId: null,
+  myName: '',
+  isHost: false,
+  oppName: '',
+  oppId: null,
+  raceText: '',
+  raceDuration: 30,
+  raceStartTime: null,
+  raceTimer: null,
+  progressInterval: null,
+  // Typing state
+  omIdx: 0,
+  omErrors: 0,
+  omTotalTyped: 0,
+  omDone: false,
+  omChars: []
+};
+
+// ── Duration selector ─────────────────────────────────────────
+function omSelectDuration(dur) {
+  OM.raceDuration = parseInt(dur);
+  document.querySelectorAll('#om-panel-create .om-dur-pill').forEach(function(b) {
+    b.classList.toggle('on', parseInt(b.dataset.dur) === OM.raceDuration);
+  });
+}
+
+function omChangeLobbyDuration(dur) {
+  if (!OM.isHost) return;
+  OM.raceDuration = parseInt(dur);
+  document.querySelectorAll('#om-dur-pills-lobby .om-dur-pill').forEach(function(b) {
+    b.classList.toggle('on', parseInt(b.dataset.dur) === OM.raceDuration);
+  });
+  if (OM.socket && OM.roomCode) {
+    OM.socket.emit('set_duration', { code: OM.roomCode, duration: OM.raceDuration });
+  }
+}
+
+// ── Server URL Configuration ──────────────────────────────────
+// Automatically determine server URL:
+// 1. If custom URL stored in localStorage, use it
+// 2. If running locally (localhost, 127.0.0.1, or file://), connect to http://localhost:3001
+// 3. If in production (deployed on Render, Railway, etc.), connect to window.location.origin
+var OM_SERVER_URL = (function() {
+  if (typeof window !== 'undefined' && window.location) {
+    var host = (window.location.hostname || '').toLowerCase();
+    var proto = window.location.protocol || '';
+    if (proto === 'file:' || host === 'localhost' || host === '127.0.0.1' || host === '') {
+      return 'http://localhost:3001';
+    }
+    return window.location.origin;
+  }
+  return 'http://localhost:3001';
+})();
+
+function omGetServerUrl() {
+  var custom = localStorage.getItem('tm_server_url');
+  if (custom && custom.trim()) return custom.trim().replace(/\/$/, '');
+  return OM_SERVER_URL;
+}
+
+function omToggleSettings() {
+  var d = document.getElementById('om-settings-drawer');
+  if (!d) return;
+  var isHidden = d.style.display === 'none' || !d.style.display;
+  d.style.display = isHidden ? 'block' : 'none';
+  if (isHidden) {
+    var inp = document.getElementById('om-custom-srv-inp');
+    if (inp) inp.value = localStorage.getItem('tm_server_url') || '';
+  }
+}
+
+function omSaveCustomServer() {
+  var inp = document.getElementById('om-custom-srv-inp');
+  var val = (inp ? inp.value.trim() : '').replace(/\/$/, '');
+  if (val) {
+    localStorage.setItem('tm_server_url', val);
+  } else {
+    localStorage.removeItem('tm_server_url');
+  }
+  var d = document.getElementById('om-settings-drawer');
+  if (d) d.style.display = 'none';
+  omShowToast(S.lang === 'ar' ? 'تم حفظ إعدادات الخادم' : 'Server settings saved');
+  if (OM.socket) {
+    OM.socket.disconnect();
+  }
+  omConnect();
+}
+
+// ── Status dot indicator ──────────────────────────────────────
+function omSetConnStatus(state, msg) {
+  var dot = document.getElementById('om-conn-dot');
+  var nOnline = document.getElementById('n-online');
+  if (!dot) return;
+  if (state === 'connected') {
+    dot.style.background = '#10b981';
+    dot.style.boxShadow = '0 0 8px rgba(16,185,129,0.8)';
+    dot.title = S.lang === 'ar' ? 'متصل بالخادم' : 'Connected to server';
+    if (nOnline) nOnline.classList.add('connected');
+  } else if (state === 'connecting') {
+    dot.style.background = '#f59e0b';
+    dot.style.boxShadow = '0 0 6px rgba(245,158,11,0.6)';
+    dot.title = S.lang === 'ar' ? 'جارِ الاتصال...' : 'Connecting...';
+  } else if (state === 'err') {
+    dot.style.background = '#ef4444';
+    dot.style.boxShadow = '0 0 6px rgba(239,68,68,0.6)';
+    dot.title = msg || (S.lang === 'ar' ? 'غير متصل بالخادم' : 'Disconnected');
+    if (nOnline) nOnline.classList.remove('connected');
+  } else {
+    dot.style.background = '#4b5563';
+    dot.style.boxShadow = 'none';
+    dot.title = S.lang === 'ar' ? 'غير متصل' : 'Disconnected';
+    if (nOnline) nOnline.classList.remove('connected');
+  }
+}
+
+// ── Socket.io CDN loader ──────────────────────────────────────
+function loadSocketIO(cb) {
+  if (typeof io !== 'undefined') { cb(); return; }
+  var s = document.createElement('script');
+  s.src = 'https://cdn.socket.io/4.7.5/socket.io.min.js';
+  s.onload = cb;
+  s.onerror = function() {
+    omSetConnStatus('err', 'Failed to load socket client');
+  };
+  document.head.appendChild(s);
+}
+
+// ── Modal control ─────────────────────────────────────────────
+function openOnlineRace() {
+  document.getElementById('online-modal').classList.add('show');
+  var errEl = document.getElementById('om-err');
+  if (errEl) errEl.textContent = '';
+  omShowScreen('setup');
+  // Auto connect quietly in the background
+  if (!OM.socket || !OM.socket.connected) {
+    omConnect();
+  }
+}
+function closeOnlineRace() {
+  document.getElementById('online-modal').classList.remove('show');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeOnlineRace();
+});
+var _onlineModalEl = document.getElementById('online-modal');
+if (_onlineModalEl) {
+  _onlineModalEl.addEventListener('click', function(e) {
+    if (e.target === this) closeOnlineRace();
+  });
+}
+
+// ── Screen management ─────────────────────────────────────────
+function omShowScreen(name) {
+  document.querySelectorAll('.om-screen').forEach(function(s) { s.classList.remove('active'); });
+  var target = document.getElementById('om-screen-' + name);
+  if (target) target.classList.add('active');
+}
+
+// ── Tab switch (create / join) ────────────────────────────────
+function omSwitchTab(t) {
+  var isCreate = t === 'create';
+  document.getElementById('om-tab-create').classList.toggle('on', isCreate);
+  document.getElementById('om-tab-join').classList.toggle('on', !isCreate);
+  document.getElementById('om-panel-create').style.display = isCreate ? '' : 'none';
+  document.getElementById('om-panel-join').style.display = isCreate ? 'none' : '';
+  document.getElementById('om-err').textContent = '';
+}
+
+// ── Connect to server ─────────────────────────────────────────
+var _omEventsBound = false;
+function omConnect(cb) {
+  if (OM.socket && OM.socket.connected) {
+    omSetConnStatus('connected');
+    if (cb) cb();
+    return;
+  }
+
+  var url = omGetServerUrl();
+  omSetConnStatus('connecting');
+
+  loadSocketIO(function() {
+    if (OM.socket) {
+      if (OM.socket.connected) {
+        omSetConnStatus('connected');
+        if (cb) cb();
+        return;
+      }
+      OM.socket.disconnect();
+    }
+
+    try {
+      OM.socket = io(url, {
+        transports: ['websocket', 'polling'],
+        timeout: 10000,
+        reconnectionAttempts: 5
+      });
+    } catch(e) {
+      omSetConnStatus('err', e.message);
+      if (cb) {
+        var errEl = document.getElementById('om-err');
+        if (errEl) errEl.textContent = S.lang === 'ar' ? 'تعذر الاتصال بالخادم' : 'Failed to connect to server';
+      }
+      return;
+    }
+
+    OM.socket.on('connect', function() {
+      OM.myId = OM.socket.id;
+      omSetConnStatus('connected');
+      var errEl = document.getElementById('om-err');
+      if (errEl && errEl.dataset.isConnWait) {
+        errEl.textContent = '';
+        delete errEl.dataset.isConnWait;
+      }
+      if (cb) cb();
+    });
+
+    OM.socket.on('connect_error', function() {
+      omSetConnStatus('err');
+      var errEl = document.getElementById('om-err');
+      if (errEl && errEl.dataset.isConnWait) {
+        errEl.textContent = S.lang === 'ar' ? 'تعذر الاتصال بالخادم. يرجى التأكد من تشغيل الخادم' : 'Could not connect to server. Please ensure server is running.';
+      }
+    });
+
+    OM.socket.on('disconnect', function() {
+      omSetConnStatus('disconnected');
+    });
+
+    // Register server events
+    if (!_omEventsBound) {
+      _omEventsBound = true;
+      OM.socket.on('room_created', function(d) {
+        OM.roomCode = d.code;
+        OM.isHost = true;
+        omShowLobby(d.roomState);
+      });
+      OM.socket.on('room_joined', function(d) {
+        OM.roomCode = d.code;
+        OM.isHost = false;
+        omShowLobby(d.roomState);
+      });
+      OM.socket.on('join_error', function(d) {
+        var msgs = {
+          room_not_found: S.lang === 'ar' ? 'الغرفة غير موجودة، تأكد من الرمز' : 'Room not found, check the code',
+          race_already_started: S.lang === 'ar' ? 'السباق بدأ بالفعل' : 'Race already started',
+          room_full: S.lang === 'ar' ? 'الغرفة ممتلئة' : 'Room is full',
+          already_in_room: S.lang === 'ar' ? 'أنت بالفعل في غرفة' : 'Already in a room'
+        };
+        var errEl = document.getElementById('om-err');
+        if (errEl) errEl.textContent = msgs[d.message] || d.message;
+      });
+      OM.socket.on('room_state', function(d) {
+        omUpdateLobby(d);
+      });
+      OM.socket.on('player_left', function(d) {
+        if (d.newHostId === OM.myId) OM.isHost = true;
+        omUpdateLobby({ players: [], hostId: OM.myId, state: 'waiting', code: OM.roomCode });
+        omShowToast(S.lang === 'ar' ? (d.name + ' غادر السباق') : (d.name + ' left the race'));
+      });
+      OM.socket.on('countdown_start', function(d) {
+        OM.raceText = d.text;
+        if (typeof d.duration !== 'undefined') OM.raceDuration = parseInt(d.duration);
+        omShowScreen('countdown');
+      });
+      OM.socket.on('countdown_tick', function(d) {
+        var el = document.getElementById('om-cd-num');
+        if (!el) return;
+        if (d.count > 0) {
+          el.textContent = d.count;
+          el.style.color = '#38bdf8';
+        } else {
+          el.textContent = 'GO!';
+          el.style.color = '#4ade80';
+          el.style.textShadow = '0 0 40px rgba(74,222,128,0.7)';
+        }
+      });
+      OM.socket.on('race_go', function(d) {
+        OM.raceStartTime = d.startTime;
+        if (typeof d.duration !== 'undefined') OM.raceDuration = parseInt(d.duration);
+        omStartRaceScreen();
+      });
+      OM.socket.on('opponent_progress', function(d) {
+        var fill = document.getElementById('om-opp-fill');
+        var badge = document.getElementById('om-opp-wpm-badge');
+        var pct = document.getElementById('om-opp-pct-badge');
+        if (fill) fill.style.width = d.progress + '%';
+        if (badge) badge.textContent = d.wpm + ' WPM';
+        if (pct) pct.textContent = d.progress + '%';
+      });
+      OM.socket.on('opponent_finished', function(d) {
+        var oppName = d.name || OM.oppName || (S.lang === 'ar' ? 'المنافس' : 'Opponent');
+        omShowToast(oppName + (S.lang === 'ar' ? ' أنهى السباق! ' : ' finished! ') + d.wpm + ' WPM 🎉');
+      });
+      OM.socket.on('race_grace_period', function(d) {
+        var alertEl = document.getElementById('om-grace-alert');
+        if (alertEl) {
+          alertEl.style.display = 'block';
+          alertEl.textContent = S.lang === 'ar' ?
+            ('⚠️ المنافس (' + (d.finisher || 'الخصم') + ') وصل لخط النهاية! متبقي 5 ثوانٍ لإنهاء ما تستطيع!') :
+            ('⚠️ Opponent (' + (d.finisher || 'Opponent') + ') finished! 5s remaining!');
+        }
+      });
+      OM.socket.on('room_reset_lobby', function(d) {
+        omShowLobby(d.roomState);
+        var alertEl = document.getElementById('om-grace-alert');
+        if (alertEl) alertEl.style.display = 'none';
+        document.getElementById('om-my-fill').style.width = '0%';
+        document.getElementById('om-my-pct-badge').textContent = '0%';
+        document.getElementById('om-my-wpm-badge').textContent = '0 WPM';
+        document.getElementById('om-opp-fill').style.width = '0%';
+        document.getElementById('om-opp-pct-badge').textContent = '0%';
+        document.getElementById('om-opp-wpm-badge').textContent = '0 WPM';
+        omShowToast(S.lang === 'ar' ? 'تمت العودة للغرفة لسباق جديد! 🏁' : 'Returned to lobby for a rematch! 🏁');
+      });
+      OM.socket.on('race_results', function(d) {
+        omShowResults(d);
+      });
+      OM.socket.on('error_msg', function(d) {
+        omShowToast(d.message, true);
+      });
+    }
+  });
+}
+
+// ── Create room ───────────────────────────────────────────────
+function omCreateRoom() {
+  var errEl = document.getElementById('om-err');
+  if (errEl) errEl.textContent = '';
+  OM.myName = document.getElementById('om-name-c').value.trim() || (S.lang === 'ar' ? 'لاعب 1' : 'Player 1');
+  
+  if (!OM.socket || !OM.socket.connected) {
+    if (errEl) {
+      errEl.textContent = S.lang === 'ar' ? 'جارِ الاتصال بالخادم...' : 'Connecting to server...';
+      errEl.dataset.isConnWait = '1';
+    }
+    omConnect(function() {
+      OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration });
+    });
+  } else {
+    OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration });
+  }
+}
+
+// ── Join room ─────────────────────────────────────────────────
+function omJoinRoom() {
+  var errEl = document.getElementById('om-err');
+  if (errEl) errEl.textContent = '';
+  var code = document.getElementById('om-code-inp').value.trim().toUpperCase();
+  if (code.length !== 4) {
+    if (errEl) errEl.textContent = S.lang === 'ar' ? 'الرمز يجب أن يكون 4 أحرف' : 'Code must be 4 characters';
+    return;
+  }
+  OM.myName = document.getElementById('om-name-j').value.trim() || (S.lang === 'ar' ? 'لاعب 2' : 'Player 2');
+
+  if (!OM.socket || !OM.socket.connected) {
+    if (errEl) {
+      errEl.textContent = S.lang === 'ar' ? 'جارِ الاتصال بالخادم...' : 'Connecting to server...';
+      errEl.dataset.isConnWait = '1';
+    }
+    omConnect(function() {
+      OM.socket.emit('join_room', { code: code, name: OM.myName });
+    });
+  } else {
+    OM.socket.emit('join_room', { code: code, name: OM.myName });
+  }
+}
+
+// ── Show lobby ────────────────────────────────────────────────
+function omShowLobby(state) {
+  omShowScreen('lobby');
+  document.getElementById('om-lobby-code-display').textContent = OM.roomCode;
+  omUpdateLobby(state);
+}
+
+function omUpdateLobby(state) {
+  var players = state.players || [];
+  var myData = null, oppData = null;
+  players.forEach(function(p) {
+    if (p.id === OM.myId || (OM.myId === null && p.isHost)) myData = p;
+    else oppData = p;
+  });
+  if (!myData && players.length > 0) myData = players[0];
+  if (players.length > 1 && !oppData) oppData = players[1];
+
+  // Update my slot
+  if (myData) {
+    document.getElementById('om-pname-p1').textContent = myData.name;
+    document.getElementById('om-prole-p1').textContent = myData.isHost ? (S.lang === 'ar' ? 'المضيف 👑' : 'Host 👑') : (S.lang === 'ar' ? 'لاعب' : 'Player');
+  }
+
+  // Update opponent slot
+  var slot2 = document.getElementById('om-slot-p2');
+  var av2 = document.getElementById('om-av-p2');
+  if (oppData) {
+    OM.oppName = oppData.name;
+    OM.oppId = oppData.id;
+    document.getElementById('om-pname-p2').textContent = oppData.name;
+    document.getElementById('om-prole-p2').textContent = oppData.isHost ? (S.lang === 'ar' ? 'المضيف 👑' : 'Host 👑') : (S.lang === 'ar' ? 'لاعب' : 'Player');
+    slot2.className = 'om-player-slot filled p2';
+    av2.className = 'om-player-avatar om-pa-p2';
+    av2.textContent = '2';
+    document.getElementById('om-waiting-pulse').style.display = 'none';
+    // Show start button only for host
+    if (OM.isHost) {
+      document.getElementById('om-start-btn').style.display = '';
+    }
+  } else {
+    document.getElementById('om-pname-p2').textContent = S.lang === 'ar' ? 'في انتظار المنافس...' : 'Waiting for opponent...';
+    document.getElementById('om-prole-p2').textContent = '—';
+    slot2.className = 'om-player-slot';
+    av2.className = 'om-player-avatar om-pa-empty';
+    av2.textContent = '?';
+    document.getElementById('om-waiting-pulse').style.display = '';
+    document.getElementById('om-start-btn').style.display = 'none';
+  }
+
+  // Sync duration pills in lobby
+  if (typeof state.duration !== 'undefined') {
+    OM.raceDuration = parseInt(state.duration);
+    document.querySelectorAll('#om-dur-pills-lobby .om-dur-pill').forEach(function(b) {
+      b.classList.toggle('on', parseInt(b.dataset.dur) === OM.raceDuration);
+    });
+  }
+
+  // Update name labels in race screen
+  document.getElementById('om-my-name-lbl').textContent = OM.myName;
+  document.getElementById('om-opp-name-lbl').textContent = OM.oppName || (S.lang === 'ar' ? 'المنافس' : 'Opponent');
+}
+
+// ── Start race (host only) ────────────────────────────────────
+function omStartRace() {
+  if (!OM.socket || !OM.roomCode) return;
+  OM.socket.emit('start_race', { code: OM.roomCode });
+}
+
+// ── Leave room ────────────────────────────────────────────────
+function omLeaveRoom() {
+  if (OM.socket && OM.roomCode) {
+    OM.socket.emit('leave_room', { code: OM.roomCode });
+  }
+  OM.roomCode = null;
+  OM.isHost = false;
+  omShowScreen('setup');
+}
+
+// ── Copy code to clipboard ────────────────────────────────────
+function omCopyCode() {
+  navigator.clipboard.writeText(OM.roomCode).then(function() {
+    var btn = document.getElementById('om-copy-btn');
+    var lbl = document.getElementById('om-copy-lbl');
+    lbl.textContent = S.lang === 'ar' ? 'تم النسخ! ✓' : 'Copied! ✓';
+    btn.style.background = 'rgba(74,222,128,0.2)';
+    btn.style.borderColor = 'rgba(74,222,128,0.5)';
+    btn.style.color = '#4ade80';
+    setTimeout(function() {
+      lbl.textContent = S.lang === 'ar' ? 'نسخ الرمز' : 'Copy code';
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 2000);
+  });
+}
+
+// ── Auto scroll active word ───────────────────────────────────
+function omScrollToActive() {
+  var el = OM.omChars[OM.omIdx];
+  var box = document.getElementById('om-words');
+  if (!el || !box) return;
+  var top = el.offsetTop - box.offsetTop;
+  if (top > 70) {
+    box.scrollTop = top - 45;
+  } else {
+    box.scrollTop = 0;
+  }
+}
+
+// ── Start race screen ─────────────────────────────────────────
+function omStartRaceScreen() {
+  omShowScreen('race');
+  OM.omIdx = 0;
+  OM.omErrors = 0;
+  OM.omTotalTyped = 0;
+  OM.omDone = false;
+
+  // Reset tracks and badges
+  document.getElementById('om-my-fill').style.width = '0%';
+  document.getElementById('om-opp-fill').style.width = '0%';
+  document.getElementById('om-my-wpm-badge').textContent = '0 WPM';
+  document.getElementById('om-opp-wpm-badge').textContent = '0 WPM';
+  document.getElementById('om-my-pct-badge').textContent = '0%';
+  document.getElementById('om-opp-pct-badge').textContent = '0%';
+
+  // Build text
+  var isAr = S.lang === 'ar';
+  var wordsEl = document.getElementById('om-words');
+  wordsEl.className = isAr ? 'ar' : '';
+  wordsEl.innerHTML = '';
+  wordsEl.scrollTop = 0;
+  OM.omChars = [];
+  var words = OM.raceText.split(' ');
+  words.forEach(function(word, wi) {
+    var wDiv = document.createElement('span');
+    wDiv.className = 'word';
+    word.split('').forEach(function(ch) {
+      var s = document.createElement('span');
+      s.className = 'c';
+      s.textContent = ch;
+      OM.omChars.push(s);
+      wDiv.appendChild(s);
+    });
+    if (wi < words.length - 1) {
+      var sp = document.createElement('span');
+      sp.className = 'c sp';
+      sp.textContent = ' ';
+      OM.omChars.push(sp);
+      wDiv.appendChild(sp);
+    }
+    wordsEl.appendChild(wDiv);
+  });
+  if (OM.omChars.length > 0) OM.omChars[0].classList.add('now');
+
+  // Focus input
+  var inp = document.getElementById('om-inp');
+  inp.value = '';
+  inp.focus();
+
+  // Race timer setup
+  if (OM.raceTimer) clearInterval(OM.raceTimer);
+  var timerEl = document.getElementById('om-race-timer');
+  var timerLbl = document.getElementById('om-race-timer-lbl');
+
+  if (OM.raceDuration > 0) {
+    timerEl.textContent = OM.raceDuration;
+    timerEl.className = 'om-big-timer';
+    timerLbl.textContent = S.lang === 'ar' ? 'الوقت المتبقي' : 'Time Left';
+
+    OM.raceTimer = setInterval(function() {
+      var elapsed = Math.floor((Date.now() - OM.raceStartTime) / 1000);
+      var remaining = Math.max(0, OM.raceDuration - elapsed);
+      timerEl.textContent = remaining;
+
+      if (remaining <= 5) {
+        timerEl.className = 'om-big-timer danger';
+      } else {
+        timerEl.className = 'om-big-timer';
+      }
+
+      if (remaining <= 0) {
+        clearInterval(OM.raceTimer);
+        omTimeUp();
+      }
+    }, 500);
+  } else {
+    timerEl.textContent = '0s';
+    timerEl.className = 'om-big-timer';
+    timerLbl.textContent = S.lang === 'ar' ? 'الوقت' : 'Time';
+
+    OM.raceTimer = setInterval(function() {
+      var elapsed = Math.floor((Date.now() - OM.raceStartTime) / 1000);
+      timerEl.textContent = elapsed + 's';
+    }, 500);
+  }
+
+  // Progress sender interval (every 300ms)
+  if (OM.progressInterval) clearInterval(OM.progressInterval);
+  OM.progressInterval = setInterval(function() {
+    if (OM.omDone) { clearInterval(OM.progressInterval); return; }
+    var progress = OM.omChars.length > 0 ? Math.min(100, Math.round((OM.omIdx / OM.omChars.length) * 100)) : 0;
+    var elapsed = (Date.now() - OM.raceStartTime) / 60000;
+    var wpm = elapsed > 0 ? Math.round((OM.omTotalTyped / 5) / elapsed) : 0;
+    var acc = OM.omTotalTyped > 0 ? Math.max(0, Math.round(((OM.omTotalTyped - OM.omErrors) / OM.omTotalTyped) * 100)) : 100;
+    // Update my bar
+    document.getElementById('om-my-fill').style.width = progress + '%';
+    document.getElementById('om-my-pct-badge').textContent = progress + '%';
+    document.getElementById('om-my-wpm-badge').textContent = wpm + ' WPM';
+    // Emit to server
+    OM.socket.emit('progress_update', { code: OM.roomCode, progress: progress, wpm: wpm, acc: acc });
+  }, 300);
+}
+
+// ── Time up handler ───────────────────────────────────────────
+function omTimeUp() {
+  if (OM.omDone) return;
+  OM.omDone = true;
+  clearInterval(OM.raceTimer);
+  clearInterval(OM.progressInterval);
+
+  var elapsed = (Date.now() - OM.raceStartTime) / 60000;
+  var wpm = elapsed > 0 ? Math.round((OM.omTotalTyped / 5) / elapsed) : 0;
+  var acc = OM.omTotalTyped > 0 ? Math.max(0, Math.round(((OM.omTotalTyped - OM.omErrors) / OM.omTotalTyped) * 100)) : 100;
+  var progress = OM.omChars.length > 0 ? Math.min(100, Math.round((OM.omIdx / OM.omChars.length) * 100)) : 0;
+
+  OM.socket.emit('time_up', {
+    code: OM.roomCode,
+    wpm: wpm,
+    acc: acc,
+    progress: progress
+  });
+}
+
+// ── Race finish handler ───────────────────────────────────────
+function omRaceFinish() {
+  if (OM.omDone) return;
+  OM.omDone = true;
+  clearInterval(OM.raceTimer);
+  clearInterval(OM.progressInterval);
+
+  var finTime = parseFloat(((Date.now() - OM.raceStartTime) / 1000).toFixed(1));
+  var elapsed = finTime / 60;
+  var wpm = elapsed > 0 ? Math.round((OM.omTotalTyped / 5) / elapsed) : 0;
+  var acc = OM.omTotalTyped > 0 ? Math.max(0, Math.round(((OM.omTotalTyped - OM.omErrors) / OM.omTotalTyped) * 100)) : 100;
+
+  document.getElementById('om-my-fill').style.width = '100%';
+  document.getElementById('om-my-pct-badge').textContent = '100%';
+  document.getElementById('om-my-wpm-badge').textContent = wpm + ' WPM';
+
+  OM.socket.emit('race_finished', { code: OM.roomCode, wpm: wpm, acc: acc, finTime: finTime });
+}
+
+// ── Online race global keydown listener (Backspace & Typing) ──
+window.addEventListener('keydown', function(e) {
+  if(e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
+  var raceScreen = document.getElementById('om-screen-race');
+  if (!raceScreen || !raceScreen.classList.contains('active')) return;
+  if (OM.omDone || !OM.raceText) return;
+
+  // Handle Backspace
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    if (OM.omIdx > 0) {
+      if (OM.omIdx < OM.omChars.length) {
+        OM.omChars[OM.omIdx].classList.remove('now');
+      }
+      OM.omIdx--;
+      var prev = OM.omChars[OM.omIdx];
+      if (prev.classList.contains('bad')) {
+        OM.omErrors = Math.max(0, OM.omErrors - 1);
+      }
+      prev.className = 'c now' + (prev.classList.contains('sp') ? ' sp' : '');
+      omScrollToActive();
+    }
+    return;
+  }
+
+  // Handle standard typing characters
+  if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+    e.preventDefault();
+    var expected = OM.omChars[OM.omIdx];
+    if (!expected) return;
+
+    OM.omTotalTyped++;
+    var charTyped = e.key;
+    var expectedChar = expected.textContent;
+
+    if (charTyped === expectedChar) {
+      expected.className = 'c ok' + (expected.classList.contains('sp') ? ' sp' : '');
+    } else {
+      expected.className = 'c bad' + (expected.classList.contains('sp') ? ' sp' : '');
+      OM.omErrors++;
+    }
+
+    OM.omIdx++;
+    if (OM.omIdx < OM.omChars.length) {
+      OM.omChars[OM.omIdx].classList.add('now');
+      omScrollToActive();
+    } else {
+      omRaceFinish();
+    }
+  }
+});
+
+// ── Canvas Confetti Particle System ───────────────────────────
+var _omConfettiAnimId = null;
+function launchVictoryConfetti() {
+  var canvas = document.getElementById('om-confetti-canvas');
+  if (!canvas) return;
+  var parent = canvas.parentElement;
+  canvas.width = parent.clientWidth || 800;
+  canvas.height = parent.clientHeight || 500;
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  if (_omConfettiAnimId) cancelAnimationFrame(_omConfettiAnimId);
+
+  var colors = ['#ffd700', '#f59e0b', '#38bdf8', '#22c55e', '#ec4899', '#a855f7', '#ffffff'];
+  var particles = [];
+  var total = 140;
+
+  for (var i = 0; i < total; i++) {
+    particles.push({
+      x: canvas.width / 2 + (Math.random() * 200 - 100),
+      y: canvas.height * 0.35 + (Math.random() * 60 - 30),
+      vx: (Math.random() - 0.5) * 16,
+      vy: (Math.random() * -12) - 4,
+      size: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * 360,
+      vRot: (Math.random() - 0.5) * 12,
+      opacity: 1,
+      shape: Math.random() > 0.3 ? 'rect' : 'circle'
+    });
+  }
+
+  var start = performance.now();
+  function loop(now) {
+    var elapsed = (now - start) / 1000;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var alive = 0;
+
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.35;
+      p.vx *= 0.985;
+      p.rot += p.vRot;
+
+      if (elapsed > 2.5) {
+        p.opacity -= 0.02;
+      }
+
+      if (p.opacity > 0 && p.y < canvas.height + 20) {
+        alive++;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rot * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillStyle = p.color;
+
+        if (p.shape === 'rect') {
+          ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    if (alive > 0 && elapsed < 4.5) {
+      _omConfettiAnimId = requestAnimationFrame(loop);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+  _omConfettiAnimId = requestAnimationFrame(loop);
+}
+
+// ── Web Audio Victory Sound Fanfare ───────────────────────────
+function playVictoryFanfare(isWinner) {
+  try {
+    if (typeof _initAudio === 'function') _initAudio();
+    if (!_actx) return;
+    if (_actx.state === 'suspended') _actx.resume();
+
+    var now = _actx.currentTime;
+    if (isWinner) {
+      // 4 triumphant fanfare chords: C5, E5, G5, C6
+      var notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach(function(freq, idx) {
+        var osc = _actx.createOscillator();
+        var gain = _actx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.12);
+        gain.gain.setValueAtTime(0, now + idx * 0.12);
+        gain.gain.linearRampToValueAtTime(0.28, now + idx * 0.12 + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + (idx === 3 ? 0.95 : 0.45));
+        osc.connect(gain);
+        gain.connect(_masterGain || _actx.destination);
+        osc.start(now + idx * 0.12);
+        osc.stop(now + idx * 0.12 + 1.1);
+      });
+    } else {
+      // 3 pleasant melody notes for good game
+      var notes2 = [392.00, 523.25, 659.25];
+      notes2.forEach(function(freq, idx) {
+        var osc = _actx.createOscillator();
+        var gain = _actx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.14);
+        gain.gain.setValueAtTime(0, now + idx * 0.14);
+        gain.gain.linearRampToValueAtTime(0.22, now + idx * 0.14 + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.14 + 0.6);
+        osc.connect(gain);
+        gain.connect(_masterGain || _actx.destination);
+        osc.start(now + idx * 0.14);
+        osc.stop(now + idx * 0.14 + 0.75);
+      });
+    }
+  } catch(e) {}
+}
+
+// ── Show results ──────────────────────────────────────────────
+var _lastRaceResults = null;
+function omShowResults(data) {
+  clearInterval(OM.raceTimer);
+  clearInterval(OM.progressInterval);
+  OM.omDone = true;
+  _lastRaceResults = data;
+
+  var alertEl = document.getElementById('om-grace-alert');
+  if (alertEl) alertEl.style.display = 'none';
+
+  omShowScreen('results');
+  var players = data.players || [];
+  var winner = data.winner || players[0];
+  var amIWinner = winner && winner.id === OM.myId;
+  var isAr = S.lang === 'ar';
+
+  // Champion banner & header
+  var champPill = document.getElementById('om-champ-pill');
+  var champNameEl = document.getElementById('om-champ-name');
+  var champMsg = document.getElementById('om-champ-msg');
+
+  if (winner) {
+    var winnerIsMe = winner.id === OM.myId;
+    if (champPill) {
+      champPill.innerHTML = winnerIsMe ?
+        (isAr ? '👑 أنت البطل الفائز • VICTORY! 👑' : '👑 YOU WON • VICTORY! 👑') :
+        (isAr ? '👑 بطل السباق الفائز • CHAMPION 👑' : '👑 RACE CHAMPION 👑');
+    }
+    if (champNameEl) {
+      champNameEl.textContent = winner.name + (winnerIsMe ? (isAr ? ' (أنت)' : ' (You)') : '');
+    }
+    if (champMsg) {
+      champMsg.className = 'om-champ-submsg ' + (winnerIsMe ? 'win' : 'lose');
+      champMsg.textContent = winnerIsMe ?
+        (isAr ? '🎉 مبروك الفوز الساحق يا بطل! أداء استثنائي وتفوق في سرعة الطباعة!' : '🎉 Outstanding victory! Exceptional typing speed and accuracy!') :
+        (isAr ? ('⚔️ منافسة بطولية نارية! فاز ' + winner.name + ' بالمركز الأول، حظاً أوفر في جولة الانتقام!') : ('⚔️ Epic match! ' + winner.name + ' took 1st place! Challenge them to a rematch!'));
+    }
+  }
+
+  // Differential bar
+  var diffBar = document.getElementById('om-diff-bar');
+  var diffText = document.getElementById('om-diff-text');
+  if (players.length >= 2) {
+    var p1 = players[0];
+    var p2 = players[1];
+    var diffWpm = Math.abs((p1.wpm || 0) - (p2.wpm || 0));
+    if (diffBar && diffText) {
+      diffBar.style.display = 'flex';
+      diffText.innerHTML = isAr ?
+        ('فارق السرعة بين المتنافسين: <span class="om-diff-badge">+' + diffWpm + ' WPM</span> لصالح ' + p1.name) :
+        ('Speed Differential: <span class="om-diff-badge">+' + diffWpm + ' WPM</span> for ' + p1.name);
+    }
+  } else if (diffBar) {
+    diffBar.style.display = 'none';
+  }
+
+  // Build esports cards
+  var podEl = document.getElementById('om-podium');
+  podEl.innerHTML = '';
+  players.forEach(function(p, i) {
+    var isWinner = winner && p.id === winner.id;
+    var isMe = p.id === OM.myId;
+    var rankLabel = isWinner ? (isAr ? '🥇 المركز الأول' : '🥇 1st Place') : (isAr ? '🥈 المركز الثاني' : '🥈 2nd Place');
+    var timeTxt = p.finTime ? (p.finTime + (isAr ? ' ثانية' : 's')) : (isAr ? 'انتهاء الوقت' : 'Time up');
+
+    var card = document.createElement('div');
+    card.className = 'om-podium-card ' + (isWinner ? 'winner' : 'loser');
+    card.innerHTML =
+      '<div class="om-pod-header">' +
+        '<div class="om-pod-medal-badge">' + (isWinner ? '👑' : '🥈') + '</div>' +
+        '<div class="om-pod-rank-lbl">' + rankLabel + '</div>' +
+      '</div>' +
+      '<div class="om-pod-avatar">' + (isWinner ? '🏆' : '⚡') + '</div>' +
+      '<div class="om-pod-name">' +
+        p.name + (isMe ? '<span class="you-badge">' + (isAr ? 'أنت' : 'You') + '</span>' : '') +
+      '</div>' +
+      '<div class="om-pod-big-wpm">' + (p.wpm || 0) + '</div>' +
+      '<div class="om-pod-wpm-sub">WPM • ' + (isAr ? 'كلمة/دقيقة' : 'Words/Min') + '</div>' +
+      '<div class="om-pod-stats-grid">' +
+        '<div class="om-pod-s-item">' +
+          '<div class="om-pod-s-val">' + (p.acc || 0) + '%</div>' +
+          '<div class="om-pod-s-lbl">' + (isAr ? 'الدقة' : 'Accuracy') + '</div>' +
+        '</div>' +
+        '<div class="om-pod-s-item">' +
+          '<div class="om-pod-s-val">' + (p.progress || 0) + '%</div>' +
+          '<div class="om-pod-s-lbl">' + (isAr ? 'الإنجاز' : 'Progress') + '</div>' +
+        '</div>' +
+        '<div class="om-pod-s-item" style="grid-column:span 2;margin-top:2px">' +
+          '<div class="om-pod-s-val" style="color:var(--sub)">' + timeTxt + '</div>' +
+          '<div class="om-pod-s-lbl">' + (isAr ? 'الوقت المستغرق' : 'Elapsed Time') + '</div>' +
+        '</div>' +
+      '</div>';
+    podEl.appendChild(card);
+  });
+
+  // Rematch button label based on host/guest
+  var againBtn = document.getElementById('om-again-btn');
+  var againLbl = document.getElementById('om-again-lbl');
+  if (againBtn && againLbl) {
+    againBtn.style.display = 'flex';
+    againLbl.textContent = OM.isHost ?
+      (isAr ? '🔄 سباق مجدداً (إعادة البدء)' : '🔄 Rematch (Start Lobby)') :
+      (isAr ? '⚔️ طلب جولة ثانية (انتقام)' : '⚔️ Request Rematch');
+  }
+
+  // Trigger celebration effects
+  launchVictoryConfetti();
+  playVictoryFanfare(amIWinner);
+}
+
+// ── Rematch (Play Again) ──────────────────────────────────────
+function omPlayAgain() {
+  if (!OM.socket || !OM.roomCode) return;
+  OM.socket.emit('play_again', { code: OM.roomCode });
+}
+
+// ── Share results summary ─────────────────────────────────────
+function omShareResults() {
+  if (!_lastRaceResults || !_lastRaceResults.players) return;
+  var isAr = S.lang === 'ar';
+  var winner = _lastRaceResults.winner;
+  var myData = null;
+  _lastRaceResults.players.forEach(function(p) { if (p.id === OM.myId) myData = p; });
+  var me = myData || _lastRaceResults.players[0];
+
+  var text = isAr ?
+    ('🏁 نتيجة سباق TypeMaster:\n' +
+     '👑 الفائز: ' + (winner ? winner.name : '—') + ' (' + (winner ? winner.wpm : 0) + ' WPM)\n' +
+     '⚡ سرعتي: ' + (me ? me.wpm : 0) + ' WPM | الدقة: ' + (me ? me.acc : 100) + '%\n' +
+     'تحداني الآن في TypeMaster!') :
+    ('🏁 TypeMaster Race Result:\n' +
+     '👑 Winner: ' + (winner ? winner.name : '—') + ' (' + (winner ? winner.wpm : 0) + ' WPM)\n' +
+     '⚡ My Speed: ' + (me ? me.wpm : 0) + ' WPM | Accuracy: ' + (me ? me.acc : 100) + '%\n' +
+     'Challenge me on TypeMaster!');
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() {
+      omShowToast(isAr ? 'تم نسخ ملخص النتيجة للحافظة! 📋' : 'Results copied to clipboard! 📋');
+    });
+  }
+}
+
+// ── Go back to setup ──────────────────────────────────────────
+function omGoSetup() {
+  if (OM.socket && OM.roomCode) {
+    OM.socket.emit('leave_room', { code: OM.roomCode });
+    OM.roomCode = null;
+    OM.isHost = false;
+  }
+  omShowScreen('setup');
+}
+
+// ── Toast helper ──────────────────────────────────────────────
+function omShowToast(msg, isErr) {
+  var t = document.createElement('div');
+  t.className = 'toast2';
+  t.style.borderColor = isErr ? 'var(--err)' : 'var(--accent)';
+  t.textContent = msg;
+  document.getElementById('toasts').appendChild(t);
+  setTimeout(function() {
+    t.style.opacity = '0';
+    t.style.transition = 'opacity .4s';
+    setTimeout(function() { t.remove(); }, 400);
+  }, 4000);
+}
+
+// ── Update online race UI language ────────────────────────────
+var _origUpdateUILanguage = typeof updateUILanguage === 'function' ? updateUILanguage : null;
+if (_origUpdateUILanguage) {
+  var _wrappedUpdateUI = function(lang) {
+    _origUpdateUILanguage(lang);
+    var isAr = lang === 'ar';
+    var el = function(id) { return document.getElementById(id); };
+    // Nav button
+    if(el('n-online-lbl')) el('n-online-lbl').textContent = isAr ? 'شبكي' : 'Online';
+    // Modal labels
+    if(el('om-header-title')) el('om-header-title').textContent = isAr ? 'السباق عبر الشبكة' : 'Online Race';
+    if(el('om-tab-create')) el('om-tab-create').textContent = isAr ? '➕ إنشاء غرفة' : '➕ Create Room';
+    if(el('om-tab-join')) el('om-tab-join').textContent = isAr ? '🔗 الانضمام برمز' : '🔗 Join by Code';
+    if(el('om-name-lbl-c')) el('om-name-lbl-c').textContent = isAr ? 'اسمك في السباق' : 'Your display name';
+    if(el('om-name-c')) el('om-name-c').placeholder = isAr ? 'اكتب اسمك هنا...' : 'Enter your name...';
+    if(el('om-create-lbl')) el('om-create-lbl').textContent = isAr ? 'إنشاء غرفة جديدة' : 'Create New Room';
+    if(el('om-name-lbl-j')) el('om-name-lbl-j').textContent = isAr ? 'اسمك في السباق' : 'Your display name';
+    if(el('om-code-lbl')) el('om-code-lbl').textContent = isAr ? 'رمز الغرفة (4 أحرف)' : 'Room Code (4 chars)';
+    if(el('om-join-lbl')) el('om-join-lbl').textContent = isAr ? 'الانضمام للسباق' : 'Join Race';
+    if(el('om-code-share-lbl')) el('om-code-share-lbl').textContent = isAr ? 'شارك هذا الرمز مع منافسك' : 'Share this code with your opponent';
+    if(el('om-copy-lbl')) el('om-copy-lbl').textContent = isAr ? 'نسخ الرمز' : 'Copy Code';
+    if(el('om-waiting-lbl')) el('om-waiting-lbl').textContent = isAr ? 'في انتظار الانضمام' : 'Waiting for opponent...';
+    if(el('om-start-lbl')) el('om-start-lbl').textContent = isAr ? 'ابدأ السباق!' : 'Start Race!';
+    if(el('om-leave-lbl')) el('om-leave-lbl').textContent = isAr ? '← مغادرة الغرفة' : '← Leave Room';
+    if(el('om-cd-lbl')) el('om-cd-lbl').textContent = isAr ? 'استعد للانطلاق!' : 'Get ready!';
+    if(el('om-race-timer-lbl')) el('om-race-timer-lbl').textContent = isAr ? 'الوقت: ' : 'Time: ';
+    if(el('om-again-lbl')) el('om-again-lbl').textContent = isAr ? (OM.isHost ? '🔄 سباق مجدداً (إعادة البدء)' : '⚔️ طلب جولة ثانية (انتقام)') : (OM.isHost ? '🔄 Rematch (Start Lobby)' : '⚔️ Request Rematch');
+    if(el('om-share-lbl')) el('om-share-lbl').textContent = isAr ? 'مشاركة النتيجة' : 'Share Result';
+    if(el('om-newroom-lbl')) el('om-newroom-lbl').textContent = isAr ? '🚪 غرفة جديدة' : '🚪 New Room';
+    if(el('om-prole-p1')) if(el('om-prole-p1').textContent.indexOf('👑') > -1) el('om-prole-p1').textContent = isAr ? 'المضيف 👑' : 'Host 👑';
+  };
+  window.updateUILanguage = _wrappedUpdateUI;
+}
+// ══════════════════════════════════════════════════════════════
+// END ONLINE RACE MODULE
+// ══════════════════════════════════════════════════════════════
+</script>
+</body>
+</html>
