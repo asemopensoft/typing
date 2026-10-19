@@ -2339,7 +2339,28 @@
     .race-mode-pills {
       display: flex;
       gap: 8px;
-      align-items: center
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .rm-pill-online {
+      color: var(--accent);
+      border-color: rgba(232, 175, 71, 0.4);
+      background: rgba(232, 175, 71, 0.08);
+      font-weight: 700;
+    }
+
+    .rm-pill-online:hover {
+      background: rgba(232, 175, 71, 0.22);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+
+    .rm-pill-online.connected {
+      color: var(--ok) !important;
+      border-color: rgba(72, 187, 120, 0.5) !important;
+      background: rgba(72, 187, 120, 0.12) !important;
     }
 
     .rm-pill {
@@ -2772,55 +2793,192 @@
       justify-content: center
     }
 
+    /* Mobile-first tap indicator */
+    .mobile-tap-indicator {
+      display: none;
+    }
+
     @media(max-width:768px) {
       header {
-        padding: 0 12px;
-        height: 52px
+        padding: 4px 10px;
+        height: auto;
+        min-height: 48px;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: space-between;
       }
 
       .logo-text {
-        display: none
+        display: none;
+      }
+
+      nav {
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 3px;
+        max-width: 100%;
+        padding-bottom: 2px;
+      }
+
+      .nb {
+        padding: 4px 8px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+
+      .ctrls {
+        display: flex;
+        gap: 4px;
+        flex-wrap: nowrap;
+      }
+
+      .pb {
+        padding: 3px 6px;
+        font-size: 10px;
+      }
+
+      select {
+        padding: 3px 6px;
+        font-size: 10px;
+        max-width: 95px;
+      }
+
+      main {
+        padding: 8px 12px 14px;
+      }
+
+      .bar {
+        gap: 12px;
+        margin-top: 4px;
+        margin-bottom: 8px;
+      }
+
+      .tmr {
+        width: 44px;
+        height: 44px;
+      }
+
+      .tmr svg {
+        width: 44px;
+        height: 44px;
+      }
+
+      .tmr .num {
+        font-size: 16px;
+      }
+
+      .big {
+        font-size: 19px;
+      }
+
+      .lbl {
+        font-size: 8.5px;
+      }
+
+      .card {
+        padding: 16px 14px 18px;
+        border-radius: 14px;
+        margin: 6px 0 10px;
+        width: 100%;
+        position: relative;
+        box-shadow: 0 10px 28px -6px rgba(0, 0, 0, 0.5);
+      }
+
+      .card.focused {
+        border-color: rgba(232, 175, 71, 0.6);
+        box-shadow: 0 12px 36px -6px rgba(232, 175, 71, 0.25);
+      }
+
+      #words {
+        font-size: 18px;
+        line-height: 1.65;
+        height: calc(1.65em * 3);
+        max-height: calc(1.65em * 3);
+        padding: 2px 0;
+      }
+
+      #words.ar {
+        font-size: 19px;
+        line-height: 1.75;
+        height: calc(1.75em * 3);
+        max-height: calc(1.75em * 3);
+        padding: 2px 0;
+      }
+
+      /* HIDE OVERLAPPING DESKTOP HINT ON MOBILE */
+      .hint {
+        display: none !important;
+      }
+
+      .acts {
+        justify-content: center;
+        margin-top: 6px;
+      }
+
+      /* HIDE TAB BADGE ON MOBILE RESTART BUTTON */
+      .gbtn kbd {
+        display: none !important;
+      }
+
+      /* HIDE ON-SCREEN KEYBOARD, HANDS & TECHNICAL FOOTER ON MOBILE */
+      #kb-wrap {
+        display: none !important;
+      }
+
+      #kb-toggle-btn,
+      #hand-toggle-btn {
+        display: none !important;
+      }
+
+      .blueprint-bg {
+        display: none !important;
+      }
+
+      #app-footer {
+        display: none !important;
+      }
+
+      .mobile-tap-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin: 8px auto 4px;
+        padding: 7px 16px;
+        background: rgba(232, 175, 71, 0.12);
+        border: 1px dashed rgba(232, 175, 71, 0.45);
+        border-radius: 20px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 600;
+        font-family: var(--far);
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.2s ease;
+      }
+
+      .mobile-tap-indicator:active {
+        background: rgba(232, 175, 71, 0.25);
+        transform: scale(0.97);
       }
 
       .grid2,
       .cg {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
       }
 
       .og {
-        grid-template-columns: repeat(3, 1fr)
-      }
-
-      .kb-guide {
-        flex-direction: column;
-        gap: 6px;
-        align-items: stretch
-      }
-
-      .kb-guide-right {
-        justify-content: center
+        grid-template-columns: repeat(3, 1fr);
       }
 
       .race-inputs {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
       }
 
       .race-podium {
         flex-direction: column;
-        align-items: center
-      }
-
-      #kb-panel {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch
-      }
-
-      .kb-stage {
-        min-width: calc(16.1 * var(--k-unit))
-      }
-
-      :root {
-        --k-unit: clamp(22px, calc((100vw - 28px) / 16.3), 36px);
+        align-items: center;
       }
     }
 
@@ -4260,8 +4418,6 @@
         <button class="nb" id="n-learn" onclick="showTab('learn')">Learn</button>
         <button class="nb" id="n-race" onclick="showTab('race')"><span id="n-race-ico"></span> <span
             id="n-race-lbl">Race</span></button>
-        <button class="nb nb-online" id="n-online" onclick="openOnlineRace()"><span id="n-online-ico"></span> <span
-            id="n-online-lbl">Online</span></button>
       </nav>
       <div class="ctrls">
         <div class="pg">
@@ -4310,12 +4466,20 @@
         </div>
 
         <!-- TEXT CARD (3 FULL LINES DISPLAY) -->
-        <div class="card" id="tcard" onclick="document.getElementById('inp').focus()">
+        <div class="card" id="tcard">
           <div id="words"></div>
           <div id="caret" class="blink"></div>
           <div class="hint" id="hint">Start typing to begin &bull; Press Tab to restart</div>
+          <input id="inp" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"
+            inputmode="text" enterkeyhint="done"
+            style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:text;z-index:3;background:transparent;border:none;outline:none;font-size:16px;color:transparent;caret-color:transparent;">
         </div>
-        <input id="inp" style="position:absolute;opacity:0;width:0;height:0" autocomplete="off" spellcheck="false">
+
+        <!-- MOBILE TAP TO FOCUS HELPER -->
+        <div class="mobile-tap-indicator" id="mobile-tap-hint" onclick="document.getElementById('inp').focus()">
+          <span>📱</span>
+          <span id="mobile-tap-text">انقر هنا للكتابة بواسطة كيبورد الجوال</span>
+        </div>
 
         <!-- ACTIONS -->
         <div class="acts">
@@ -7584,6 +7748,9 @@
               <button class="rm-pill" id="rm-bot-btn" onclick="setRaceModeType('bot')">
                 <span id="rm-bot-ico"></span> <span id="rm-bot-lbl">سباق ضد الروبوت</span>
               </button>
+              <button class="rm-pill rm-pill-online" id="n-online" onclick="openOnlineRace()">
+                <span id="n-online-ico"></span> <span id="n-online-lbl">سباق عن بعد</span>
+              </button>
             </div>
             <div id="rm-bot-config" style="display:none;align-items:center;gap:8px">
               <span style="font-size:11px;color:var(--sub);font-family:var(--far)" id="rm-bot-cfg-lbl">مستوى
@@ -9157,6 +9324,8 @@
       document.getElementById("p-result").className = "page";
       document.getElementById("inp").value = "";
       document.getElementById("inp").focus();
+      var mTap = document.getElementById("mobile-tap-hint");
+      if (mTap) mTap.style.display = "";
     }
 
     // ── FAST INCREMENTAL RENDERER ─────────────────────────────────
@@ -9812,6 +9981,86 @@
     }
 
     // KEYDOWN LISTENER (INSTANT ZERO-LATENCY DISPATCH + DUAL-LAYOUT MATCHING)
+    // ── CORE TYPING LOGIC (SHARED BY PHYSICAL KEYBOARD & MOBILE SOFT KEYBOARD) ──
+    var _lastKeyDownTs = 0;
+
+    function handleCharInput(char) {
+      if (S.fin) return;
+      var ex = S.text[S.idx];
+      if (!ex) return;
+
+      // ROBUST DUAL-LAYOUT KEYSTROKE MATCHING (ACCURATE ARABIC & ENGLISH MATCHING)
+      var ok = matchChar(char, ex);
+
+      // IMMEDIATE DISPATCH: AUDIO + VISUAL KEYBOARD HIGHLIGHT
+      if (ok) {
+        playCorrectSound(ex === " ");
+      } else {
+        playErrorSound();
+      }
+      highlightPressedKey(char, ok);
+
+      // START TIMER ON FIRST KEYSTROKE
+      if (!S.on && S.idx === 0) {
+        S.on = true;
+        S.t0 = performance.now();
+        S.tk = S.t0;
+        var hintEl = document.getElementById("hint");
+        if (hintEl) hintEl.style.display = "none";
+        var tcard = document.getElementById("tcard");
+        if (tcard) tcard.className = "card glow";
+        var _caret = document.getElementById('caret');
+        if (_caret) _caret.classList.remove('blink');
+        var mTap = document.getElementById('mobile-tap-hint');
+        if (mTap) mTap.style.display = 'none';
+        startTimer();
+      }
+
+      var now = performance.now();
+      var dur = S.tk > 0 ? (now - S.tk) : 0;
+      S.tk = now;
+      if (ok) S.cor++; else S.ec++;
+      S.ks.push({ ch: char, ex: ex, ok: ok, dur: dur, t: (now - S.t0) });
+      S.ch[S.idx].s = ok ? "ok" : "bad";
+      S.idx++;
+      if (S.idx < S.ch.length) S.ch[S.idx].s = "now";
+
+      // Batch DOM stat updates via rAF (non-blocking)
+      var _el2 = now - S.t0;
+      var _cor2 = S.cor;
+      var _ks_len = S.ks.length;
+      var _ec = S.ec;
+      requestAnimationFrame(function () {
+        var w = calcWPM(_cor2, _el2);
+        var a = calcAcc(_cor2, _ks_len);
+        var wEl = document.getElementById("xwpm");
+        var aEl = document.getElementById("xacc");
+        var eEl = document.getElementById("xerr");
+        if (wEl) { wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
+        if (aEl) { aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
+        if (eEl) { eEl.textContent = _ec; eEl.style.color = _ec > 0 ? "var(--err)" : "var(--text)"; }
+      });
+
+      renderChars();
+      updateTargetKey();
+
+      if (S.idx >= S.text.length) finishTest();
+    }
+
+    function handleBackspace() {
+      if (S.fin) return;
+      if (S.idx > 0) {
+        playCorrectSound(false);
+        highlightPressedKey("Backspace", true);
+        S.idx--;
+        S.ch[S.idx].s = "now";
+        if (S.idx + 1 < S.ch.length) S.ch[S.idx + 1].s = "w";
+        renderChars();
+        updateTargetKey();
+      }
+    }
+
+    // KEYDOWN LISTENER (INSTANT ZERO-LATENCY DISPATCH FOR PHYSICAL KEYBOARDS)
     document.addEventListener("keydown", function (e) {
       if (e.target && e.target.id !== 'inp' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
       var omModal = document.getElementById('online-modal');
@@ -9842,80 +10091,84 @@
 
       if (e.key === "Backspace") {
         e.preventDefault();
-        if (S.idx > 0) {
-          playCorrectSound(false);
-          highlightPressedKey("Backspace", true);
-          S.idx--;
-          S.ch[S.idx].s = "now";
-          if (S.idx + 1 < S.ch.length) S.ch[S.idx + 1].s = "w";
-          renderChars();
-          updateTargetKey();
-        }
+        _lastKeyDownTs = Date.now();
+        handleBackspace();
         return;
       }
 
       if (e.key.length !== 1) return;
-      var ex = S.text[S.idx];
-      if (!ex) return;
-
-      // ROBUST DUAL-LAYOUT KEYSTROKE MATCHING (ACCURATE ARABIC & ENGLISH MATCHING)
-      var ok = matchChar(e.key, ex);
-
-      // IMMEDIATE DISPATCH: AUDIO + VISUAL KEYBOARD HIGHLIGHT
-      if (ok) {
-        playCorrectSound(ex === " ");
-      } else {
-        playErrorSound();
-      }
-      highlightPressedKey(e.key, ok);
-
-      // START TIMER ON FIRST KEYSTROKE
-      if (!S.on && S.idx === 0) {
-        S.on = true;
-        S.t0 = performance.now();
-        S.tk = S.t0;
-        document.getElementById("hint").style.display = "none";
-        document.getElementById("tcard").className = "card glow";
-        // Stop caret blinking once typing starts
-        var _caret = document.getElementById('caret');
-        if (_caret) _caret.classList.remove('blink');
-        startTimer();
+      if (e.key === "Unidentified" || e.keyCode === 229) {
+        // Mobile IME / composition event: handled by input listener on #inp
+        return;
       }
 
-      var now = performance.now();
-      var dur = S.tk > 0 ? (now - S.tk) : 0;
-      S.tk = now;
-      if (ok) S.cor++; else S.ec++;
-      S.ks.push({ ch: e.key, ex: ex, ok: ok, dur: dur, t: (now - S.t0) });
-      S.ch[S.idx].s = ok ? "ok" : "bad";
-      S.idx++;
-      if (S.idx < S.ch.length) S.ch[S.idx].s = "now";
+      _lastKeyDownTs = Date.now();
+      handleCharInput(e.key);
+    });
 
-      // Batch DOM stat updates via rAF (non-blocking)
-      var _el2 = now - S.t0;
-      var _cor2 = S.cor;
-      var _ks_len = S.ks.length;
-      var _ec = S.ec;
-      requestAnimationFrame(function () {
-        var w = calcWPM(_cor2, _el2);
-        var a = calcAcc(_cor2, _ks_len);
-        var wEl = document.getElementById("xwpm");
-        var aEl = document.getElementById("xacc");
-        var eEl = document.getElementById("xerr");
-        if (wEl) { wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
-        if (aEl) { aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
-        if (eEl) { eEl.textContent = _ec; eEl.style.color = _ec > 0 ? "var(--err)" : "var(--text)"; }
+    // MOBILE INPUT & TOUCH LISTENERS (MONKEYTYPE STYLE MOBILE TYPING ENGINE)
+    var inp = document.getElementById("inp");
+    if (inp) {
+      inp.addEventListener("beforeinput", function (e) {
+        if (e.inputType === "deleteContentBackward" || e.inputType === "deleteContentForward") {
+          e.preventDefault();
+          _lastKeyDownTs = Date.now();
+          handleBackspace();
+          inp.value = "";
+          return;
+        }
       });
 
-      renderChars();
-      updateTargetKey();
+      inp.addEventListener("input", function (e) {
+        // If handled by desktop keydown recently, ignore to prevent duplicate
+        if (Date.now() - _lastKeyDownTs < 40) {
+          inp.value = "";
+          return;
+        }
 
-      if (S.idx >= S.text.length) finishTest();
-    });
+        if (e.inputType === "deleteContentBackward" || e.inputType === "deleteContentForward") {
+          handleBackspace();
+          inp.value = "";
+          return;
+        }
 
-    document.getElementById("tcard").addEventListener("click", function () {
-      document.getElementById("inp").focus();
-    });
+        var val = e.data || inp.value || "";
+        if (val.length > 0) {
+          for (var i = 0; i < val.length; i++) {
+            handleCharInput(val[i]);
+          }
+        }
+        inp.value = "";
+      });
+
+      inp.addEventListener("focus", function () {
+        var mTap = document.getElementById("mobile-tap-hint");
+        if (mTap) mTap.style.display = "none";
+        var tc = document.getElementById("tcard");
+        if (tc) tc.classList.add("focused");
+      });
+
+      inp.addEventListener("blur", function () {
+        var tc = document.getElementById("tcard");
+        if (tc) tc.classList.remove("focused");
+        if (!S.fin) {
+          var mTap = document.getElementById("mobile-tap-hint");
+          if (mTap) mTap.style.display = "inline-flex";
+        }
+      });
+    }
+
+    var tcard = document.getElementById("tcard");
+    if (tcard) {
+      tcard.addEventListener("touchstart", function () {
+        var inp = document.getElementById("inp");
+        if (inp) inp.focus();
+      }, { passive: true });
+      tcard.addEventListener("click", function () {
+        var inp = document.getElementById("inp");
+        if (inp) inp.focus();
+      });
+    }
 
     function startTimer() {
       S.ti = setInterval(function () {
@@ -9941,8 +10194,9 @@
         if (el("n-stats")) el("n-stats").textContent = isAr ? "إحصاءات" : "Stats";
         if (el("n-learn")) el("n-learn").textContent = isAr ? "تعلم" : "Learn";
         if (el("n-race")) el("n-race").innerHTML = TM_ICONS.flag + ' ' + (isAr ? "سباق" : "Race");
-        if (el("n-online")) el("n-online").innerHTML = TM_ICONS.globe + ' ' + (isAr ? "شبكي" : "Online");
-        if (el("n-online-lbl")) el("n-online-lbl").textContent = isAr ? "شبكي" : "Online";
+        if (el("n-online")) {
+          el("n-online").innerHTML = '<span id="n-online-ico">' + TM_ICONS.globe + '</span> <span id="n-online-lbl">' + (isAr ? "سباق عن بعد" : "Remote Race") + '</span>';
+        }
 
         // 2. Mode Select Dropdown
         var ms = el("msel");
@@ -9960,6 +10214,7 @@
         if (el("lbl-acc")) el("lbl-acc").textContent = isAr ? "دقة %" : "Accuracy %";
         if (el("lbl-err")) el("lbl-err").textContent = isAr ? "أخطاء" : "Errors";
         if (el("hint")) el("hint").textContent = isAr ? "ابدأ الكتابة للبدء • اضغط Tab للإعادة السريعة" : "Start typing to begin • Press Tab to restart";
+        if (el("mobile-tap-text")) el("mobile-tap-text").textContent = isAr ? "انقر هنا للكتابة بواسطة كيبورد الجوال" : "Tap here to type with mobile keyboard";
         if (el("gbtn-lbl")) el("gbtn-lbl").textContent = isAr ? "إعادة" : "Restart";
         if (el("kb-toggle-lbl")) el("kb-toggle-lbl").textContent = _kbVisible ? (isAr ? "إخفاء الكيبورد" : "Hide Keyboard") : (isAr ? "إظهار الكيبورد" : "Show Keyboard");
         if (el("hand-toggle-lbl")) el("hand-toggle-lbl").textContent = (typeof _handVisible !== 'undefined' && _handVisible) ? (isAr ? "إخفاء اليدين" : "Hide Hands") : (isAr ? "إظهار اليدين" : "Show Hands");
