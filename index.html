@@ -29,6 +29,7 @@
   :root {
     --k-unit: clamp(36px, min(calc((100vw - 56px) / 16.3), calc((100vh - 310px) / 6.4), 48px), 48px);
   }
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:radial-gradient(circle at 50% 15%, #253947 0%, #17242d 55%, #111a21 100%);color:var(--text);font-family:var(--fui);height:100vh;max-height:100vh;overflow-x:hidden}
 #app{display:flex;flex-direction:column;height:100vh;max-height:100vh;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}
@@ -1087,6 +1088,22 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
   border-color:rgba(72,187,120,0.45) !important;
   background:rgba(72,187,120,0.1) !important;
 }
+.rm-pill-online{
+  color:var(--accent);
+  border:1px solid rgba(232,175,71,0.35);
+  background:rgba(232,175,71,0.08);
+}
+.rm-pill-online:hover{
+  background:rgba(232,175,71,0.22) !important;
+  color:#fff !important;
+  border-color:var(--accent);
+  box-shadow:0 0 12px var(--accent-glow);
+}
+.rm-pill-online.connected{
+  color:var(--ok) !important;
+  border-color:rgba(72,187,120,0.45) !important;
+  background:rgba(72,187,120,0.1) !important;
+}
 
 /* ── ONLINE RACE MODAL OVERLAY ───────────────────────── */
 #online-modal{
@@ -1856,8 +1873,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
     <button class="nb on" id="n-test" onclick="showTab('test')">Practice</button>
     <button class="nb" id="n-stats" onclick="showTab('stats')">Stats</button>
     <button class="nb" id="n-learn" onclick="showTab('learn')">Learn</button>
-    <button class="nb" id="n-race" onclick="showTab('race')"><span id="n-race-ico"></span> <span id="n-race-lbl">Race</span></button>
-    <button class="nb nb-online" id="n-online" onclick="openOnlineRace()"><span id="n-online-ico"></span> <span id="n-online-lbl">Online</span></button>
+    <button class="nb" id="n-race" onclick="showTab('race')"><span id="n-race-ico"></span> <span id="n-race-lbl">Race</span></button>
   </nav>
   <div class="ctrls">
     <div class="pg">
@@ -5055,6 +5071,9 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
           <button class="rm-pill on" id="rm-ghost-btn" onclick="setRaceModeType('ghost')">
             <span id="rm-ghost-ico"></span> <span id="rm-ghost-lbl">سباق التناوب (شبح المنافس)</span>
           </button>
+          <button class="rm-pill rm-pill-online" id="rm-online-btn" onclick="openOnlineRace()">
+            <span id="rm-online-ico"></span> <span id="rm-online-lbl">سباق عن بعد</span>
+          </button>
           <button class="rm-pill" id="rm-bot-btn" onclick="setRaceModeType('bot')">
             <span id="rm-bot-ico"></span> <span id="rm-bot-lbl">سباق ضد الروبوت</span>
           </button>
@@ -5453,6 +5472,7 @@ function initAllVectorIcons() {
   };
   setHtml('n-race-ico', TM_ICONS.flag);
   setHtml('n-online-ico', TM_ICONS.globe);
+  setHtml('rm-online-ico', TM_ICONS.globe);
   setHtml('r-title-ico', TM_ICONS.flag);
   setHtml('rm-ghost-ico', TM_ICONS.users);
   setHtml('rm-bot-ico', TM_ICONS.robot);
@@ -7546,6 +7566,7 @@ function updateUILanguage(l){
     if(el("race-title-txt")) el("race-title-txt").textContent = isAr ? "سباق السرعة" : "RACE DUEL";
     if(el("race-title-sub")) el("race-title-sub").textContent = isAr ? "سباق تفاعلي على نفس الكيبورد" : "Interactive Duel on Same Keyboard";
     if(el("rm-ghost-lbl")) el("rm-ghost-lbl").textContent = isAr ? "سباق التناوب (شبح المنافس)" : "1v1 Ghost Duel";
+    if(el("rm-online-lbl")) el("rm-online-lbl").textContent = isAr ? "سباق عن بعد" : "Remote Race";
     if(el("rm-bot-lbl")) el("rm-bot-lbl").textContent = isAr ? "سباق ضد الروبوت" : "Race vs AI Bot";
     if(el("rm-bot-cfg-lbl")) el("rm-bot-cfg-lbl").textContent = isAr ? "مستوى الروبوت:" : "Bot Level:";
     if(el("r-card-hint")) el("r-card-hint").textContent = isAr ? "اكتب النص أعلاه بأقصى سرعة • اضغط Tab للإعادة" : "Type the text above as fast as possible • Press Tab to restart";
@@ -8538,7 +8559,7 @@ function omSaveCustomServer() {
 // ── Status dot indicator ──────────────────────────────────────
 function omSetConnStatus(state, msg) {
   var dot = document.getElementById('om-conn-dot');
-  var nOnline = document.getElementById('n-online');
+  var nOnline = document.getElementById('rm-online-btn') || document.getElementById('n-online');
   if (!dot) return;
   if (state === 'connected') {
     dot.style.background = '#10b981';
@@ -9452,7 +9473,10 @@ window.addEventListener('load', function() {
   var h = window.location.hash;
   if (h === '#stats') showTab('stats');
   else if (h === '#race') showTab('race');
-  else if (h === '#online') setTimeout(function() { if (window.openOnlineRace) openOnlineRace(); }, 200);
+  else if (h === '#online') {
+    showTab('race');
+    setTimeout(function() { if (window.openOnlineRace) openOnlineRace(); }, 200);
+  }
 });
 </script>
 </body>
