@@ -2193,7 +2193,7 @@ function toggleKeyboard(){
 // 4. ZERO-LATENCY RAZER GREEN MECHANICAL SWITCH AUDIO
 // ==============================================================
 var _actx = null, _masterGain = null;
-var _rgSounds = [], _spaceSound = null, _errSound = null;
+var _rgSounds = [], _spaceSound = null, _backspaceSound = null, _errSound = null;
 
 function _initAudio(){
   if(_actx){
@@ -2221,14 +2221,86 @@ function _initAudio(){
       _synthesizeRGSound(_actx, 0),
       _synthesizeRGSound(_actx, 1),
       _synthesizeRGSound(_actx, 2),
-      _synthesizeRGSound(_actx, 3)
+      _synthesizeRGSound(_actx, 3),
+      _synthesizeRGSound(_actx, 4),
+      _synthesizeRGSound(_actx, 5)
     ];
     _spaceSound = _synthesizeSpaceSound(_actx);
+    _backspaceSound = _synthesizeRGSound(_actx, 2, false, true);
     _errSound = _synthesizeErrorSound(_actx);
   } catch(e){}
 }
 
-function _synthesizeRGSound(actx, variant){
+function _synthesizeRGSound(actx, variant, isSpace, isBackspace) {
+  var sr = actx.sampleRate;
+  var dur = isSpace ? 0.075 : (isBackspace ? 0.048 : 0.052);
+  var len = Math.floor(sr * dur);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+
+  var pitch = 1.0 + (variant - 2.5) * 0.035;
+  if (isSpace) pitch *= 0.62;
+  if (isBackspace) pitch *= 1.15;
+
+  var thockFreq = (isSpace ? 185 : 365) * pitch;
+  var thockDecay = isSpace ? 48 : 78;
+  var clackFreq = (isSpace ? 470 : 860) * pitch;
+  var clackDecay = isSpace ? 82 : 125;
+  var snapFreq = (isSpace ? 2100 : 3300) * pitch;
+  var clickFreq = (isSpace ? 2900 : 4100) * pitch;
+  var clickDecay = isSpace ? 360 : 520;
+
+  function makeFilter(f, Q) {
+    var w = 2 * Math.PI * f / sr;
+    var alpha = Math.sin(w) / (2 * Q);
+    var a0 = 1 + alpha;
+    return {
+      b0: alpha / a0,
+      a1: (-2 * Math.cos(w)) / a0,
+      a2: (1 - alpha) / a0,
+      x1: 0, x2: 0, y1: 0, y2: 0,
+      tick: function (x) {
+        var y = this.b0 * (x - this.x2) - this.a1 * this.y1 - this.a2 * this.y2;
+        this.x2 = this.x1;
+        this.x1 = x;
+        this.y2 = this.y1;
+        this.y1 = y;
+        return y;
+      }
+    };
+  }
+
+  var fThock = makeFilter(thockFreq, isSpace ? 3.6 : 4.0);
+  var fClack = makeFilter(clackFreq, 4.6);
+  var fSnap = makeFilter(snapFreq, 5.8);
+  var fClick = makeFilter(clickFreq, 7.2);
+
+  for (var i = 0; i < len; i++) {
+    var t = i / sr;
+    var impactEnv = Math.exp(-t * 1900);
+    var spike = (i === 0) ? 0.95 : (i === 1) ? -0.8 : (i === 2) ? 0.55 : (i === 3) ? -0.35 : 0;
+    var contactNoise = (Math.random() * 2 - 1) * impactEnv;
+    var x = spike * 0.75 + contactNoise * 0.45;
+
+    var resThock = fThock.tick(x);
+    var resClack = fClack.tick(x);
+    var resSnap = fSnap.tick(x);
+    var resClick = fClick.tick(x);
+
+    var bottomOut = Math.sin(2 * Math.PI * thockFreq * t) * Math.exp(-t * thockDecay) * (isSpace ? 0.56 : 0.38);
+    var stemSnap = (Math.random() * 2 - 1) * Math.exp(-t * (isSpace ? 420 : 660)) * 0.18;
+    var highTick = Math.cos(2 * Math.PI * clickFreq * t) * Math.exp(-t * clickDecay) * 0.16;
+
+    var sample = resThock * 1.7 + resClack * 1.15 + resSnap * 0.7 + resClick * 0.5 + bottomOut + stemSnap + highTick;
+
+    var masterEnv = t < 0.0003 ? (t / 0.0003) : Math.exp(-t * (isSpace ? 40 : 60));
+    sample *= masterEnv;
+
+    d[i] = Math.tanh(sample * 1.35) * (isSpace ? 0.92 : 0.86);
+  }
+  return buf;
+}
+function _oldRGSound(actx, variant){
   var sr = actx.sampleRate;
   var len = Math.floor(sr * 0.045);
   var buf = actx.createBuffer(1, len, sr);
@@ -2247,7 +2319,10 @@ function _synthesizeRGSound(actx, variant){
   return buf;
 }
 
-function _synthesizeSpaceSound(actx){
+function _synthesizeSpaceSound(actx) {
+  return _synthesizeRGSound(actx, 0, true, false);
+}
+function _oldSpaceSound(actx){
   var sr = actx.sampleRate;
   var len = Math.floor(sr * 0.065);
   var buf = actx.createBuffer(1, len, sr);
@@ -2264,7 +2339,24 @@ function _synthesizeSpaceSound(actx){
   return buf;
 }
 
-function _synthesizeErrorSound(actx){
+function _synthesizeErrorSound(actx) {
+  var sr = actx.sampleRate;
+  var len = Math.floor(sr * 0.062);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+  var thudFreq = 165;
+  for (var i = 0; i < len; i++) {
+    var t = i / sr;
+    var impact = (i === 0) ? 0.7 : (i === 1) ? -0.5 : (i === 2) ? 0.3 : 0;
+    var wobble = (Math.random() * 2 - 1) * Math.exp(-t * 320) * 0.22;
+    var lowThud = Math.sin(2 * Math.PI * thudFreq * t) * Math.exp(-t * 68) * 0.58;
+    var bodyPop = Math.sin(2 * Math.PI * 320 * t) * Math.exp(-t * 115) * 0.32;
+    var sample = (impact * 0.3 + wobble + lowThud + bodyPop) * Math.exp(-t * 42);
+    d[i] = Math.tanh(sample * 1.2) * 0.8;
+  }
+  return buf;
+}
+function _oldErrorSound(actx){
   var sr = actx.sampleRate;
   var len = Math.floor(sr * 0.07);
   var buf = actx.createBuffer(1, len, sr);
@@ -2284,13 +2376,13 @@ window.addEventListener("pointerdown", _initAudio, { passive: true });
 window.addEventListener("mousedown", _initAudio, { passive: true });
 window.addEventListener("keydown", _initAudio, { passive: true });
 
-function playCorrectSound(isSpace){
+function playCorrectSound(isSpace, isBackspace){
   if(!_actx) _initAudio();
   if(!_actx) return;
   if(_actx.state === 'suspended') _actx.resume();
   try {
     var src = _actx.createBufferSource();
-    src.buffer = (isSpace && _spaceSound) ? _spaceSound : _rgSounds[Math.floor(Math.random() * _rgSounds.length)];
+    src.buffer = (isSpace && _spaceSound) ? _spaceSound : (isBackspace && _backspaceSound) ? _backspaceSound : _rgSounds[Math.floor(Math.random() * _rgSounds.length)];
     src.connect(_masterGain);
     src.start(_actx.currentTime);
   } catch(e){}
@@ -2523,7 +2615,7 @@ document.addEventListener("keydown", function(e){
   if(e.key === "Backspace"){
     e.preventDefault();
     if(S.idx > 0){
-      playCorrectSound(false);
+      playCorrectSound(false, true);
       highlightPressedKey("Backspace", true);
       S.idx--;
       S.ch[S.idx].s = "now";
@@ -3198,7 +3290,7 @@ function handleRaceKey(e){
       RACE.ch[curPlayer.idx].s = "now";
       if(curPlayer.idx + 1 < RACE.ch.length) RACE.ch[curPlayer.idx + 1].s = "w";
       renderRaceWords();
-      playCorrectSound(false);
+      playCorrectSound(false, true);
     }
     return;
   }
