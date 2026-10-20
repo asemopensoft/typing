@@ -23,12 +23,14 @@
   --bdr:rgba(255,255,255,0.09);
   --fen:'Roboto Mono',monospace;
   --far:'Cairo',sans-serif;
+  --fui:'Cairo','Outfit',sans-serif;
   --k-unit:clamp(30px, min(calc((100vw - 44px) / 16.3), calc((100vh - 290px) / 6.4), 46px), 46px);
 }
 @media (min-width: 1440px) and (min-height: 860px) {
   :root {
     --k-unit: clamp(36px, min(calc((100vw - 56px) / 16.3), calc((100vh - 310px) / 6.4), 48px), 48px);
   }
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:radial-gradient(circle at 50% 15%, #253947 0%, #17242d 55%, #111a21 100%);color:var(--text);font-family:var(--fui);height:100vh;max-height:100vh;overflow-x:hidden}
 #app{display:flex;flex-direction:column;height:100vh;max-height:100vh;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}
@@ -1795,6 +1797,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
   .hint {
     font-size: 10.5px !important;
     bottom: 5px !important;
+  }
 }
 
 @media (max-width: 400px) {
