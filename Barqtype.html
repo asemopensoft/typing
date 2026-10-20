@@ -23,8 +23,12 @@
   --bdr:rgba(255,255,255,0.09);
   --fen:'Roboto Mono',monospace;
   --far:'Cairo',sans-serif;
-  --k-unit:clamp(28px, min(3.8vw, calc((100vh - 610px) / 6.2)), 44px);
+  --k-unit:clamp(30px, min(calc((100vw - 44px) / 16.3), calc((100vh - 290px) / 6.4), 46px), 46px);
 }
+@media (min-width: 1440px) and (min-height: 860px) {
+  :root {
+    --k-unit: clamp(36px, min(calc((100vw - 56px) / 16.3), calc((100vh - 310px) / 6.4), 48px), 48px);
+  }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:radial-gradient(circle at 50% 15%, #253947 0%, #17242d 55%, #111a21 100%);color:var(--text);font-family:var(--fui);height:100vh;max-height:100vh;overflow-x:hidden}
 #app{display:flex;flex-direction:column;height:100vh;max-height:100vh;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}
@@ -970,7 +974,67 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
 .race-btns{display:flex;gap:12px;justify-content:center}
 
 @media(max-width:768px){
-  header{padding:0 12px;height:52px}
+  header{
+    padding:0 8px !important;
+    height:48px !important;
+    gap:6px !important;
+    width:100% !important;
+    max-width:100vw !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+  .logo{gap:0 !important;flex-shrink:0 !important}
+  .logo-ico{width:28px !important;height:28px !important;flex-shrink:0 !important;border-radius:7px !important}
+  .logo-ico svg{width:16px !important;height:16px !important}
+  nav{
+    display:flex !important;
+    align-items:center !important;
+    flex:1 1 auto !important;
+    min-width:0 !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
+    gap:3px !important;
+    padding:2px 0 !important;
+  }
+  nav::-webkit-scrollbar{display:none !important;width:0 !important;height:0 !important}
+  .nb{
+    white-space:nowrap !important;
+    flex-shrink:0 !important;
+    padding:4px 8px !important;
+    font-size:11px !important;
+    border-radius:6px !important;
+  }
+  .nb svg{
+    width:12px !important;
+    height:12px !important;
+    margin-inline-end:3px !important;
+    vertical-align:middle !important;
+  }
+  .ctrls{
+    display:flex !important;
+    align-items:center !important;
+    flex-shrink:0 !important;
+    gap:4px !important;
+  }
+  .pg{
+    padding:1px !important;
+    gap:1px !important;
+    border-radius:6px !important;
+  }
+  .pb{
+    padding:3px 7px !important;
+    font-size:10px !important;
+    font-weight:600 !important;
+    border-radius:4px !important;
+  }
+  select, #msel{
+    padding:3px 6px !important;
+    font-size:10px !important;
+    max-width:72px !important;
+    border-radius:6px !important;
+  }
   .logo-text{display:none}
   .grid2,.cg{grid-template-columns:1fr}
   .og{grid-template-columns:repeat(3,1fr)}
@@ -978,6 +1042,16 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
   .kb-guide-right{justify-content:center}
   .race-inputs{grid-template-columns:1fr}
   .race-podium{flex-direction:column;align-items:center}
+}
+@media(max-width:480px){
+  header{padding:0 5px !important;gap:4px !important}
+  .logo-ico{width:26px !important;height:26px !important}
+  .logo-ico svg{width:14px !important;height:14px !important}
+  nav{gap:2px !important}
+  .nb{padding:3px 6px !important;font-size:10px !important}
+  .ctrls{gap:3px !important}
+  .pb{padding:2px 5px !important;font-size:9.5px !important}
+  select, #msel{padding:2px 4px !important;font-size:9.5px !important;max-width:60px !important}
 }
 .blueprint-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .bp-mark{
@@ -1569,6 +1643,200 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
 }
 
 
+
+/* BARQTYPE STRICT MOBILE RESPONSIVE STYLES */
+@media (max-width: 768px) {
+  /* 1. COMPLETELY HIDE mechanical keyboard, animated hands, and finger guide on mobile phones */
+  #kb-wrap,
+  .vk-hands-overlay,
+  #vk-hands-wrapper,
+  .kb-chassis-top,
+  .kb-guide,
+  .kb-stage,
+  .kb-rows,
+  #kb-legend,
+  .acts .kbtoggle,
+  .acts .hand-toggle-btn {
+    display: none !important;
+  }
+  
+  /* 2. Compact clean header on mobile */
+  header {
+    padding: 0 8px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    gap: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    overflow: hidden !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  .logo {
+    flex-shrink: 0 !important;
+    gap: 0 !important;
+  }
+  .logo-ico {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 7px !important;
+    flex-shrink: 0 !important;
+  }
+  .logo-ico svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  .logo-text {
+    display: none !important;
+  }
+  nav {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 3px !important;
+    padding: 2px 0 !important;
+  }
+  nav::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .nb {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+    border-radius: 6px !important;
+  }
+  .ctrls {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+    gap: 4px !important;
+  }
+  .pg {
+    padding: 1px !important;
+    gap: 1px !important;
+    border-radius: 6px !important;
+  }
+  .pb {
+    padding: 3px 6px !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    border-radius: 4px !important;
+  }
+  select, #msel {
+    padding: 2px 4px !important;
+    font-size: 10px !important;
+    height: 24px !important;
+    max-width: 66px !important;
+    border-radius: 6px !important;
+  }
+  
+  /* 3. Action buttons center aligned */
+  .acts {
+    justify-content: center !important;
+    margin-top: 10px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* 4. Statistics bar compact */
+  .bar {
+    gap: 10px !important;
+    margin-top: 4px !important;
+    margin-bottom: 14px !important;
+  }
+  .tmr, .tmr svg {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .tmr .num {
+    font-size: 16px !important;
+  }
+  .stat-pill {
+    padding: 4px 10px !important;
+  }
+  .stat-pill .big {
+    font-size: 18px !important;
+  }
+  .stat-pill .lbl {
+    font-size: 8.5px !important;
+  }
+  
+  /* 5. Clean, high-legibility mobile typing card */
+  main {
+    padding: 8px 12px !important;
+  }
+  .card {
+    padding: 14px 16px !important;
+    min-height: 125px !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  #words {
+    font-size: 18px !important;
+    line-height: 1.62 !important;
+    height: calc(1.62em * 3) !important;
+    max-height: calc(1.62em * 3) !important;
+  }
+  #words.ar {
+    font-size: 19px !important;
+    line-height: 1.72 !important;
+    height: calc(1.72em * 3) !important;
+    max-height: calc(1.72em * 3) !important;
+  }
+  .hint {
+    font-size: 10.5px !important;
+    bottom: 5px !important;
+}
+
+@media (max-width: 400px) {
+  header {
+    padding: 0 5px !important;
+    gap: 4px !important;
+  }
+  .logo-ico {
+    width: 25px !important;
+    height: 25px !important;
+  }
+  .logo-ico svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  nav {
+    gap: 2px !important;
+  }
+  .nb {
+    padding: 3px 6px !important;
+    font-size: 10px !important;
+  }
+  .ctrls {
+    gap: 2px !important;
+  }
+  .pb {
+    padding: 2px 4px !important;
+    font-size: 9.5px !important;
+  }
+  select, #msel {
+    max-width: 54px !important;
+    font-size: 9px !important;
+    padding: 1px 2px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --k-unit: clamp(24px, min(calc((100vw - 36px) / 16.3), calc((100vh - 280px) / 6.4), 42px), 42px) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1633,7 +1901,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       <div id="caret" class="blink"></div>
       <div class="hint" id="hint">Start typing to begin &bull; Press Tab to restart</div>
     </div>
-    <input id="inp" style="position:absolute;opacity:0;width:0;height:0" autocomplete="off" spellcheck="false">
+    <input id="inp" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Mobile Typing Input" style="position:fixed;bottom:0;left:0;opacity:0;pointer-events:none;z-index:-1;width:1px;height:1px;border:none;padding:0;margin:0;">
 
     <!-- ACTIONS -->
     <div class="acts">
@@ -6974,7 +7242,98 @@ function copyBarqResult(){
   }
 }
 
-// KEYDOWN LISTENER (INSTANT ZERO-LATENCY DISPATCH + DUAL-LAYOUT MATCHING)
+
+/* UNIFIED SHARED INPUT ENGINE (DESKTOP + MOBILE) */
+var _lastMismatchToastTime = 0;
+
+function handleCharacterTyped(inputKey, isBackspace) {
+  if (S.fin) return;
+
+  if (isBackspace) {
+    if (S.idx > 0) {
+      playCorrectSound(false);
+      highlightPressedKey("Backspace", true);
+      S.idx--;
+      S.ch[S.idx].s = "now";
+      if (S.idx + 1 < S.ch.length) S.ch[S.idx + 1].s = "w";
+      renderChars();
+      updateTargetKey();
+    }
+    return;
+  }
+
+  if (!inputKey) return;
+  var ex = S.text[S.idx];
+  if (!ex) return;
+
+  // Language mismatch hint for mobile & desktop
+  if (S.lang === "ar" && /[a-zA-Z]/.test(inputKey)) {
+    var nowT = Date.now();
+    if (nowT - _lastMismatchToastTime > 6000) {
+      _lastMismatchToastTime = nowT;
+      showToast(
+        "تنبيه لغة الإدخال",
+        "تم اختيار اللغة العربية في التطبيق، يرجى تحويل لوحة المفاتيح إلى العربية ⌨️",
+        TM_ICONS.warning
+      );
+    }
+  }
+
+  var ok = matchChar(inputKey, ex);
+
+  if (ok) {
+    playCorrectSound(ex === " ");
+  } else {
+    playErrorSound();
+  }
+  highlightPressedKey(inputKey, ok);
+
+  // Start timer on first keystroke
+  if (!S.on && S.idx === 0) {
+    S.on = true;
+    S.t0 = performance.now();
+    S.tk = S.t0;
+    var hintEl = document.getElementById("hint");
+    if (hintEl) hintEl.style.display = "none";
+    var tcardEl = document.getElementById("tcard");
+    if (tcardEl) tcardEl.className = "card glow";
+    var _caret = document.getElementById('caret');
+    if (_caret) _caret.classList.remove('blink');
+    startTimer();
+  }
+
+  var now = performance.now();
+  var dur = S.tk > 0 ? (now - S.tk) : 0;
+  S.tk = now;
+  if (ok) S.cor++; else S.ec++;
+  S.ks.push({ ch: inputKey, ex: ex, ok: ok, dur: dur, t: (now - S.t0) });
+  S.ch[S.idx].s = ok ? "ok" : "bad";
+  S.idx++;
+  if (S.idx < S.ch.length) S.ch[S.idx].s = "now";
+
+  // Batch DOM stat updates via rAF
+  var _el2 = now - S.t0;
+  var _cor2 = S.cor;
+  var _ks_len = S.ks.length;
+  var _ec = S.ec;
+  requestAnimationFrame(function(){
+    var w = calcWPM(_cor2, _el2);
+    var a = calcAcc(_cor2, _ks_len);
+    var wEl = document.getElementById("xwpm");
+    var aEl = document.getElementById("xacc");
+    var eEl = document.getElementById("xerr");
+    if (wEl) { wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
+    if (aEl) { aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
+    if (eEl) { eEl.textContent = _ec; eEl.style.color = _ec > 0 ? "var(--err)" : "var(--text)"; }
+  });
+
+  renderChars();
+  updateTargetKey();
+
+  if (S.idx >= S.text.length) finishTest();
+}
+
+// 1. DESKTOP PHYSICAL KEYBOARD LISTENER
 document.addEventListener("keydown", function(e){
   if(e.target && e.target.id !== 'inp' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
   var omModal = document.getElementById('online-modal');
@@ -6989,12 +7348,8 @@ document.addEventListener("keydown", function(e){
     if(e.key === "Tab"){ e.preventDefault(); repeatCurrentTest(); return; }
     if(e.key === "Enter"){ e.preventDefault(); initTest(); return; }
     if(e.key === "Escape"){ initTest(); return; }
-    if((e.key === "d" || e.key === "D" || e.key === "ي") && !e.ctrlKey && !e.altKey){
-      drillMissedKeys(); return;
-    }
-    if((e.key === "c" || e.key === "C" || e.key === "ؤ") && !e.ctrlKey && !e.altKey){
-      copyBarqResult(); return;
-    }
+    if((e.key === "d" || e.key === "D" || e.key === "ي") && !e.ctrlKey && !e.altKey){ drillMissedKeys(); return; }
+    if((e.key === "c" || e.key === "C" || e.key === "ؤ") && !e.ctrlKey && !e.altKey){ copyBarqResult(); return; }
     return;
   }
 
@@ -7005,80 +7360,88 @@ document.addEventListener("keydown", function(e){
 
   if(e.key === "Backspace"){
     e.preventDefault();
-    if(S.idx > 0){
-      playCorrectSound(false);
-      highlightPressedKey("Backspace", true);
-      S.idx--;
-      S.ch[S.idx].s = "now";
-      if(S.idx + 1 < S.ch.length) S.ch[S.idx + 1].s = "w";
-      renderChars();
-      updateTargetKey();
-    }
+    handleCharacterTyped("", true);
+    var _inp = document.getElementById("inp");
+    if (_inp) _inp.value = "";
     return;
   }
 
-  if(e.key.length !== 1) return;
-  var ex = S.text[S.idx];
-  if(!ex) return;
-
-  // ROBUST DUAL-LAYOUT KEYSTROKE MATCHING (ACCURATE ARABIC & ENGLISH MATCHING)
-  var ok = matchChar(e.key, ex);
-
-  // IMMEDIATE DISPATCH: AUDIO + VISUAL KEYBOARD HIGHLIGHT
-  if(ok){
-    playCorrectSound(ex === " ");
-  } else {
-    playErrorSound();
+  if(e.key.length === 1){
+    e.preventDefault();
+    handleCharacterTyped(e.key, false);
+    var _inp = document.getElementById("inp");
+    if (_inp) _inp.value = "";
   }
-  highlightPressedKey(e.key, ok);
+});
 
-  // START TIMER ON FIRST KEYSTROKE
-  if(!S.on && S.idx === 0){
-    S.on = true;
-    S.t0 = performance.now();
-    S.tk = S.t0;
-    document.getElementById("hint").style.display = "none";
-    document.getElementById("tcard").className = "card glow";
-    // Stop caret blinking once typing starts
-    var _caret = document.getElementById('caret');
-    if(_caret) _caret.classList.remove('blink');
-    startTimer();
+// 2. MOBILE NATIVE KEYBOARD PIPELINE (TOUCH, INPUT, COMPOSITION)
+(function initMobileInputSystem(){
+  var inp = document.getElementById("inp");
+  var tcard = document.getElementById("tcard");
+  if(!inp || !tcard) return;
+
+  function focusMobileInput(e){
+    inp.focus({ preventScroll: true });
+    // On touch devices, slight delay ensures keyboard shows without viewport jump
+    setTimeout(function(){ inp.focus({ preventScroll: true }); }, 50);
   }
 
-  var now = performance.now();
-  var dur = S.tk > 0 ? (now - S.tk) : 0;
-  S.tk = now;
-  if(ok) S.cor++; else S.ec++;
-  S.ks.push({ ch: e.key, ex: ex, ok: ok, dur: dur, t: (now - S.t0) });
-  S.ch[S.idx].s = ok ? "ok" : "bad";
-  S.idx++;
-  if(S.idx < S.ch.length) S.ch[S.idx].s = "now";
+  tcard.addEventListener("click", focusMobileInput);
+  tcard.addEventListener("touchend", focusMobileInput);
 
-  // Batch DOM stat updates via rAF (non-blocking)
-  var _el2 = now - S.t0;
-  var _cor2 = S.cor;
-  var _ks_len = S.ks.length;
-  var _ec = S.ec;
-  requestAnimationFrame(function(){
-    var w = calcWPM(_cor2, _el2);
-    var a = calcAcc(_cor2, _ks_len);
-    var wEl = document.getElementById("xwpm");
-    var aEl = document.getElementById("xacc");
-    var eEl = document.getElementById("xerr");
-    if(wEl){ wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
-    if(aEl){ aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
-    if(eEl){ eEl.textContent = _ec; eEl.style.color = _ec > 0 ? "var(--err)" : "var(--text)"; }
+  var isComposing = false;
+  inp.addEventListener("compositionstart", function(){
+    isComposing = true;
+  });
+  inp.addEventListener("compositionend", function(e){
+    isComposing = false;
+    var data = e.data || "";
+    for(var i = 0; i < data.length; i++){
+      handleCharacterTyped(data[i], false);
+    }
+    inp.value = "";
   });
 
-  renderChars();
-  updateTargetKey();
+  inp.addEventListener("beforeinput", function(e){
+    if(e.inputType === "deleteContentBackward" || e.inputType === "deleteContentForward"){
+      e.preventDefault();
+      handleCharacterTyped("", true);
+      inp.value = "";
+    }
+  });
 
-  if(S.idx >= S.text.length) finishTest();
-});
+  inp.addEventListener("input", function(e){
+    if(isComposing) return;
+    if(e.inputType === "deleteContentBackward") {
+      inp.value = "";
+      return;
+    }
+    var val = inp.value;
+    if(val){
+      for(var i = 0; i < val.length; i++){
+        handleCharacterTyped(val[i], false);
+      }
+      inp.value = "";
+    }
+  });
 
-document.getElementById("tcard").addEventListener("click", function(){
-  document.getElementById("inp").focus();
-});
+  // Keep active text centered when mobile keyboard opens
+  if(window.visualViewport){
+    window.visualViewport.addEventListener("resize", function(){
+      if(window.innerWidth <= 768){
+        var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : null;
+        var wordsEl = document.getElementById("words");
+        if(curEl && wordsEl){
+          var cardH = wordsEl.clientHeight;
+          var topPos = curEl.offsetTop;
+          if(topPos > cardH * 0.45) wordsEl.scrollTop = topPos - cardH * 0.25;
+        }
+        moveCaret();
+      }
+    });
+  }
+})();
+
 
 function startTimer(){
   S.ti = setInterval(function(){

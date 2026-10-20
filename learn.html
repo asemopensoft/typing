@@ -742,8 +742,77 @@ html[dir="ltr"] .typing-box { direction: ltr; text-align: left; }
 /* MOBILE RESPONSIVE STYLES */
 @media (max-width: 768px) {
   .kb-stage, .vk-hands-overlay, #vk-hands-wrapper { display: none !important; }
-  header { padding: 0 12px; height: 48px; }
-  .logo-text { display: none; }
+  header {
+    padding: 0 8px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    gap: 6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    overflow: hidden !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  .logo {
+    flex-shrink: 0 !important;
+    gap: 0 !important;
+  }
+  .logo-ico {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 7px !important;
+    flex-shrink: 0 !important;
+  }
+  .logo-ico svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  .logo-text {
+    display: none !important;
+  }
+  nav {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 3px !important;
+    padding: 2px 0 !important;
+  }
+  nav::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  .nb {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+    border-radius: 6px !important;
+  }
+  .ctrls {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+    gap: 4px !important;
+  }
+  .pg {
+    padding: 1px !important;
+    gap: 1px !important;
+    border-radius: 6px !important;
+  }
+  .pb {
+    padding: 3px 7px !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    border-radius: 4px !important;
+  }
+
   .stages-grid { grid-template-columns: 1fr; }
   main { padding: 12px 14px; }
   .stage-hero { padding: 18px 20px; flex-direction: column; align-items: flex-start; }
@@ -755,6 +824,26 @@ html[dir="ltr"] .typing-box { direction: ltr; text-align: left; }
   .dock-card .lbl { font-size: 9.5px; }
   .typing-box { padding: 16px 18px; min-height: 90px; }
   .typing-text-flow { font-size: 20px; }
+  .lesson-top-bar { flex-wrap: wrap; gap: 8px; }
+  .lesson-title-area { order: 2; width: 100%; text-align: center; }
+  .btn-back { padding: 6px 12px; font-size: 12px; }
+  .lesson-row-card { flex-direction: column; align-items: stretch; gap: 10px; padding: 16px; }
+  .lesson-row-stats { justify-content: center; }
+  .modal-card { padding: 24px 20px; }
+  .modal-actions { flex-direction: column; }
+}
+
+@media (max-width: 400px) {
+  header { padding: 0 5px !important; gap: 4px !important; }
+  .logo-ico { width: 25px !important; height: 25px !important; }
+  .logo-ico svg { width: 14px !important; height: 14px !important; }
+  nav { gap: 2px !important; }
+  .nb { padding: 3px 6px !important; font-size: 10px !important; }
+  .pb { padding: 2px 5px !important; font-size: 9px !important; }
+  .ctrls { gap: 2px !important; }
+  .stage-card { padding: 16px; }
+  .stage-card-body h3 { font-size: 15px; }
+  .stage-card-body p { font-size: 12px; }
 }
 
 footer {
@@ -4527,6 +4616,13 @@ function setLanguage(lang) {
   document.getElementById("lbl-live-err").textContent = isAr ? "الأخطاء" : "Errors";
   document.getElementById("lbl-live-prog").textContent = isAr ? "التقدم" : "Progress";
 
+  var lblMWpm = document.getElementById("lbl-m-wpm");
+  var lblMAcc = document.getElementById("lbl-m-acc");
+  var lblMErr = document.getElementById("lbl-m-err");
+  if (lblMWpm) lblMWpm.textContent = isAr ? "السرعة" : "Speed";
+  if (lblMAcc) lblMAcc.textContent = isAr ? "الدقة" : "Accuracy";
+  if (lblMErr) lblMErr.textContent = isAr ? "الأخطاء" : "Errors";
+
   buildKeyboard();
   showStagesView();
 }
@@ -5082,6 +5178,9 @@ function completeLesson() {
   document.getElementById("m-wpm").textContent = wpm;
   document.getElementById("m-acc").textContent = acc + "%";
   document.getElementById("m-err").textContent = LESSON_STATE.errors;
+  document.getElementById("lbl-m-wpm").textContent = isAr ? "السرعة" : "Speed";
+  document.getElementById("lbl-m-acc").textContent = isAr ? "الدقة" : "Accuracy";
+  document.getElementById("lbl-m-err").textContent = isAr ? "الأخطاء" : "Errors";
 
   document.getElementById("modal-feedback").textContent = passed
     ? (isAr ? "رائع جداً! حققت نسبة الدقة الموصى بها (90%+) وثبتّ ذاكرتك العضلية." : "Excellent! You achieved the recommended 90%+ accuracy threshold.")
