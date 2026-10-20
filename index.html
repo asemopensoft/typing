@@ -23,8 +23,12 @@
   --bdr:rgba(255,255,255,0.09);
   --fen:'Roboto Mono',monospace;
   --far:'Cairo',sans-serif;
-  --k-unit:clamp(28px, min(3.8vw, calc((100vh - 610px) / 6.2)), 44px);
+  --k-unit:clamp(30px, min(calc((100vw - 44px) / 16.3), calc((100vh - 290px) / 6.4), 46px), 46px);
 }
+@media (min-width: 1440px) and (min-height: 860px) {
+  :root {
+    --k-unit: clamp(36px, min(calc((100vw - 56px) / 16.3), calc((100vh - 310px) / 6.4), 48px), 48px);
+  }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:radial-gradient(circle at 50% 15%, #253947 0%, #17242d 55%, #111a21 100%);color:var(--text);font-family:var(--fui);height:100vh;max-height:100vh;overflow-x:hidden}
 #app{display:flex;flex-direction:column;height:100vh;max-height:100vh;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}
@@ -1461,11 +1465,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
   top: calc(var(--k-unit) * -1.55);
   left: 50%;
   transform: translateX(-50%);
-<<<<<<< Updated upstream
-  width: calc(18.8 * var(--k-unit));
-=======
   width: calc(20.4 * var(--k-unit));
->>>>>>> Stashed changes
   max-width: none;
   pointer-events: none !important; /* Allows clicks and typing through freely */
   z-index: 10;
@@ -1573,6 +1573,117 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
 }
 
 
+
+/* BARQTYPE STRICT MOBILE RESPONSIVE STYLES */
+@media (max-width: 768px) {
+  /* 1. COMPLETELY HIDE mechanical keyboard, animated hands, and finger guide on mobile phones */
+  #kb-wrap,
+  .vk-hands-overlay,
+  #vk-hands-wrapper,
+  .kb-chassis-top,
+  .kb-guide,
+  .kb-stage,
+  .kb-rows,
+  #kb-legend,
+  .acts .kbtoggle,
+  .acts .hand-toggle-btn {
+    display: none !important;
+  }
+  
+  /* 2. Compact clean header on mobile */
+  header {
+    padding: 0 10px !important;
+    height: 48px !important;
+  }
+  .logo-text {
+    display: none !important;
+  }
+  nav {
+    gap: 2px !important;
+  }
+  .nb {
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+  }
+  .ctrls {
+    gap: 4px !important;
+  }
+  .pb {
+    padding: 3px 6px !important;
+    font-size: 10px !important;
+  }
+  select {
+    padding: 3px 6px !important;
+    font-size: 10px !important;
+    max-width: 76px !important;
+  }
+  
+  /* 3. Action buttons center aligned */
+  .acts {
+    justify-content: center !important;
+    margin-top: 10px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* 4. Statistics bar compact */
+  .bar {
+    gap: 10px !important;
+    margin-top: 4px !important;
+    margin-bottom: 14px !important;
+  }
+  .tmr, .tmr svg {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .tmr .num {
+    font-size: 16px !important;
+  }
+  .stat-pill {
+    padding: 4px 10px !important;
+  }
+  .stat-pill .big {
+    font-size: 18px !important;
+  }
+  .stat-pill .lbl {
+    font-size: 8.5px !important;
+  }
+  
+  /* 5. Clean, high-legibility mobile typing card */
+  main {
+    padding: 8px 12px !important;
+  }
+  .card {
+    padding: 14px 16px !important;
+    min-height: 125px !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  #words {
+    font-size: 18px !important;
+    line-height: 1.62 !important;
+    height: calc(1.62em * 3) !important;
+    max-height: calc(1.62em * 3) !important;
+  }
+  #words.ar {
+    font-size: 19px !important;
+    line-height: 1.72 !important;
+    height: calc(1.72em * 3) !important;
+    max-height: calc(1.72em * 3) !important;
+  }
+  .hint {
+    font-size: 10.5px !important;
+    bottom: 5px !important;
+  }
+}
+
+/* Tablet keyboard smooth scaling */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --k-unit: clamp(24px, min(calc((100vw - 36px) / 16.3), calc((100vh - 280px) / 6.4), 42px), 42px) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1637,7 +1748,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       <div id="caret" class="blink"></div>
       <div class="hint" id="hint">Start typing to begin &bull; Press Tab to restart</div>
     </div>
-    <input id="inp" style="position:absolute;opacity:0;width:0;height:0" autocomplete="off" spellcheck="false">
+    <input id="inp" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Mobile Typing Input" style="position:fixed;bottom:0;left:0;opacity:0;pointer-events:none;z-index:-1;width:1px;height:1px;border:none;padding:0;margin:0;">
 
     <!-- ACTIONS -->
     <div class="acts">
@@ -1692,11 +1803,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
             <svg id="hand-both" version="1.1" xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
   y="0px"
-<<<<<<< Updated upstream
-  viewBox="0 0 716.3 380" style="enable-background:new 0 0 716.3 380;" xml:space="preserve">
-=======
   viewBox="-30 0 776.3 380" style="enable-background:new -30 0 776.3 380;" xml:space="preserve">
->>>>>>> Stashed changes
 <style xmlns="http://www.w3.org/2000/svg" type="text/css">
   #hand-both .st0 {
     display: none !important;
@@ -1757,11 +1864,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
     75% { transform: translateX(4px); }
   }
 </style>
-<<<<<<< Updated upstream
-    <g id="hand-neutral-right" class="show-hand" style="display:inline">
-=======
     <g id="hand-neutral-right" transform="translate(30, 0)" class="show-hand" style="display:inline">
->>>>>>> Stashed changes
   <path class="st1" d="M483.3,379.3c-4.7-9.9-8-19.1-9.3-39.5s1.2-22,0-38.1c-1.2-16.1-2.4-12.6-1.2-24.7c1.1-12.1-5.5-27.8-5.6-33.7
     c-0.1-5.9,0.4-26.1-1.4-35.6c-1.8-9.5-6-15.6-9-31.9c-3-16.3-14.4-26.9-21.7-24.5s-8.5,10-7.6,12.8c-3.2-6.3-5.3-10-7.3-12.4
     c-2-2.4-7.8-5.2-7.8-5.2s-9-1.9-12.5,6.2c-2.9,0.6-2.9,6.9-2.8,8.6c-0.7-3.8-2-9.2-3.1-10.9c-1.2-1.7-3.5-4.4-6.7-5.8
@@ -1788,11 +1891,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.6-0.6,0.7-1.5,0.7-2.4c0-1.8-0.3-3.6-0.6-5.3c-0.3-1.8-0.7-3.6-1.1-5.3C319.2,211.6,318,210.1,316.3,209.3z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-equal" style="display: none" class="st0">
-=======
     <g id="hand-equal" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M472.9,379.3c-3.9-6.7-7.9-12.1-11.4-16.4c-1.8-2.2-7.4-8.8-15.9-16.1c-2.9-2.5-6.1-5.1-10.8-8
     c-4.5-2.8-8.4-4.5-10.9-5.6c-3.4-1.4-35.8-13.8-42.3-16.2c-6.3-2.3-10.2-3.3-14.2-7.1c-2.3-2.2-3.8-4.6-4.3-5.4
     c-1.9-3-2.5-5.3-3.8-9.5c0,0-1.4-4.3-3.7-10.3c-3.9-10.2-6.2-13-8.3-19.1c-0.2-0.6-0.7-2.2-1.8-4.2c-1.2-2.3-2.3-3.5-3-4.6
@@ -1857,11 +1956,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       l-0.1-0.1l-0.1-0.1C472.5,104.7,471.1,101.5,470.4,98.2z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-minus" style="display: none" class="st0">
-=======
     <g id="hand-minus" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M471.5,380.1c-1.8-3.2-5.7-10.4-10.6-18c-2.4-3.8-5.2-7.8-9.3-12c-0.1-0.1-0.3-0.3-0.4-0.4
     c-3.9-3.9-7.3-6.2-11.3-8.8c-2.8-1.9-10.9-7.1-22.9-11.9c-3.7-1.5-7.7-2.8-15.8-5.4c-7.6-2.4-9.4-2.8-14.6-4.5
     c0,0-3.8-1.6-17.9-6.8c-1.8-0.7-5.3-6.7-7-9.9c-1.8-3.5-2.3-5.6-4-10.3c-2.3-6.6-4.5-11.5-6.4-15.9c-1.3-2.9-3.7-7.9-8.4-17.7
@@ -1920,11 +2015,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.1,1.7-0.4,3.3-1.3,4.6c0.6-1.5,0.8-3.1,0.6-4.6c-0.2-1.5-1-2.8-1.9-4.1C333.4,216.1,331.8,213.4,330.3,210.5z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-0" style="display: none" class="st0">
-=======
     <g id="hand-0" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M482.1,379.6c-3.4-8.4-6.8-15.1-9.6-20.1c-3.6-6.6-6.2-10.2-7.2-11.7c-3.3-4.7-5.5-7.7-9.2-10.9
     c-5.4-4.8-10.7-7-14.8-8.8c-2.8-1.2-3.4-1.2-13.9-4.3c-11.8-3.5-17.7-5.2-21.3-6.4c-6-2.1-7.8-3-12.5-4.1c-3.2-0.7-5.4-0.8-10.2-2
     c-3.6-0.9-5.5-1.4-7.6-2.5c-3.9-2.1-6.2-5-7.3-6.4c-2.2-2.7-3.2-5.2-4.6-8.3c-1.1-2.6-1.1-3.2-2.4-6.6c-1.1-3-3-8.2-6.2-13.8
@@ -1985,11 +2076,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C335,213.6,333.1,211.1,330.9,208.8z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-9" style="display: none" class="st0">
-=======
     <g id="hand-9" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M432.8,380c-3.3-6.4-6.2-11.7-8.5-15.6c-6.3-10.9-9.3-14.9-11.3-17.2c-4-4.7-7.5-7.5-9.7-9.2
     c-1.1-0.8-1.7-1.2-5.7-3.8c-13.8-8.9-16.3-9.8-19-11.3c-0.5-0.3-4.2-2.2-7.7-4.2c-5.1-2.8-5-3-10.9-6.3c-3.9-2.2-5.9-3.4-8.3-4.6
     c-3.8-1.9-5-2.3-8-4.1c-3.2-1.9-4.8-2.8-6.3-4.6c-2.1-2.4-3-4.9-3.7-6.7c-1.3-3.6-1.5-6.5-1.6-7.4c-0.4-5-2.7-10-4.7-18.7
@@ -2047,11 +2134,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C385.7,101.1,384.8,99.5,384.1,97.9z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-8" style="display: none" class="st0">
-=======
     <g id="hand-8" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M528.9,368.7c-0.6-1.1-1.5-2.7-4.4-7.4c-5.1-8.1-5.1-7.7-6.5-10.2c-1.6-2.7-5.3-9.4-7.1-17.9
     c-0.3-1.3-1-5.2-2.3-10.7c-0.6-2.8-0.9-3.8-1.3-5c-1-2.8-1.7-3.7-3.3-7.5c-0.9-2.2-1.5-3.9-1.8-4.7c-0.6-1.9-1.5-4.6-2.4-8.4
     c-1.1-4.9-1.5-8.6-2.1-13.3c-0.7-5.8-0.5-6.8-1.3-12.7c-0.6-4.6-1-6.6-1.2-7.4c-1-4.5-2.5-8.7-2.5-8.7c-0.7-2-1.2-3.4-1.6-5.7
@@ -2109,11 +2192,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C352.9,101.1,352.4,100.5,351.9,99.9z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-7" style="display: none" class="st0">
-=======
     <g id="hand-7" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M363.9,380.3c-1.6-3-4.1-7.4-7.2-12.6c-5.9-9.9-5.2-8.3-7.1-11.6c-3.8-6.7-4.7-9.1-7.8-12.9
     c-1-1.2-0.6-0.5-6-5.9c-5.8-5.7-6.7-6.9-7.3-7.7c-1.1-1.4-1.8-2.6-4.8-8.7c-2.5-5.1-3.8-7.6-5.1-10.5c-5.6-12.1-6.1-15.4-10.6-24.2
     c-0.4-0.8-2.3-3.8-4.4-8.2c-0.1-0.3-0.5-0.9-0.9-1.9c-0.5-1.3-0.6-2.5-0.7-3.2c-0.4-5.2,0.2-11.9,0.2-11.9
@@ -2168,11 +2247,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
         <path class="st2" d="M432.5,201.1c3.6-17.9,5.9-31.5,6.7-37.2c0.2-1.9,0.6-5.1,0.1-9.1c-0.4-2.8-1-4.4-1.6-5.9"/>
         <path class="st2" d="M438.6,168.1c0.5,3.6,0.6,7.5,0.7,10.1c0,0.3-3.4,7.8-4.2,10.1"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-y" style="display: none" class="st0">
-=======
     <g id="hand-y" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M364.8,380c-1-2-2.7-5-5.3-8.4c-3.6-4.7-6-6.3-10.3-10.8c-4.1-4.4-6.7-7.9-9.9-12.4c-2.3-3.2-2.6-4-10-16.2
     c-9.1-15.1-13.6-22.6-14.8-24.1c-0.6-0.7-2.1-2.4-3.3-5.1c-1.3-3-1.5-5.6-1.8-9c-0.4-5.7-0.6-8.6-0.7-11.8
     c-0.2-4.4-0.9-8.1-2.1-15.7c-0.7-4.5-1.5-8.5-2.5-15.9c-0.1-0.4-0.1-1-0.2-1.8c-0.4-2.4-0.9-2.6-1-4.1c-0.1-1.2,0.3-1.4,0.1-2.7
@@ -2220,11 +2295,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
     c1,5.7,2.8,10,3.8,12.4c0.6,1.5,1.6,3.4,3.6,7.2c4.2,8,4.2,7.6,6,11.3c2.6,5.2,4.4,9.5,6.7,15.3c0.2,0.4,2.1,5.3,2.8,7
     c1.2,3.1,1.8,4.5,3.3,5.4c0.2,0.1,1.4,0.7,2.7,0.6"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-u" style="display: none" class="st0">
-=======
     <g id="hand-u" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M373.1,380c-1.6-2.6-4.3-6.8-8-11.5c-4.5-5.6-6.4-6.9-11.1-12.5c-4.5-5.4-7.4-9.9-10.4-14.6
     c-5.7-8.9-4.9-9.3-10.4-17.5c-2.4-3.6-3.9-5.6-8.7-12.7c-3.5-5.3-4.9-7.6-6.1-11c-0.4-1.2-1.1-3.4-1.9-10.2
     c-0.6-5.3-0.2-10.3-1.1-15.5c-0.3-1.7-0.6-3-0.8-3.7c-0.6-2.2-1.1-3.3-1.7-4.9c-0.5-1.4-2-5.3-2.5-10.1c-0.2-1.4-0.3-3.2-0.2-5.2
@@ -2281,11 +2352,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C334.1,128.6,334.1,127.8,334.1,126.9z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-i" style="display: none" class="st0">
-=======
     <g id="hand-i" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M380.3,379.8c-1.1-2.4-2.8-6.7-5.2-9.8c-2.5-3.1-5-5.5-7.1-7.1c0,0-3.6-3.3-10.3-9.9c-3.5-3.4-3.1-3.2-10.7-11
     c-10.1-10.3-9.6-9.5-13.1-13.3c-4.2-4.6-5.3-6.2-9.1-9.9c-4.9-4.7-6.5-6.2-6.5-6.2c-2.9-2.7-3.5-3-4.5-4.4
     c-2.3-3.1-3.2-6.2-3.6-7.8c-0.7-2.9-0.5-3.9-0.8-8.5c-0.1-0.7-0.4-4.9-1.2-9.5c-0.8-4.3-1.8-10.1-4.4-15.7c-0.4-1-1.3-2.8-2-5.5
@@ -2348,11 +2415,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.3,0.4-0.7,0.7-1,1C303.2,219.1,302.8,219.4,302.3,219.4z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-o" style="display: none" class="st0">
-=======
     <g id="hand-o" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M432.5,203.7c0.4-6.4,0.3-13.8-0.9-21.9c-0.8-5.7-1.7-9.1-1.7-9.1c-1.3-5.4-2.1-6.9-2.6-11.1
     c-0.4-3.4-0.5-5.7,0.5-8.5c1.2-3.2,3.4-5.2,4.7-6.3c0.2-0.3,0.4-0.8,0.9-1.3c2.3-2.5,7.1-2.3,10.3-0.5c1.2,0.7,2,1.5,2.6,2.2
     c4.2,4.8,6,10.4,7.1,14.6c0.9,3.4,1.4,6,2.4,11.2c1.3,7.5,2.2,12.5,3.6,21.2c1.3,8.8,2,13.2,2.4,17.5c0.6,7.7,0.6,13.3,0.5,16.3
@@ -2401,11 +2464,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C310.1,238.3,309.4,239.6,308.5,240.6z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-p" style="display: none" class="st0">
-=======
     <g id="hand-p" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M425.7,379.5c-3.1-3.3-12.7-10.7-20.8-20c-0.2-0.3-0.3-0.6-0.6-0.7c-10-5.2-24.2-11-36.9-16.4
     c-8.6-3.6-17.1-7.1-25.4-10.4c-1.2-0.4-2.8-1.2-4.4-2.4c-2.4-1.8-4.1-4.1-5.9-7.6c-2.1-4.1-2.7-5.9-4.2-10.5
     c-2.1-6.6-13.7-26.1-14.9-29.7c-0.8-0.8-1.8-2.5-2.7-4.3c-1.7-3.5-2.3-7.5-2.3-7.5c-0.4-4.1-0.6-12.4,0.2-23.3
@@ -2461,11 +2520,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C312.2,241.4,311.4,243.1,310.2,244.3z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-left-center-bracket" style="display: none" class="st0">
-=======
     <g id="hand-left-center-bracket" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M422.4,379.4c-1.9-2.3-6.6-9-19.9-19.7c-5.6-4.5-8.6-5.7-11.4-7.1c-3.6-1.8-6.6-2.6-10.3-4.1
     c-17.9-7-15.9-7.7-30-13.1c-2.6-1-5.9-2.2-9.8-5c-4.7-3.3-7-6.1-7.7-7.1c-1.7-2.3-2.6-4.3-3.6-6.5c-1.4-3-1.7-4.6-3.5-10.2
     c-1.2-3.5-1.8-5.3-2.2-6.3c-1.8-4.3-3.2-6.4-5-9.7c-1.4-2.6-3.2-6.5-4.8-11.7c-0.7-1-1.6-2.4-2.4-4.2c-0.7-1.5-1.8-3.7-2.4-6.8
@@ -2525,11 +2580,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.3-0.4-0.5-0.8-0.7-1.2c-0.2-0.4-0.4-0.8-0.5-1.2C457.1,127.3,457,125.5,457,123.8z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-right-center-bracket" style="display: none" class="st0">
-=======
     <g id="hand-right-center-bracket" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M524.8,379.8c-35,0.1-70.1,0.1-105.1,0.2"/>
         <path class="st1" d="M419.7,380c-1.5-2.1-3.9-5.2-7-8.5c-7.1-7.4-13.6-11.4-23.3-17c-11.6-6.8-22.1-11.4-24.4-12.4
     c-0.2-0.1-9-4-19.9-9.8c-4.6-2.4-7.8-4.3-10.7-7.9c-2.5-3.2-3.4-5.9-5.3-11.7c-5.3-15.6-4.3-14.2-6.5-18.4
@@ -2603,11 +2654,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C483.5,127.4,483.7,126.6,484,125.8z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-h" style="display: none" class="st0">
-=======
     <g id="hand-h" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M371.4,380c-7.3-5.8-12.8-10.9-16.5-14.5c-5.6-5.4-9.7-10-16.2-15.8c-4.8-4.3-7.2-6.4-8.8-7.6
     c-0.4-0.3-2.2-1.6-4.3-3.5c-2.6-2.5-3.5-3.8-3.8-4.4c-1-1.8-1.2-3.4-1.4-4.5c-0.6-3.6-1.5-7.2-2.2-10.9c-1.5-7.5-4.5-13.5-6.1-16.5
     c-0.8-1.5-2.5-4.8-4.1-8.4c-0.5-1.2-1.4-3.3-2.1-6.2c-0.1-0.2-0.1-0.7-0.4-1.4c-0.5-1.5-1.2-2.4-1.4-2.7c-2-2.8-2.6-8-2.6-8.9
@@ -2673,11 +2720,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C305.3,248.7,304.7,249.4,304,249.8z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-j" style="display: none" class="st0">
-=======
     <g id="hand-j" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M381.7,379.7c-1.2-1.8-3.1-4.4-5.7-7.3c-2.6-3-4.3-4.4-7.2-7.2c-3.1-3.1-5-5.4-8.4-9.3
     c-7.9-9.1-14-17.8-15.8-20.4c-5-7.1-6.7-10.4-10.2-13.4c-0.5-0.4-2.3-1.9-4.1-4.4c-2.1-2.8-2.9-5-3.1-5.7c-0.1-0.4-0.5-1.7-0.8-4.5
     c-0.5-4.3,0-6.1-0.1-10.4c-0.1-3.5-0.5-6.1-0.6-6.8c-0.3-2-1-6.5-3.1-11.8c-0.8-1.9-1.5-3.4-2.2-6.1c-0.1-0.4-0.5-2.1-0.9-4.3
@@ -2734,11 +2777,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       l0,0.6l0.1,1.2c0,0.4,0.1,0.8,0.1,1.3c0,0.4-0.1,0.9-0.3,1.4C322.2,225.3,321.4,225.8,320.6,225.9z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-k" style="display: none" class="st0">
-=======
     <g id="hand-k" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M380.7,379.7c-2.7-5.5-5.7-8.8-8.1-10.8c-1.5-1.3-2.6-1.9-4.8-4c-2.6-2.4-4.1-4.3-6.3-6.9
     c-5.2-6.3-4.9-5.5-7.9-9.2c-4.8-5.9-5.4-7.4-14.4-19.8c-3.5-4.8-4.8-6.4-6.5-8.3c-1.7-1.8-2.3-2.2-3.4-3.8
     c-0.4-0.7-2.4-3.7-3.2-8.4c-0.2-1.4-0.2-2.9-0.2-6c0-4.4,0.3-5.7,0-8.8c-0.2-1.6-0.4-2.7-0.8-4.5c-0.9-4.2-1.6-5.7-4-13.3
@@ -2798,11 +2837,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.1,0.9-0.3,1.8-0.9,2.6C321.7,226,321,226.5,320.3,226.9z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-l" style="display: none" class="st0">
-=======
     <g id="hand-l" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M381.1,379.4c-1.5-2.5-3.5-5.3-6-8.2c-2.3-2.6-4.6-4.8-6.6-6.5c0,0-4.5-4.3-9.4-9.8
     c-3.5-3.9-5.8-7.2-10.4-13.7c-9-12.7-8-13-11.7-16.4c-1.4-1.3-4.1-3.6-6.7-7.4c-2.2-3.2-3-5.6-3.3-7.2c-0.1-0.6-0.3-1.5-0.4-5.4
     c-0.1-5.5,0.1-6.8,0-9.6c-0.1-3.2-0.7-5.4-1.7-9.3c-1.6-6.4-2.8-7.9-4.1-13.6c-0.7-3.3-1-6.1-1.2-7.8c-0.4-0.6-1-1.3-1.4-2.3
@@ -2858,11 +2893,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C403.5,155.5,402.9,154.7,402.6,153.9z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-semicolon" style="display: none" class="st0">
-=======
     <g id="hand-semicolon" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M381.9,380c-3.6-5.5-6.6-8.7-8.6-10.7c-0.9-0.9-4.1-4-7.2-6.7c-3.8-3.3-6.3-6.2-21.6-27.1
     c-3.3-4.5-5.1-7.9-9-12.3c-2-2.3-3.8-4.1-5-5.2c-0.6-0.8-1.4-1.9-2.1-3.5c-1.4-3.1-1.4-5.9-1.4-7.8c-0.1-7-0.1-10.6-0.2-11.5
     c-0.6-8-3.4-15.4-4-16.8c-0.6-1.5-1.3-3.3-2-6c-0.8-3.3-0.9-6.2-0.9-8c-1.2-2.9-1.9-5.4-2.4-7.4c-0.4-2-0.9-4.5-0.8-7.7
@@ -2920,11 +2951,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
     c-2.3-5.3-2.5-7.1-2.6-8c-0.2-4,1.4-7.3,2.5-9.1c0.2-0.7,0.6-1.8,1.5-2.8c2.7-3.1,7.4-2.5,8.1-2.4c3.1,0.4,5.1,2.1,7.4,4.1
     c1.9,1.6,4.9,4.7,7.3,9.6c1,2,2,4,3,6l0.1-0.1"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-single-quote" style="display: none" class="st0">
-=======
     <g id="hand-single-quote" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M381.7,379.6c-7.1-8.6-13.5-13.5-18.2-16.5c-2.3-1.5-6.2-3.8-11.3-8c-4.1-3.4-3.4-3.4-7.9-7.2
     c-6-5.1-8.6-6.1-13.8-11.3c-2.1-2.1-3.2-3.2-4.3-4.8c-2.3-3.5-2.9-6.6-3.9-12.1c-2.7-14.5-2.2-14-3.2-17c-2-6.5-3.1-6.3-4.2-11.8
     c-0.7-3.7-0.7-6.1-2.2-10.5c-1.3-3.8-1.7-3.2-2.4-6c-1.8-6.5-0.4-12.8,0-14.5c0.5-2.3,1-3.3,1.1-5.7c0.1-2.1-0.2-3.2,0-5.6
@@ -2983,11 +3010,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.4-0.5-0.6-0.9-0.8-1.3c-0.2-0.4-0.3-0.9-0.4-1.3c-0.2-0.9-0.4-1.7-0.6-2.6C468.2,160.1,468.1,158.3,468.2,156.6z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-enter" style="display: none" class="st0">
-=======
     <g id="hand-enter" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M387.3,379.4c-2.4-2-8.9-7.5-14.8-11.8c-2-1.5-3.7-2.7-3.8-2.7c-3.8-2.6-6.4-4.1-16.8-11.4
     c-1.7-1.2-1.5-1.1-13.9-9.8c-5.5-3.9-5.6-3.6-6.6-4.6c-4.8-4.9-6.3-11.1-6.9-13.9c-0.6-2.5-0.2-2.3-0.9-6.8
     c-1-7.1-2.5-12.5-3.7-16.9c-1.9-6.7-2.8-8.6-3.8-14.3c-0.4-2.4-0.7-4.4-0.8-5.8c-0.6-0.8-1.3-2-1.8-3.7c-0.3-0.9-0.4-1.8-0.4-2.4
@@ -3053,11 +3076,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.3,1.8,0.5,3.6,0.7,5.4c0.1,0.9,0.2,1.8-0.1,2.8C317.1,244.2,316.3,244.8,315.6,245.3z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-n" style="display: none" class="st0">
-=======
     <g id="hand-n" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M373.7,380c-7-5.4-12.5-10-16.3-13.2c-7-6-7.5-7-12.1-10.4c-3.9-2.9-7.7-6-11.6-8.9c-2.6-1.9-3.7-2.8-4.8-4.5
     c-1.9-2.7-2-4.9-3.2-10.3c0,0-1.1-5.3-2.8-10.8c-1.7-5.8-3.9-10.3-4.8-12.1c-1.9-3.8-4-7.2-5.9-12.3c-0.2-0.5-0.4-1.1-0.8-2
     c-1.7-4.4-3-6.8-3.6-8.3c-0.4-1-1.1-2.8-1.4-10.6c-0.2-4.2-0.3-9.8,0.1-16.7c-1.5-2.4-3-5.4-4.5-8.9c-1.6-3.9-2.5-7.4-3.2-10.4
@@ -3113,11 +3132,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
     c1-0.8,2.7-2,5-2.8c4.7-1.6,8.7-0.5,9.9-0.1c0.8,0.2,3.7,1.2,8.7,5.7c2.9,2.7,7.1,6.6,10.4,13.4c1.3,2.6,4.2,8.8,4.1,16.9
     c0,1-0.1,1.8-0.1,2.4c1.3,2,2.6,4,3.9,6.2c1.7,2.8,3.2,5.6,4.6,8.3c-2.4-6.7-7.1-19-9.4-25.7"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-m" style="display: none" class="st0">
-=======
     <g id="hand-m" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M387,379.9c-8.8-13.2-16-21.6-21.3-29.2c-6.6-9.5-9.9-14.3-12.3-18.3c-3.5-5.8-4.4-8.1-7.7-12
     c-2.1-2.5-4-4.3-6.3-8.1c-1.1-1.9-2.5-4.2-3.4-7.5c-0.7-2.7-0.5-4.3-0.5-9c0-1,0.1-8.8-0.4-15.6c-0.1-2.2-0.5-4.8-1.1-10
     c-0.8-7.1-1.4-10-1.8-15.6c-0.2-2.8-0.3-5-0.4-6.4c-0.2-1.2-0.4-2.6-0.3-4.3c0.2-2.6,0.9-4.6,1.8-6.8c1.1-2.7,2.8-6.2,5-10.3
@@ -3164,11 +3179,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.5-1.7,0.9-3.4,1.1-5.2c0.3-1.8,0.4-3.5,0.5-5.3c0-0.9,0.1-1.8,0.1-2.7C349.5,202.3,349.5,201.4,348.9,200.7z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-comma" style="display: none" class="st0">
-=======
     <g id="hand-comma" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M389.6,379.6c-1-2.2-2.7-5.5-5.3-8.9c-2.8-3.6-5.3-5.6-7.4-7.5c-2.7-2.5-5.8-6.5-11.8-14.5
     c-16.3-21.7-15.2-22.6-19.8-26.3c-1.4-1.1-4.5-3.4-6.8-7.5c-1.7-3.1-2.5-6.1-3-8.5c-0.9-3.8-0.6-4.9-1.2-9c-0.1-1-1-6.4-3.1-12.5
     c-2.1-5.8-3.4-6.6-5.3-12.3c-1.3-3.7-2-6.9-2.3-9c-0.7-1.1-1.6-2.6-2.2-4.5c-0.3-0.9-0.4-1.7-0.5-2.5c-0.5-1.1-1.2-2.7-1.5-4.7
@@ -3219,11 +3230,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       l0.9,2.7c0.2,0.9,0.6,1.8,0.7,2.8c0.1,1-0.3,2.1-0.8,2.9C323.3,225.5,322.6,226.2,321.9,226.8z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-dot" style="display: none" class="st0">
-=======
     <g id="hand-dot" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M405.6,379.7c-1.2-2.1-3.1-5.2-6.1-8.3c-3.8-4.1-6.5-5.4-10.9-8.7c-6.1-4.5-10-8.5-16.1-14.7
     c-6.5-6.7-5.9-7.1-11.4-12.3c-6.3-5.9-10.4-9.4-10.4-9.4c-3.8-3.2-5.2-4.2-6.9-6.6c-1.3-1.8-2.4-3.9-4.2-9.7
     c-2-6.6-1.7-7.7-3.5-14.4c-1.7-6.5-2-5.7-4.7-15.1c-1.3-4.6-1.7-6.5-3-10.7c-1.9-5.8-2.6-6.4-3.2-9.1c-1.2-5.2,0-10.4,1.1-14
@@ -3277,11 +3284,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.1,0.9-0.3,1.8-0.6,2.7c-0.2,0.5-0.5,0.9-0.8,1.2C334.6,231.5,334.1,231.7,333.7,231.6z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-slash" style="display: none" class="st0">
-=======
     <g id="hand-slash" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M355.2,379.8c-4.5-8.3-8.1-15.1-10.7-20c-3.2-6.2-4.8-9.3-5.2-10.2c-3.1-6.3-3.7-7.9-6.2-11.6
     c-0.8-1.2-2.9-4.2-4.8-8.6c-2.2-5-2.7-8.5-2.9-9.8c-0.2-1.8-0.2-3-0.1-7.3c0.4-14.2,0.5-15.5,0.1-18.8c-0.3-2.6-0.5-2.1-1.5-8.2
     c-0.7-4.1-1.1-7.3-1.3-9.4c-0.6-4.5-0.8-6.8-0.9-9.7c0-1.6-0.1-4,0.2-7c0.3-3.3,0.6-2.8,1.3-7.9c0.5-3.2,0.6-5.1,1.3-9.4
@@ -3335,11 +3338,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0,0.4,0,0.8,0,1.2c0,0.2,0,0.4-0.1,0.7c-0.1,0.2-0.1,0.4-0.2,0.6C328.3,235.9,327.7,236.7,327,236.9z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-shift-right" style="display: none" class="st0">
-=======
     <g id="hand-shift-right" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M357.3,379.8c-7.6-7.6-14.1-14-19.4-19.2c-7.7-7.6-11.6-11.4-12.6-12.3c-5.2-4.4-8.7-6.4-12.6-11.7
     c-1.4-1.8-3.4-4.5-4.8-8.6c-1.3-3.6-1.5-6.2-2-12.6c-0.6-7.1-0.9-10.7-1.2-13.9c-0.9-8.7-1.5-13.6-3.3-20c-0.9-3-1.6-4.9-2.2-8.6
     c-0.5-3-1.1-6.6-0.3-10.9c0.4-2.1,0.8-2.7,1.9-6.5c1.2-4.1,2-7.5,2.5-9.7c-0.6-1.8-1.3-4.3-2-7.4c-0.6-2.4-1-4.1-1.3-6.3
@@ -3398,11 +3397,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.5,1.7,0.7,3.4,0.8,5.1c0.1,1.7,0.3,3.4,0.2,5.2c0,0.9-0.2,1.8-0.5,2.6C307.6,242.7,307,243.4,306.2,243.8z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-space" style="display: none" class="st0">
-=======
     <g id="hand-space" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M377.1,379.8c-1.1-2.5-3-6.3-5.9-10.5c-3.9-5.6-5.9-6.4-11.5-12.7c-2.3-2.6-6-7.6-13.5-17.6
     c-3.5-4.7-5.4-7.3-8.7-11.4c-3.1-3.8-4.7-5.8-5.6-6.8c-3.1-3.5-4-4.1-5-6.1c-1.4-2.6-1.6-4.9-2-8.4c-0.6-5.8,0.5-7.2,0-12.6
     c-0.2-2.4-0.7-4.2-1.6-7.9c-1.6-6.4-2.8-8.4-4.4-14.7c-0.8-3-1.2-5.4-1.5-7c-0.3-0.8-0.7-2-1.2-3.5c-1-3.3-1.6-6-1.7-7.1
@@ -3450,11 +3445,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0,0.5,0.1,0.9,0,1.5c-0.1,0.5-0.3,0.9-0.6,1.3C321,226.7,320.1,227.4,319.1,227.3z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-6" style="display: none" class="st0">
-=======
     <g id="hand-6" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M444.3,363.8c-6.3-13.2-7.2-15.9-8-19.5c-1.6-7.2-1.4-13.3-1.3-16.1c0.2-5.4,2.5-19.9,3.3-33.9
     c0.9-17.4,1.4-26.1,1.5-30.1c0.5-13,0.7-19.5,0.6-24.9c-0.1-6.5,0.1-13.1,0-19.6c0-1.1,0-1.9,0.1-2.9c0.4-4.5,2-6.6,4.3-13.5
     c0.8-2.4,1-3.4,1.1-3.9c0.6-2.8,0.6-5.2,0.5-6.8c0.6-2,1.5-4.9,2.5-8.5c0.9-3.1,1.3-4.9,1.7-6.5c0.6-3,1-7.4,0.1-13.2
@@ -3501,11 +3492,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C291.6,105.7,291.5,104.4,291.6,103.1z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-backslash" style="display: none" class="st0">
-=======
     <g id="hand-backslash" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M481.9,380.2c0,0-3.9-4.2-7.3-6.4c-2.2-1.4-3.9-2.2-4.6-2.5c-7.8-3.5-5.9-3.5-29.5-14.5
     c-13.6-6.3-16.2-7.2-22.3-10.9c-6.1-3.7-10.1-6.8-11.1-7.6c-1.6-1.2-5.5-4.3-16-15.4c-13.6-14.2-14.6-16.8-19-19.4
     c-0.9-0.5-3.5-2-5.8-4.9c-1.4-1.7-2.1-3.3-3.1-5.9c-1.9-4.8-3.1-8.4-4.2-12c-3.1-9.4-3.6-10.5-4.1-11.5c-2.3-4.5-5-8.1-5-8.1
@@ -3633,11 +3620,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C486.4,183.2,486.6,181.6,486.8,180z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-alt-right" style="display: none" class="st0">
-=======
     <g id="hand-alt-right" transform="translate(30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M489.4,281.6c-0.6-9.2-4.1-24.7-5.1-27.2c-1.9-4.3-4.5-6.5-5.8-7.6c-2.4-1.8-4.9-2.7-6.6-3.3
     c-1.6-0.6-2.9-0.9-3.9-1.2c-1.4-1.1-3.5-2.4-7.7-3.2c-1.5-0.3-4.3-0.6-5.1-0.2c-1.2-2.3-2.8-4.5-5.2-7.3c-1.2-1.4-2.4-2.7-3.5-3.8
     c-0.2-0.4-0.6-1.2-1.2-2.2c-3-5.7-5.6-10.9-7.9-14.1c-1.6-2.2-2.8-3.4-3.8-4.6c-1.4-1.5-2.1-2.3-3.1-2.8c-3-1.8-6.4-1-6.8-0.9
@@ -3698,11 +3681,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.7,0.2,1.4,0.2,2.2,0.2c1.6,0,3.1,0,4.7-0.1C433.1,213.7,434.6,213.7,436.2,213.4z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-alt-left" style="display: none" class="st0">
-=======
     <g id="hand-alt-left" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M327.7,301c0-8.9-8-17.5-10.9-26.2c-2.9-8.8-3.9-18-5.1-20.1c-1.2-2.1-5.5-5.5-11.8-1.6
     c-6.3,3.9-8.8,19.5-8.7,28.1c0.1,8.7,0.7,15.8,4.3,18.7c-3,2.2-0.9,21-2.2,22.6s-10.9-22.2-12.6-26.7c-1.7-4.5-4.2-17.7-4.6-34.7
     c-0.4-17-0.4-33.8-0.7-39.2c-0.3-5.4-1.5-44.3-1.8-50.3c-0.4-6-2.7-12.2-4.8-15.1c-2.1-2.9-11.9-10.3-18.1,2.7
@@ -3743,11 +3722,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
   </g>
         <path class="st5" d="M200.6,276c-1.8-0.9-5.5-2.3-6.5-5.5c-1-3.2,0-11.4-6-16.1c2.9-4.1,7.1-14.5,7.4-17.7"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-shift-alt-left" style="display: none" class="st0">
-=======
     <g id="hand-shift-alt-left" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M270.9,382.7c4-6.5,7.4-12.2,17.4-24.1c10-11.9,5-26.2,6.7-36.9c1.7-10.7,4.5-20.9,4.8-24.1
     c0.3-3.1-3.1-21.9-3.1-29.5c0-7.6,1.4-18.3,0.4-20.7c-1-2.5-7.6-5.3-13.1,0c-5.5,5.3-10.4,12.6-12.1,18.5s-2.7,12.8-2.4,20.7
     s-2.3,6.8-2.1,9.5c-1-4.3-5-6.8-3.5-35c1.4-28.2,4-36.4,4.4-50c0.4-13.6,1.8-43.6-0.9-52.9c-2.7-9.2-14.9-10.3-18.7-1.1
@@ -3794,11 +3769,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.5-2.1-0.8-4.2-1-6.3c-0.1-1.1-0.2-2.1-0.1-3.2c0-1.2,0.6-2.3,1.2-3.1C290,249.3,292,248.1,294.1,248z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-b" style="display: none" class="st0">
-=======
     <g id="hand-b" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M216.9,381c3.5-1.7,12.7-10.3,18.5-16.4c5.8-6,26-21.7,28.4-26c2.3-4.3,7.6-23.6,13.8-37.2
     c4-8.8,7.7-17.1,7.5-18.2c1.5-0.8,2.8-7.2,4.1-12.8c1.3-5.6,11.1-23,12.4-27.7c0-5-10.8-7.1-13.8-6.2c0,0,7-11.3,12.8-17.4
     c5.8-6,10.3-18.2,12.5-22.6s1.1-15.3-5.8-18.3s-16,4.5-19.5,9.3s-7.7,11.9-9.5,14.2c-1.8,2.4-26.8,26.9-33.1,33.8
@@ -3836,11 +3807,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C309.5,190.9,310.4,190.3,311.1,189.6z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-v" style="display: none" class="st0">
-=======
     <g id="hand-v" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M277.8,222.3c1-1.6,9.5-9.3,14.1-28.8c4.6-19.5-15.9-19.2-23.1-8.3c-7.1,10.9-12.5,20.4-21.6,29.4
     c-9.1,9-24.8,28.4-26.7,30.4c-1.9,2-8.7,11.4-10.3,11.5c-1.6,0.1-8.7-3.1-9.3-5.3c-0.6-2.2-0.4-11.3,1.4-15.5
     c1.8-4.2,9.8-23,10.3-26.5c4.1-1.3,11.2-7.6,13.7-10.7c2.4-3.2,4.9-7.9,7-10.1c2.1-2.2,11.6-20.9,6.1-28.5
@@ -3884,11 +3851,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.6-1.2-1-2.7-0.9-4.1c0-1.4,0.4-2.8,0.9-4.1c1.1-2.5,2.7-4.8,4.8-6.6C281.8,229.5,284.2,227.9,286.9,227.4z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-c" style="display: none" class="st0">
-=======
     <g id="hand-c" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M238.1,380.3c2.7-4.7,18.2-31.7,33.7-42.8c15.5-11.1,16.4-14.8,25-20.4c8.6-5.5,14.6-10.4,15.3-28.8
     c0.7-18.4,5.8-30.1,4.9-33c0.9-1.7,1.3-10.1,0.6-11.1c0.4-1.2,0.5-6-0.1-10.6c-0.6-4.6,0.4-9.1-0.4-10.6c0.2-2.4,6-18.4,4.7-24.5
     c-6.9-5.5-17.6,0.5-24.2,9.1c-6.6,8.6-12.6,23.4-9.5,34.4c-3.4,2.3-3.5,10.4-4.7,14.7c-1.2,4.3-2.6,8.1-1.7,8.8
@@ -3927,11 +3890,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       L231.5,181z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-x" style="display: none" class="st0">
-=======
     <g id="hand-x" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M235.6,381c3.4-6.5,9.1-19,15-23.8s29.6-36.2,36.4-42.4s10.8-11.6,11-20.4c0.2-8.8,0-7.2,0.8-18
     c0.8-10.8,1.5-22.7,1.3-25.6c0.7-2,1.2-9.4,0-10.2c0.7-0.9,0.8-4.6-1.3-9.6c-2.1-5-1.2-8.5-2.1-11.4c0.5-3.1,3.1-17.4,1.3-23.3
     c-5.5-5.1-20.4,0.4-26.3,18.5s-3.7,25.8-1.5,27.8c-2.1,1.4-2.6,10-3.2,14.3c-0.6,4.3-1.3,8.1-0.8,9.1c-1.7,0.3-4,6.8-4,8.9
@@ -3960,11 +3919,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.8-1.1,1.7-2.1,2.8-2.8C293.3,198.2,294.5,197.7,295.8,197.5z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-z" style="display: none" class="st0">
-=======
     <g id="hand-z" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M245.4,381c11.2-11.5,28.5-33.9,36.9-40.4s6.7-21,10-32.4c3.3-11.4,11.4-29.6,10.1-32.2
     c2.1-1.3,2.7-6,3.4-10.6c0.7-4.6,3.7-7.1,3.6-9.8c2.1-2.7,11.2-16.7,11.3-19.7c0.1-3-7-9.9-21.7-3.1s-23.3,23.4-24.2,26.3
     s0.3,5.7-0.4,7.1s-2.7,1.1-5.5,9.8c-2.7,8.6-3.9,15.7-7.7,18.4c0.3-5,0.8-26.7,1.5-35.2s7.6-33.5,9.9-44.3
@@ -3998,11 +3953,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C313.2,236.1,315.6,235.5,317.9,235.8z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-g" style="display: none" class="st0">
-=======
     <g id="hand-g" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M295.2,214.3c-3.2-3.4-13.5,0.5-13.9,0.6c0.2-0.5,5.7-16.2,9.7-23c4.1-6.9,11.4-21.3,7.8-35.5
     c-3.6-14.2-15.8-7.4-20.1-2.3c-4.3,5.1-9.7,21.5-12.6,26c-2.9,4.5-14.4,19.6-20.7,28.8c-6.3,9.2-14.6,24.3-16.9,25.9
     c-2.4,1.6-9,1.3-10.3-3.2c-1.3-4.5-1.6-10.6,1.1-18.8c2.7-8.1,5.2-16.8,5-17.7c-0.2-0.9,6.5-2.3,11.4-15c6.4-8.3,7.3-22.5,3-23.9
@@ -4039,11 +3990,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
         <path class="st5" d="M257.3,255.7c3.5-5,21.1-33.2,23.9-40.8c2.8-7.6,5.6-16.1,9.7-23s11.4-21.3,7.8-35.5
     c-3.6-14.2-15.8-7.4-20.1-2.3c-4.3,5-9.7,21.4-12.6,26s-14.4,19.6-20.7,28.8c-6.3,9.2-14.6,24.3-16.9,26"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-f" style="display: none" class="st0">
-=======
     <g id="hand-f" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M205.3,380.4c2.7-2.5,5.9-7,13.1-11.9s26.7-29.3,41.6-43.6s5.5-14.7,16-44.5c10.5-29.8,5.7-29.4,1.7-43.2
     c0,0,3.1-12.1,2.6-22.6c-8.1-5.5-19.9,1.5-27.2,18s-1.8,23.9-1.8,23.9s-4.3,2.9-7.3,14s-3.4,10.9-3.7,8.6
     c-0.4-2.2,1.5-16.2,2.9-22.1c1.5-5.9,5-19.8,10.9-32.1c5.9-12.4,9.2-22.7,10.7-28.9s7.2-11.8,8.5-26.5c1.3-14.7-2-14.4-2-14.4
@@ -4077,11 +4024,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.4-1,0.9-2,1.5-2.8C273.3,217.5,275,216.1,276.9,215.3z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-d" style="display: none" class="st0">
-=======
     <g id="hand-d" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M205.8,380.5c4.8-4.6,5.5-7,17.3-16.6c11.8-9.6,23.5-26.1,33.8-36.4c10.3-10.3,12.3-13.1,13.4-24.8
     c1-11.7,7.8-31.2,10.9-40.2c3.1-9-3.7-25.3-3.7-25.3s3.8-10.2,3-23.1c-6.1-5.2-19.5-1.3-27.6,17.6s-2.4,23.8-2.4,23.8
     s-3.8,4-6.6,10.6s-3.6,13.3-3.6,13.3s4.4-33.4,13.2-52.1c8.8-18.6,10.4-30,15.2-39.7c4.7-9.7,7.3-27.2,2.9-32.1
@@ -4115,11 +4058,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.7-0.9,1.5-1.6,2.3-2.2C275.8,216,276.8,215.5,277.7,215z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-s" style="display: none" class="st0">
-=======
     <g id="hand-s" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M205.7,380.1c3-3,1.8-4.7,11-11.7c9.2-7,26.1-25.6,31.5-32.3c5.3-6.7,17.7-17,19.2-20.5
     c1.5-3.5,2.2-19.5,7.2-31.8c5-12.3,8-25,7.3-30.1c-0.7-5.2-4.1-15.4-4.7-16.3c0.6-1,3.2-13.5,3.1-23c-4-4.6-19-3.1-27.4,16.7
     c-8.4,19.8-2.8,25-2.8,25s-5,5.6-8.1,17.7c-3.1,12.1-2.9-4.4,2.5-23.3s15.8-40,17.4-44s2.4-10.4,6.3-18.5c3.9-8.2,4.8-17,5.1-21.2
@@ -4153,11 +4092,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.5-2.1-0.6-4.4-0.1-6.5c0.5-2.1,1.5-4.1,2.8-5.9C273.8,217.3,275.4,215.6,277.4,214.8z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-a" style="display: none" class="st0">
-=======
     <g id="hand-a" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M205.3,380.4c2.1-2.1,6.8-8.3,19.8-19.3c13-11,18-20.8,34.6-36.9s6-17.9,15.5-43c9.5-25.1,7.3-29.3,5.1-35.7
     c-2.2-6.4-2.7-8.1-2.7-8.1s3.6-17,2.3-22.6s-14.5-3.6-22.9,9.2c-8.4,12.8-11.5,26.7-6.7,31.7c-2.5,2-9.5,15.9-10.5,22.9
     c1.9-6.9,2-24,8.9-40.7c6.9-16.7,13.7-34.9,16.8-44.5c3.1-9.5,10.9-18.4,6.1-38.5c-1.2-3.9-7-5.6-10.1-5.5
@@ -4195,11 +4130,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.5-0.6,0.7-1.5,0.6-2.4C176.5,157,176.2,156.1,175.6,155.4z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-neutral-left" class="show-hand" style="display:inline">
-=======
     <g id="hand-neutral-left" transform="translate(-30, 0)" class="show-hand" style="display:inline">
->>>>>>> Stashed changes
   <path class="st1" d="M231.1,381.6c1.3-1.6,6.9-7.4,13-13.5c6.1-6.1,18.6-27.6,22.3-31.9c3.7-4.3,13.5-14.9,15.9-20.2
     c2.4-5.3-0.2-22.3,0-27.6s2.7-30.6,1-37.2c-1.7-6.6-4.4-9.3-6.6-13.9s-2.6-6-4.6-7.4s-0.8-13.4-0.4-15.1s1.8-9.4,1.8-12.1
     s0-10.4,2.1-16.1s0.7-22.8-2.9-28.2s-6.5-6.7-10.8-7s-9,3.9-10.2,6.5s-2.8,5-4.6,26.2c-2.5,5.7-7.3,10.7-9.4,17.6s-7.7,24.3-9,31.5
@@ -4223,11 +4154,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
         <path class="st2" d="M151.6,239.8c2.8-3,5.1-7.6,5.3-12.4c0.2-4.8-0.3-29.7,6-39.2c6.3-9.5,17.8-22.8,17.8-22.8"/>
         <path class="st2" d="M263.3,298.1c-1.4-2.6-3.1-4.3-3.1-6.3s1.1-24.9,2.3-33.1c1.1-8.2,6.7-31.9,8.6-36.8"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-t" style="display: none" class="st0">
-=======
     <g id="hand-t" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M221.1,382.1c4-4.3,13-17.2,18.7-20.7s16-13.9,22.7-23.2c6.7-9.3,19.5-19.2,24.2-28.4
     c4.7-9.2,1.8-22.7,5.8-40.7s4.5-21.5-1.2-28c-5.7-6.5-12-11.4-16.5-18.5c2-6.5,7.8-23.7,9.2-30.5c1.3-6.8,1.3-15.7,2.7-20.5
     s3-7.8,3.5-12.8c0.4-4.9,1.8-23.7-2.9-31.5s-12.6-9-19.1-1.3c-6.4,7.7-6.6,23.4-7.1,30.9c-0.4,7.5-8.8,20.6-13.4,31.6
@@ -4256,11 +4183,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c1.2,0.2,2.4,0.4,3.6,0.5c1,0.1,1.9-0.9,2.6-1.7c0.8-0.9,1.4-2,2-3C285.1,132.5,285.5,131.4,285.9,130.2z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-shift-left" style="display: none" class="st0">
-=======
     <g id="hand-shift-left" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M247,382c3.7-4.7,14.7-21,18.2-26.4c3.5-5.4,11.4-23.8,14.7-28c3.3-4.2,7.3-9.5,5.5-21.9
     c-1.7-12.4-3.2-16.7-2.2-34.4c1-17.7-2.1-21.2-6.2-29.7c-0.8-5.1-2.1-6.5-4-8c0.3-3.5,2.1-17.4,3.2-24.5c1.2-7.1-1.2-4.9,0-20
     c1.2-15.1-2.9-25.8-5.5-28.9c-0.4-3-3.3-6.4-8.6-7.5c-5.2-1.2-10,3.6-10,5.7c-1.7,0.6-7.1,8-4.4,32.2c-5.9,14.1-9.6,28.6-10.4,33.5
@@ -4292,11 +4215,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
         <path class="st2" d="M266.3,286.6c-0.2-7.4-1.2-21.2,0-29.5c1.2-8.2,6.8-23.4,6.8-23.4"/>
         <path class="st2" d="M192,250c2.1-4.6,4.7-11.1,5.1-16.4"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-r" style="display: none" class="st0">
-=======
     <g id="hand-r" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M297.2,223.4c0.5-3.1,6-15.5,4.7-21.5c-2.2-3.2-17.2-4.9-26.7,11.6c-9.4,16.5-9.4,20.6-7.8,28.9
     c-2,0.3-8,16.8-9.2,20.7c-2,1.1-4.5,7.1-5.4,7.4s-3.1-2.4-2.4-16.6c0.7-14.2,2.1-18.5,2.2-22.2c0.1-3.7,4.5-23,7.2-33
     c2.7-10,3.3-23.4,5.6-32.2c2.3-8.7,3.5-26.8,0-36.7c-3.5-9.9-13-8.7-14.7-7.9c-1.8,0.8-5.5,3.9-7.7,10.2
@@ -4339,11 +4258,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c0.6-2.1,1.6-4.1,3.1-5.8c0.7-0.8,1.6-1.6,2.5-2.2C295.4,203.2,296.3,202.7,297.4,202.3z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-e" style="display: none" class="st0">
-=======
     <g id="hand-e" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M211.9,381.8c4.6-5.6,5.6-10.5,10.9-12.6c5.3-2.1,12.6-8.8,16.5-13.3c3.9-4.6,23.5-27.7,28.7-32.2
     s8.8-9.8,9.8-12.6c1.1-2.8,1.4-11.6,2.8-18.2c1.4-6.7,1.8-9.8,4.8-18.6c3-8.8,6.2-16.9,4.1-18.2c1.2-1.1,0.9-6.7,0.7-8.3
     c-0.2-1.7-0.6-13.3-0.2-14.1c0.4-0.8,3-5.8,4.2-9.9c1.2-4.2,1.7-11.4,1-12.5c-0.7-1.2-12.5-6.9-24.1,8.7
@@ -4382,11 +4297,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C227.6,133.5,228.5,131.8,229.3,130.1z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-w" style="display: none" class="st0">
-=======
     <g id="hand-w" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M205.4,381.4c4.4-5.4,8.7-10.4,15.4-15.6c6.7-5.2,11.4-9.4,15.6-13.7s15.4-16.7,24.8-23.9
     c9.4-7.3,12.7-11.8,15.2-15.2c2.9-4,1.3-15.8,7.4-29c6.2-13.2,5.5-16.8,5.5-16.8s3.9-4,4.3-8.8c0.4-4.8,0.1-17.5,3.2-20.5l-2.1-2.1
     c0,0,8.2-14.5,9.1-23.2c-3.2-3.9-17.9-4.9-29.5,9.7c-11.5,14.6-11.2,21.6-10.4,27.4c-3,2-4.5,7.3-6.6,12.1s-3.7,8.9-3.6,9.9
@@ -4427,11 +4338,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C197.4,136.5,198.7,134.8,199.9,133.1z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-q" style="display: none" class="st0">
-=======
     <g id="hand-q" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M172,381.8c4-4.9,16.7-23.8,28.5-32.7c11.8-8.9,47.5-34.8,52.7-40.5c5.2-5.6,6.3-11.3,9.4-21.4
     s14.8-36.9,16-40.7c1.2-3.8,0.9-13.2,2.2-17.7v-1.6c0,0,8.4-19.9,7.6-22.4c-0.7-2.5-9.2-4.3-16-2.2c-6.8,2-15.4,12.4-18.6,17.6
     s-7.8,13.2-6.1,20c-2,0.2-3.1,1.8-3.4,3.1c-0.3,1.3-7.2,17.5-7.2,17.5s-2.8,0.9-4.7,2.8s-2.7,4.5-2.7,4.5s-2.7-1.7-3.2-3.1
@@ -4471,11 +4378,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       C161.7,129.7,160.8,128,159.3,126.9z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-tab" style="display: none" class="st0">
-=======
     <g id="hand-tab" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M172.2,381.9c5.6-8.1,12.2-19.9,20.7-26.7s26-17,32.5-20.1c6.6-3.2,9.5-6.6,13.8-8.5c4.4-1.9,10.7-4.1,14.3-7
     c3.6-2.9,6.6-7.3,8.6-14.5s14.7-36.7,14-37.9c0.9-0.4,5-9.3,4.2-10.7c1-0.6,0.8-8.6,2.1-13.4c1.3-4.8,2-5.4,0-7.5
     c2.3-1.6,11.7-15.4,10.7-21s-11.7-5.5-16.2-2.7c-4.4,2.8-14.1,10-17.4,15.2c-3.3,5.2-8.6,17-8.6,18.6c0,1.6,1.1,2.3,0.6,2.7
@@ -4518,11 +4421,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c1.3,0.1,2.6-0.1,3.7-0.5c1.1-0.4,2.2-1.1,3-2c0.8-0.9,1.5-1.9,2-3.1C133.9,134.8,134.3,133.6,134.5,132.3z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-5" style="display: none" class="st0">
-=======
     <g id="hand-5" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M213.3,381.4c2.7-3.9,22.1-36.6,26.8-42.7s13-12.5,15.7-16.2c2.7-3.8,14-19.3,18.6-26c4.6-6.7,16.4-21,18.3-27
     c1.9-6,1-16.4,1.7-19.7c0.7-3.2,3.6-21.2,4.6-24.8c1-3.6,2.4-9.8,3.4-13s-2.1-13,0-18.4s8.7-16.3,7.3-21.9s-14.2-7.1-23.1,2
     c-8.9,9.1-13.9,17.9-15.3,23.6s-0.1,8.5-0.4,9.5s-1.8,1.3-2.5,3.6c-0.7,2.3-3.9,20.1-4.9,21.7c-0.9,1.7-2.9,3.2-3.6,5
@@ -4563,11 +4462,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
   </g>
         <path class="st2" d="M218.9,157.4c-1.2-3.8,0-23.5,0-23.5"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-4" style="display: none" class="st0">
-=======
     <g id="hand-4" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M135.3,154.7c-2.6,0.8-14.3,11.5-17.4,16.2c-3.1,4.7-5,2.5-6.9,8.1s-0.9,20.8,0,27.5
     c0.9,6.7,4.4,12.2,4.4,20.4c0,8.2-1.6,12.4,1,22.7c2.5,10.3,5.5,15.2,8.1,34.2c2.5,19,5.4,27.2,3.8,32.8
     c-1.6,5.6-10.5,35.8-12.5,39.1s-12,22.4-15.9,27.2h109.3c3.8-5.4,18.3-31.3,22.9-37.6c4.6-6.2,14.9-16.9,18.7-21.5
@@ -4607,11 +4502,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
   </g>
         <path class="st2" d="M206.2,157.1c-1.3-9.9-0.8-14.4,0-21.7"/>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-3" style="display: none" class="st0">
-=======
     <g id="hand-3" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M141.4,218c9.1-2.5,16.2-12.3,19.1-17.4c2.9-5.2,4.9-15.1,6.5-21c1.6-5.8,5.6-15,6.9-18.4s0.5-3.9,1.4-6.7
     c0.3-1,2.4-4.7,5-9.1c-1.8,1.5-7,3.5-10.3,2.9c-3.3-0.6-11.5,1.6-17.1,5.1c-5.7,3.5-12.3,1.2-16.4,7.3c-4.1,6-5.6,19.1-5.9,20.2
     c-4,1.5-12.2,1.5-15.3,7c-3.2,5.6-2,6.2-3.4,9.2c-1.4,3-3.3,7.9-3.4,12.3s0.3,22.6-0.8,26.2s-4.5,12.9-4.9,17.8s-0.2,25.3-1.1,30.9
@@ -4654,11 +4545,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.4,0.2-0.8,0.5-1.1,0.7c-1.6,0.8-3.2,1.4-4.9,1.7C201.6,112,199.8,112,198.2,111.4z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-2" style="display: none" class="st0">
-=======
     <g id="hand-2" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M292.5,203.9c0.5-1.8,7.4-19.5,6.2-23c-1.2-3.5-14.8-7.3-26.2,7.5C261,203.2,259,211,259.8,220.3
     c-1.4,2-3,17-5.6,23.2c-2.2,1.3-6,8-6.5,7.9c-0.6-0.1-7.1-5-14.6-4.1c0-3.5-0.2-13.6,3.9-23.9c4.1-10.3,14-25.8,17.8-31
     c3.7-5.2,2.8-6.3,3.3-7.3c0.5-1,10.6-8.4,9.7-24.1c-0.8-15.7-14.8-13.1-16-12.6c-1.1,0.5-6.5,4.4-11.6,12.9
@@ -4707,11 +4594,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c1.5-0.7,2.7-1.8,3.8-3C186.6,107.5,187.6,106.1,188.4,104.6z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-1" style="display: none" class="st0">
-=======
     <g id="hand-1" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path class="st1" d="M292.3,210.4c-7.8-0.6-19.2,6.1-22.4,7.8c-3.2,1.7-10.5,8.8-14.5,14.1c-4,5.2-2.9,8.8-3.2,9.4
     c-0.3,0.5-1.6,0.6-2.6,1.2c-1,0.6-10.3,12.7-12.1,14.7c-1.9,1.9-2.6,1.9-2.4,4.2c-5.3,0.1-9.7,5.6-11.1,5.7
     c-1.4,0.1-2.5-4.1-6.4-7.4c-3.9-3.3-7.6-4.6-7.7-8.8c-0.1-4.3,7.8-18.9,12.5-25.7c4.7-6.8,13.5-15.5,16.8-19.1
@@ -4764,11 +4647,7 @@ footer{padding:6px 20px;border-top:1px solid var(--bdr);display:flex;justify-con
       c-0.5,1.1-0.8,2.4-0.8,3.6c0.1,0.6,0.1,1.2,0.4,1.8C284.5,233.1,284.9,233.7,285.2,234.3z"/>
   </g>
 </g>
-<<<<<<< Updated upstream
-    <g id="hand-tilda" style="display: none" class="st0">
-=======
     <g id="hand-tilda" transform="translate(-30, 0)" style="display: none" class="st0">
->>>>>>> Stashed changes
   <path id="bg" class="st1" d="M270.2,185.6c-7.9-0.5-14.3,1.4-24.2,7.2c-9.9,5.8-13.6,13.3-14.1,17.5c-8,6.9-12.9,22-13.5,25.2
     c-2.4,0.3-5.5,5.8-6.3,6c-0.8,0.3-0.6-1.3-0.6-3.7c0-2.4-1.9-2.8-2.3-4.8c-0.4-2,1.3-4.9,1.7-8c0.4-3.1-1.3-5.9-1.3-7.3
     c0-1.4,1.2-3.3,7.7-11.3c6.5-8,12.5-9.4,17-12.3c4.5-2.8,9.3-8.1,19.3-12.6c10-4.5,16.7-11.3,17.8-21.3
@@ -7210,7 +7089,98 @@ function copyBarqResult(){
   }
 }
 
-// KEYDOWN LISTENER (INSTANT ZERO-LATENCY DISPATCH + DUAL-LAYOUT MATCHING)
+
+/* UNIFIED SHARED INPUT ENGINE (DESKTOP + MOBILE) */
+var _lastMismatchToastTime = 0;
+
+function handleCharacterTyped(inputKey, isBackspace) {
+  if (S.fin) return;
+
+  if (isBackspace) {
+    if (S.idx > 0) {
+      playCorrectSound(false);
+      highlightPressedKey("Backspace", true);
+      S.idx--;
+      S.ch[S.idx].s = "now";
+      if (S.idx + 1 < S.ch.length) S.ch[S.idx + 1].s = "w";
+      renderChars();
+      updateTargetKey();
+    }
+    return;
+  }
+
+  if (!inputKey) return;
+  var ex = S.text[S.idx];
+  if (!ex) return;
+
+  // Language mismatch hint for mobile & desktop
+  if (S.lang === "ar" && /[a-zA-Z]/.test(inputKey)) {
+    var nowT = Date.now();
+    if (nowT - _lastMismatchToastTime > 6000) {
+      _lastMismatchToastTime = nowT;
+      showToast(
+        "تنبيه لغة الإدخال",
+        "تم اختيار اللغة العربية في التطبيق، يرجى تحويل لوحة المفاتيح إلى العربية ⌨️",
+        TM_ICONS.warning
+      );
+    }
+  }
+
+  var ok = matchChar(inputKey, ex);
+
+  if (ok) {
+    playCorrectSound(ex === " ");
+  } else {
+    playErrorSound();
+  }
+  highlightPressedKey(inputKey, ok);
+
+  // Start timer on first keystroke
+  if (!S.on && S.idx === 0) {
+    S.on = true;
+    S.t0 = performance.now();
+    S.tk = S.t0;
+    var hintEl = document.getElementById("hint");
+    if (hintEl) hintEl.style.display = "none";
+    var tcardEl = document.getElementById("tcard");
+    if (tcardEl) tcardEl.className = "card glow";
+    var _caret = document.getElementById('caret');
+    if (_caret) _caret.classList.remove('blink');
+    startTimer();
+  }
+
+  var now = performance.now();
+  var dur = S.tk > 0 ? (now - S.tk) : 0;
+  S.tk = now;
+  if (ok) S.cor++; else S.ec++;
+  S.ks.push({ ch: inputKey, ex: ex, ok: ok, dur: dur, t: (now - S.t0) });
+  S.ch[S.idx].s = ok ? "ok" : "bad";
+  S.idx++;
+  if (S.idx < S.ch.length) S.ch[S.idx].s = "now";
+
+  // Batch DOM stat updates via rAF
+  var _el2 = now - S.t0;
+  var _cor2 = S.cor;
+  var _ks_len = S.ks.length;
+  var _ec = S.ec;
+  requestAnimationFrame(function(){
+    var w = calcWPM(_cor2, _el2);
+    var a = calcAcc(_cor2, _ks_len);
+    var wEl = document.getElementById("xwpm");
+    var aEl = document.getElementById("xacc");
+    var eEl = document.getElementById("xerr");
+    if (wEl) { wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
+    if (aEl) { aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
+    if (eEl) { eEl.textContent = _ec; eEl.style.color = _ec > 0 ? "var(--err)" : "var(--text)"; }
+  });
+
+  renderChars();
+  updateTargetKey();
+
+  if (S.idx >= S.text.length) finishTest();
+}
+
+// 1. DESKTOP PHYSICAL KEYBOARD LISTENER
 document.addEventListener("keydown", function(e){
   if(e.target && e.target.id !== 'inp' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
   var omModal = document.getElementById('online-modal');
@@ -7225,12 +7195,8 @@ document.addEventListener("keydown", function(e){
     if(e.key === "Tab"){ e.preventDefault(); repeatCurrentTest(); return; }
     if(e.key === "Enter"){ e.preventDefault(); initTest(); return; }
     if(e.key === "Escape"){ initTest(); return; }
-    if((e.key === "d" || e.key === "D" || e.key === "ي") && !e.ctrlKey && !e.altKey){
-      drillMissedKeys(); return;
-    }
-    if((e.key === "c" || e.key === "C" || e.key === "ؤ") && !e.ctrlKey && !e.altKey){
-      copyBarqResult(); return;
-    }
+    if((e.key === "d" || e.key === "D" || e.key === "ي") && !e.ctrlKey && !e.altKey){ drillMissedKeys(); return; }
+    if((e.key === "c" || e.key === "C" || e.key === "ؤ") && !e.ctrlKey && !e.altKey){ copyBarqResult(); return; }
     return;
   }
 
@@ -7241,80 +7207,88 @@ document.addEventListener("keydown", function(e){
 
   if(e.key === "Backspace"){
     e.preventDefault();
-    if(S.idx > 0){
-      playCorrectSound(false);
-      highlightPressedKey("Backspace", true);
-      S.idx--;
-      S.ch[S.idx].s = "now";
-      if(S.idx + 1 < S.ch.length) S.ch[S.idx + 1].s = "w";
-      renderChars();
-      updateTargetKey();
-    }
+    handleCharacterTyped("", true);
+    var _inp = document.getElementById("inp");
+    if (_inp) _inp.value = "";
     return;
   }
 
-  if(e.key.length !== 1) return;
-  var ex = S.text[S.idx];
-  if(!ex) return;
-
-  // ROBUST DUAL-LAYOUT KEYSTROKE MATCHING (ACCURATE ARABIC & ENGLISH MATCHING)
-  var ok = matchChar(e.key, ex);
-
-  // IMMEDIATE DISPATCH: AUDIO + VISUAL KEYBOARD HIGHLIGHT
-  if(ok){
-    playCorrectSound(ex === " ");
-  } else {
-    playErrorSound();
+  if(e.key.length === 1){
+    e.preventDefault();
+    handleCharacterTyped(e.key, false);
+    var _inp = document.getElementById("inp");
+    if (_inp) _inp.value = "";
   }
-  highlightPressedKey(e.key, ok);
+});
 
-  // START TIMER ON FIRST KEYSTROKE
-  if(!S.on && S.idx === 0){
-    S.on = true;
-    S.t0 = performance.now();
-    S.tk = S.t0;
-    document.getElementById("hint").style.display = "none";
-    document.getElementById("tcard").className = "card glow";
-    // Stop caret blinking once typing starts
-    var _caret = document.getElementById('caret');
-    if(_caret) _caret.classList.remove('blink');
-    startTimer();
+// 2. MOBILE NATIVE KEYBOARD PIPELINE (TOUCH, INPUT, COMPOSITION)
+(function initMobileInputSystem(){
+  var inp = document.getElementById("inp");
+  var tcard = document.getElementById("tcard");
+  if(!inp || !tcard) return;
+
+  function focusMobileInput(e){
+    inp.focus({ preventScroll: true });
+    // On touch devices, slight delay ensures keyboard shows without viewport jump
+    setTimeout(function(){ inp.focus({ preventScroll: true }); }, 50);
   }
 
-  var now = performance.now();
-  var dur = S.tk > 0 ? (now - S.tk) : 0;
-  S.tk = now;
-  if(ok) S.cor++; else S.ec++;
-  S.ks.push({ ch: e.key, ex: ex, ok: ok, dur: dur, t: (now - S.t0) });
-  S.ch[S.idx].s = ok ? "ok" : "bad";
-  S.idx++;
-  if(S.idx < S.ch.length) S.ch[S.idx].s = "now";
+  tcard.addEventListener("click", focusMobileInput);
+  tcard.addEventListener("touchend", focusMobileInput);
 
-  // Batch DOM stat updates via rAF (non-blocking)
-  var _el2 = now - S.t0;
-  var _cor2 = S.cor;
-  var _ks_len = S.ks.length;
-  var _ec = S.ec;
-  requestAnimationFrame(function(){
-    var w = calcWPM(_cor2, _el2);
-    var a = calcAcc(_cor2, _ks_len);
-    var wEl = document.getElementById("xwpm");
-    var aEl = document.getElementById("xacc");
-    var eEl = document.getElementById("xerr");
-    if(wEl){ wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
-    if(aEl){ aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
-    if(eEl){ eEl.textContent = _ec; eEl.style.color = _ec > 0 ? "var(--err)" : "var(--text)"; }
+  var isComposing = false;
+  inp.addEventListener("compositionstart", function(){
+    isComposing = true;
+  });
+  inp.addEventListener("compositionend", function(e){
+    isComposing = false;
+    var data = e.data || "";
+    for(var i = 0; i < data.length; i++){
+      handleCharacterTyped(data[i], false);
+    }
+    inp.value = "";
   });
 
-  renderChars();
-  updateTargetKey();
+  inp.addEventListener("beforeinput", function(e){
+    if(e.inputType === "deleteContentBackward" || e.inputType === "deleteContentForward"){
+      e.preventDefault();
+      handleCharacterTyped("", true);
+      inp.value = "";
+    }
+  });
 
-  if(S.idx >= S.text.length) finishTest();
-});
+  inp.addEventListener("input", function(e){
+    if(isComposing) return;
+    if(e.inputType === "deleteContentBackward") {
+      inp.value = "";
+      return;
+    }
+    var val = inp.value;
+    if(val){
+      for(var i = 0; i < val.length; i++){
+        handleCharacterTyped(val[i], false);
+      }
+      inp.value = "";
+    }
+  });
 
-document.getElementById("tcard").addEventListener("click", function(){
-  document.getElementById("inp").focus();
-});
+  // Keep active text centered when mobile keyboard opens
+  if(window.visualViewport){
+    window.visualViewport.addEventListener("resize", function(){
+      if(window.innerWidth <= 768){
+        var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : null;
+        var wordsEl = document.getElementById("words");
+        if(curEl && wordsEl){
+          var cardH = wordsEl.clientHeight;
+          var topPos = curEl.offsetTop;
+          if(topPos > cardH * 0.45) wordsEl.scrollTop = topPos - cardH * 0.25;
+        }
+        moveCaret();
+      }
+    });
+  }
+})();
+
 
 function startTimer(){
   S.ti = setInterval(function(){
@@ -7561,11 +7535,7 @@ function showTab(t){
   document.getElementById("p-result").className = "page";
   if(t === "test") initTest();
   if(t === "stats") renderStats();
-<<<<<<< Updated upstream
-  if(t === "learn") renderLearn();
-=======
   if(t === "learn") { window.location.href = "learn.html"; return; }
->>>>>>> Stashed changes
   if(t === "race") initRace();
 }
 
@@ -9325,15 +9295,12 @@ function omShowToast(msg, isErr) {
 // ══════════════════════════════════════════════════════════════
 // END ONLINE RACE MODULE
 // ══════════════════════════════════════════════════════════════
-<<<<<<< Updated upstream
-=======
 window.addEventListener('load', function() {
   var h = window.location.hash;
   if (h === '#stats') showTab('stats');
   else if (h === '#race') showTab('race');
   else if (h === '#online') setTimeout(function() { if (window.openOnlineRace) openOnlineRace(); }, 200);
 });
->>>>>>> Stashed changes
 </script>
 </body>
 </html>
