@@ -1,234 +1,1040 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>BARQTYPE — معاينة نظام اليدين الإرشاديتين (VKeyboardHand)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0d151c;
-      --card: #15222d;
-      --card-border: rgba(255, 255, 255, 0.08);
-      --accent: #e8af47;
-      --accent-glow: rgba(232, 175, 71, 0.45);
-      --text: #e6edf3;
-      --sub: #8b9bb0;
-      --err: #e55656;
-      --ok: #4ade80;
-      --far: 'Cairo', system-ui, sans-serif;
-      --fen: 'Outfit', 'JetBrains Mono', monospace;
-      --fmono: 'JetBrains Mono', monospace;
-    }
-    * { box-sizing: border-box; }
-    body {
-      background: radial-gradient(circle at 50% 15%, #182836 0%, #0d151c 65%, #080d12 100%);
-      color: var(--text);
-      font-family: var(--far);
-      margin: 0;
-      padding: 24px 16px 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .header-box {
-      text-align: center;
-      max-width: 860px;
-      margin-bottom: 18px;
-    }
-    .pill-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(232, 175, 71, 0.15);
-      border: 1px solid rgba(232, 175, 71, 0.35);
-      color: var(--accent);
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    h1 {
-      color: #fff;
-      font-size: 26px;
-      font-weight: 900;
-      margin: 0 0 6px;
-      letter-spacing: -0.01em;
-    }
-    h1 span { color: var(--accent); }
-    p.sub {
-      color: var(--sub);
-      font-size: 13px;
-      line-height: 1.5;
-      margin: 0 0 16px;
-    }
-    .controls {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: center;
-      max-width: 860px;
-      margin-bottom: 16px;
-      background: rgba(20, 33, 44, 0.6);
-      border: 1px solid var(--card-border);
-      padding: 10px 14px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-    }
-    .btn {
-      background: #17242e;
-      color: #cbd5e1;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 6px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 700;
-      font-family: var(--far);
-      transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .btn:hover {
-      background: #223747;
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-    .btn.active {
-      background: rgba(232, 175, 71, 0.2);
-      border-color: var(--accent);
-      color: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
-    }
-    .btn.action-tap {
-      background: rgba(74, 222, 128, 0.15);
-      border-color: rgba(74, 222, 128, 0.4);
-      color: #4ade80;
-    }
-    .btn.action-err {
-      background: rgba(229, 86, 86, 0.15);
-      border-color: rgba(229, 86, 86, 0.4);
-      color: #e55656;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>Barqtype Learn – مسار التعلم الذكي لطباعة اللمس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #17242d;
+  --bg2: #213442;
+  --bg3: #2c4354;
+  --bg4: #385266;
+  --text: #f4f3ef;
+  --sub: #7993a4;
+  --accent: #e8af47;
+  --accent-glow: rgba(232, 175, 71, 0.45);
+  --ok: #48bb78;
+  --ok-glow: rgba(72, 187, 120, 0.4);
+  --err: #e55656;
+  --err-glow: rgba(229, 86, 86, 0.4);
+  --bdr: rgba(255, 255, 255, 0.09);
+  --card-bg: rgba(33, 52, 66, 0.72);
+  --card-hover: rgba(44, 67, 84, 0.9);
+  --fen: 'Roboto Mono', monospace;
+  --far: 'Cairo', sans-serif;
+  --fui: 'Cairo', 'Outfit', sans-serif;
+  --k-unit: clamp(24px, min(3.5vw, calc((100vh - 610px) / 6.2)), 40px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: radial-gradient(circle at 50% 15%, #253947 0%, #17242d 55%, #111a21 100%);
+  color: var(--text);
+  font-family: var(--fui);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-    /* Hands panel container */
-    .vk-hands-panel {
-      width: 100%;
-      max-width: 710px;
-      margin: 12px auto;
-      direction: ltr !important;
-      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      overflow: hidden;
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(20, 33, 46, 0.72) 0%, rgba(11, 18, 25, 0.90) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 14px 36px rgba(0, 0, 0, 0.55);
-      padding: 12px 14px 8px;
-      position: relative;
-      user-select: none;
-      max-height: 320px;
-      opacity: 1;
-    }
-    .vk-hands-panel.hidden {
-      max-height: 0 !important;
-      opacity: 0 !important;
-      margin: 0 auto !important;
-      padding: 0 14px !important;
-      border-width: 0 !important;
-      pointer-events: none;
-    }
-    .vk-hands-panel svg {
-      width: 100%;
-      height: auto;
-      max-height: 270px;
-      display: block;
-      margin: 0 auto;
-      overflow: visible;
-      filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.6));
-    }
+/* HEADER (STABLE FIXED LTR LAYOUT - UNIFIED WITH INDEX) */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 clamp(16px, 2.5vw, 32px);
+  height: 48px;
+  min-height: 48px;
+  border-bottom: 1px solid var(--bdr);
+  background: rgba(23, 36, 45, 0.85);
+  backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  direction: ltr !important;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  direction: ltr !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+.logo-ico {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #f5c842 0%, #e8831c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 18px rgba(232, 175, 71, 0.55), 0 2px 6px rgba(0, 0, 0, 0.4);
+  will-change: transform;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.logo:hover .logo-ico {
+  transform: scale(1.05);
+  box-shadow: 0 0 22px rgba(232, 175, 71, 0.75), 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+.logo-ico svg { width: 20px; height: 20px; display: block; }
+.logo-text {
+  background: linear-gradient(135deg, #ffffff 30%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: var(--fui);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  direction: ltr !important;
+}
+.logo-badge {
+  font-size: 8px;
+  font-family: var(--fen);
+  padding: 2px 6px;
+  background: rgba(232, 175, 71, 0.15);
+  border: 1px solid rgba(232, 175, 71, 0.45);
+  color: var(--accent);
+  border-radius: 4px;
+  letter-spacing: .12em;
+  -webkit-text-fill-color: var(--accent);
+  font-weight: 700;
+}
+nav {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  direction: ltr !important;
+}
+.nb {
+  padding: 5px 14px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--far);
+  background: transparent;
+  color: var(--sub);
+  transition: all .2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.4;
+}
+.nb:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+.nb.on {
+  background: var(--accent);
+  color: #17242d;
+  box-shadow: 0 0 14px var(--accent-glow);
+  font-weight: 700;
+}
+#n-race {
+  color: var(--accent);
+  border: 1px solid rgba(232, 175, 71, 0.35);
+  background: rgba(232, 175, 71, 0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+#n-race:hover {
+  background: rgba(232, 175, 71, 0.22);
+  color: #ffffff;
+}
+#n-race.on {
+  background: var(--accent) !important;
+  color: #17242d !important;
+  font-weight: 700;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+.nb-online {
+  color: var(--accent) !important;
+  border: 1px solid rgba(232, 175, 71, 0.35) !important;
+  background: rgba(232, 175, 71, 0.08) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--far) !important;
+  font-weight: 600;
+  transition: all .2s ease;
+}
+.nb-online:hover {
+  background: rgba(232, 175, 71, 0.22) !important;
+  color: #fff !important;
+}
+.nb-online.on {
+  background: var(--accent) !important;
+  color: #17242d !important;
+  font-weight: 700;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+.ctrls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  direction: ltr !important;
+}
+.pg {
+  display: flex;
+  background: rgba(18, 29, 37, 0.7);
+  border-radius: 7px;
+  padding: 2px;
+  border: 1px solid var(--bdr);
+  gap: 2px;
+  direction: ltr !important;
+}
+.pb {
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  background: transparent;
+  color: var(--sub);
+  transition: all .2s;
+  font-family: var(--fen);
+  text-decoration: none;
+}
+.pb:hover {
+  color: var(--text);
+}
+.pb.on {
+  background: var(--accent);
+  color: #17242d;
+}
 
-    /* Status badge */
-    .status-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 10px;
-      font-size: 13px;
-      color: var(--sub);
-      background: rgba(0, 0, 0, 0.25);
-      padding: 6px 16px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .status-val {
-      color: var(--accent);
-      font-weight: 800;
-      font-family: var(--fen);
-    }
-    .footer-dock {
-      margin-top: 24px;
-      text-align: center;
-    }
-    .link-btn {
-      color: #93c5fd;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 8px 18px;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: all 0.2s ease;
-      display: inline-block;
-    }
-    .link-btn:hover {
-      background: rgba(232, 175, 71, 0.15);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-  </style>
+@media(max-width:768px) {
+  header { padding: 0 12px; height: 52px; }
+  .logo-text { display: none; }
+  .nb { padding: 5px 8px; font-size: 12px; }
+}
+
+/* MAIN CONTAINER */
+main {
+  flex: 1;
+  padding: clamp(16px, 2.5vw, 32px) clamp(16px, 4vw, 48px);
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* SECTION 1: STAGES OVERVIEW */
+#view-stages {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.stage-hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, rgba(44, 67, 84, 0.5) 0%, rgba(23, 36, 45, 0.7) 100%);
+  border: 1px solid var(--bdr);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+}
+.stage-hero-info h1 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.stage-hero-info p {
+  color: var(--sub);
+  font-size: 14px;
+  margin-top: 6px;
+  max-width: 680px;
+  line-height: 1.6;
+}
+.hero-overall-progress {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(18, 29, 37, 0.8);
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--bdr);
+}
+.overall-text {
+  display: flex;
+  flex-direction: column;
+}
+.overall-label { font-size: 11px; color: var(--sub); font-weight: 600; }
+.overall-val { font-size: 18px; font-weight: 800; color: var(--accent); font-family: var(--fen); }
+.overall-bar-wrap {
+  width: 110px;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.overall-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f5c842, #e8831c);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+/* STAGES GRID */
+.stages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 18px;
+}
+.stage-card {
+  background: var(--card-bg);
+  border: 1px solid var(--bdr);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.stage-card:hover {
+  background: var(--card-hover);
+  border-color: rgba(232, 175, 71, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+.stage-card.completed {
+  border-color: rgba(72, 187, 120, 0.35);
+}
+.stage-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.stage-badge-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(232, 175, 71, 0.15);
+  border: 1px solid rgba(232, 175, 71, 0.35);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fen);
+  font-weight: 800;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.stage-card.completed .stage-badge-num {
+  background: rgba(72, 187, 120, 0.15);
+  border-color: rgba(72, 187, 120, 0.4);
+  color: var(--ok);
+}
+.stage-status-badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.status-completed { background: rgba(72, 187, 120, 0.18); color: var(--ok); border: 1px solid rgba(72, 187, 120, 0.3); }
+.status-progress { background: rgba(232, 175, 71, 0.18); color: var(--accent); border: 1px solid rgba(232, 175, 71, 0.3); }
+.status-locked { background: rgba(255, 255, 255, 0.08); color: var(--sub); border: 1px solid var(--bdr); }
+
+.stage-card-body h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+.stage-card-body p {
+  font-size: 13px;
+  color: var(--sub);
+  line-height: 1.5;
+}
+
+.stage-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.stage-lessons-count {
+  font-size: 12px;
+  color: var(--sub);
+  font-weight: 600;
+}
+.stage-action-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(232, 175, 71, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(232, 175, 71, 0.3);
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+.stage-card:hover .stage-action-btn {
+  background: var(--accent);
+  color: #17242d;
+}
+
+/* SECTION 2: STAGE DRILL-DOWN (3 LESSONS) */
+#view-stage-lessons {
+  display: none;
+  flex-direction: column;
+  gap: 22px;
+}
+.back-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: var(--bg3);
+  color: var(--text);
+  border: 1px solid var(--bdr);
+  font-family: var(--fui);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-back:hover { background: var(--bg4); }
+
+.stage-detail-banner {
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(44, 67, 84, 0.6) 0%, rgba(23, 36, 45, 0.8) 100%);
+  border: 1px solid var(--bdr);
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.stage-detail-info h2 { font-size: 22px; font-weight: 800; color: #ffffff; }
+.stage-detail-info p { font-size: 14px; color: var(--sub); margin-top: 4px; line-height: 1.5; }
+
+.lessons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.lesson-row-card {
+  background: var(--card-bg);
+  border: 1px solid var(--bdr);
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.lesson-row-card:hover {
+  background: var(--card-hover);
+  border-color: rgba(232, 175, 71, 0.4);
+  transform: translateX(-4px);
+}
+html[dir="ltr"] .lesson-row-card:hover { transform: translateX(4px); }
+
+.lesson-row-main {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.lesson-num-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--bg3);
+  border: 1px solid var(--bdr);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fen);
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--accent);
+}
+.lesson-row-card.done .lesson-num-badge {
+  background: rgba(72, 187, 120, 0.15);
+  border-color: rgba(72, 187, 120, 0.4);
+  color: var(--ok);
+}
+.lesson-row-texts h4 { font-size: 16px; font-weight: 700; color: #ffffff; }
+.lesson-row-texts p { font-size: 13px; color: var(--sub); margin-top: 2px; }
+.lesson-keys-preview {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+}
+.key-chip {
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  font-family: var(--fen);
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.lesson-row-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+html[dir="ltr"] .stat-pill { align-items: flex-start; }
+.stat-pill .val { font-size: 15px; font-weight: 800; font-family: var(--fen); color: #ffffff; }
+.stat-pill .lbl { font-size: 10px; color: var(--sub); }
+.stars-display { color: var(--accent); font-size: 15px; letter-spacing: 2px; }
+.btn-start-lesson {
+  padding: 8px 18px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #17242d;
+  border: none;
+  font-family: var(--fui);
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.btn-start-lesson:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 18px rgba(232, 175, 71, 0.65);
+}
+
+/* SECTION 3: ACTIVE LESSON PLAYGROUND */
+#view-active-lesson {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  width: 100%;
+}
+.lesson-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 6px;
+}
+.lesson-title-area h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+}
+.lesson-title-area span {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* GUIDANCE BOX */
+.guidance-box {
+  width: 100%;
+  background: rgba(33, 52, 66, 0.65);
+  border: 1px solid rgba(232, 175, 71, 0.25);
+  border-radius: 12px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  backdrop-filter: blur(8px);
+}
+.guidance-ico {
+  font-size: 22px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.guidance-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* LIVE STATS DOCK */
+.stats-dock {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.dock-card {
+  background: var(--card-bg);
+  border: 1px solid var(--bdr);
+  border-radius: 12px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 110px;
+}
+.dock-card .val {
+  font-size: 22px;
+  font-weight: 800;
+  font-family: var(--fen);
+  color: var(--accent);
+}
+.dock-card .lbl {
+  font-size: 11px;
+  color: var(--sub);
+  font-weight: 600;
+}
+
+/* TYPING DISPLAY AREA */
+.typing-box {
+  width: 100%;
+  background: rgba(18, 29, 37, 0.88);
+  border: 1px solid var(--bdr);
+  border-radius: 16px;
+  padding: 22px 28px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.4);
+}
+html[dir="rtl"] .typing-box {
+  direction: rtl;
+  text-align: right;
+}
+html[dir="ltr"] .typing-box {
+  direction: ltr;
+  text-align: left;
+}
+.typing-text-flow {
+  font-family: var(--fen);
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  white-space: pre-wrap;
+  word-break: break-word;
+  user-select: none;
+}
+.ch-done { color: var(--ok); opacity: 0.9; }
+.ch-err {
+  color: #ffffff;
+  background: var(--err);
+  border-radius: 4px;
+  animation: err-shake 0.15s ease-in-out;
+}
+.ch-current {
+  color: #17242d;
+  background: var(--accent);
+  border-radius: 4px;
+  box-shadow: 0 0 14px var(--accent-glow);
+  position: relative;
+}
+.ch-pending { color: var(--sub); opacity: 0.55; }
+@keyframes err-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* KEYBOARD & HANDS STAGE - CRITICAL: Hardware keyboard is physically LTR worldwide */
+.kb-stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 10px auto 0 auto;
+  overflow: visible;
+  padding-bottom: clamp(40px, calc(var(--k-unit) * 1.5), 70px);
+  direction: ltr !important;
+}
+.kb-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  user-select: none;
+  direction: ltr !important;
+}
+.kb-row {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  direction: ltr !important;
+}
+.kb-key {
+  height: var(--k-unit);
+  border-radius: 6px;
+  background: var(--bg2);
+  border: 1px solid var(--bdr);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: var(--fui);
+  font-size: calc(var(--k-unit) * 0.36);
+  font-weight: 700;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.35);
+  transition: all 0.1s ease;
+  direction: ltr !important;
+}
+.kb-key.key-accent { background: rgba(232, 175, 71, 0.15); border-color: rgba(232, 175, 71, 0.4); }
+.kb-key.key-target {
+  background: var(--accent) !important;
+  color: #17242d !important;
+  box-shadow: 0 0 16px var(--accent-glow), 0 3px 0 #b37e24 !important;
+  transform: translateY(-2px);
+}
+.kb-key.key-pressed {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.35) !important;
+}
+.kb-key.has-bump::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  width: 8px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 1px;
+}
+.kb-key.key-target.has-bump::after { background: #17242d; }
+.kb-lbl-main { line-height: 1; }
+.kb-lbl-sub { font-size: 0.65em; color: var(--sub); line-height: 1; margin-bottom: 2px; }
+.kb-finger-strip {
+  position: absolute;
+  bottom: 0;
+  left: 3px;
+  right: 3px;
+  height: 2.5px;
+  border-radius: 2px;
+  opacity: 0.65;
+}
+
+/* HANDS OVERLAY */
+.vk-hands-overlay {
+  position: absolute;
+  top: calc(var(--k-unit) * -1.55);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(20.4 * var(--k-unit));
+  pointer-events: none !important;
+  z-index: 10;
+  overflow: visible;
+  direction: ltr !important;
+}
+.vk-hands-overlay svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
+}
+#hand-both .st0 { display: none !important; }
+#hand-both g.show-hand { display: inline !important; }
+#hand-both .st1 {
+  display: inline;
+  fill: #142432 !important;
+  opacity: 0.65 !important;
+}
+#hand-both .st2 {
+  display: inline;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.32) !important;
+  stroke-width: 1.4 !important;
+}
+#hand-both .st3 { display: inline; opacity: 0.55; }
+#hand-both .st4 { fill: rgba(255, 255, 255, 0.35) !important; }
+#hand-both .st5 {
+  display: inline;
+  fill: none;
+  stroke: var(--accent, #e8af47) !important;
+  stroke-width: 4.2 !important;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  filter: drop-shadow(0 0 8px rgba(232, 175, 71, 0.95)) drop-shadow(0 0 20px rgba(232, 175, 71, 0.6)) !important;
+}
+#hand-both.hf-pressed g.show-hand { animation: vk-hand-tap 0.12s ease-out; }
+#hand-both.hf-error g.show-hand .st5 {
+  stroke: var(--err, #e55656) !important;
+  filter: drop-shadow(0 0 10px #e55656) !important;
+}
+@keyframes vk-hand-tap {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* RESULT MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 16, 21, 0.85);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+.modal-overlay.open { display: flex; }
+.modal-card {
+  background: linear-gradient(135deg, #213442 0%, #17242d 100%);
+  border: 1px solid rgba(232, 175, 71, 0.35);
+  border-radius: 20px;
+  padding: 32px 36px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px var(--accent-glow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.modal-trophy {
+  font-size: 54px;
+  animation: bounce 0.6s ease;
+}
+@keyframes bounce {
+  0% { transform: scale(0.4); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.modal-stars {
+  font-size: 32px;
+  color: var(--accent);
+  letter-spacing: 4px;
+}
+.modal-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  margin: 12px 0;
+}
+.m-stat {
+  background: rgba(18, 29, 37, 0.65);
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid var(--bdr);
+}
+.m-stat .v { font-family: var(--fen); font-size: 20px; font-weight: 800; color: #ffffff; }
+.m-stat .l { font-size: 11px; color: var(--sub); }
+.modal-msg {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+.m-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  font-family: var(--fui);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.m-btn-retry {
+  background: var(--bg3);
+  color: var(--text);
+  border: 1px solid var(--bdr);
+}
+.m-btn-retry:hover { background: var(--bg4); }
+.m-btn-next {
+  background: var(--accent);
+  color: #17242d;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+.m-btn-next:hover { transform: scale(1.02); }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 12px;
+  color: var(--sub);
+  border-top: 1px solid var(--bdr);
+}
+</style>
 </head>
 <body>
-  <div class="header-box">
-    <div class="pill-badge">VKeyboardHand MIT Integration</div>
-    <h1>اليدين الإرشاديتين في <span>BARQTYPE</span></h1>
-    <p class="sub">رسومات تشريحية طبيعية كاملة من مشروع VKeyboardHand مفتوح المصدر (ayuday/vkeyboardhand)<br>مع إضاءة ليزرية ذهبية للأصابع وتغذية راجعة للنقر الميكانيكي والاهتزاز عند الأخطاء.</p>
-  </div>
+<div id="app">
+  <!-- HEADER (UNIFIED WITH INDEX) -->
+  <header>
+    <a href="index.html" class="logo" title="Barqtype">
+      <div class="logo-ico">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 2L3 11h7l-1 7 8-9h-7l1-7z" fill="#17242d" stroke="#17242d" stroke-width="0.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="logo-text">
+        Barqtype <span class="logo-badge" id="lbl-badge">BETA</span>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html" class="nb" id="n-test"><span id="txt-nav-test">تدريب</span></a>
+      <a href="index.html#stats" class="nb" id="n-stats"><span id="txt-nav-stats">إحصاءات</span></a>
+      <a href="learn.html" class="nb on" id="n-learn"><span id="txt-nav-learn">تعلم</span></a>
+    </nav>
+    <div class="ctrls">
+      <div class="pg">
+        <button class="pb" id="lang-en" onclick="setLanguage('en')">EN</button>
+        <button class="pb on" id="lang-ar" onclick="setLanguage('ar')">AR</button>
+      </div>
+      <div class="pg">
+        <button class="pb on" id="btn-sound" onclick="toggleSound()" title="Sound" style="display:inline-flex;align-items:center;justify-content:center;padding:4px 9px">
+          <svg id="sound-icon-svg" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path id="sound-wave-path" d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
 
-  <div class="controls">
-    <button class="btn active" onclick="testPose('neutral')">🌿 وضع الاسترخاء (Neutral)</button>
-    <button class="btn" onclick="testPose('f')">👈 سبابة يسار F (ب)</button>
-    <button class="btn" onclick="testPose('j')">👉 سبابة يمين J (ت)</button>
-    <button class="btn" onclick="testPose('d')">👈 وسطى يسار D (ي)</button>
-    <button class="btn" onclick="testPose('k')">👉 وسطى يمين K (ن)</button>
-    <button class="btn" onclick="testPose('s')">👈 بنسر يسار S (س)</button>
-    <button class="btn" onclick="testPose('l')">👉 بنسر يمين L (م)</button>
-    <button class="btn" onclick="testPose('a')">👈 خنصر يسار A (ش)</button>
-    <button class="btn" onclick="testPose('semicolon')">👉 خنصر يمين ; (ك)</button>
-    <button class="btn" onclick="testPose('c')">👈 وسطى سفلية C (ؤ)</button>
-    <button class="btn" onclick="testPose('e')">👈 وسطى علوية E (ث)</button>
-    <button class="btn" onclick="testPose('r')">👈 سبابة علوية R (ق)</button>
-    <button class="btn" onclick="testPose('u')">👉 سبابة علوية U (ع)</button>
-    <button class="btn" onclick="testPose('space')">👍 إبهام Space (مسافة)</button>
-    <button class="btn" onclick="testPose('a', true)">⇧ Shift + A (كبير)</button>
-    <button class="btn" onclick="testPose('j', true)">⇧ Shift + J (كبير)</button>
-    <button class="btn action-tap" onclick="triggerTap()">⚡ نقر ميكانيكي (Tap)</button>
-    <button class="btn action-err" onclick="triggerErr()">❌ اهتزاز خطأ (Error Vibe)</button>
-    <button class="btn" onclick="toggleVisibility()">👁 إظهار/إخفاء اليدين</button>
-  </div>
+  <!-- MAIN -->
+  <main>
+    <!-- VIEW 1: STAGES OVERVIEW -->
+    <section id="view-stages">
+      <div class="stage-hero">
+        <div class="stage-hero-info">
+          <h1 id="hero-title">مسار التعلم الذكي لطباعة اللمس</h1>
+          <p id="hero-desc">خطة تعليمية منهجية من 6 مراحل و18 درساً تنتقل بك من الصفر إلى الاحتراف بذاكرة عضلية فائقة ودون النظر إلى الكيبورد.</p>
+        </div>
+        <div class="hero-overall-progress">
+          <div class="overall-text">
+            <span class="overall-label" id="txt-overall-lbl">التقدم العام</span>
+            <span class="overall-val" id="overall-progress-text">0 / 18</span>
+          </div>
+          <div class="overall-bar-wrap">
+            <div class="overall-bar-fill" id="overall-bar" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
 
-  <div id="vk-hands-wrapper" class="vk-hands-panel" aria-label="Interactive Hands Guide">
-    <svg id="hand-both" version="1.1" xmlns="http://www.w3.org/2000/svg"
+      <div class="stages-grid" id="stages-container">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 2: STAGE LESSONS DRILL-DOWN -->
+    <section id="view-stage-lessons">
+      <div class="back-header">
+        <button class="btn-back" onclick="showStagesView()">
+          <span id="back-arrow">←</span> <span id="txt-back-stages">العودة إلى المراحل</span>
+        </button>
+        <span class="overall-val" id="stage-lessons-progress-badge">0 / 3 مكتمل</span>
+      </div>
+
+      <div class="stage-detail-banner">
+        <div class="stage-detail-info">
+          <h2 id="stage-banner-title">المرحلة</h2>
+          <p id="stage-banner-desc">وصف المرحلة</p>
+        </div>
+      </div>
+
+      <div class="lessons-list" id="lessons-container">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 3: ACTIVE LESSON PLAYGROUND -->
+    <section id="view-active-lesson">
+      <div class="lesson-top-bar">
+        <button class="btn-back" onclick="showStageLessonsView(CURRENT_STAGE_ID)">
+          <span id="lesson-back-arrow">←</span> <span id="txt-back-stage">العودة للدروس</span>
+        </button>
+        <div class="lesson-title-area">
+          <span id="active-stage-crumb">المرحلة 1</span>
+          <h2 id="active-lesson-title">عنوان الدرس</h2>
+        </div>
+        <div class="stars-display" id="active-lesson-best-stars">★★★</div>
+      </div>
+
+      <!-- INSTRUCTIONAL GUIDANCE -->
+      <div class="guidance-box">
+        <div class="guidance-ico">💡</div>
+        <div class="guidance-text" id="active-lesson-intro">
+          ضع أصابعك في وضعية الارتكاز ثم اضغط المفتاح المضاء باللون الذهبي باستخدام الإصبع الموضح باليد.
+        </div>
+      </div>
+
+      <!-- LIVE STATS DOCK -->
+      <div class="stats-dock">
+        <div class="dock-card">
+          <span class="val" id="live-wpm">0</span>
+          <span class="lbl" id="lbl-live-wpm">السرعة (WPM)</span>
+        </div>
+        <div class="dock-card">
+          <span class="val" id="live-acc">100%</span>
+          <span class="lbl" id="lbl-live-acc">الدقة</span>
+        </div>
+        <div class="dock-card">
+          <span class="val" id="live-errors">0</span>
+          <span class="lbl" id="lbl-live-err">الأخطاء</span>
+        </div>
+        <div class="dock-card">
+          <span class="val" id="live-progress">0%</span>
+          <span class="lbl" id="lbl-live-prog">التقدم</span>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE TYPING BOX -->
+      <div class="typing-box" id="typing-box" tabindex="0">
+        <div class="typing-text-flow" id="typing-flow"></div>
+      </div>
+
+      <!-- VIRTUAL KEYBOARD & HANDS STAGE -->
+      <div class="kb-stage" id="kb-stage" dir="ltr">
+        <div class="kb-rows" id="kb-rows" dir="ltr"></div>
+        <div id="vk-hands-wrapper" class="vk-hands-overlay">
+          <svg id="hand-both" version="1.1" xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
   y="0px"
-  viewBox="0 0 716.3 380" style="enable-background:new 0 0 716.3 380;" xml:space="preserve">
+  viewBox="-30 0 776.3 380" style="enable-background:new -30 0 776.3 380;" xml:space="preserve">
 <style xmlns="http://www.w3.org/2000/svg" type="text/css">
   #hand-both .st0 {
     display: none !important;
@@ -238,14 +1044,14 @@
   }
   #hand-both .st1 {
     display: inline;
-    fill: #1a2a38 !important;
-    opacity: 0.92 !important;
+    fill: #142432 !important;
+    opacity: 0.65 !important;
     transition: fill 0.22s ease, opacity 0.22s ease;
   }
   #hand-both .st2 {
     display: inline;
     fill: none;
-    stroke: rgba(255, 255, 255, 0.26) !important;
+    stroke: rgba(255, 255, 255, 0.32) !important;
     stroke-width: 1.4 !important;
     stroke-miterlimit: 10;
   }
@@ -260,16 +1066,18 @@
     display: inline;
     fill: none;
     stroke: var(--accent, #e8af47) !important;
-    stroke-width: 4 !important;
+    stroke-width: 4.2 !important;
     stroke-linecap: round;
     stroke-miterlimit: 10;
-    filter: drop-shadow(0 0 8px rgba(232, 175, 71, 0.9)) drop-shadow(0 0 18px rgba(232, 175, 71, 0.55)) !important;
+    filter: drop-shadow(0 0 8px rgba(232, 175, 71, 0.95)) drop-shadow(0 0 20px rgba(232, 175, 71, 0.6)) !important;
     transition: stroke 0.14s ease, filter 0.14s ease;
   }
+  /* Keystroke Mechanical Tap */
   #hand-both.hf-pressed g.show-hand {
     animation: vk-hand-tap 0.12s ease-out;
     transform-origin: center bottom;
   }
+  /* Typo Error Vibration */
   #hand-both.hf-error g.show-hand .st5 {
     stroke: var(--err, #e55656) !important;
     filter: drop-shadow(0 0 10px #e55656) drop-shadow(0 0 22px rgba(229, 86, 86, 0.6)) !important;
@@ -287,7 +1095,7 @@
     75% { transform: translateX(4px); }
   }
 </style>
-    <g id="hand-neutral-right" class="show-hand" style="display:inline">
+    <g id="hand-neutral-right" transform="translate(30, 0)" class="show-hand" style="display:inline">
   <path class="st1" d="M483.3,379.3c-4.7-9.9-8-19.1-9.3-39.5s1.2-22,0-38.1c-1.2-16.1-2.4-12.6-1.2-24.7c1.1-12.1-5.5-27.8-5.6-33.7
     c-0.1-5.9,0.4-26.1-1.4-35.6c-1.8-9.5-6-15.6-9-31.9c-3-16.3-14.4-26.9-21.7-24.5s-8.5,10-7.6,12.8c-3.2-6.3-5.3-10-7.3-12.4
     c-2-2.4-7.8-5.2-7.8-5.2s-9-1.9-12.5,6.2c-2.9,0.6-2.9,6.9-2.8,8.6c-0.7-3.8-2-9.2-3.1-10.9c-1.2-1.7-3.5-4.4-6.7-5.8
@@ -314,7 +1122,7 @@
       c0.6-0.6,0.7-1.5,0.7-2.4c0-1.8-0.3-3.6-0.6-5.3c-0.3-1.8-0.7-3.6-1.1-5.3C319.2,211.6,318,210.1,316.3,209.3z"/>
   </g>
 </g>
-    <g id="hand-equal" style="display: none" class="st0">
+    <g id="hand-equal" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M472.9,379.3c-3.9-6.7-7.9-12.1-11.4-16.4c-1.8-2.2-7.4-8.8-15.9-16.1c-2.9-2.5-6.1-5.1-10.8-8
     c-4.5-2.8-8.4-4.5-10.9-5.6c-3.4-1.4-35.8-13.8-42.3-16.2c-6.3-2.3-10.2-3.3-14.2-7.1c-2.3-2.2-3.8-4.6-4.3-5.4
     c-1.9-3-2.5-5.3-3.8-9.5c0,0-1.4-4.3-3.7-10.3c-3.9-10.2-6.2-13-8.3-19.1c-0.2-0.6-0.7-2.2-1.8-4.2c-1.2-2.3-2.3-3.5-3-4.6
@@ -379,7 +1187,7 @@
       l-0.1-0.1l-0.1-0.1C472.5,104.7,471.1,101.5,470.4,98.2z"/>
   </g>
 </g>
-    <g id="hand-minus" style="display: none" class="st0">
+    <g id="hand-minus" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M471.5,380.1c-1.8-3.2-5.7-10.4-10.6-18c-2.4-3.8-5.2-7.8-9.3-12c-0.1-0.1-0.3-0.3-0.4-0.4
     c-3.9-3.9-7.3-6.2-11.3-8.8c-2.8-1.9-10.9-7.1-22.9-11.9c-3.7-1.5-7.7-2.8-15.8-5.4c-7.6-2.4-9.4-2.8-14.6-4.5
     c0,0-3.8-1.6-17.9-6.8c-1.8-0.7-5.3-6.7-7-9.9c-1.8-3.5-2.3-5.6-4-10.3c-2.3-6.6-4.5-11.5-6.4-15.9c-1.3-2.9-3.7-7.9-8.4-17.7
@@ -438,7 +1246,7 @@
       c0.1,1.7-0.4,3.3-1.3,4.6c0.6-1.5,0.8-3.1,0.6-4.6c-0.2-1.5-1-2.8-1.9-4.1C333.4,216.1,331.8,213.4,330.3,210.5z"/>
   </g>
 </g>
-    <g id="hand-0" style="display: none" class="st0">
+    <g id="hand-0" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M482.1,379.6c-3.4-8.4-6.8-15.1-9.6-20.1c-3.6-6.6-6.2-10.2-7.2-11.7c-3.3-4.7-5.5-7.7-9.2-10.9
     c-5.4-4.8-10.7-7-14.8-8.8c-2.8-1.2-3.4-1.2-13.9-4.3c-11.8-3.5-17.7-5.2-21.3-6.4c-6-2.1-7.8-3-12.5-4.1c-3.2-0.7-5.4-0.8-10.2-2
     c-3.6-0.9-5.5-1.4-7.6-2.5c-3.9-2.1-6.2-5-7.3-6.4c-2.2-2.7-3.2-5.2-4.6-8.3c-1.1-2.6-1.1-3.2-2.4-6.6c-1.1-3-3-8.2-6.2-13.8
@@ -499,7 +1307,7 @@
       C335,213.6,333.1,211.1,330.9,208.8z"/>
   </g>
 </g>
-    <g id="hand-9" style="display: none" class="st0">
+    <g id="hand-9" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M432.8,380c-3.3-6.4-6.2-11.7-8.5-15.6c-6.3-10.9-9.3-14.9-11.3-17.2c-4-4.7-7.5-7.5-9.7-9.2
     c-1.1-0.8-1.7-1.2-5.7-3.8c-13.8-8.9-16.3-9.8-19-11.3c-0.5-0.3-4.2-2.2-7.7-4.2c-5.1-2.8-5-3-10.9-6.3c-3.9-2.2-5.9-3.4-8.3-4.6
     c-3.8-1.9-5-2.3-8-4.1c-3.2-1.9-4.8-2.8-6.3-4.6c-2.1-2.4-3-4.9-3.7-6.7c-1.3-3.6-1.5-6.5-1.6-7.4c-0.4-5-2.7-10-4.7-18.7
@@ -557,7 +1365,7 @@
       C385.7,101.1,384.8,99.5,384.1,97.9z"/>
   </g>
 </g>
-    <g id="hand-8" style="display: none" class="st0">
+    <g id="hand-8" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M528.9,368.7c-0.6-1.1-1.5-2.7-4.4-7.4c-5.1-8.1-5.1-7.7-6.5-10.2c-1.6-2.7-5.3-9.4-7.1-17.9
     c-0.3-1.3-1-5.2-2.3-10.7c-0.6-2.8-0.9-3.8-1.3-5c-1-2.8-1.7-3.7-3.3-7.5c-0.9-2.2-1.5-3.9-1.8-4.7c-0.6-1.9-1.5-4.6-2.4-8.4
     c-1.1-4.9-1.5-8.6-2.1-13.3c-0.7-5.8-0.5-6.8-1.3-12.7c-0.6-4.6-1-6.6-1.2-7.4c-1-4.5-2.5-8.7-2.5-8.7c-0.7-2-1.2-3.4-1.6-5.7
@@ -615,7 +1423,7 @@
       C352.9,101.1,352.4,100.5,351.9,99.9z"/>
   </g>
 </g>
-    <g id="hand-7" style="display: none" class="st0">
+    <g id="hand-7" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M363.9,380.3c-1.6-3-4.1-7.4-7.2-12.6c-5.9-9.9-5.2-8.3-7.1-11.6c-3.8-6.7-4.7-9.1-7.8-12.9
     c-1-1.2-0.6-0.5-6-5.9c-5.8-5.7-6.7-6.9-7.3-7.7c-1.1-1.4-1.8-2.6-4.8-8.7c-2.5-5.1-3.8-7.6-5.1-10.5c-5.6-12.1-6.1-15.4-10.6-24.2
     c-0.4-0.8-2.3-3.8-4.4-8.2c-0.1-0.3-0.5-0.9-0.9-1.9c-0.5-1.3-0.6-2.5-0.7-3.2c-0.4-5.2,0.2-11.9,0.2-11.9
@@ -670,7 +1478,7 @@
         <path class="st2" d="M432.5,201.1c3.6-17.9,5.9-31.5,6.7-37.2c0.2-1.9,0.6-5.1,0.1-9.1c-0.4-2.8-1-4.4-1.6-5.9"/>
         <path class="st2" d="M438.6,168.1c0.5,3.6,0.6,7.5,0.7,10.1c0,0.3-3.4,7.8-4.2,10.1"/>
 </g>
-    <g id="hand-y" style="display: none" class="st0">
+    <g id="hand-y" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M364.8,380c-1-2-2.7-5-5.3-8.4c-3.6-4.7-6-6.3-10.3-10.8c-4.1-4.4-6.7-7.9-9.9-12.4c-2.3-3.2-2.6-4-10-16.2
     c-9.1-15.1-13.6-22.6-14.8-24.1c-0.6-0.7-2.1-2.4-3.3-5.1c-1.3-3-1.5-5.6-1.8-9c-0.4-5.7-0.6-8.6-0.7-11.8
     c-0.2-4.4-0.9-8.1-2.1-15.7c-0.7-4.5-1.5-8.5-2.5-15.9c-0.1-0.4-0.1-1-0.2-1.8c-0.4-2.4-0.9-2.6-1-4.1c-0.1-1.2,0.3-1.4,0.1-2.7
@@ -718,7 +1526,7 @@
     c1,5.7,2.8,10,3.8,12.4c0.6,1.5,1.6,3.4,3.6,7.2c4.2,8,4.2,7.6,6,11.3c2.6,5.2,4.4,9.5,6.7,15.3c0.2,0.4,2.1,5.3,2.8,7
     c1.2,3.1,1.8,4.5,3.3,5.4c0.2,0.1,1.4,0.7,2.7,0.6"/>
 </g>
-    <g id="hand-u" style="display: none" class="st0">
+    <g id="hand-u" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M373.1,380c-1.6-2.6-4.3-6.8-8-11.5c-4.5-5.6-6.4-6.9-11.1-12.5c-4.5-5.4-7.4-9.9-10.4-14.6
     c-5.7-8.9-4.9-9.3-10.4-17.5c-2.4-3.6-3.9-5.6-8.7-12.7c-3.5-5.3-4.9-7.6-6.1-11c-0.4-1.2-1.1-3.4-1.9-10.2
     c-0.6-5.3-0.2-10.3-1.1-15.5c-0.3-1.7-0.6-3-0.8-3.7c-0.6-2.2-1.1-3.3-1.7-4.9c-0.5-1.4-2-5.3-2.5-10.1c-0.2-1.4-0.3-3.2-0.2-5.2
@@ -775,7 +1583,7 @@
       C334.1,128.6,334.1,127.8,334.1,126.9z"/>
   </g>
 </g>
-    <g id="hand-i" style="display: none" class="st0">
+    <g id="hand-i" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M380.3,379.8c-1.1-2.4-2.8-6.7-5.2-9.8c-2.5-3.1-5-5.5-7.1-7.1c0,0-3.6-3.3-10.3-9.9c-3.5-3.4-3.1-3.2-10.7-11
     c-10.1-10.3-9.6-9.5-13.1-13.3c-4.2-4.6-5.3-6.2-9.1-9.9c-4.9-4.7-6.5-6.2-6.5-6.2c-2.9-2.7-3.5-3-4.5-4.4
     c-2.3-3.1-3.2-6.2-3.6-7.8c-0.7-2.9-0.5-3.9-0.8-8.5c-0.1-0.7-0.4-4.9-1.2-9.5c-0.8-4.3-1.8-10.1-4.4-15.7c-0.4-1-1.3-2.8-2-5.5
@@ -838,7 +1646,7 @@
       c-0.3,0.4-0.7,0.7-1,1C303.2,219.1,302.8,219.4,302.3,219.4z"/>
   </g>
 </g>
-    <g id="hand-o" style="display: none" class="st0">
+    <g id="hand-o" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M432.5,203.7c0.4-6.4,0.3-13.8-0.9-21.9c-0.8-5.7-1.7-9.1-1.7-9.1c-1.3-5.4-2.1-6.9-2.6-11.1
     c-0.4-3.4-0.5-5.7,0.5-8.5c1.2-3.2,3.4-5.2,4.7-6.3c0.2-0.3,0.4-0.8,0.9-1.3c2.3-2.5,7.1-2.3,10.3-0.5c1.2,0.7,2,1.5,2.6,2.2
     c4.2,4.8,6,10.4,7.1,14.6c0.9,3.4,1.4,6,2.4,11.2c1.3,7.5,2.2,12.5,3.6,21.2c1.3,8.8,2,13.2,2.4,17.5c0.6,7.7,0.6,13.3,0.5,16.3
@@ -887,7 +1695,7 @@
       C310.1,238.3,309.4,239.6,308.5,240.6z"/>
   </g>
 </g>
-    <g id="hand-p" style="display: none" class="st0">
+    <g id="hand-p" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M425.7,379.5c-3.1-3.3-12.7-10.7-20.8-20c-0.2-0.3-0.3-0.6-0.6-0.7c-10-5.2-24.2-11-36.9-16.4
     c-8.6-3.6-17.1-7.1-25.4-10.4c-1.2-0.4-2.8-1.2-4.4-2.4c-2.4-1.8-4.1-4.1-5.9-7.6c-2.1-4.1-2.7-5.9-4.2-10.5
     c-2.1-6.6-13.7-26.1-14.9-29.7c-0.8-0.8-1.8-2.5-2.7-4.3c-1.7-3.5-2.3-7.5-2.3-7.5c-0.4-4.1-0.6-12.4,0.2-23.3
@@ -943,7 +1751,7 @@
       C312.2,241.4,311.4,243.1,310.2,244.3z"/>
   </g>
 </g>
-    <g id="hand-left-center-bracket" style="display: none" class="st0">
+    <g id="hand-left-center-bracket" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M422.4,379.4c-1.9-2.3-6.6-9-19.9-19.7c-5.6-4.5-8.6-5.7-11.4-7.1c-3.6-1.8-6.6-2.6-10.3-4.1
     c-17.9-7-15.9-7.7-30-13.1c-2.6-1-5.9-2.2-9.8-5c-4.7-3.3-7-6.1-7.7-7.1c-1.7-2.3-2.6-4.3-3.6-6.5c-1.4-3-1.7-4.6-3.5-10.2
     c-1.2-3.5-1.8-5.3-2.2-6.3c-1.8-4.3-3.2-6.4-5-9.7c-1.4-2.6-3.2-6.5-4.8-11.7c-0.7-1-1.6-2.4-2.4-4.2c-0.7-1.5-1.8-3.7-2.4-6.8
@@ -1003,7 +1811,7 @@
       c-0.3-0.4-0.5-0.8-0.7-1.2c-0.2-0.4-0.4-0.8-0.5-1.2C457.1,127.3,457,125.5,457,123.8z"/>
   </g>
 </g>
-    <g id="hand-right-center-bracket" style="display: none" class="st0">
+    <g id="hand-right-center-bracket" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M524.8,379.8c-35,0.1-70.1,0.1-105.1,0.2"/>
         <path class="st1" d="M419.7,380c-1.5-2.1-3.9-5.2-7-8.5c-7.1-7.4-13.6-11.4-23.3-17c-11.6-6.8-22.1-11.4-24.4-12.4
     c-0.2-0.1-9-4-19.9-9.8c-4.6-2.4-7.8-4.3-10.7-7.9c-2.5-3.2-3.4-5.9-5.3-11.7c-5.3-15.6-4.3-14.2-6.5-18.4
@@ -1077,7 +1885,7 @@
       C483.5,127.4,483.7,126.6,484,125.8z"/>
   </g>
 </g>
-    <g id="hand-h" style="display: none" class="st0">
+    <g id="hand-h" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M371.4,380c-7.3-5.8-12.8-10.9-16.5-14.5c-5.6-5.4-9.7-10-16.2-15.8c-4.8-4.3-7.2-6.4-8.8-7.6
     c-0.4-0.3-2.2-1.6-4.3-3.5c-2.6-2.5-3.5-3.8-3.8-4.4c-1-1.8-1.2-3.4-1.4-4.5c-0.6-3.6-1.5-7.2-2.2-10.9c-1.5-7.5-4.5-13.5-6.1-16.5
     c-0.8-1.5-2.5-4.8-4.1-8.4c-0.5-1.2-1.4-3.3-2.1-6.2c-0.1-0.2-0.1-0.7-0.4-1.4c-0.5-1.5-1.2-2.4-1.4-2.7c-2-2.8-2.6-8-2.6-8.9
@@ -1143,7 +1951,7 @@
       C305.3,248.7,304.7,249.4,304,249.8z"/>
   </g>
 </g>
-    <g id="hand-j" style="display: none" class="st0">
+    <g id="hand-j" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M381.7,379.7c-1.2-1.8-3.1-4.4-5.7-7.3c-2.6-3-4.3-4.4-7.2-7.2c-3.1-3.1-5-5.4-8.4-9.3
     c-7.9-9.1-14-17.8-15.8-20.4c-5-7.1-6.7-10.4-10.2-13.4c-0.5-0.4-2.3-1.9-4.1-4.4c-2.1-2.8-2.9-5-3.1-5.7c-0.1-0.4-0.5-1.7-0.8-4.5
     c-0.5-4.3,0-6.1-0.1-10.4c-0.1-3.5-0.5-6.1-0.6-6.8c-0.3-2-1-6.5-3.1-11.8c-0.8-1.9-1.5-3.4-2.2-6.1c-0.1-0.4-0.5-2.1-0.9-4.3
@@ -1200,7 +2008,7 @@
       l0,0.6l0.1,1.2c0,0.4,0.1,0.8,0.1,1.3c0,0.4-0.1,0.9-0.3,1.4C322.2,225.3,321.4,225.8,320.6,225.9z"/>
   </g>
 </g>
-    <g id="hand-k" style="display: none" class="st0">
+    <g id="hand-k" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M380.7,379.7c-2.7-5.5-5.7-8.8-8.1-10.8c-1.5-1.3-2.6-1.9-4.8-4c-2.6-2.4-4.1-4.3-6.3-6.9
     c-5.2-6.3-4.9-5.5-7.9-9.2c-4.8-5.9-5.4-7.4-14.4-19.8c-3.5-4.8-4.8-6.4-6.5-8.3c-1.7-1.8-2.3-2.2-3.4-3.8
     c-0.4-0.7-2.4-3.7-3.2-8.4c-0.2-1.4-0.2-2.9-0.2-6c0-4.4,0.3-5.7,0-8.8c-0.2-1.6-0.4-2.7-0.8-4.5c-0.9-4.2-1.6-5.7-4-13.3
@@ -1260,7 +2068,7 @@
       c-0.1,0.9-0.3,1.8-0.9,2.6C321.7,226,321,226.5,320.3,226.9z"/>
   </g>
 </g>
-    <g id="hand-l" style="display: none" class="st0">
+    <g id="hand-l" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M381.1,379.4c-1.5-2.5-3.5-5.3-6-8.2c-2.3-2.6-4.6-4.8-6.6-6.5c0,0-4.5-4.3-9.4-9.8
     c-3.5-3.9-5.8-7.2-10.4-13.7c-9-12.7-8-13-11.7-16.4c-1.4-1.3-4.1-3.6-6.7-7.4c-2.2-3.2-3-5.6-3.3-7.2c-0.1-0.6-0.3-1.5-0.4-5.4
     c-0.1-5.5,0.1-6.8,0-9.6c-0.1-3.2-0.7-5.4-1.7-9.3c-1.6-6.4-2.8-7.9-4.1-13.6c-0.7-3.3-1-6.1-1.2-7.8c-0.4-0.6-1-1.3-1.4-2.3
@@ -1316,7 +2124,7 @@
       C403.5,155.5,402.9,154.7,402.6,153.9z"/>
   </g>
 </g>
-    <g id="hand-semicolon" style="display: none" class="st0">
+    <g id="hand-semicolon" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M381.9,380c-3.6-5.5-6.6-8.7-8.6-10.7c-0.9-0.9-4.1-4-7.2-6.7c-3.8-3.3-6.3-6.2-21.6-27.1
     c-3.3-4.5-5.1-7.9-9-12.3c-2-2.3-3.8-4.1-5-5.2c-0.6-0.8-1.4-1.9-2.1-3.5c-1.4-3.1-1.4-5.9-1.4-7.8c-0.1-7-0.1-10.6-0.2-11.5
     c-0.6-8-3.4-15.4-4-16.8c-0.6-1.5-1.3-3.3-2-6c-0.8-3.3-0.9-6.2-0.9-8c-1.2-2.9-1.9-5.4-2.4-7.4c-0.4-2-0.9-4.5-0.8-7.7
@@ -1374,7 +2182,7 @@
     c-2.3-5.3-2.5-7.1-2.6-8c-0.2-4,1.4-7.3,2.5-9.1c0.2-0.7,0.6-1.8,1.5-2.8c2.7-3.1,7.4-2.5,8.1-2.4c3.1,0.4,5.1,2.1,7.4,4.1
     c1.9,1.6,4.9,4.7,7.3,9.6c1,2,2,4,3,6l0.1-0.1"/>
 </g>
-    <g id="hand-single-quote" style="display: none" class="st0">
+    <g id="hand-single-quote" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M381.7,379.6c-7.1-8.6-13.5-13.5-18.2-16.5c-2.3-1.5-6.2-3.8-11.3-8c-4.1-3.4-3.4-3.4-7.9-7.2
     c-6-5.1-8.6-6.1-13.8-11.3c-2.1-2.1-3.2-3.2-4.3-4.8c-2.3-3.5-2.9-6.6-3.9-12.1c-2.7-14.5-2.2-14-3.2-17c-2-6.5-3.1-6.3-4.2-11.8
     c-0.7-3.7-0.7-6.1-2.2-10.5c-1.3-3.8-1.7-3.2-2.4-6c-1.8-6.5-0.4-12.8,0-14.5c0.5-2.3,1-3.3,1.1-5.7c0.1-2.1-0.2-3.2,0-5.6
@@ -1433,7 +2241,7 @@
       c-0.4-0.5-0.6-0.9-0.8-1.3c-0.2-0.4-0.3-0.9-0.4-1.3c-0.2-0.9-0.4-1.7-0.6-2.6C468.2,160.1,468.1,158.3,468.2,156.6z"/>
   </g>
 </g>
-    <g id="hand-enter" style="display: none" class="st0">
+    <g id="hand-enter" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M387.3,379.4c-2.4-2-8.9-7.5-14.8-11.8c-2-1.5-3.7-2.7-3.8-2.7c-3.8-2.6-6.4-4.1-16.8-11.4
     c-1.7-1.2-1.5-1.1-13.9-9.8c-5.5-3.9-5.6-3.6-6.6-4.6c-4.8-4.9-6.3-11.1-6.9-13.9c-0.6-2.5-0.2-2.3-0.9-6.8
     c-1-7.1-2.5-12.5-3.7-16.9c-1.9-6.7-2.8-8.6-3.8-14.3c-0.4-2.4-0.7-4.4-0.8-5.8c-0.6-0.8-1.3-2-1.8-3.7c-0.3-0.9-0.4-1.8-0.4-2.4
@@ -1499,7 +2307,7 @@
       c0.3,1.8,0.5,3.6,0.7,5.4c0.1,0.9,0.2,1.8-0.1,2.8C317.1,244.2,316.3,244.8,315.6,245.3z"/>
   </g>
 </g>
-    <g id="hand-n" style="display: none" class="st0">
+    <g id="hand-n" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M373.7,380c-7-5.4-12.5-10-16.3-13.2c-7-6-7.5-7-12.1-10.4c-3.9-2.9-7.7-6-11.6-8.9c-2.6-1.9-3.7-2.8-4.8-4.5
     c-1.9-2.7-2-4.9-3.2-10.3c0,0-1.1-5.3-2.8-10.8c-1.7-5.8-3.9-10.3-4.8-12.1c-1.9-3.8-4-7.2-5.9-12.3c-0.2-0.5-0.4-1.1-0.8-2
     c-1.7-4.4-3-6.8-3.6-8.3c-0.4-1-1.1-2.8-1.4-10.6c-0.2-4.2-0.3-9.8,0.1-16.7c-1.5-2.4-3-5.4-4.5-8.9c-1.6-3.9-2.5-7.4-3.2-10.4
@@ -1555,7 +2363,7 @@
     c1-0.8,2.7-2,5-2.8c4.7-1.6,8.7-0.5,9.9-0.1c0.8,0.2,3.7,1.2,8.7,5.7c2.9,2.7,7.1,6.6,10.4,13.4c1.3,2.6,4.2,8.8,4.1,16.9
     c0,1-0.1,1.8-0.1,2.4c1.3,2,2.6,4,3.9,6.2c1.7,2.8,3.2,5.6,4.6,8.3c-2.4-6.7-7.1-19-9.4-25.7"/>
 </g>
-    <g id="hand-m" style="display: none" class="st0">
+    <g id="hand-m" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M387,379.9c-8.8-13.2-16-21.6-21.3-29.2c-6.6-9.5-9.9-14.3-12.3-18.3c-3.5-5.8-4.4-8.1-7.7-12
     c-2.1-2.5-4-4.3-6.3-8.1c-1.1-1.9-2.5-4.2-3.4-7.5c-0.7-2.7-0.5-4.3-0.5-9c0-1,0.1-8.8-0.4-15.6c-0.1-2.2-0.5-4.8-1.1-10
     c-0.8-7.1-1.4-10-1.8-15.6c-0.2-2.8-0.3-5-0.4-6.4c-0.2-1.2-0.4-2.6-0.3-4.3c0.2-2.6,0.9-4.6,1.8-6.8c1.1-2.7,2.8-6.2,5-10.3
@@ -1602,7 +2410,7 @@
       c0.5-1.7,0.9-3.4,1.1-5.2c0.3-1.8,0.4-3.5,0.5-5.3c0-0.9,0.1-1.8,0.1-2.7C349.5,202.3,349.5,201.4,348.9,200.7z"/>
   </g>
 </g>
-    <g id="hand-comma" style="display: none" class="st0">
+    <g id="hand-comma" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M389.6,379.6c-1-2.2-2.7-5.5-5.3-8.9c-2.8-3.6-5.3-5.6-7.4-7.5c-2.7-2.5-5.8-6.5-11.8-14.5
     c-16.3-21.7-15.2-22.6-19.8-26.3c-1.4-1.1-4.5-3.4-6.8-7.5c-1.7-3.1-2.5-6.1-3-8.5c-0.9-3.8-0.6-4.9-1.2-9c-0.1-1-1-6.4-3.1-12.5
     c-2.1-5.8-3.4-6.6-5.3-12.3c-1.3-3.7-2-6.9-2.3-9c-0.7-1.1-1.6-2.6-2.2-4.5c-0.3-0.9-0.4-1.7-0.5-2.5c-0.5-1.1-1.2-2.7-1.5-4.7
@@ -1653,7 +2461,7 @@
       l0.9,2.7c0.2,0.9,0.6,1.8,0.7,2.8c0.1,1-0.3,2.1-0.8,2.9C323.3,225.5,322.6,226.2,321.9,226.8z"/>
   </g>
 </g>
-    <g id="hand-dot" style="display: none" class="st0">
+    <g id="hand-dot" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M405.6,379.7c-1.2-2.1-3.1-5.2-6.1-8.3c-3.8-4.1-6.5-5.4-10.9-8.7c-6.1-4.5-10-8.5-16.1-14.7
     c-6.5-6.7-5.9-7.1-11.4-12.3c-6.3-5.9-10.4-9.4-10.4-9.4c-3.8-3.2-5.2-4.2-6.9-6.6c-1.3-1.8-2.4-3.9-4.2-9.7
     c-2-6.6-1.7-7.7-3.5-14.4c-1.7-6.5-2-5.7-4.7-15.1c-1.3-4.6-1.7-6.5-3-10.7c-1.9-5.8-2.6-6.4-3.2-9.1c-1.2-5.2,0-10.4,1.1-14
@@ -1707,7 +2515,7 @@
       c-0.1,0.9-0.3,1.8-0.6,2.7c-0.2,0.5-0.5,0.9-0.8,1.2C334.6,231.5,334.1,231.7,333.7,231.6z"/>
   </g>
 </g>
-    <g id="hand-slash" style="display: none" class="st0">
+    <g id="hand-slash" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M355.2,379.8c-4.5-8.3-8.1-15.1-10.7-20c-3.2-6.2-4.8-9.3-5.2-10.2c-3.1-6.3-3.7-7.9-6.2-11.6
     c-0.8-1.2-2.9-4.2-4.8-8.6c-2.2-5-2.7-8.5-2.9-9.8c-0.2-1.8-0.2-3-0.1-7.3c0.4-14.2,0.5-15.5,0.1-18.8c-0.3-2.6-0.5-2.1-1.5-8.2
     c-0.7-4.1-1.1-7.3-1.3-9.4c-0.6-4.5-0.8-6.8-0.9-9.7c0-1.6-0.1-4,0.2-7c0.3-3.3,0.6-2.8,1.3-7.9c0.5-3.2,0.6-5.1,1.3-9.4
@@ -1761,7 +2569,7 @@
       c0,0.4,0,0.8,0,1.2c0,0.2,0,0.4-0.1,0.7c-0.1,0.2-0.1,0.4-0.2,0.6C328.3,235.9,327.7,236.7,327,236.9z"/>
   </g>
 </g>
-    <g id="hand-shift-right" style="display: none" class="st0">
+    <g id="hand-shift-right" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M357.3,379.8c-7.6-7.6-14.1-14-19.4-19.2c-7.7-7.6-11.6-11.4-12.6-12.3c-5.2-4.4-8.7-6.4-12.6-11.7
     c-1.4-1.8-3.4-4.5-4.8-8.6c-1.3-3.6-1.5-6.2-2-12.6c-0.6-7.1-0.9-10.7-1.2-13.9c-0.9-8.7-1.5-13.6-3.3-20c-0.9-3-1.6-4.9-2.2-8.6
     c-0.5-3-1.1-6.6-0.3-10.9c0.4-2.1,0.8-2.7,1.9-6.5c1.2-4.1,2-7.5,2.5-9.7c-0.6-1.8-1.3-4.3-2-7.4c-0.6-2.4-1-4.1-1.3-6.3
@@ -1820,7 +2628,7 @@
       c0.5,1.7,0.7,3.4,0.8,5.1c0.1,1.7,0.3,3.4,0.2,5.2c0,0.9-0.2,1.8-0.5,2.6C307.6,242.7,307,243.4,306.2,243.8z"/>
   </g>
 </g>
-    <g id="hand-space" style="display: none" class="st0">
+    <g id="hand-space" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M377.1,379.8c-1.1-2.5-3-6.3-5.9-10.5c-3.9-5.6-5.9-6.4-11.5-12.7c-2.3-2.6-6-7.6-13.5-17.6
     c-3.5-4.7-5.4-7.3-8.7-11.4c-3.1-3.8-4.7-5.8-5.6-6.8c-3.1-3.5-4-4.1-5-6.1c-1.4-2.6-1.6-4.9-2-8.4c-0.6-5.8,0.5-7.2,0-12.6
     c-0.2-2.4-0.7-4.2-1.6-7.9c-1.6-6.4-2.8-8.4-4.4-14.7c-0.8-3-1.2-5.4-1.5-7c-0.3-0.8-0.7-2-1.2-3.5c-1-3.3-1.6-6-1.7-7.1
@@ -1868,7 +2676,7 @@
       c0,0.5,0.1,0.9,0,1.5c-0.1,0.5-0.3,0.9-0.6,1.3C321,226.7,320.1,227.4,319.1,227.3z"/>
   </g>
 </g>
-    <g id="hand-6" style="display: none" class="st0">
+    <g id="hand-6" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M444.3,363.8c-6.3-13.2-7.2-15.9-8-19.5c-1.6-7.2-1.4-13.3-1.3-16.1c0.2-5.4,2.5-19.9,3.3-33.9
     c0.9-17.4,1.4-26.1,1.5-30.1c0.5-13,0.7-19.5,0.6-24.9c-0.1-6.5,0.1-13.1,0-19.6c0-1.1,0-1.9,0.1-2.9c0.4-4.5,2-6.6,4.3-13.5
     c0.8-2.4,1-3.4,1.1-3.9c0.6-2.8,0.6-5.2,0.5-6.8c0.6-2,1.5-4.9,2.5-8.5c0.9-3.1,1.3-4.9,1.7-6.5c0.6-3,1-7.4,0.1-13.2
@@ -1915,7 +2723,7 @@
       C291.6,105.7,291.5,104.4,291.6,103.1z"/>
   </g>
 </g>
-    <g id="hand-backslash" style="display: none" class="st0">
+    <g id="hand-backslash" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M481.9,380.2c0,0-3.9-4.2-7.3-6.4c-2.2-1.4-3.9-2.2-4.6-2.5c-7.8-3.5-5.9-3.5-29.5-14.5
     c-13.6-6.3-16.2-7.2-22.3-10.9c-6.1-3.7-10.1-6.8-11.1-7.6c-1.6-1.2-5.5-4.3-16-15.4c-13.6-14.2-14.6-16.8-19-19.4
     c-0.9-0.5-3.5-2-5.8-4.9c-1.4-1.7-2.1-3.3-3.1-5.9c-1.9-4.8-3.1-8.4-4.2-12c-3.1-9.4-3.6-10.5-4.1-11.5c-2.3-4.5-5-8.1-5-8.1
@@ -2043,7 +2851,7 @@
       C486.4,183.2,486.6,181.6,486.8,180z"/>
   </g>
 </g>
-    <g id="hand-alt-right" style="display: none" class="st0">
+    <g id="hand-alt-right" transform="translate(30, 0)" style="display: none" class="st0">
   <path class="st1" d="M489.4,281.6c-0.6-9.2-4.1-24.7-5.1-27.2c-1.9-4.3-4.5-6.5-5.8-7.6c-2.4-1.8-4.9-2.7-6.6-3.3
     c-1.6-0.6-2.9-0.9-3.9-1.2c-1.4-1.1-3.5-2.4-7.7-3.2c-1.5-0.3-4.3-0.6-5.1-0.2c-1.2-2.3-2.8-4.5-5.2-7.3c-1.2-1.4-2.4-2.7-3.5-3.8
     c-0.2-0.4-0.6-1.2-1.2-2.2c-3-5.7-5.6-10.9-7.9-14.1c-1.6-2.2-2.8-3.4-3.8-4.6c-1.4-1.5-2.1-2.3-3.1-2.8c-3-1.8-6.4-1-6.8-0.9
@@ -2104,7 +2912,7 @@
       c0.7,0.2,1.4,0.2,2.2,0.2c1.6,0,3.1,0,4.7-0.1C433.1,213.7,434.6,213.7,436.2,213.4z"/>
   </g>
 </g>
-    <g id="hand-alt-left" style="display: none" class="st0">
+    <g id="hand-alt-left" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M327.7,301c0-8.9-8-17.5-10.9-26.2c-2.9-8.8-3.9-18-5.1-20.1c-1.2-2.1-5.5-5.5-11.8-1.6
     c-6.3,3.9-8.8,19.5-8.7,28.1c0.1,8.7,0.7,15.8,4.3,18.7c-3,2.2-0.9,21-2.2,22.6s-10.9-22.2-12.6-26.7c-1.7-4.5-4.2-17.7-4.6-34.7
     c-0.4-17-0.4-33.8-0.7-39.2c-0.3-5.4-1.5-44.3-1.8-50.3c-0.4-6-2.7-12.2-4.8-15.1c-2.1-2.9-11.9-10.3-18.1,2.7
@@ -2145,7 +2953,7 @@
   </g>
         <path class="st5" d="M200.6,276c-1.8-0.9-5.5-2.3-6.5-5.5c-1-3.2,0-11.4-6-16.1c2.9-4.1,7.1-14.5,7.4-17.7"/>
 </g>
-    <g id="hand-shift-alt-left" style="display: none" class="st0">
+    <g id="hand-shift-alt-left" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M270.9,382.7c4-6.5,7.4-12.2,17.4-24.1c10-11.9,5-26.2,6.7-36.9c1.7-10.7,4.5-20.9,4.8-24.1
     c0.3-3.1-3.1-21.9-3.1-29.5c0-7.6,1.4-18.3,0.4-20.7c-1-2.5-7.6-5.3-13.1,0c-5.5,5.3-10.4,12.6-12.1,18.5s-2.7,12.8-2.4,20.7
     s-2.3,6.8-2.1,9.5c-1-4.3-5-6.8-3.5-35c1.4-28.2,4-36.4,4.4-50c0.4-13.6,1.8-43.6-0.9-52.9c-2.7-9.2-14.9-10.3-18.7-1.1
@@ -2192,7 +3000,7 @@
       c-0.5-2.1-0.8-4.2-1-6.3c-0.1-1.1-0.2-2.1-0.1-3.2c0-1.2,0.6-2.3,1.2-3.1C290,249.3,292,248.1,294.1,248z"/>
   </g>
 </g>
-    <g id="hand-b" style="display: none" class="st0">
+    <g id="hand-b" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M216.9,381c3.5-1.7,12.7-10.3,18.5-16.4c5.8-6,26-21.7,28.4-26c2.3-4.3,7.6-23.6,13.8-37.2
     c4-8.8,7.7-17.1,7.5-18.2c1.5-0.8,2.8-7.2,4.1-12.8c1.3-5.6,11.1-23,12.4-27.7c0-5-10.8-7.1-13.8-6.2c0,0,7-11.3,12.8-17.4
     c5.8-6,10.3-18.2,12.5-22.6s1.1-15.3-5.8-18.3s-16,4.5-19.5,9.3s-7.7,11.9-9.5,14.2c-1.8,2.4-26.8,26.9-33.1,33.8
@@ -2230,7 +3038,7 @@
       C309.5,190.9,310.4,190.3,311.1,189.6z"/>
   </g>
 </g>
-    <g id="hand-v" style="display: none" class="st0">
+    <g id="hand-v" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M277.8,222.3c1-1.6,9.5-9.3,14.1-28.8c4.6-19.5-15.9-19.2-23.1-8.3c-7.1,10.9-12.5,20.4-21.6,29.4
     c-9.1,9-24.8,28.4-26.7,30.4c-1.9,2-8.7,11.4-10.3,11.5c-1.6,0.1-8.7-3.1-9.3-5.3c-0.6-2.2-0.4-11.3,1.4-15.5
     c1.8-4.2,9.8-23,10.3-26.5c4.1-1.3,11.2-7.6,13.7-10.7c2.4-3.2,4.9-7.9,7-10.1c2.1-2.2,11.6-20.9,6.1-28.5
@@ -2274,7 +3082,7 @@
       c-0.6-1.2-1-2.7-0.9-4.1c0-1.4,0.4-2.8,0.9-4.1c1.1-2.5,2.7-4.8,4.8-6.6C281.8,229.5,284.2,227.9,286.9,227.4z"/>
   </g>
 </g>
-    <g id="hand-c" style="display: none" class="st0">
+    <g id="hand-c" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M238.1,380.3c2.7-4.7,18.2-31.7,33.7-42.8c15.5-11.1,16.4-14.8,25-20.4c8.6-5.5,14.6-10.4,15.3-28.8
     c0.7-18.4,5.8-30.1,4.9-33c0.9-1.7,1.3-10.1,0.6-11.1c0.4-1.2,0.5-6-0.1-10.6c-0.6-4.6,0.4-9.1-0.4-10.6c0.2-2.4,6-18.4,4.7-24.5
     c-6.9-5.5-17.6,0.5-24.2,9.1c-6.6,8.6-12.6,23.4-9.5,34.4c-3.4,2.3-3.5,10.4-4.7,14.7c-1.2,4.3-2.6,8.1-1.7,8.8
@@ -2313,7 +3121,7 @@
       L231.5,181z"/>
   </g>
 </g>
-    <g id="hand-x" style="display: none" class="st0">
+    <g id="hand-x" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M235.6,381c3.4-6.5,9.1-19,15-23.8s29.6-36.2,36.4-42.4s10.8-11.6,11-20.4c0.2-8.8,0-7.2,0.8-18
     c0.8-10.8,1.5-22.7,1.3-25.6c0.7-2,1.2-9.4,0-10.2c0.7-0.9,0.8-4.6-1.3-9.6c-2.1-5-1.2-8.5-2.1-11.4c0.5-3.1,3.1-17.4,1.3-23.3
     c-5.5-5.1-20.4,0.4-26.3,18.5s-3.7,25.8-1.5,27.8c-2.1,1.4-2.6,10-3.2,14.3c-0.6,4.3-1.3,8.1-0.8,9.1c-1.7,0.3-4,6.8-4,8.9
@@ -2342,7 +3150,7 @@
       c0.8-1.1,1.7-2.1,2.8-2.8C293.3,198.2,294.5,197.7,295.8,197.5z"/>
   </g>
 </g>
-    <g id="hand-z" style="display: none" class="st0">
+    <g id="hand-z" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M245.4,381c11.2-11.5,28.5-33.9,36.9-40.4s6.7-21,10-32.4c3.3-11.4,11.4-29.6,10.1-32.2
     c2.1-1.3,2.7-6,3.4-10.6c0.7-4.6,3.7-7.1,3.6-9.8c2.1-2.7,11.2-16.7,11.3-19.7c0.1-3-7-9.9-21.7-3.1s-23.3,23.4-24.2,26.3
     s0.3,5.7-0.4,7.1s-2.7,1.1-5.5,9.8c-2.7,8.6-3.9,15.7-7.7,18.4c0.3-5,0.8-26.7,1.5-35.2s7.6-33.5,9.9-44.3
@@ -2376,7 +3184,7 @@
       C313.2,236.1,315.6,235.5,317.9,235.8z"/>
   </g>
 </g>
-    <g id="hand-g" style="display: none" class="st0">
+    <g id="hand-g" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M295.2,214.3c-3.2-3.4-13.5,0.5-13.9,0.6c0.2-0.5,5.7-16.2,9.7-23c4.1-6.9,11.4-21.3,7.8-35.5
     c-3.6-14.2-15.8-7.4-20.1-2.3c-4.3,5.1-9.7,21.5-12.6,26c-2.9,4.5-14.4,19.6-20.7,28.8c-6.3,9.2-14.6,24.3-16.9,25.9
     c-2.4,1.6-9,1.3-10.3-3.2c-1.3-4.5-1.6-10.6,1.1-18.8c2.7-8.1,5.2-16.8,5-17.7c-0.2-0.9,6.5-2.3,11.4-15c6.4-8.3,7.3-22.5,3-23.9
@@ -2413,7 +3221,7 @@
         <path class="st5" d="M257.3,255.7c3.5-5,21.1-33.2,23.9-40.8c2.8-7.6,5.6-16.1,9.7-23s11.4-21.3,7.8-35.5
     c-3.6-14.2-15.8-7.4-20.1-2.3c-4.3,5-9.7,21.4-12.6,26s-14.4,19.6-20.7,28.8c-6.3,9.2-14.6,24.3-16.9,26"/>
 </g>
-    <g id="hand-f" style="display: none" class="st0">
+    <g id="hand-f" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M205.3,380.4c2.7-2.5,5.9-7,13.1-11.9s26.7-29.3,41.6-43.6s5.5-14.7,16-44.5c10.5-29.8,5.7-29.4,1.7-43.2
     c0,0,3.1-12.1,2.6-22.6c-8.1-5.5-19.9,1.5-27.2,18s-1.8,23.9-1.8,23.9s-4.3,2.9-7.3,14s-3.4,10.9-3.7,8.6
     c-0.4-2.2,1.5-16.2,2.9-22.1c1.5-5.9,5-19.8,10.9-32.1c5.9-12.4,9.2-22.7,10.7-28.9s7.2-11.8,8.5-26.5c1.3-14.7-2-14.4-2-14.4
@@ -2447,7 +3255,7 @@
       c0.4-1,0.9-2,1.5-2.8C273.3,217.5,275,216.1,276.9,215.3z"/>
   </g>
 </g>
-    <g id="hand-d" style="display: none" class="st0">
+    <g id="hand-d" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M205.8,380.5c4.8-4.6,5.5-7,17.3-16.6c11.8-9.6,23.5-26.1,33.8-36.4c10.3-10.3,12.3-13.1,13.4-24.8
     c1-11.7,7.8-31.2,10.9-40.2c3.1-9-3.7-25.3-3.7-25.3s3.8-10.2,3-23.1c-6.1-5.2-19.5-1.3-27.6,17.6s-2.4,23.8-2.4,23.8
     s-3.8,4-6.6,10.6s-3.6,13.3-3.6,13.3s4.4-33.4,13.2-52.1c8.8-18.6,10.4-30,15.2-39.7c4.7-9.7,7.3-27.2,2.9-32.1
@@ -2481,7 +3289,7 @@
       c0.7-0.9,1.5-1.6,2.3-2.2C275.8,216,276.8,215.5,277.7,215z"/>
   </g>
 </g>
-    <g id="hand-s" style="display: none" class="st0">
+    <g id="hand-s" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M205.7,380.1c3-3,1.8-4.7,11-11.7c9.2-7,26.1-25.6,31.5-32.3c5.3-6.7,17.7-17,19.2-20.5
     c1.5-3.5,2.2-19.5,7.2-31.8c5-12.3,8-25,7.3-30.1c-0.7-5.2-4.1-15.4-4.7-16.3c0.6-1,3.2-13.5,3.1-23c-4-4.6-19-3.1-27.4,16.7
     c-8.4,19.8-2.8,25-2.8,25s-5,5.6-8.1,17.7c-3.1,12.1-2.9-4.4,2.5-23.3s15.8-40,17.4-44s2.4-10.4,6.3-18.5c3.9-8.2,4.8-17,5.1-21.2
@@ -2515,7 +3323,7 @@
       c-0.5-2.1-0.6-4.4-0.1-6.5c0.5-2.1,1.5-4.1,2.8-5.9C273.8,217.3,275.4,215.6,277.4,214.8z"/>
   </g>
 </g>
-    <g id="hand-a" style="display: none" class="st0">
+    <g id="hand-a" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M205.3,380.4c2.1-2.1,6.8-8.3,19.8-19.3c13-11,18-20.8,34.6-36.9s6-17.9,15.5-43c9.5-25.1,7.3-29.3,5.1-35.7
     c-2.2-6.4-2.7-8.1-2.7-8.1s3.6-17,2.3-22.6s-14.5-3.6-22.9,9.2c-8.4,12.8-11.5,26.7-6.7,31.7c-2.5,2-9.5,15.9-10.5,22.9
     c1.9-6.9,2-24,8.9-40.7c6.9-16.7,13.7-34.9,16.8-44.5c3.1-9.5,10.9-18.4,6.1-38.5c-1.2-3.9-7-5.6-10.1-5.5
@@ -2553,7 +3361,7 @@
       c0.5-0.6,0.7-1.5,0.6-2.4C176.5,157,176.2,156.1,175.6,155.4z"/>
   </g>
 </g>
-    <g id="hand-neutral-left" class="show-hand" style="display:inline">
+    <g id="hand-neutral-left" transform="translate(-30, 0)" class="show-hand" style="display:inline">
   <path class="st1" d="M231.1,381.6c1.3-1.6,6.9-7.4,13-13.5c6.1-6.1,18.6-27.6,22.3-31.9c3.7-4.3,13.5-14.9,15.9-20.2
     c2.4-5.3-0.2-22.3,0-27.6s2.7-30.6,1-37.2c-1.7-6.6-4.4-9.3-6.6-13.9s-2.6-6-4.6-7.4s-0.8-13.4-0.4-15.1s1.8-9.4,1.8-12.1
     s0-10.4,2.1-16.1s0.7-22.8-2.9-28.2s-6.5-6.7-10.8-7s-9,3.9-10.2,6.5s-2.8,5-4.6,26.2c-2.5,5.7-7.3,10.7-9.4,17.6s-7.7,24.3-9,31.5
@@ -2577,7 +3385,7 @@
         <path class="st2" d="M151.6,239.8c2.8-3,5.1-7.6,5.3-12.4c0.2-4.8-0.3-29.7,6-39.2c6.3-9.5,17.8-22.8,17.8-22.8"/>
         <path class="st2" d="M263.3,298.1c-1.4-2.6-3.1-4.3-3.1-6.3s1.1-24.9,2.3-33.1c1.1-8.2,6.7-31.9,8.6-36.8"/>
 </g>
-    <g id="hand-t" style="display: none" class="st0">
+    <g id="hand-t" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M221.1,382.1c4-4.3,13-17.2,18.7-20.7s16-13.9,22.7-23.2c6.7-9.3,19.5-19.2,24.2-28.4
     c4.7-9.2,1.8-22.7,5.8-40.7s4.5-21.5-1.2-28c-5.7-6.5-12-11.4-16.5-18.5c2-6.5,7.8-23.7,9.2-30.5c1.3-6.8,1.3-15.7,2.7-20.5
     s3-7.8,3.5-12.8c0.4-4.9,1.8-23.7-2.9-31.5s-12.6-9-19.1-1.3c-6.4,7.7-6.6,23.4-7.1,30.9c-0.4,7.5-8.8,20.6-13.4,31.6
@@ -2606,7 +3414,7 @@
       c1.2,0.2,2.4,0.4,3.6,0.5c1,0.1,1.9-0.9,2.6-1.7c0.8-0.9,1.4-2,2-3C285.1,132.5,285.5,131.4,285.9,130.2z"/>
   </g>
 </g>
-    <g id="hand-shift-left" style="display: none" class="st0">
+    <g id="hand-shift-left" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M247,382c3.7-4.7,14.7-21,18.2-26.4c3.5-5.4,11.4-23.8,14.7-28c3.3-4.2,7.3-9.5,5.5-21.9
     c-1.7-12.4-3.2-16.7-2.2-34.4c1-17.7-2.1-21.2-6.2-29.7c-0.8-5.1-2.1-6.5-4-8c0.3-3.5,2.1-17.4,3.2-24.5c1.2-7.1-1.2-4.9,0-20
     c1.2-15.1-2.9-25.8-5.5-28.9c-0.4-3-3.3-6.4-8.6-7.5c-5.2-1.2-10,3.6-10,5.7c-1.7,0.6-7.1,8-4.4,32.2c-5.9,14.1-9.6,28.6-10.4,33.5
@@ -2638,7 +3446,7 @@
         <path class="st2" d="M266.3,286.6c-0.2-7.4-1.2-21.2,0-29.5c1.2-8.2,6.8-23.4,6.8-23.4"/>
         <path class="st2" d="M192,250c2.1-4.6,4.7-11.1,5.1-16.4"/>
 </g>
-    <g id="hand-r" style="display: none" class="st0">
+    <g id="hand-r" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M297.2,223.4c0.5-3.1,6-15.5,4.7-21.5c-2.2-3.2-17.2-4.9-26.7,11.6c-9.4,16.5-9.4,20.6-7.8,28.9
     c-2,0.3-8,16.8-9.2,20.7c-2,1.1-4.5,7.1-5.4,7.4s-3.1-2.4-2.4-16.6c0.7-14.2,2.1-18.5,2.2-22.2c0.1-3.7,4.5-23,7.2-33
     c2.7-10,3.3-23.4,5.6-32.2c2.3-8.7,3.5-26.8,0-36.7c-3.5-9.9-13-8.7-14.7-7.9c-1.8,0.8-5.5,3.9-7.7,10.2
@@ -2681,7 +3489,7 @@
       c0.6-2.1,1.6-4.1,3.1-5.8c0.7-0.8,1.6-1.6,2.5-2.2C295.4,203.2,296.3,202.7,297.4,202.3z"/>
   </g>
 </g>
-    <g id="hand-e" style="display: none" class="st0">
+    <g id="hand-e" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M211.9,381.8c4.6-5.6,5.6-10.5,10.9-12.6c5.3-2.1,12.6-8.8,16.5-13.3c3.9-4.6,23.5-27.7,28.7-32.2
     s8.8-9.8,9.8-12.6c1.1-2.8,1.4-11.6,2.8-18.2c1.4-6.7,1.8-9.8,4.8-18.6c3-8.8,6.2-16.9,4.1-18.2c1.2-1.1,0.9-6.7,0.7-8.3
     c-0.2-1.7-0.6-13.3-0.2-14.1c0.4-0.8,3-5.8,4.2-9.9c1.2-4.2,1.7-11.4,1-12.5c-0.7-1.2-12.5-6.9-24.1,8.7
@@ -2720,7 +3528,7 @@
       C227.6,133.5,228.5,131.8,229.3,130.1z"/>
   </g>
 </g>
-    <g id="hand-w" style="display: none" class="st0">
+    <g id="hand-w" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M205.4,381.4c4.4-5.4,8.7-10.4,15.4-15.6c6.7-5.2,11.4-9.4,15.6-13.7s15.4-16.7,24.8-23.9
     c9.4-7.3,12.7-11.8,15.2-15.2c2.9-4,1.3-15.8,7.4-29c6.2-13.2,5.5-16.8,5.5-16.8s3.9-4,4.3-8.8c0.4-4.8,0.1-17.5,3.2-20.5l-2.1-2.1
     c0,0,8.2-14.5,9.1-23.2c-3.2-3.9-17.9-4.9-29.5,9.7c-11.5,14.6-11.2,21.6-10.4,27.4c-3,2-4.5,7.3-6.6,12.1s-3.7,8.9-3.6,9.9
@@ -2761,7 +3569,7 @@
       C197.4,136.5,198.7,134.8,199.9,133.1z"/>
   </g>
 </g>
-    <g id="hand-q" style="display: none" class="st0">
+    <g id="hand-q" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M172,381.8c4-4.9,16.7-23.8,28.5-32.7c11.8-8.9,47.5-34.8,52.7-40.5c5.2-5.6,6.3-11.3,9.4-21.4
     s14.8-36.9,16-40.7c1.2-3.8,0.9-13.2,2.2-17.7v-1.6c0,0,8.4-19.9,7.6-22.4c-0.7-2.5-9.2-4.3-16-2.2c-6.8,2-15.4,12.4-18.6,17.6
     s-7.8,13.2-6.1,20c-2,0.2-3.1,1.8-3.4,3.1c-0.3,1.3-7.2,17.5-7.2,17.5s-2.8,0.9-4.7,2.8s-2.7,4.5-2.7,4.5s-2.7-1.7-3.2-3.1
@@ -2801,7 +3609,7 @@
       C161.7,129.7,160.8,128,159.3,126.9z"/>
   </g>
 </g>
-    <g id="hand-tab" style="display: none" class="st0">
+    <g id="hand-tab" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M172.2,381.9c5.6-8.1,12.2-19.9,20.7-26.7s26-17,32.5-20.1c6.6-3.2,9.5-6.6,13.8-8.5c4.4-1.9,10.7-4.1,14.3-7
     c3.6-2.9,6.6-7.3,8.6-14.5s14.7-36.7,14-37.9c0.9-0.4,5-9.3,4.2-10.7c1-0.6,0.8-8.6,2.1-13.4c1.3-4.8,2-5.4,0-7.5
     c2.3-1.6,11.7-15.4,10.7-21s-11.7-5.5-16.2-2.7c-4.4,2.8-14.1,10-17.4,15.2c-3.3,5.2-8.6,17-8.6,18.6c0,1.6,1.1,2.3,0.6,2.7
@@ -2844,7 +3652,7 @@
       c1.3,0.1,2.6-0.1,3.7-0.5c1.1-0.4,2.2-1.1,3-2c0.8-0.9,1.5-1.9,2-3.1C133.9,134.8,134.3,133.6,134.5,132.3z"/>
   </g>
 </g>
-    <g id="hand-5" style="display: none" class="st0">
+    <g id="hand-5" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M213.3,381.4c2.7-3.9,22.1-36.6,26.8-42.7s13-12.5,15.7-16.2c2.7-3.8,14-19.3,18.6-26c4.6-6.7,16.4-21,18.3-27
     c1.9-6,1-16.4,1.7-19.7c0.7-3.2,3.6-21.2,4.6-24.8c1-3.6,2.4-9.8,3.4-13s-2.1-13,0-18.4s8.7-16.3,7.3-21.9s-14.2-7.1-23.1,2
     c-8.9,9.1-13.9,17.9-15.3,23.6s-0.1,8.5-0.4,9.5s-1.8,1.3-2.5,3.6c-0.7,2.3-3.9,20.1-4.9,21.7c-0.9,1.7-2.9,3.2-3.6,5
@@ -2885,7 +3693,7 @@
   </g>
         <path class="st2" d="M218.9,157.4c-1.2-3.8,0-23.5,0-23.5"/>
 </g>
-    <g id="hand-4" style="display: none" class="st0">
+    <g id="hand-4" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M135.3,154.7c-2.6,0.8-14.3,11.5-17.4,16.2c-3.1,4.7-5,2.5-6.9,8.1s-0.9,20.8,0,27.5
     c0.9,6.7,4.4,12.2,4.4,20.4c0,8.2-1.6,12.4,1,22.7c2.5,10.3,5.5,15.2,8.1,34.2c2.5,19,5.4,27.2,3.8,32.8
     c-1.6,5.6-10.5,35.8-12.5,39.1s-12,22.4-15.9,27.2h109.3c3.8-5.4,18.3-31.3,22.9-37.6c4.6-6.2,14.9-16.9,18.7-21.5
@@ -2925,7 +3733,7 @@
   </g>
         <path class="st2" d="M206.2,157.1c-1.3-9.9-0.8-14.4,0-21.7"/>
 </g>
-    <g id="hand-3" style="display: none" class="st0">
+    <g id="hand-3" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M141.4,218c9.1-2.5,16.2-12.3,19.1-17.4c2.9-5.2,4.9-15.1,6.5-21c1.6-5.8,5.6-15,6.9-18.4s0.5-3.9,1.4-6.7
     c0.3-1,2.4-4.7,5-9.1c-1.8,1.5-7,3.5-10.3,2.9c-3.3-0.6-11.5,1.6-17.1,5.1c-5.7,3.5-12.3,1.2-16.4,7.3c-4.1,6-5.6,19.1-5.9,20.2
     c-4,1.5-12.2,1.5-15.3,7c-3.2,5.6-2,6.2-3.4,9.2c-1.4,3-3.3,7.9-3.4,12.3s0.3,22.6-0.8,26.2s-4.5,12.9-4.9,17.8s-0.2,25.3-1.1,30.9
@@ -2968,7 +3776,7 @@
       c-0.4,0.2-0.8,0.5-1.1,0.7c-1.6,0.8-3.2,1.4-4.9,1.7C201.6,112,199.8,112,198.2,111.4z"/>
   </g>
 </g>
-    <g id="hand-2" style="display: none" class="st0">
+    <g id="hand-2" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M292.5,203.9c0.5-1.8,7.4-19.5,6.2-23c-1.2-3.5-14.8-7.3-26.2,7.5C261,203.2,259,211,259.8,220.3
     c-1.4,2-3,17-5.6,23.2c-2.2,1.3-6,8-6.5,7.9c-0.6-0.1-7.1-5-14.6-4.1c0-3.5-0.2-13.6,3.9-23.9c4.1-10.3,14-25.8,17.8-31
     c3.7-5.2,2.8-6.3,3.3-7.3c0.5-1,10.6-8.4,9.7-24.1c-0.8-15.7-14.8-13.1-16-12.6c-1.1,0.5-6.5,4.4-11.6,12.9
@@ -3017,7 +3825,7 @@
       c1.5-0.7,2.7-1.8,3.8-3C186.6,107.5,187.6,106.1,188.4,104.6z"/>
   </g>
 </g>
-    <g id="hand-1" style="display: none" class="st0">
+    <g id="hand-1" transform="translate(-30, 0)" style="display: none" class="st0">
   <path class="st1" d="M292.3,210.4c-7.8-0.6-19.2,6.1-22.4,7.8c-3.2,1.7-10.5,8.8-14.5,14.1c-4,5.2-2.9,8.8-3.2,9.4
     c-0.3,0.5-1.6,0.6-2.6,1.2c-1,0.6-10.3,12.7-12.1,14.7c-1.9,1.9-2.6,1.9-2.4,4.2c-5.3,0.1-9.7,5.6-11.1,5.7
     c-1.4,0.1-2.5-4.1-6.4-7.4c-3.9-3.3-7.6-4.6-7.7-8.8c-0.1-4.3,7.8-18.9,12.5-25.7c4.7-6.8,13.5-15.5,16.8-19.1
@@ -3070,7 +3878,7 @@
       c-0.5,1.1-0.8,2.4-0.8,3.6c0.1,0.6,0.1,1.2,0.4,1.8C284.5,233.1,284.9,233.7,285.2,234.3z"/>
   </g>
 </g>
-    <g id="hand-tilda" style="display: none" class="st0">
+    <g id="hand-tilda" transform="translate(-30, 0)" style="display: none" class="st0">
   <path id="bg" class="st1" d="M270.2,185.6c-7.9-0.5-14.3,1.4-24.2,7.2c-9.9,5.8-13.6,13.3-14.1,17.5c-8,6.9-12.9,22-13.5,25.2
     c-2.4,0.3-5.5,5.8-6.3,6c-0.8,0.3-0.6-1.3-0.6-3.7c0-2.4-1.9-2.8-2.3-4.8c-0.4-2,1.3-4.9,1.7-8c0.4-3.1-1.3-5.9-1.3-7.3
     c0-1.4,1.2-3.3,7.7-11.3c6.5-8,12.5-9.4,17-12.3c4.5-2.8,9.3-8.1,19.3-12.6c10-4.5,16.7-11.3,17.8-21.3
@@ -3121,19 +3929,480 @@
   </g>
 </g>
 </svg>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- RESULT MODAL -->
+  <div class="modal-overlay" id="result-modal">
+    <div class="modal-card">
+      <div class="modal-trophy" id="modal-trophy">🏆</div>
+      <h2 id="modal-title" style="color:#fff; font-size:22px;">تم إكمال الدرس بنجاح!</h2>
+      <div class="modal-stars" id="modal-stars">★★★</div>
+      <div class="modal-stats-grid">
+        <div class="m-stat"><div class="v" id="m-wpm">35</div><div class="l" id="lbl-m-wpm">السرعة</div></div>
+        <div class="m-stat"><div class="v" id="m-acc">98%</div><div class="l" id="lbl-m-acc">الدقة</div></div>
+        <div class="m-stat"><div class="v" id="m-err">1</div><div class="l" id="lbl-m-err">الأخطاء</div></div>
+      </div>
+      <p class="modal-msg" id="modal-feedback">أداء متميز وتدفق رائع! لقد حققت نسبة الدقة المطلوبة (90%+).</p>
+      <div class="modal-actions">
+        <button class="m-btn m-btn-retry" id="btn-modal-retry" onclick="retryCurrentLesson()">إعادة التمرين (Tab)</button>
+        <button class="m-btn m-btn-next" id="btn-modal-next" onclick="goToNextLesson()">الدرس التالي (Enter)</button>
+      </div>
+    </div>
   </div>
 
-  <div class="status-bar">
-    <span>الوضعية الحالية: <span class="status-val" id="pose-lbl">neutral</span></span>
-    <span>•</span>
-    <span>الإصبع المستهدف: <span class="status-val" id="finger-lbl">الاسترخاء الطبيعي</span></span>
-  </div>
-
-  <div class="footer-dock">
-    <a href="Barqtype.html" class="link-btn">⚡ فتح منصة Barqtype الكاملة</a>
-  </div>
+  <footer>
+    Barqtype Learn &bull; Mechanical IQUNIX A80 &bull; 18 Comprehensive Touch-Typing Lessons
+  </footer>
+</div>
 
 <script>
+// ==============================================================
+// 1. CURRICULUM DATA (18 ARABIC + 18 ENGLISH LESSONS)
+// ==============================================================
+var CURRICULUM = {
+  ar: [
+    {
+      id: "ar_s1",
+      num: 1,
+      title: "الصف الأساسي (Home Row)",
+      desc: "تعلم مفاتيح الارتكاز وبناء وضعية اليدين الصحيحة على الكيبورد.",
+      lessons: [
+        {
+          id: "ar_1_1",
+          title: "مفاتيح الارتكاز والسبابتين (ت، ب)",
+          desc: "ضع السبابة اليمنى على (ت) واليسرى على (ب). النتوء البارز يرشدك للموضع الصحيح.",
+          keys: ["ت", "ب"],
+          text: "تت بب تب بت تتت ببب تبت بتب تت بب تبت بت ت ب ت ب بت تب تت بب"
+        },
+        {
+          id: "ar_1_2",
+          title: "الوسطى والبنصر والخنصر (ك م ن / ي س ش)",
+          desc: "اليد اليمنى: ن (وسطى)، م (بنصر)، ك (خنصر). اليد اليسرى: ي (وسطى)، س (بنصر)، ش (خنصر).",
+          keys: ["ك", "م", "ن", "ت", "ب", "ي", "س", "ش"],
+          text: "كمنت بيسش نم كك مم نن نت يس يش بي سي كم تم نم سم بن تن سن شن"
+        },
+        {
+          id: "ar_1_3",
+          title: "تمدد السبابتين والمسافة (ا، ل)",
+          desc: "تمدد بالسبابة اليمنى يساراً إلى (ا) وباليسرى يميناً إلى (ل). الإبهام يضغط المسافة.",
+          keys: ["ا", "ل", "ت", "ب", "ك", "م", "ن", "ي", "س", "ش"],
+          text: "كل بل تل نم من مس بت سبل مات بيت نام مال سال كتب لبن بنت سمن شمل تين"
+        }
+      ]
+    },
+    {
+      id: "ar_s2",
+      num: 2,
+      title: "الصف العلوي (Upper Row)",
+      desc: "الصعود بالأصابع إلى الصف العلوي والعودة مباشرة إلى وضعية الارتكاز.",
+      lessons: [
+        {
+          id: "ar_2_1",
+          title: "سبابة ووسطى الصف العلوي (ع، غ، ف، ق / ث، ص)",
+          desc: "سبابة اليمين لـ (ع، غ) ووسطى لـ (هـ). سبابة اليسار لـ (ف، ق) ووسطى لـ (ث، ص).",
+          keys: ["ع", "غ", "ف", "ق", "ث", "ص", "ه"],
+          text: "عف صق ثغ فص قع صفث عق ثق فص هع عصف فصفص صقع قصف ثقف عصفور"
+        },
+        {
+          id: "ar_2_2",
+          title: "بنصر وخنصر الصف العلوي (خ، ح، ج، د / ض)",
+          desc: "أطراف الصف العلوي: (خ، ح، ج، د) باليد اليمنى، و(ض) بالخنصر الأيسر.",
+          keys: ["خ", "ح", "ج", "د", "ض"],
+          text: "ضد حج خد جح ضح ضج جد خض حجد ضحض دحدح ضخم حجر جبل خشب دمع"
+        },
+        {
+          id: "ar_2_3",
+          title: "دمج الصفين الأساسي والعلوي",
+          desc: "تطبيق عملي يجمع بين الصف الأساسي والصف العلوي في كلمات حقيقية متناسقة.",
+          keys: ["كتب", "علم", "قفل", "صوت"],
+          text: "كتب علم قفل صوت قلم قلب جميل شمس حبل صدق فجر حق خير صحة صيف"
+        }
+      ]
+    },
+    {
+      id: "ar_s3",
+      num: 3,
+      title: "الصف السفلي (Lower Row)",
+      desc: "الهبوط بالأصابع إلى الصف السفلي وإتقان جميع الحروف الأساسية.",
+      lessons: [
+        {
+          id: "ar_3_1",
+          title: "سبابة ووسطى الصف السفلي (ر، ى، ة / لا، ؤ)",
+          desc: "انزل بالسبابة اليمنى نحو (ر، ى) والوسطى نحو (ة). وباليد اليسرى نحو (لا، ؤ).",
+          keys: ["ر", "ى", "ة", "لا", "ؤ"],
+          text: "رى رة لاؤ رلا ؤة رىلا كرة مرى حرة رمل رمى برى قرى ثرى رؤية راية"
+        },
+        {
+          id: "ar_3_2",
+          title: "البنصر والخنصر والهمزات (و، ز، ظ / ء، ئ)",
+          desc: "أتقن مفاتيح أطراف الصف السفلي: (و، ز، ظ) باليد اليمنى، و(ء، ئ) باليد اليسرى.",
+          keys: ["و", "ز", "ظ", "ء", "ئ"],
+          text: "وز ظو ءئ وزظ ضوء جزء بطء فائز زائر وزن زهرة ظل ظرف قارئ هواء"
+        },
+        {
+          id: "ar_3_3",
+          title: "تكامل الصفوف الثلاثة الكاملة",
+          desc: "تمارين تجمع كامل حروف الكيبورد العربي في الصفوف الثلاثة مع مفردات لغوية غنية.",
+          keys: ["نهر", "بحر", "شجر", "قمر"],
+          text: "نهر بحر شجر زهر ضوء سماء قمر شمس كتاب ربيع خريف صيف شتاء وطن كفاح"
+        }
+      ]
+    },
+    {
+      id: "ar_s4",
+      num: 4,
+      title: "الكلمات وتدفق الحروف (Words)",
+      desc: "بناء تدفق مستمر وسلس لكلمات شائعة دون التوقف بين الحروف.",
+      lessons: [
+        {
+          id: "ar_4_1",
+          title: "كلمات متوازنة بين اليدين",
+          desc: "كلمات تتناوب فيها الحروف بين اليدين اليمنى واليسرى لانسيابية مضاعفة.",
+          keys: ["هذا", "رجل", "بنت", "وطن"],
+          text: "هذا رجل ولد بنت وطن كاتب مهندس معلم طالب طبيب مخلص مبدع قائد مفكر"
+        },
+        {
+          id: "ar_4_2",
+          title: "التاء المربوطة والهمزات المتنوعة",
+          desc: "التركيز على دقة كتابة التاء المربوطة والهمزات على السطر والواو والياء دون تردد.",
+          keys: ["مدينة", "مدرسة", "سماء"],
+          text: "مدينة مدرسة حديقة جامعة حياة كريمة سماء صافية لقاء طيب فناء واسع بيئة نظيفة"
+        },
+        {
+          id: "ar_4_3",
+          title: "تدفق الكلمات الشائعة والمتكررة",
+          desc: "تدريب مكثف على أكثر الكلمات العربية استخداماً لبناء ذاكرة عضلية دائمة.",
+          keys: ["في", "من", "على", "كان"],
+          text: "في من على إلى عن مع كان كل يوم عمل علم خير حق قول فعل رشد فضل نفع"
+        }
+      ]
+    },
+    {
+      id: "ar_s5",
+      num: 5,
+      title: "الجمل وعلامات الترقيم (Sentences)",
+      desc: "كتابة جمل فصيحة متكاملة واستخدام الفاصلة والنقطة والمسافات بدقة.",
+      lessons: [
+        {
+          id: "ar_5_1",
+          title: "جمل قصيرة مع علامات الترقيم الأساسية",
+          desc: "تعلم إدراج الفاصلة (،) والنقطة (.) بعد الكلمات بمسافة واحدة.",
+          keys: ["،", "."],
+          text: "العلم نور، والجهل ظلام. الصدق منجاة، والكذب خيبة. العمل عبادة، والإخلاص شرف."
+        },
+        {
+          id: "ar_5_2",
+          title: "أمثال وحكم عربية مأثورة",
+          desc: "نصوص لغوية رصينة تعزز مهارة القراءة المسبقة بالعين أثناء الطباعة بالأصابع.",
+          keys: ["الصبر", "الفرج", "الوقت"],
+          text: "الصبر مفتاح الفرج، ومن جد وجد ومن زرع حصد. الوقت كالسيف إن لم تقطعه قطعك."
+        },
+        {
+          id: "ar_5_3",
+          title: "نصوص فكرية وانسيابية متصلة",
+          desc: "فقرات متصلة تدربك على الحفاظ على وتيرة موحدة وثابتة كعازف البيانو المحترف.",
+          keys: ["الثقة", "العمل", "الطموح"],
+          text: "تبدأ الثقة بالنفس عندما يتصالح الإنسان مع ذاته، ويعمل بجد مستمر لتحقيق طموحاته العالية."
+        }
+      ]
+    },
+    {
+      id: "ar_s6",
+      num: 6,
+      title: "السرعة والتمكن (Speed & Mastery)",
+      desc: "رفع معدل الكلمات في الدقيقة (WPM) وتحقيق دقة 95%+ للحصول على التاج الذهبي.",
+      lessons: [
+        {
+          id: "ar_6_1",
+          title: "سباق الانطلاق السريع (هدف 25+ WPM)",
+          desc: "تحدي زمني سريع لكسر حاجز 25 كلمة بالدقيقة مع الحفاظ على دقة لا تقل عن 90%.",
+          keys: ["سباق", "سرعة", "تفاؤل"],
+          text: "كن جميلا ترى الوجود جميلا، وتفاءل بالخير تجده في كل خطوة تخطوها نحو أهدافك المستقبلية."
+        },
+        {
+          id: "ar_6_2",
+          title: "سباق الكفاءة العالية (هدف 40+ WPM)",
+          desc: "رفع الإيقاع الذهني والحركي لمستوى الطباعين المحترفين بسرعة 40 كلمة بالدقيقة.",
+          keys: ["معرفة", "قوة", "تميز"],
+          text: "إن المعرفة قوة متجددة لا تنضب، والحرص على اكتساب المهارات الحديثة يفتح آفاقا واسعة للنجاح والتميز."
+        },
+        {
+          id: "ar_6_3",
+          title: "اختبار التخرج الشامل والتاج الذهبي",
+          desc: "الاختبار النهائي لمسار التعلم العربي! أثبت تمكنك الكامل واحصل على التاج الذهبي.",
+          keys: ["تخرج", "إتقان", "احتراف"],
+          text: "الطباعة باللمس مهارة حيوية تمنحك سرعة التعبير ودقة الإنجاز، وممارسة اليوم تصنع احتراف الغد بامتياز."
+        }
+      ]
+    }
+  ],
+  en: [
+    {
+      id: "en_s1",
+      num: 1,
+      title: "Home Row Foundations",
+      desc: "Master anchor keys (F, J) and rest finger positioning without looking at the keyboard.",
+      lessons: [
+        {
+          id: "en_1_1",
+          title: "Anchor Keys & Index Fingers (F, J)",
+          desc: "Left index rests on F and right index on J. Feel the tactile ridges on both keycaps.",
+          keys: ["f", "j", " "],
+          text: "ff jj fj jf ff jj fjf jfj fff jjj f j j f fj jf ff jj fj jf"
+        },
+        {
+          id: "en_1_2",
+          title: "Middle, Ring & Pinky Fingers (D, K / S, L / A, ;)",
+          desc: "Left hand: D, S, A. Right hand: K, L, ;. Keep wrists slightly hovering and relaxed.",
+          keys: ["a", "s", "d", "f", "j", "k", "l", ";"],
+          text: "asdf jkl; as df jk l; a s d f j k l ; ask dad lad fall flask salads"
+        },
+        {
+          id: "en_1_3",
+          title: "Full Home Row & Spacebar Mastery",
+          desc: "Combine all home row keys with thumbs on the spacebar to form real vocabulary.",
+          keys: ["a", "s", "d", "f", "g", "h", "j", "k", "l", ";"],
+          text: "all add ask dad glad flag flash fall half glass alas salads flask alfalfa"
+        }
+      ]
+    },
+    {
+      id: "en_s2",
+      num: 2,
+      title: "Upper Row Expansion",
+      desc: "Reach up to the top row and instantly snap fingers back to the home row anchor position.",
+      lessons: [
+        {
+          id: "en_2_1",
+          title: "Index & Middle Upper Reaches (R, U / E, I)",
+          desc: "Left reaches up to R and E. Right reaches up to U and I. Return to home keys immediately.",
+          keys: ["r", "u", "e", "i"],
+          text: "red fur rid jar fire user deer rude sure rise fair ride direct figure"
+        },
+        {
+          id: "en_2_2",
+          title: "Ring & Pinky Upper Reaches (W, O / Q, P)",
+          desc: "Left ring to W, pinky to Q. Right ring to O, pinky to P with light, accurate taps.",
+          keys: ["w", "o", "q", "p"],
+          text: "pop wow quip loop pour wipe drop slow walk wrap pool paper power queen"
+        },
+        {
+          id: "en_2_3",
+          title: "Home & Upper Row Word Integration",
+          desc: "Connect the home row and top row smoothly to form rich English vocabulary.",
+          keys: ["world", "quick", "quiet", "water"],
+          text: "write people world floor quiet sleep quick apple please yellow water forward"
+        }
+      ]
+    },
+    {
+      id: "en_s3",
+      num: 3,
+      title: "Lower Row Navigation",
+      desc: "Curl fingers gracefully downward to master the bottom row keys while preserving wrist posture.",
+      lessons: [
+        {
+          id: "en_3_1",
+          title: "Index & Middle Lower Reaches (V, M / C, ,)",
+          desc: "Left index to V, middle to C. Right index to M, middle to comma (,).",
+          keys: ["v", "m", "c", ","],
+          text: "van map come cave move calm view camp music cover victim vacuum cream"
+        },
+        {
+          id: "en_3_2",
+          title: "Ring, Pinky & Punctuation (X, . / Z, /)",
+          desc: "Left ring to X, pinky to Z. Right ring to period (.), pinky to slash (/).",
+          keys: ["x", ".", "z", "/"],
+          text: "box zip zero next size fix pixel maze zeal six bronze apex exit. size. next."
+        },
+        {
+          id: "en_3_3",
+          title: "Full Keyboard Pangrams & Three-Row Flow",
+          desc: "Practice comprehensive pangrams that exercise every letter across all three keyboard rows.",
+          keys: ["quick", "brown", "fox", "jumps"],
+          text: "the quick brown fox jumps over the lazy dog and packs five dozen velvet jugs"
+        }
+      ]
+    },
+    {
+      id: "en_s4",
+      num: 4,
+      title: "High-Frequency Words",
+      desc: "Build seamless muscle memory for the most common English words and Shift key capitalization.",
+      lessons: [
+        {
+          id: "en_4_1",
+          title: "Top 50 Most Common Words",
+          desc: "Master the core words that constitute over 50% of everyday English texts.",
+          keys: ["the", "and", "that", "have"],
+          text: "the of and to a in is you that it he was for on are as with his they at be this have from"
+        },
+        {
+          id: "en_4_2",
+          title: "Capital Letters with Opposite Shift",
+          desc: "Press the opposite Shift key using pinky fingers while typing capitalized initials.",
+          keys: ["Shift", "Capitals"],
+          text: "London Paris Tokyo Cairo New York Monday Friday Apple Google Python JavaScript"
+        },
+        {
+          id: "en_4_3",
+          title: "Common Prefixes & Suffixes",
+          desc: "Train automatic finger sequences for common endings: -ing, -tion, -ment, -able.",
+          keys: ["tion", "ment", "able"],
+          text: "action learning movement stable kindness national building development powerful creative"
+        }
+      ]
+    },
+    {
+      id: "en_s5",
+      num: 5,
+      title: "Sentences & Cadence",
+      desc: "Type complete grammatical sentences with rhythm, punctuation, and steady pacing.",
+      lessons: [
+        {
+          id: "en_5_1",
+          title: "Everyday Conversational Sentences",
+          desc: "Practice natural sentence flow with proper spacing after commas and periods.",
+          keys: [",", "."],
+          text: "Consistency is the key to mastering typing. Practice a little bit every day, and your fingers will fly."
+        },
+        {
+          id: "en_5_2",
+          title: "Inspirational Wisdom & Quotes",
+          desc: "Read whole words ahead with your eyes while your fingers execute the current word.",
+          keys: ["future", "dreams", "courage"],
+          text: "The future belongs to those who believe in the beauty of their dreams. Keep moving forward with courage."
+        },
+        {
+          id: "en_5_3",
+          title: "Continuous Multi-Sentence Flow",
+          desc: "Maintain a smooth, piano-like cadence without stopping abruptly between words.",
+          keys: ["skill", "patience", "mastery"],
+          text: "True skill comes from patience and deliberate repetition. When your mind relaxes, muscle memory takes over naturally."
+        }
+      ]
+    },
+    {
+      id: "en_s6",
+      num: 6,
+      title: "Speed & Mastery",
+      desc: "Push your speed beyond 40+ WPM with 95%+ accuracy to earn your Grand Master Certification.",
+      lessons: [
+        {
+          id: "en_6_1",
+          title: "Speed Sprint 1 (Goal: 30+ WPM)",
+          desc: "Fast-paced sprint test. Focus on clean, rhythmic typing with minimal backspacing.",
+          keys: ["speed", "accuracy", "confidence"],
+          text: "Speed comes as a natural byproduct of accuracy. Type with confidence and let each stroke land cleanly."
+        },
+        {
+          id: "en_6_2",
+          title: "Advanced Pro Sprint (Goal: 50+ WPM)",
+          desc: "Elevate your pace to match professional touch-typists worldwide.",
+          keys: ["pro", "speed", "execution"],
+          text: "Technology accelerates when human creativity connects with fast execution. Every keystroke is an idea taking flight."
+        },
+        {
+          id: "en_6_3",
+          title: "Grand Master Graduation & Gold Crown",
+          desc: "The ultimate challenge! Complete this final exam with 95%+ accuracy to graduate with honors.",
+          keys: ["mastery", "crown", "certified"],
+          text: "Congratulations on reaching the pinnacle of touch typing mastery. Your fingers now express your thoughts with effortless lightning speed."
+        }
+      ]
+    }
+  ]
+};
+
+// ==============================================================
+// 2. KEYBOARD & FINGER MAPPINGS (IQUNIX A80 - FIXED PHYSICAL LTR)
+// ==============================================================
+var FINGER_DATA = {
+  lp: { name: "Left Pinky", color: "#e55656" },
+  lr: { name: "Left Ring", color: "#ed8936" },
+  lm: { name: "Left Middle", color: "#ecc94b" },
+  li: { name: "Left Index", color: "#48bb78" },
+  ri: { name: "Right Index", color: "#38b2ac" },
+  rm: { name: "Right Middle", color: "#4299e1" },
+  rr: { name: "Right Ring", color: "#9f7aea" },
+  rp: { name: "Right Pinky", color: "#ed64a6" },
+  th: { name: "Thumb", color: "#a0aec0" }
+};
+
+var KB_ROWS = [
+  [
+    { k: "`~", ar: "ذ", w: 1, f: "lp" },
+    { k: "1", ar: "١", w: 1, f: "lp" },
+    { k: "2", ar: "٢", w: 1, f: "lr" },
+    { k: "3", ar: "٣", w: 1, f: "lm" },
+    { k: "4", ar: "٤", w: 1, f: "li" },
+    { k: "5", ar: "٥", w: 1, f: "li" },
+    { k: "6", ar: "٦", w: 1, f: "ri" },
+    { k: "7", ar: "٧", w: 1, f: "ri" },
+    { k: "8", ar: "٨", w: 1, f: "rm" },
+    { k: "9", ar: "٩", w: 1, f: "rr" },
+    { k: "0", ar: "٠", w: 1, f: "rp" },
+    { k: "-_", ar: "-", w: 1, f: "rp" },
+    { k: "=+", ar: "=", w: 1, f: "rp" },
+    { k: "Backspace", ar: "Backspace", w: 2, f: "rp", special: true }
+  ],
+  [
+    { k: "Tab", ar: "Tab", w: 1.5, f: "lp", special: true },
+    { k: "Q", ar: "ض", w: 1, f: "lp" },
+    { k: "W", ar: "ص", w: 1, f: "lr" },
+    { k: "E", ar: "ث", w: 1, f: "lm" },
+    { k: "R", ar: "ق", w: 1, f: "li" },
+    { k: "T", ar: "ف", w: 1, f: "li" },
+    { k: "Y", ar: "غ", w: 1, f: "ri" },
+    { k: "U", ar: "ع", w: 1, f: "ri" },
+    { k: "I", ar: "هـ", w: 1, f: "rm" },
+    { k: "O", ar: "خ", w: 1, f: "rr" },
+    { k: "P", ar: "ح", w: 1, f: "rp" },
+    { k: "[{", ar: "ج", w: 1, f: "rp" },
+    { k: "]}", ar: "د", w: 1, f: "rp" },
+    { k: "\\|", ar: "\\", w: 1.5, f: "rp" }
+  ],
+  [
+    { k: "Caps", ar: "Caps", w: 1.75, f: "lp", special: true },
+    { k: "A", ar: "ش", w: 1, f: "lp" },
+    { k: "S", ar: "س", w: 1, f: "lr" },
+    { k: "D", ar: "ي", w: 1, f: "lm" },
+    { k: "F", ar: "ب", w: 1, f: "li", bump: true },
+    { k: "G", ar: "ل", w: 1, f: "li" },
+    { k: "H", ar: "ا", w: 1, f: "ri" },
+    { k: "J", ar: "ت", w: 1, f: "ri", bump: true },
+    { k: "K", ar: "ن", w: 1, f: "rm" },
+    { k: "L", ar: "م", w: 1, f: "rr" },
+    { k: ";:", ar: "ك", w: 1, f: "rp" },
+    { k: "'\"", ar: "ط", w: 1, f: "rp" },
+    { k: "Enter", ar: "Enter", w: 2.25, f: "rp", special: true }
+  ],
+  [
+    { k: "Shift", ar: "Shift", w: 2.25, f: "lp", special: true },
+    { k: "Z", ar: "ئ", w: 1, f: "lp" },
+    { k: "X", ar: "ء", w: 1, f: "lr" },
+    { k: "C", ar: "ؤ", w: 1, f: "lm" },
+    { k: "V", ar: "ر", w: 1, f: "li" },
+    { k: "B", ar: "لا", w: 1, f: "li" },
+    { k: "N", ar: "ى", w: 1, f: "ri" },
+    { k: "M", ar: "ة", w: 1, f: "ri" },
+    { k: ",<", ar: "و", w: 1, f: "rm" },
+    { k: ".>", ar: "ز", w: 1, f: "rr" },
+    { k: "/?", ar: "ظ", w: 1, f: "rp" },
+    { k: "Shift", ar: "Shift", w: 2.75, f: "rp", special: true }
+  ],
+  [
+    { k: "Ctrl", ar: "Ctrl", w: 1.25, f: "lp", special: true },
+    { k: "Alt", ar: "Alt", w: 1.25, f: "lp", special: true },
+    { k: "Space", ar: "مسافة", w: 6.25, f: "th", special: true },
+    { k: "Alt", ar: "Alt", w: 1.25, f: "rp", special: true },
+    { k: "Ctrl", ar: "Ctrl", w: 1.25, f: "rp", special: true }
+  ]
+];
+
 var VK_FINGER_MAP = {
   tilda: 'lp', '1': 'lp', q: 'lp', a: 'lp', z: 'lp',
   tab: 'lp', capslock: 'lp', 'shift-left': 'lp', control: 'lp',
@@ -3150,115 +4419,728 @@ var VK_FINGER_MAP = {
   space: 'th'
 };
 
-var FINGER_NAMES = {
-  lp: 'الخنصر الأيسر',
-  lr: 'البنسر الأيسر',
-  lm: 'الوسطى اليسرى',
-  li: 'السبابة اليسرى',
-  th: 'الإبهام (المسافة)',
-  ri: 'السبابة اليمنى',
-  rm: 'الوسطى اليمنى',
-  rr: 'البنسر الأيمن',
-  rp: 'الخنصر الأيمن'
+function mapCharToVkId(ch, lang) {
+  if (!ch) return 'neutral';
+  if (ch === ' ') return 'space';
+  if (lang === 'ar') {
+    var arToEn = {
+      'ذ': 'tilda', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '٠': '0',
+      'ض': 'q', 'ص': 'w', 'ث': 'e', 'ق': 'r', 'ف': 't', 'غ': 'y', 'ع': 'u', 'ه': 'i', 'هـ': 'i', 'خ': 'o', 'ح': 'p', 'ج': 'left-center-bracket', 'د': 'right-center-bracket',
+      'ش': 'a', 'س': 's', 'ي': 'd', 'ب': 'f', 'ل': 'g', 'ا': 'h', 'أ': 'h', 'إ': 'h', 'آ': 'h', 'ت': 'j', 'ن': 'k', 'م': 'l', 'ك': 'semicolon', 'ط': 'single-quote',
+      'ئ': 'z', 'ء': 'x', 'ؤ': 'c', 'ر': 'v', 'لا': 'b', 'ى': 'n', 'ة': 'm', 'و': 'comma', 'ز': 'dot', 'ظ': 'slash',
+      '،': 'comma', '؟': 'slash', '.': 'dot'
+    };
+    return arToEn[ch] || 'neutral';
+  } else {
+    var c = ch.toLowerCase();
+    if (c >= 'a' && c <= 'z') return c;
+    if (c >= '0' && c <= '9') return c;
+    if (c === '.') return 'dot';
+    if (c === ',') return 'comma';
+    if (c === ';') return 'semicolon';
+    if (c === "'") return 'single-quote';
+    if (c === '/') return 'slash';
+    return 'neutral';
+  }
+}
+
+// ==============================================================
+// 3. STORAGE & PROGRESS SYSTEM
+// ==============================================================
+var STORAGE_KEY = "barqtype_learn_v1";
+var USER_PROGRESS = {
+  ar: { completed: {}, bestWpm: {}, bestAcc: {}, stars: {}, lastStage: "ar_s1", lastLesson: "ar_1_1" },
+  en: { completed: {}, bestWpm: {}, bestAcc: {}, stars: {}, lastStage: "en_s1", lastLesson: "en_1_1" }
 };
 
-var _currentPose = 'neutral';
-var _feedbackTimeout = null;
+function loadProgress() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (parsed.ar) USER_PROGRESS.ar = Object.assign(USER_PROGRESS.ar, parsed.ar);
+      if (parsed.en) USER_PROGRESS.en = Object.assign(USER_PROGRESS.en, parsed.en);
+    }
+  } catch (e) {
+    console.warn("Storage load error:", e);
+  }
+}
 
-function testPose(vkKey, needsShift) {
-  _currentPose = vkKey;
-  var svg = document.getElementById('hand-both');
+function saveProgress() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(USER_PROGRESS));
+  } catch (e) {
+    console.warn("Storage save error:", e);
+  }
+}
+
+// ==============================================================
+// 4. SOUND ENGINE (RAZER GREEN MECHANICAL SYNTHESIS)
+// ==============================================================
+var SOUND_ENABLED = true;
+var _actx = null;
+var _rgSounds = [];
+var _spaceSound = null;
+var _errSound = null;
+
+function initAudio() {
+  if (_actx) return;
+  try {
+    var AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    _actx = new AudioCtx({ latencyHint: 0, sampleRate: 44100 });
+    _rgSounds = [_synthRGSound(_actx, 0), _synthRGSound(_actx, 1), _synthRGSound(_actx, 2)];
+    _spaceSound = _synthSpaceSound(_actx);
+    _errSound = _synthErrSound(_actx);
+  } catch (e) {}
+}
+
+function _synthRGSound(actx, variant) {
+  var dur = 0.045, len = Math.floor(actx.sampleRate * dur);
+  var buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+  var pitchMod = 1.0 + (variant - 1) * 0.07;
+  for (var i = 0; i < len; i++) {
+    var t = i / actx.sampleRate;
+    var click = Math.sin(2 * Math.PI * 3400 * pitchMod * t) * Math.exp(-t * 320);
+    var body = Math.sin(2 * Math.PI * 850 * pitchMod * t) * Math.exp(-t * 90);
+    var snap = (Math.random() * 2 - 1) * Math.exp(-t * 500) * 0.45;
+    d[i] = (click * 0.5 + body * 0.35 + snap) * 0.7;
+  }
+  return buf;
+}
+
+function _synthSpaceSound(actx) {
+  var dur = 0.065, len = Math.floor(actx.sampleRate * dur);
+  var buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+  for (var i = 0; i < len; i++) {
+    var t = i / actx.sampleRate;
+    var thud = Math.sin(2 * Math.PI * 220 * t) * Math.exp(-t * 60);
+    var snap = (Math.random() * 2 - 1) * Math.exp(-t * 300) * 0.25;
+    d[i] = (thud * 0.7 + snap) * 0.8;
+  }
+  return buf;
+}
+
+function _synthErrSound(actx) {
+  var dur = 0.08, len = Math.floor(actx.sampleRate * dur);
+  var buf = actx.createBuffer(1, len, actx.sampleRate), d = buf.getChannelData(0);
+  for (var i = 0; i < len; i++) {
+    var t = i / actx.sampleRate;
+    d[i] = Math.sin(2 * Math.PI * 180 * t) * Math.exp(-t * 40) * 0.5;
+  }
+  return buf;
+}
+
+function playKeySound(isSpace) {
+  if (!SOUND_ENABLED || !_actx) return;
+  if (_actx.state === 'suspended') _actx.resume();
+  try {
+    var src = _actx.createBufferSource();
+    if (isSpace && _spaceSound) {
+      src.buffer = _spaceSound;
+    } else if (_rgSounds.length) {
+      src.buffer = _rgSounds[Math.floor(Math.random() * _rgSounds.length)];
+    }
+    var gain = _actx.createGain();
+    gain.gain.value = 0.65;
+    src.connect(gain);
+    gain.connect(_actx.destination);
+    src.start(0);
+  } catch (e) {}
+}
+
+function playErrSound() {
+  if (!SOUND_ENABLED || !_actx || !_errSound) return;
+  if (_actx.state === 'suspended') _actx.resume();
+  try {
+    var src = _actx.createBufferSource();
+    src.buffer = _errSound;
+    var gain = _actx.createGain();
+    gain.gain.value = 0.5;
+    src.connect(gain);
+    gain.connect(_actx.destination);
+    src.start(0);
+  } catch (e) {}
+}
+
+function toggleSound() {
+  SOUND_ENABLED = !SOUND_ENABLED;
+  var btn = document.getElementById("btn-sound");
+  var svg = document.getElementById("sound-icon-svg");
+  if (btn) btn.className = "pb" + (SOUND_ENABLED ? " on" : "");
+  if (svg) {
+    if (SOUND_ENABLED) {
+      svg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path id="sound-wave-path" d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"></path>';
+    } else {
+      svg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+    }
+  }
+}
+
+// ==============================================================
+// 5. APPLICATION STATE & ROUTING
+// ==============================================================
+var CURRENT_LANG = "ar";
+var CURRENT_STAGE_ID = "ar_s1";
+var CURRENT_LESSON = null;
+
+var LESSON_STATE = {
+  active: false,
+  text: "",
+  idx: 0,
+  errors: 0,
+  startTime: null,
+  timerInterval: null,
+  wpm: 0,
+  acc: 100
+};
+
+function setLanguage(lang) {
+  CURRENT_LANG = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = (lang === "ar" ? "rtl" : "ltr");
+  
+  var btnAr = document.getElementById("lang-ar");
+  var btnEn = document.getElementById("lang-en");
+  if (btnAr) btnAr.className = "pb" + (lang === "ar" ? " on" : "");
+  if (btnEn) btnEn.className = "pb" + (lang === "en" ? " on" : "");
+
+  var isAr = (lang === "ar");
+
+  // Page title
+  document.title = isAr ? "Barqtype – سباق الكتابة الخاطف" : "Barqtype – Lightning Fast Typing Race";
+
+  // Navigation Items Localization (Matching index.html exactly)
+  var navTest = document.getElementById("txt-nav-test");
+  var navStats = document.getElementById("txt-nav-stats");
+  var navLearn = document.getElementById("txt-nav-learn");
+  if (navTest) navTest.textContent = isAr ? "تدريب" : "Practice";
+  if (navStats) navStats.textContent = isAr ? "إحصاءات" : "Stats";
+  if (navLearn) navLearn.textContent = isAr ? "تعلم" : "Learn";
+
+  // Hero section
+  document.getElementById("hero-title").textContent = isAr ? "مسار التعلم الذكي لطباعة اللمس" : "Smart Bilingual Touch-Typing Curriculum";
+  document.getElementById("hero-desc").textContent = isAr
+    ? "خطة تعليمية منهجية من 6 مراحل و18 درساً تنتقل بك من الصفر إلى الاحتراف بذاكرة عضلية فائقة ودون النظر إلى الكيبورد."
+    : "A systematic 6-stage, 18-lesson path from beginner basics to fluent touch typing with muscle memory.";
+  document.getElementById("txt-overall-lbl").textContent = isAr ? "التقدم العام" : "Overall Progress";
+  document.getElementById("txt-back-stages").textContent = isAr ? "العودة إلى المراحل" : "Back to Stages";
+  document.getElementById("txt-back-stage").textContent = isAr ? "العودة للدروس" : "Back to Lessons";
+
+  var backArrow = document.getElementById("back-arrow");
+  var lessonBackArrow = document.getElementById("lesson-back-arrow");
+  if (backArrow) backArrow.textContent = isAr ? "→" : "←";
+  if (lessonBackArrow) lessonBackArrow.textContent = isAr ? "→" : "←";
+
+  document.getElementById("lbl-live-wpm").textContent = isAr ? "السرعة (WPM)" : "Speed (WPM)";
+  document.getElementById("lbl-live-acc").textContent = isAr ? "الدقة" : "Accuracy";
+  document.getElementById("lbl-live-err").textContent = isAr ? "الأخطاء" : "Errors";
+  document.getElementById("lbl-live-prog").textContent = isAr ? "التقدم" : "Progress";
+
+  buildKeyboard();
+  showStagesView();
+}
+
+function showStagesView() {
+  if (LESSON_STATE.active) stopLesson();
+  document.getElementById("view-stages").style.display = "flex";
+  document.getElementById("view-stage-lessons").style.display = "none";
+  document.getElementById("view-active-lesson").style.display = "none";
+  renderStagesGrid();
+}
+
+function showStageLessonsView(stageId) {
+  if (LESSON_STATE.active) stopLesson();
+  CURRENT_STAGE_ID = stageId;
+  document.getElementById("view-stages").style.display = "none";
+  document.getElementById("view-stage-lessons").style.display = "flex";
+  document.getElementById("view-active-lesson").style.display = "none";
+  renderStageLessons(stageId);
+}
+
+function showActiveLessonView(lesson) {
+  CURRENT_LESSON = lesson;
+  document.getElementById("view-stages").style.display = "none";
+  document.getElementById("view-stage-lessons").style.display = "none";
+  document.getElementById("view-active-lesson").style.display = "flex";
+  startLesson(lesson);
+}
+
+// ==============================================================
+// 6. RENDER STAGES & LESSONS
+// ==============================================================
+function renderStagesGrid() {
+  var container = document.getElementById("stages-container");
+  container.innerHTML = "";
+  var stages = CURRICULUM[CURRENT_LANG];
+  var prog = USER_PROGRESS[CURRENT_LANG];
+  var totalLessons = stages.length * 3;
+  var completedCount = Object.keys(prog.completed).length;
+
+  document.getElementById("overall-progress-text").textContent = completedCount + " / " + totalLessons;
+  var pct = Math.round((completedCount / totalLessons) * 100);
+  document.getElementById("overall-bar").style.width = pct + "%";
+
+  for (var i = 0; i < stages.length; i++) {
+    var stage = stages[i];
+    var stageCompleted = 0;
+    for (var j = 0; j < stage.lessons.length; j++) {
+      if (prog.completed[stage.lessons[j].id]) stageCompleted++;
+    }
+
+    var isCompleted = (stageCompleted === stage.lessons.length);
+    var isStarted = (stageCompleted > 0);
+
+    var card = document.createElement("div");
+    card.className = "stage-card" + (isCompleted ? " completed" : "");
+    card.onclick = (function(sId){ return function(){ showStageLessonsView(sId); }; })(stage.id);
+
+    var statusHtml = "";
+    if (isCompleted) {
+      statusHtml = '<span class="stage-status-badge status-completed">✓ ' + (CURRENT_LANG === "ar" ? "مكتمل" : "Completed") + '</span>';
+    } else if (isStarted) {
+      statusHtml = '<span class="stage-status-badge status-progress">⏳ ' + stageCompleted + '/3 ' + (CURRENT_LANG === "ar" ? "مكتمل" : "Done") + '</span>';
+    } else {
+      statusHtml = '<span class="stage-status-badge status-locked">🎯 ' + (CURRENT_LANG === "ar" ? "متاح للبدء" : "Ready") + '</span>';
+    }
+
+    card.innerHTML =
+      '<div class="stage-card-header">' +
+        '<div class="stage-badge-num">' + stage.num + '</div>' +
+        statusHtml +
+      '</div>' +
+      '<div class="stage-card-body">' +
+        '<h3>' + stage.title + '</h3>' +
+        '<p>' + stage.desc + '</p>' +
+      '</div>' +
+      '<div class="stage-card-footer">' +
+        '<span class="stage-lessons-count">📚 3 ' + (CURRENT_LANG === "ar" ? "دروس تطبيقية" : "Lessons") + '</span>' +
+        '<button class="stage-action-btn">' + (isStarted ? (CURRENT_LANG === "ar" ? "متابعة" : "Continue") : (CURRENT_LANG === "ar" ? "استكشاف" : "Explore")) + '</button>' +
+      '</div>';
+
+    container.appendChild(card);
+  }
+}
+
+function renderStageLessons(stageId) {
+  var stages = CURRICULUM[CURRENT_LANG];
+  var stage = null;
+  for (var i = 0; i < stages.length; i++) {
+    if (stages[i].id === stageId) { stage = stages[i]; break; }
+  }
+  if (!stage) return;
+
+  var prog = USER_PROGRESS[CURRENT_LANG];
+  document.getElementById("stage-banner-title").textContent = stage.title;
+  document.getElementById("stage-banner-desc").textContent = stage.desc;
+
+  var doneCount = 0;
+  for (var j = 0; j < stage.lessons.length; j++) {
+    if (prog.completed[stage.lessons[j].id]) doneCount++;
+  }
+  document.getElementById("stage-lessons-progress-badge").textContent = doneCount + " / 3 " + (CURRENT_LANG === "ar" ? "مكتمل" : "Completed");
+
+  var list = document.getElementById("lessons-container");
+  list.innerHTML = "";
+
+  for (var k = 0; k < stage.lessons.length; k++) {
+    var lesson = stage.lessons[k];
+    var isDone = !!prog.completed[lesson.id];
+    var bestWpm = prog.bestWpm[lesson.id] || 0;
+    var bestAcc = prog.bestAcc[lesson.id] || 0;
+    var stars = prog.stars[lesson.id] || 0;
+    var starsStr = "★".repeat(stars) + "☆".repeat(Math.max(0, 3 - stars));
+
+    var row = document.createElement("div");
+    row.className = "lesson-row-card" + (isDone ? " done" : "");
+    row.onclick = (function(les){ return function(){ showActiveLessonView(les); }; })(lesson);
+
+    var keysChips = "";
+    for (var m = 0; m < Math.min(lesson.keys.length, 6); m++) {
+      keysChips += '<span class="key-chip">' + lesson.keys[m] + '</span>';
+    }
+
+    row.innerHTML =
+      '<div class="lesson-row-main">' +
+        '<div class="lesson-num-badge">' + (k + 1) + '</div>' +
+        '<div class="lesson-row-texts">' +
+          '<h4>' + lesson.title + '</h4>' +
+          '<p>' + lesson.desc + '</p>' +
+          '<div class="lesson-keys-preview">' + keysChips + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="lesson-row-stats">' +
+        (isDone ? (
+          '<div class="stat-pill"><span class="val">' + bestWpm + '</span><span class="lbl">WPM</span></div>' +
+          '<div class="stat-pill"><span class="val">' + bestAcc + '%</span><span class="lbl">' + (CURRENT_LANG === "ar" ? "دقة" : "Acc") + '</span></div>' +
+          '<div class="stars-display">' + starsStr + '</div>'
+        ) : '') +
+        '<button class="btn-start-lesson">' + (isDone ? (CURRENT_LANG === "ar" ? "إعادة" : "Practice") : (CURRENT_LANG === "ar" ? "بدء الدرس" : "Start")) + '</button>' +
+      '</div>';
+
+    list.appendChild(row);
+  }
+}
+
+// ==============================================================
+// 7. KEYBOARD BUILDER & FINGER HIGHLIGHTING
+// ==============================================================
+function buildKeyboard() {
+  var rowsEl = document.getElementById("kb-rows");
+  if (!rowsEl) return;
+  rowsEl.innerHTML = "";
+  var isAr = (CURRENT_LANG === "ar");
+
+  for (var ri = 0; ri < KB_ROWS.length; ri++) {
+    var row = KB_ROWS[ri];
+    var rowEl = document.createElement("div");
+    rowEl.className = "kb-row";
+    rowEl.setAttribute("dir", "ltr");
+
+    for (var ki = 0; ki < row.length; ki++) {
+      var kd = row[ki];
+      var fInfo = FINGER_DATA[kd.f] || FINGER_DATA.th;
+      var el = document.createElement("div");
+      var isAccent = (kd.k === "Space");
+      el.className = "kb-key" + (isAccent ? " key-accent" : "") + (kd.bump ? " has-bump" : "");
+      el.id = "kbk_" + ri + "_" + ki;
+      el.style.width = "calc(var(--k-unit) * " + kd.w + ")";
+      el.dataset.k = kd.k;
+      el.dataset.ar = kd.ar;
+      el.dataset.f = kd.f;
+
+      var mainLbl = isAr ? kd.ar : (kd.k.length === 1 ? kd.k.toLowerCase() : kd.k);
+      var subLbl = isAr ? (kd.k.length === 1 ? kd.k.toLowerCase() : "") : kd.ar;
+
+      if (kd.special) {
+        mainLbl = kd.k;
+        subLbl = "";
+      }
+
+      if (subLbl) {
+        var subSpan = document.createElement("span");
+        subSpan.className = "kb-lbl-sub";
+        subSpan.textContent = subLbl;
+        el.appendChild(subSpan);
+      }
+      var mainSpan = document.createElement("span");
+      mainSpan.className = "kb-lbl-main";
+      mainSpan.textContent = mainLbl;
+      el.appendChild(mainSpan);
+
+      var strip = document.createElement("div");
+      strip.className = "kb-finger-strip";
+      strip.style.background = fInfo.color;
+      el.appendChild(strip);
+
+      rowEl.appendChild(el);
+    }
+    rowsEl.appendChild(rowEl);
+  }
+}
+
+function highlightTargetKey(targetChar) {
+  var allKeys = document.querySelectorAll(".kb-key.key-target");
+  for (var i = 0; i < allKeys.length; i++) allKeys[i].classList.remove("key-target");
+
+  if (!targetChar) return;
+  var isAr = (CURRENT_LANG === "ar");
+  var allKeysDom = document.querySelectorAll(".kb-key");
+  var targetEl = null;
+
+  for (var j = 0; j < allKeysDom.length; j++) {
+    var kEl = allKeysDom[j];
+    if (targetChar === " " && kEl.dataset.k === "Space") {
+      targetEl = kEl;
+      break;
+    }
+    if (isAr) {
+      if (kEl.dataset.ar === targetChar) { targetEl = kEl; break; }
+    } else {
+      if (kEl.dataset.k && kEl.dataset.k.toLowerCase() === targetChar.toLowerCase()) {
+        targetEl = kEl;
+        break;
+      }
+    }
+  }
+
+  if (targetEl) {
+    targetEl.classList.add("key-target");
+  }
+
+  var vkId = mapCharToVkId(targetChar, CURRENT_LANG);
+  setVkHandPose(vkId);
+}
+
+function setVkHandPose(vkKey) {
+  var svg = document.getElementById("hand-both");
   if (!svg) return;
 
-  var allG = svg.querySelectorAll('g[id]');
+  var allG = svg.querySelectorAll("g[id]");
   for (var i = 0; i < allG.length; i++) {
-    allG[i].classList.add('st0');
-    allG[i].classList.remove('show-hand');
+    allG[i].classList.add("st0");
+    allG[i].classList.remove("show-hand");
   }
 
-  if (!vkKey || vkKey === 'neutral') {
-    _showVkGroup('hand-neutral-left');
-    _showVkGroup('hand-neutral-right');
-    document.getElementById('pose-lbl').textContent = 'neutral';
-    document.getElementById('finger-lbl').textContent = 'الاسترخاء الطبيعي';
+  if (!vkKey || vkKey === "neutral") {
+    _showVkGroup("hand-neutral-left");
+    _showVkGroup("hand-neutral-right");
     return;
   }
 
-  var finger = VK_FINGER_MAP[vkKey] || 'th';
-  var side = finger ? finger.charAt(0) : '';
-
-  if (vkKey === 'space') {
-    _showVkGroup('hand-space');
-    _showVkGroup('hand-neutral-left');
-    document.getElementById('pose-lbl').textContent = 'space';
-    document.getElementById('finger-lbl').textContent = FINGER_NAMES.th;
+  if (vkKey === "space") {
+    _showVkGroup("hand-space");
+    _showVkGroup("hand-neutral-left");
     return;
   }
 
-  var targetId = 'hand-' + vkKey;
-  _showVkGroup(targetId);
+  var finger = VK_FINGER_MAP[vkKey] || "";
+  var side = finger ? finger.charAt(0) : "";
+  var targetId = "hand-" + vkKey;
 
-  if (side === 'l') {
-    if (needsShift) _showVkGroup('hand-shift-right');
-    else _showVkGroup('hand-neutral-right');
-  } else if (side === 'r') {
-    if (needsShift) _showVkGroup('hand-shift-left');
-    else _showVkGroup('hand-neutral-left');
+  if (side === "l") {
+    _showVkGroup(targetId);
+    _showVkGroup("hand-neutral-right");
+  } else if (side === "r") {
+    _showVkGroup(targetId);
+    _showVkGroup("hand-neutral-left");
   } else {
-    _showVkGroup('hand-neutral-right');
+    _showVkGroup(targetId);
+    _showVkGroup("hand-neutral-right");
   }
-
-  document.getElementById('pose-lbl').textContent = vkKey + (needsShift ? ' (+Shift)' : '');
-  document.getElementById('finger-lbl').textContent = (FINGER_NAMES[finger] || finger) + (needsShift ? ' مع الشيفت باليد المعاكسة' : '');
 }
 
 function _showVkGroup(id) {
   var el = document.getElementById(id);
   if (el) {
-    el.classList.remove('st0');
-    el.classList.add('show-hand');
+    el.classList.remove("st0");
+    el.classList.add("show-hand");
   }
 }
 
-function triggerTap() {
-  var svg = document.getElementById('hand-both');
+function animateHandTap(ok) {
+  var svg = document.getElementById("hand-both");
   if (!svg) return;
-  if (_feedbackTimeout) clearTimeout(_feedbackTimeout);
-  svg.classList.remove('hf-error', 'hf-pressed');
+  svg.classList.remove("hf-error", "hf-pressed");
   void svg.offsetWidth;
-  svg.classList.add('hf-pressed');
-  _feedbackTimeout = setTimeout(function() {
-    svg.classList.remove('hf-pressed');
-  }, 120);
-}
-
-function triggerErr() {
-  var svg = document.getElementById('hand-both');
-  if (!svg) return;
-  if (_feedbackTimeout) clearTimeout(_feedbackTimeout);
-  svg.classList.remove('hf-error', 'hf-pressed');
-  void svg.offsetWidth;
-  svg.classList.add('hf-error');
-  _feedbackTimeout = setTimeout(function() {
-    svg.classList.remove('hf-error');
-  }, 220);
-}
-
-function toggleVisibility() {
-  var panel = document.getElementById('vk-hands-wrapper');
-  if (panel) panel.classList.toggle('hidden');
-}
-
-// Keyboard input listener on the preview page
-window.addEventListener('keydown', function(e) {
-  var k = e.key.toLowerCase();
-  if (e.code === 'Space') {
-    testPose('space');
-    triggerTap();
-  } else if (VK_FINGER_MAP[k]) {
-    testPose(k, e.shiftKey);
-    triggerTap();
+  if (ok) {
+    svg.classList.add("hf-pressed");
+    setTimeout(function(){ if (svg) svg.classList.remove("hf-pressed"); }, 120);
+  } else {
+    svg.classList.add("hf-error");
+    setTimeout(function(){ if (svg) svg.classList.remove("hf-error"); }, 200);
   }
+}
+
+// ==============================================================
+// 8. ACTIVE LESSON ENGINE
+// ==============================================================
+function startLesson(lesson) {
+  initAudio();
+  LESSON_STATE.active = true;
+  LESSON_STATE.text = lesson.text;
+  LESSON_STATE.idx = 0;
+  LESSON_STATE.errors = 0;
+  LESSON_STATE.startTime = null;
+  LESSON_STATE.wpm = 0;
+  LESSON_STATE.acc = 100;
+
+  if (LESSON_STATE.timerInterval) clearInterval(LESSON_STATE.timerInterval);
+
+  document.getElementById("active-lesson-title").textContent = lesson.title;
+  document.getElementById("active-lesson-intro").textContent = lesson.desc;
+
+  var prog = USER_PROGRESS[CURRENT_LANG];
+  var stars = prog.stars[lesson.id] || 0;
+  document.getElementById("active-lesson-best-stars").textContent = stars ? ("★".repeat(stars) + "☆".repeat(3 - stars)) : "";
+
+  updateLiveStats();
+  renderTypingFlow();
+  highlightTargetKey(LESSON_STATE.text[0]);
+
+  var typingBox = document.getElementById("typing-box");
+  typingBox.focus();
+}
+
+function stopLesson() {
+  LESSON_STATE.active = false;
+  if (LESSON_STATE.timerInterval) {
+    clearInterval(LESSON_STATE.timerInterval);
+    LESSON_STATE.timerInterval = null;
+  }
+}
+
+function renderTypingFlow() {
+  var flow = document.getElementById("typing-flow");
+  var txt = LESSON_STATE.text;
+  var curr = LESSON_STATE.idx;
+  var h = "";
+
+  for (var i = 0; i < txt.length; i++) {
+    var c = txt[i];
+    var displayChar = (c === " " ? " " : c);
+    if (i < curr) {
+      h += '<span class="ch-done">' + displayChar + '</span>';
+    } else if (i === curr) {
+      h += '<span class="ch-current">' + (c === " " ? "␣" : displayChar) + '</span>';
+    } else {
+      h += '<span class="ch-pending">' + displayChar + '</span>';
+    }
+  }
+  flow.innerHTML = h;
+}
+
+function updateLiveStats() {
+  if (LESSON_STATE.startTime) {
+    var elapsedMin = (Date.now() - LESSON_STATE.startTime) / 60000;
+    if (elapsedMin > 0.005) {
+      var netChars = Math.max(0, LESSON_STATE.idx - LESSON_STATE.errors);
+      LESSON_STATE.wpm = Math.round((netChars / 5) / elapsedMin);
+    }
+  }
+  var totalTyped = LESSON_STATE.idx + LESSON_STATE.errors;
+  LESSON_STATE.acc = totalTyped > 0 ? Math.max(0, Math.round(((totalTyped - LESSON_STATE.errors) / totalTyped) * 100)) : 100;
+
+  document.getElementById("live-wpm").textContent = LESSON_STATE.wpm;
+  document.getElementById("live-acc").textContent = LESSON_STATE.acc + "%";
+  document.getElementById("live-errors").textContent = LESSON_STATE.errors;
+
+  var pct = Math.round((LESSON_STATE.idx / LESSON_STATE.text.length) * 100);
+  document.getElementById("live-progress").textContent = pct + "%";
+}
+
+// KEYBOARD INPUT LISTENER
+window.addEventListener("keydown", function(e) {
+  if (!LESSON_STATE.active) return;
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+  var modal = document.getElementById("result-modal");
+  if (modal.classList.contains("open")) {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      retryCurrentLesson();
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      goToNextLesson();
+    } else if (e.key === "Escape") {
+      modal.classList.remove("open");
+      showStageLessonsView(CURRENT_STAGE_ID);
+    }
+    return;
+  }
+
+  if (e.key === "Escape") {
+    showStageLessonsView(CURRENT_STAGE_ID);
+    return;
+  }
+
+  if (e.key.length === 1 || e.key === "Spacebar" || e.key === " ") {
+    e.preventDefault();
+
+    if (!LESSON_STATE.startTime) {
+      LESSON_STATE.startTime = Date.now();
+      LESSON_STATE.timerInterval = setInterval(updateLiveStats, 200);
+    }
+
+    var expected = LESSON_STATE.text[LESSON_STATE.idx];
+    var typed = (e.key === "Spacebar" ? " " : e.key);
+
+    if (typed === expected) {
+      playKeySound(typed === " ");
+      animateHandTap(true);
+      LESSON_STATE.idx++;
+
+      if (LESSON_STATE.idx >= LESSON_STATE.text.length) {
+        completeLesson();
+        return;
+      }
+    } else {
+      playErrSound();
+      animateHandTap(false);
+      LESSON_STATE.errors++;
+    }
+
+    updateLiveStats();
+    renderTypingFlow();
+    highlightTargetKey(LESSON_STATE.text[LESSON_STATE.idx]);
+  }
+});
+
+function completeLesson() {
+  stopLesson();
+  updateLiveStats();
+
+  var wpm = Math.max(10, LESSON_STATE.wpm);
+  var acc = LESSON_STATE.acc;
+  var passed = (acc >= 90);
+
+  var stars = 1;
+  if (acc >= 95 && wpm >= 25) stars = 3;
+  else if (acc >= 90) stars = 2;
+
+  var prog = USER_PROGRESS[CURRENT_LANG];
+  prog.completed[CURRENT_LESSON.id] = true;
+  if (!prog.bestWpm[CURRENT_LESSON.id] || wpm > prog.bestWpm[CURRENT_LESSON.id]) prog.bestWpm[CURRENT_LESSON.id] = wpm;
+  if (!prog.bestAcc[CURRENT_LESSON.id] || acc > prog.bestAcc[CURRENT_LESSON.id]) prog.bestAcc[CURRENT_LESSON.id] = acc;
+  if (!prog.stars[CURRENT_LESSON.id] || stars > prog.stars[CURRENT_LESSON.id]) prog.stars[CURRENT_LESSON.id] = stars;
+  saveProgress();
+
+  var isAr = (CURRENT_LANG === "ar");
+  document.getElementById("modal-trophy").textContent = stars === 3 ? "👑" : (stars === 2 ? "🏆" : "⭐");
+  document.getElementById("modal-title").textContent = passed
+    ? (isAr ? "تم إكمال الدرس بنجاح! 🎉" : "Lesson Completed! 🎉")
+    : (isAr ? "تمرين جيد، استمر في التقدم!" : "Good Practice, Keep Going!");
+  document.getElementById("modal-stars").textContent = "★".repeat(stars) + "☆".repeat(3 - stars);
+  document.getElementById("m-wpm").textContent = wpm;
+  document.getElementById("m-acc").textContent = acc + "%";
+  document.getElementById("m-err").textContent = LESSON_STATE.errors;
+
+  document.getElementById("modal-feedback").textContent = passed
+    ? (isAr ? "رائع جداً! حققت نسبة الدقة الموصى بها (90%+) وثبتّ ذاكرتك العضلية." : "Excellent! You achieved the recommended 90%+ accuracy threshold.")
+    : (isAr ? "دقتك أقل من 90%. نوصي بإعادة التمرين لتثبيت الحركات، أو يمكنك المتابعة." : "Accuracy is under 90%. We recommend retrying to reinforce finger memory, or you may proceed.");
+
+  document.getElementById("result-modal").classList.add("open");
+}
+
+function retryCurrentLesson() {
+  document.getElementById("result-modal").classList.remove("open");
+  if (CURRENT_LESSON) startLesson(CURRENT_LESSON);
+}
+
+function goToNextLesson() {
+  document.getElementById("result-modal").classList.remove("open");
+  var stages = CURRICULUM[CURRENT_LANG];
+  var nextLesson = null;
+  var found = false;
+
+  for (var i = 0; i < stages.length; i++) {
+    for (var j = 0; j < stages[i].lessons.length; j++) {
+      if (found) {
+        nextLesson = stages[i].lessons[j];
+        CURRENT_STAGE_ID = stages[i].id;
+        break;
+      }
+      if (stages[i].lessons[j].id === CURRENT_LESSON.id) {
+        found = true;
+      }
+    }
+    if (nextLesson) break;
+  }
+
+  if (nextLesson) {
+    showActiveLessonView(nextLesson);
+  } else {
+    showStagesView();
+  }
+}
+
+// ==============================================================
+// 9. INITIALIZATION
+// ==============================================================
+window.addEventListener("DOMContentLoaded", function() {
+  loadProgress();
+  buildKeyboard();
+  setLanguage("ar");
 });
 </script>
 </body>
