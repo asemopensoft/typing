@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
-<title>Barqtype Learn – مسار التعلم الذكي لطباعة اللمس</title>
+<title>Barqtype – مسار تعلم الطباعة ثنائي اللغة</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@ html, body {
   min-height: 100vh;
 }
 
-/* HEADER (STABLE FIXED LTR LAYOUT - UNIFIED WITH INDEX) */
+/* HEADER (STABLE FIXED LTR LAYOUT - MATCHING INDEX) */
 header {
   display: flex;
   justify-content: space-between;
@@ -145,45 +145,6 @@ nav {
   box-shadow: 0 0 14px var(--accent-glow);
   font-weight: 700;
 }
-#n-race {
-  color: var(--accent);
-  border: 1px solid rgba(232, 175, 71, 0.35);
-  background: rgba(232, 175, 71, 0.08);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-#n-race:hover {
-  background: rgba(232, 175, 71, 0.22);
-  color: #ffffff;
-}
-#n-race.on {
-  background: var(--accent) !important;
-  color: #17242d !important;
-  font-weight: 700;
-  box-shadow: 0 0 16px var(--accent-glow);
-}
-.nb-online {
-  color: var(--accent) !important;
-  border: 1px solid rgba(232, 175, 71, 0.35) !important;
-  background: rgba(232, 175, 71, 0.08) !important;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--far) !important;
-  font-weight: 600;
-  transition: all .2s ease;
-}
-.nb-online:hover {
-  background: rgba(232, 175, 71, 0.22) !important;
-  color: #fff !important;
-}
-.nb-online.on {
-  background: var(--accent) !important;
-  color: #17242d !important;
-  font-weight: 700;
-  box-shadow: 0 0 16px var(--accent-glow);
-}
 .ctrls {
   display: flex;
   align-items: center;
@@ -212,19 +173,8 @@ nav {
   font-family: var(--fen);
   text-decoration: none;
 }
-.pb:hover {
-  color: var(--text);
-}
-.pb.on {
-  background: var(--accent);
-  color: #17242d;
-}
-
-@media(max-width:768px) {
-  header { padding: 0 12px; height: 52px; }
-  .logo-text { display: none; }
-  .nb { padding: 5px 8px; font-size: 12px; }
-}
+.pb:hover { color: var(--text); }
+.pb.on { background: var(--accent); color: #17242d; }
 
 /* MAIN CONTAINER */
 main {
@@ -277,10 +227,7 @@ main {
   border-radius: 12px;
   border: 1px solid var(--bdr);
 }
-.overall-text {
-  display: flex;
-  flex-direction: column;
-}
+.overall-text { display: flex; flex-direction: column; }
 .overall-label { font-size: 11px; color: var(--sub); font-weight: 600; }
 .overall-val { font-size: 18px; font-weight: 800; color: var(--accent); font-family: var(--fen); }
 .overall-bar-wrap {
@@ -300,7 +247,7 @@ main {
 /* STAGES GRID */
 .stages-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 18px;
 }
 .stage-card {
@@ -323,9 +270,7 @@ main {
   transform: translateY(-3px);
   box-shadow: 0 12px 28px rgba(0,0,0,0.35);
 }
-.stage-card.completed {
-  border-color: rgba(72, 187, 120, 0.35);
-}
+.stage-card.completed { border-color: rgba(72, 187, 120, 0.35); }
 .stage-card-header {
   display: flex;
   justify-content: space-between;
@@ -365,18 +310,8 @@ main {
 .status-progress { background: rgba(232, 175, 71, 0.18); color: var(--accent); border: 1px solid rgba(232, 175, 71, 0.3); }
 .status-locked { background: rgba(255, 255, 255, 0.08); color: var(--sub); border: 1px solid var(--bdr); }
 
-.stage-card-body h3 {
-  font-size: 17px;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 6px;
-}
-.stage-card-body p {
-  font-size: 13px;
-  color: var(--sub);
-  line-height: 1.5;
-}
-
+.stage-card-body h3 { font-size: 17px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+.stage-card-body p { font-size: 13px; color: var(--sub); line-height: 1.5; }
 .stage-card-footer {
   display: flex;
   justify-content: space-between;
@@ -384,11 +319,7 @@ main {
   padding-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
-.stage-lessons-count {
-  font-size: 12px;
-  color: var(--sub);
-  font-weight: 600;
-}
+.stage-lessons-count { font-size: 12px; color: var(--sub); font-weight: 600; }
 .stage-action-btn {
   padding: 6px 14px;
   border-radius: 8px;
@@ -399,10 +330,7 @@ main {
   font-weight: 700;
   transition: all 0.2s;
 }
-.stage-card:hover .stage-action-btn {
-  background: var(--accent);
-  color: #17242d;
-}
+.stage-card:hover .stage-action-btn { background: var(--accent); color: #17242d; }
 
 /* SECTION 2: STAGE DRILL-DOWN (3 LESSONS) */
 #view-stage-lessons {
@@ -431,7 +359,6 @@ main {
   transition: all 0.2s;
 }
 .btn-back:hover { background: var(--bg4); }
-
 .stage-detail-banner {
   padding: 24px;
   background: linear-gradient(135deg, rgba(44, 67, 84, 0.6) 0%, rgba(23, 36, 45, 0.8) 100%);
@@ -440,15 +367,22 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 .stage-detail-info h2 { font-size: 22px; font-weight: 800; color: #ffffff; }
 .stage-detail-info p { font-size: 14px; color: var(--sub); margin-top: 4px; line-height: 1.5; }
-
-.lessons-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.stage-prog-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(232, 175, 71, 0.15);
+  border: 1px solid rgba(232, 175, 71, 0.35);
+  color: var(--accent);
 }
+
+.lessons-list { display: flex; flex-direction: column; gap: 14px; }
 .lesson-row-card {
   background: var(--card-bg);
   border: 1px solid var(--bdr);
@@ -467,12 +401,7 @@ main {
   transform: translateX(-4px);
 }
 html[dir="ltr"] .lesson-row-card:hover { transform: translateX(4px); }
-
-.lesson-row-main {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
+.lesson-row-main { display: flex; align-items: center; gap: 18px; }
 .lesson-num-badge {
   width: 42px;
   height: 42px;
@@ -494,11 +423,7 @@ html[dir="ltr"] .lesson-row-card:hover { transform: translateX(4px); }
 }
 .lesson-row-texts h4 { font-size: 16px; font-weight: 700; color: #ffffff; }
 .lesson-row-texts p { font-size: 13px; color: var(--sub); margin-top: 2px; }
-.lesson-keys-preview {
-  display: flex;
-  gap: 4px;
-  margin-top: 6px;
-}
+.lesson-keys-preview { display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap; }
 .key-chip {
   padding: 2px 8px;
   background: rgba(255, 255, 255, 0.08);
@@ -509,16 +434,8 @@ html[dir="ltr"] .lesson-row-card:hover { transform: translateX(4px); }
   color: var(--accent);
   font-weight: 700;
 }
-.lesson-row-stats {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.stat-pill {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
+.lesson-row-stats { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.stat-pill { display: flex; flex-direction: column; align-items: flex-end; }
 html[dir="ltr"] .stat-pill { align-items: flex-start; }
 .stat-pill .val { font-size: 15px; font-weight: 800; font-family: var(--fen); color: #ffffff; }
 .stat-pill .lbl { font-size: 10px; color: var(--sub); }
@@ -556,18 +473,9 @@ html[dir="ltr"] .stat-pill { align-items: flex-start; }
   width: 100%;
   padding-bottom: 6px;
 }
-.lesson-title-area h2 {
-  font-size: 20px;
-  font-weight: 800;
-  color: #ffffff;
-}
-.lesson-title-area span {
-  font-size: 12px;
-  color: var(--accent);
-  font-weight: 600;
-}
+.lesson-title-area h2 { font-size: 20px; font-weight: 800; color: #ffffff; }
+.lesson-title-area span { font-size: 12px; color: var(--accent); font-weight: 600; }
 
-/* GUIDANCE BOX */
 .guidance-box {
   width: 100%;
   background: rgba(33, 52, 66, 0.65);
@@ -579,18 +487,9 @@ html[dir="ltr"] .stat-pill { align-items: flex-start; }
   gap: 14px;
   backdrop-filter: blur(8px);
 }
-.guidance-ico {
-  font-size: 22px;
-  color: var(--accent);
-  flex-shrink: 0;
-}
-.guidance-text {
-  font-size: 14px;
-  color: var(--text);
-  line-height: 1.5;
-}
+.guidance-ico { font-size: 22px; color: var(--accent); flex-shrink: 0; }
+.guidance-text { font-size: 14px; color: var(--text); line-height: 1.5; }
 
-/* LIVE STATS DOCK */
 .stats-dock {
   display: flex;
   gap: 16px;
@@ -614,13 +513,8 @@ html[dir="ltr"] .stat-pill { align-items: flex-start; }
   font-family: var(--fen);
   color: var(--accent);
 }
-.dock-card .lbl {
-  font-size: 11px;
-  color: var(--sub);
-  font-weight: 600;
-}
+.dock-card .lbl { font-size: 11px; color: var(--sub); font-weight: 600; }
 
-/* TYPING DISPLAY AREA */
 .typing-box {
   width: 100%;
   background: rgba(18, 29, 37, 0.88);
@@ -634,15 +528,10 @@ html[dir="ltr"] .stat-pill { align-items: flex-start; }
   position: relative;
   overflow: hidden;
   box-shadow: inset 0 2px 10px rgba(0,0,0,0.4);
+  cursor: pointer;
 }
-html[dir="rtl"] .typing-box {
-  direction: rtl;
-  text-align: right;
-}
-html[dir="ltr"] .typing-box {
-  direction: ltr;
-  text-align: left;
-}
+html[dir="rtl"] .typing-box { direction: rtl; text-align: right; }
+html[dir="ltr"] .typing-box { direction: ltr; text-align: left; }
 .typing-text-flow {
   font-family: var(--fen);
   font-size: clamp(22px, 3vw, 30px);
@@ -657,7 +546,6 @@ html[dir="ltr"] .typing-box {
   color: #ffffff;
   background: var(--err);
   border-radius: 4px;
-  animation: err-shake 0.15s ease-in-out;
 }
 .ch-current {
   color: #17242d;
@@ -667,13 +555,8 @@ html[dir="ltr"] .typing-box {
   position: relative;
 }
 .ch-pending { color: var(--sub); opacity: 0.55; }
-@keyframes err-shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-3px); }
-  75% { transform: translateX(3px); }
-}
 
-/* KEYBOARD & HANDS STAGE - CRITICAL: Hardware keyboard is physically LTR worldwide */
+/* KEYBOARD & HANDS STAGE - PHYSICAL LTR LAYOUT */
 .kb-stage {
   position: relative;
   width: 100%;
@@ -772,17 +655,8 @@ html[dir="ltr"] .typing-box {
 }
 #hand-both .st0 { display: none !important; }
 #hand-both g.show-hand { display: inline !important; }
-#hand-both .st1 {
-  display: inline;
-  fill: #142432 !important;
-  opacity: 0.65 !important;
-}
-#hand-both .st2 {
-  display: inline;
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.32) !important;
-  stroke-width: 1.4 !important;
-}
+#hand-both .st1 { display: inline; fill: #142432 !important; opacity: 0.65 !important; }
+#hand-both .st2 { display: inline; fill: none; stroke: rgba(255, 255, 255, 0.32) !important; stroke-width: 1.4 !important; }
 #hand-both .st3 { display: inline; opacity: 0.55; }
 #hand-both .st4 { fill: rgba(255, 255, 255, 0.35) !important; }
 #hand-both .st5 {
@@ -831,46 +705,24 @@ html[dir="ltr"] .typing-box {
   align-items: center;
   gap: 16px;
 }
-.modal-trophy {
-  font-size: 54px;
-  animation: bounce 0.6s ease;
-}
-@keyframes bounce {
-  0% { transform: scale(0.4); opacity: 0; }
-  60% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); }
-}
-.modal-stars {
-  font-size: 32px;
-  color: var(--accent);
-  letter-spacing: 4px;
-}
+.modal-trophy { font-size: 54px; }
+.modal-stars { font-size: 32px; color: var(--accent); letter-spacing: 4px; }
 .modal-stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
   width: 100%;
-  margin: 12px 0;
 }
 .m-stat {
-  background: rgba(18, 29, 37, 0.65);
+  background: rgba(18, 29, 37, 0.6);
+  border: 1px solid var(--bdr);
   border-radius: 10px;
   padding: 10px;
-  border: 1px solid var(--bdr);
 }
-.m-stat .v { font-family: var(--fen); font-size: 20px; font-weight: 800; color: #ffffff; }
+.m-stat .v { font-size: 20px; font-weight: 800; font-family: var(--fen); color: var(--accent); }
 .m-stat .l { font-size: 11px; color: var(--sub); }
-.modal-msg {
-  font-size: 14px;
-  color: var(--text);
-  line-height: 1.5;
-}
-.modal-actions {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-  margin-top: 8px;
-}
+.modal-msg { font-size: 13px; color: var(--text); line-height: 1.6; }
+.modal-actions { display: flex; gap: 12px; width: 100%; margin-top: 8px; }
 .m-btn {
   flex: 1;
   padding: 12px;
@@ -882,20 +734,29 @@ html[dir="ltr"] .typing-box {
   border: none;
   transition: all 0.2s;
 }
-.m-btn-retry {
-  background: var(--bg3);
-  color: var(--text);
-  border: 1px solid var(--bdr);
-}
+.m-btn-retry { background: var(--bg3); color: var(--text); border: 1px solid var(--bdr); }
 .m-btn-retry:hover { background: var(--bg4); }
-.m-btn-next {
-  background: var(--accent);
-  color: #17242d;
-  box-shadow: 0 0 16px var(--accent-glow);
-}
+.m-btn-next { background: var(--accent); color: #17242d; box-shadow: 0 0 16px var(--accent-glow); }
 .m-btn-next:hover { transform: scale(1.02); }
 
-/* FOOTER */
+/* MOBILE RESPONSIVE STYLES */
+@media (max-width: 768px) {
+  .kb-stage, .vk-hands-overlay, #vk-hands-wrapper { display: none !important; }
+  header { padding: 0 12px; height: 48px; }
+  .logo-text { display: none; }
+  .stages-grid { grid-template-columns: 1fr; }
+  main { padding: 12px 14px; }
+  .stage-hero { padding: 18px 20px; flex-direction: column; align-items: flex-start; }
+  .hero-overall-progress { width: 100%; justify-content: space-between; }
+  .stage-detail-banner { padding: 18px 20px; flex-direction: column; align-items: flex-start; }
+  .stats-dock { gap: 8px; }
+  .dock-card { min-width: 75px; padding: 6px 12px; }
+  .dock-card .val { font-size: 18px; }
+  .dock-card .lbl { font-size: 9.5px; }
+  .typing-box { padding: 16px 18px; min-height: 90px; }
+  .typing-text-flow { font-size: 20px; }
+}
+
 footer {
   text-align: center;
   padding: 16px;
@@ -907,7 +768,7 @@ footer {
 </head>
 <body>
 <div id="app">
-  <!-- HEADER (UNIFIED WITH INDEX) -->
+  <!-- HEADER -->
   <header>
     <a href="index.html" class="logo" title="Barqtype">
       <div class="logo-ico">
@@ -921,6 +782,8 @@ footer {
       <a href="index.html" class="nb" id="n-test"><span id="txt-nav-test">تدريب</span></a>
       <a href="index.html#stats" class="nb" id="n-stats"><span id="txt-nav-stats">إحصاءات</span></a>
       <a href="learn.html" class="nb on" id="n-learn"><span id="txt-nav-learn">تعلم</span></a>
+      <a href="index.html#race" class="nb" id="n-race"><span>سباق</span></a>
+      <a href="index.html#online" class="nb" id="n-online"><span>شبكي</span></a>
     </nav>
     <div class="ctrls">
       <div class="pg">
@@ -950,42 +813,35 @@ footer {
             <span class="overall-val" id="overall-progress-text">0 / 18</span>
           </div>
           <div class="overall-bar-wrap">
-            <div class="overall-bar-fill" id="overall-bar" style="width: 0%"></div>
+            <div class="overall-bar-fill" id="overall-bar" style="width: 0%;"></div>
           </div>
         </div>
       </div>
-
-      <div class="stages-grid" id="stages-container">
-        <!-- Rendered via JS -->
-      </div>
+      <div class="stages-grid" id="stages-container"></div>
     </section>
 
-    <!-- VIEW 2: STAGE LESSONS DRILL-DOWN -->
+    <!-- VIEW 2: STAGE DRILL-DOWN (3 LESSONS) -->
     <section id="view-stage-lessons">
       <div class="back-header">
         <button class="btn-back" onclick="showStagesView()">
-          <span id="back-arrow">←</span> <span id="txt-back-stages">العودة إلى المراحل</span>
+          <span id="back-arrow">→</span> <span id="txt-back-stages">العودة إلى المراحل</span>
         </button>
-        <span class="overall-val" id="stage-lessons-progress-badge">0 / 3 مكتمل</span>
       </div>
-
       <div class="stage-detail-banner">
         <div class="stage-detail-info">
           <h2 id="stage-banner-title">المرحلة</h2>
           <p id="stage-banner-desc">وصف المرحلة</p>
         </div>
+        <div class="stage-prog-badge" id="stage-lessons-progress-badge">0 / 3 مكتمل</div>
       </div>
-
-      <div class="lessons-list" id="lessons-container">
-        <!-- Rendered via JS -->
-      </div>
+      <div class="lessons-list" id="lessons-container"></div>
     </section>
 
     <!-- VIEW 3: ACTIVE LESSON PLAYGROUND -->
     <section id="view-active-lesson">
       <div class="lesson-top-bar">
         <button class="btn-back" onclick="showStageLessonsView(CURRENT_STAGE_ID)">
-          <span id="lesson-back-arrow">←</span> <span id="txt-back-stage">العودة للدروس</span>
+          <span id="lesson-back-arrow">→</span> <span id="txt-back-stage">العودة للدروس</span>
         </button>
         <div class="lesson-title-area">
           <span id="active-stage-crumb">المرحلة 1</span>
@@ -1026,6 +882,8 @@ footer {
       <div class="typing-box" id="typing-box" tabindex="0">
         <div class="typing-text-flow" id="typing-flow"></div>
       </div>
+      <!-- Hidden mobile input target -->
+      <input id="learn-inp" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="position:fixed;bottom:0;left:0;opacity:0;pointer-events:none;z-index:-1;width:1px;height:1px;border:none;padding:0;margin:0;">
 
       <!-- VIRTUAL KEYBOARD & HANDS STAGE -->
       <div class="kb-stage" id="kb-stage" dir="ltr">
@@ -3954,7 +3812,7 @@ footer {
   </div>
 
   <footer>
-    Barqtype Learn &bull; Mechanical IQUNIX A80 &bull; 18 Comprehensive Touch-Typing Lessons
+    Barqtype Learn &bull; Bilingual Touch-Typing Curriculum &bull; 6 Stages &bull; 18 Comprehensive Lessons
   </footer>
 </div>
 
@@ -3962,34 +3820,35 @@ footer {
 // ==============================================================
 // 1. CURRICULUM DATA (18 ARABIC + 18 ENGLISH LESSONS)
 // ==============================================================
+
 var CURRICULUM = {
   ar: [
     {
       id: "ar_s1",
       num: 1,
       title: "الصف الأساسي (Home Row)",
-      desc: "تعلم مفاتيح الارتكاز وبناء وضعية اليدين الصحيحة على الكيبورد.",
+      desc: "تعلم مفاتيح الارتكاز وبناء وضعية اليدين الصحيحة على الكيبورد دون النظر للمفاتيح.",
       lessons: [
         {
           id: "ar_1_1",
           title: "مفاتيح الارتكاز والسبابتين (ت، ب)",
-          desc: "ضع السبابة اليمنى على (ت) واليسرى على (ب). النتوء البارز يرشدك للموضع الصحيح.",
-          keys: ["ت", "ب"],
-          text: "تت بب تب بت تتت ببب تبت بتب تت بب تبت بت ت ب ت ب بت تب تت بب"
+          desc: "ضع السبابة اليمنى على (ت) واليسرى على (ب). النتوء البارز يرشدك للموضع الصحيح دائماً.",
+          keys: ["ت", "ب", "مسافة"],
+          text: "تت بب تب بت تتت ببب تبت بتب تت بب تبت بت ت ب ت ب بت تب تت بب تبت بتب"
         },
         {
           id: "ar_1_2",
-          title: "الوسطى والبنصر والخنصر (ك م ن / ي س ش)",
-          desc: "اليد اليمنى: ن (وسطى)، م (بنصر)، ك (خنصر). اليد اليسرى: ي (وسطى)، س (بنصر)، ش (خنصر).",
-          keys: ["ك", "م", "ن", "ت", "ب", "ي", "س", "ش"],
-          text: "كمنت بيسش نم كك مم نن نت يس يش بي سي كم تم نم سم بن تن سن شن"
+          title: "أصابع الصف الأساسي (ن، م، ك / ي، س، ش)",
+          desc: "اليمين: ن (وسطى)، م (بنصر)، ك (خنصر). اليسار: ي (وسطى)، س (بنصر)، ش (خنصر).",
+          keys: ["ن", "م", "ك", "ي", "س", "ش"],
+          text: "بيت بنت تين مسك سمك سكت شمس يمس سمن سكين كم نم تم بن تن سن شن مس كك مم نن"
         },
         {
           id: "ar_1_3",
-          title: "تمدد السبابتين والمسافة (ا، ل)",
-          desc: "تمدد بالسبابة اليمنى يساراً إلى (ا) وباليسرى يميناً إلى (ل). الإبهام يضغط المسافة.",
-          keys: ["ا", "ل", "ت", "ب", "ك", "م", "ن", "ي", "س", "ش"],
-          text: "كل بل تل نم من مس بت سبل مات بيت نام مال سال كتب لبن بنت سمن شمل تين"
+          title: "تمدد السبابتين والصف الأساسي الكامل (ا، ل)",
+          desc: "تمدد بالسبابة اليمنى يساراً إلى (ا) وباليسرى يميناً إلى (ل) لتكتمل حروف الصف الأساسي.",
+          keys: ["ا", "ل", "ط"],
+          text: "كل بل تل مال سال نام مات كتب لبن شمل سليم لسان سلام كاتب نبات لباس شباك كمن"
         }
       ]
     },
@@ -3997,28 +3856,28 @@ var CURRICULUM = {
       id: "ar_s2",
       num: 2,
       title: "الصف العلوي (Upper Row)",
-      desc: "الصعود بالأصابع إلى الصف العلوي والعودة مباشرة إلى وضعية الارتكاز.",
+      desc: "الصعود بالأصابع إلى الصف العلوي والعودة مباشرة لوضعية الارتكاز.",
       lessons: [
         {
           id: "ar_2_1",
-          title: "سبابة ووسطى الصف العلوي (ع، غ، ف، ق / ث، ص)",
-          desc: "سبابة اليمين لـ (ع، غ) ووسطى لـ (هـ). سبابة اليسار لـ (ف، ق) ووسطى لـ (ث، ص).",
-          keys: ["ع", "غ", "ف", "ق", "ث", "ص", "ه"],
-          text: "عف صق ثغ فص قع صفث عق ثق فص هع عصف فصفص صقع قصف ثقف عصفور"
+          title: "سبابة ووسطى الصف العلوي (ع، غ، ف، ق، ث، هـ)",
+          desc: "سبابة اليمين لـ (ع، غ) ووسطى لـ (هـ). سبابة اليسار لـ (ف، ق) ووسطى لـ (ث).",
+          keys: ["ع", "غ", "ف", "ق", "ث", "ه"],
+          text: "علم عمل فعل فهم قلم عسل سهم غالب شهد فلك عقل ثقة ثعلب قفل غيم لهب سقف"
         },
         {
           id: "ar_2_2",
-          title: "بنصر وخنصر الصف العلوي (خ، ح، ج، د / ض)",
-          desc: "أطراف الصف العلوي: (خ، ح، ج، د) باليد اليمنى، و(ض) بالخنصر الأيسر.",
-          keys: ["خ", "ح", "ج", "د", "ض"],
-          text: "ضد حج خد جح ضح ضج جد خض حجد ضحض دحدح ضخم حجر جبل خشب دمع"
+          title: "أطراف الصف العلوي (ص، ض، خ، ح، ج، د)",
+          desc: "أتقن حروف أطراف الصف العلوي: (خ، ح، ج، د) باليد اليمنى، و(ص، ض) باليد اليسرى.",
+          keys: ["ص", "ض", "خ", "ح", "ج", "د"],
+          text: "صدق حق خلق جهد خشب جبل دمع ضحك مدح نجاح صيف ضيف حكم فتح دخل قصد حقد"
         },
         {
           id: "ar_2_3",
-          title: "دمج الصفين الأساسي والعلوي",
-          desc: "تطبيق عملي يجمع بين الصف الأساسي والصف العلوي في كلمات حقيقية متناسقة.",
-          keys: ["كتب", "علم", "قفل", "صوت"],
-          text: "كتب علم قفل صوت قلم قلب جميل شمس حبل صدق فجر حق خير صحة صيف"
+          title: "دمج وانسيابية الصفين الأساسي والعلوي",
+          desc: "تدريب عملي يجمع بين الصف الأساسي والصف العلوي في كلمات متناسقة تتدفق بسلاسة.",
+          keys: ["علم", "صدق", "خلق", "نجاح"],
+          text: "علم نافع فتح باب النجاح دمع العين فضل الصدق خلق جميل كتم الغضب صدق الحديث كسب حلال"
         }
       ]
     },
@@ -4026,28 +3885,28 @@ var CURRICULUM = {
       id: "ar_s3",
       num: 3,
       title: "الصف السفلي (Lower Row)",
-      desc: "الهبوط بالأصابع إلى الصف السفلي وإتقان جميع الحروف الأساسية.",
+      desc: "الهبوط بالأصابع إلى الصف السفلي وإتقان جميع حروف الكيبورد الأساسية والهمزات.",
       lessons: [
         {
           id: "ar_3_1",
-          title: "سبابة ووسطى الصف السفلي (ر، ى، ة / لا، ؤ)",
-          desc: "انزل بالسبابة اليمنى نحو (ر، ى) والوسطى نحو (ة). وباليد اليسرى نحو (لا، ؤ).",
-          keys: ["ر", "ى", "ة", "لا", "ؤ"],
-          text: "رى رة لاؤ رلا ؤة رىلا كرة مرى حرة رمل رمى برى قرى ثرى رؤية راية"
+          title: "سبابة ووسطى الصف السفلي (ر، لا، ى، ة)",
+          desc: "انزل بالسبابة اليمنى نحو (ر، ى) والوسطى نحو (ة). وباليد اليسرى نحو (لا).",
+          keys: ["ر", "لا", "ى", "ة"],
+          text: "ربيع رحمة سيرة فكرة نهضة طريق قوة حياة أثر قرية شجرة بشرى حكمة هدى راية"
         },
         {
           id: "ar_3_2",
-          title: "البنصر والخنصر والهمزات (و، ز، ظ / ء، ئ)",
-          desc: "أتقن مفاتيح أطراف الصف السفلي: (و، ز، ظ) باليد اليمنى، و(ء، ئ) باليد اليسرى.",
-          keys: ["و", "ز", "ظ", "ء", "ئ"],
-          text: "وز ظو ءئ وزظ ضوء جزء بطء فائز زائر وزن زهرة ظل ظرف قارئ هواء"
+          title: "بنصر وخنصر الصف السفلي والهمزات (و، ز، ظ، ء، ئ، ؤ)",
+          desc: "أتقن مفاتيح: (و، ز، ظ) باليد اليمنى، و(ء، ئ، ؤ) باليد اليسرى مع علامات الترقيم.",
+          keys: ["و", "ز", "ظ", "ء", "ئ", "ؤ", "،", "."],
+          text: "ضوء، جزء، تفاؤل، فضاء، ظرف، نقاء، وفاء، هواء، زهرة، روعة، فائز، مسؤول، سؤال، ظلال."
         },
         {
           id: "ar_3_3",
-          title: "تكامل الصفوف الثلاثة الكاملة",
-          desc: "تمارين تجمع كامل حروف الكيبورد العربي في الصفوف الثلاثة مع مفردات لغوية غنية.",
-          keys: ["نهر", "بحر", "شجر", "قمر"],
-          text: "نهر بحر شجر زهر ضوء سماء قمر شمس كتاب ربيع خريف صيف شتاء وطن كفاح"
+          title: "تكامل الكيبورد الكامل (جميع الصفوف الثلاثة)",
+          desc: "تمارين تجمع كامل حروف الكيبورد العربي في الصفوف الثلاثة بتناسق وإيقاع مريح.",
+          keys: ["نهر", "بحر", "سماء", "ضياء"],
+          text: "العلم يرفع بيتا لا عماد له، والجهل يهدم بيت العز والشرف. القراءة تضيء دروب الفكر وتصقل الروح."
         }
       ]
     },
@@ -4055,28 +3914,28 @@ var CURRICULUM = {
       id: "ar_s4",
       num: 4,
       title: "الكلمات وتدفق الحروف (Words)",
-      desc: "بناء تدفق مستمر وسلس لكلمات شائعة دون التوقف بين الحروف.",
+      desc: "بناء تدفق مستمر وسلس لأكثر الكلمات شيوعاً دون التوقف المفاجئ بين الحروف.",
       lessons: [
         {
           id: "ar_4_1",
-          title: "كلمات متوازنة بين اليدين",
-          desc: "كلمات تتناوب فيها الحروف بين اليدين اليمنى واليسرى لانسيابية مضاعفة.",
-          keys: ["هذا", "رجل", "بنت", "وطن"],
-          text: "هذا رجل ولد بنت وطن كاتب مهندس معلم طالب طبيب مخلص مبدع قائد مفكر"
+          title: "أكثر الكلمات العربية استخداماً",
+          desc: "تثبيت الكلمات المتكررة في النصوص لبناء سرعة كتابة تلقائية عبر الذاكرة العضلية.",
+          keys: ["في", "من", "على", "كان"],
+          text: "في من على إلى عن مع كان هذا كل يوم عمل علم خير حق قول فعل رشد فضل نفع زمن عهد"
         },
         {
           id: "ar_4_2",
-          title: "التاء المربوطة والهمزات المتنوعة",
-          desc: "التركيز على دقة كتابة التاء المربوطة والهمزات على السطر والواو والياء دون تردد.",
-          keys: ["مدينة", "مدرسة", "سماء"],
-          text: "مدينة مدرسة حديقة جامعة حياة كريمة سماء صافية لقاء طيب فناء واسع بيئة نظيفة"
+          title: "توازن اليدين وتناوب الأصابع",
+          desc: "كلمات تتناوب فيها الحروف بين اليدين اليمنى واليسرى لانسيابية مضاعفة وإيقاع ثابت.",
+          keys: ["وطن", "معلم", "مبدع", "صديق"],
+          text: "وطن مهندس معلم كاتب طالب مفكر مخلص مبدع قائد طبيب باحث مسافر صديق وفي شجاع كريم حليم عادل"
         },
         {
           id: "ar_4_3",
-          title: "تدفق الكلمات الشائعة والمتكررة",
-          desc: "تدريب مكثف على أكثر الكلمات العربية استخداماً لبناء ذاكرة عضلية دائمة.",
-          keys: ["في", "من", "على", "كان"],
-          text: "في من على إلى عن مع كان كل يوم عمل علم خير حق قول فعل رشد فضل نفع"
+          title: "اللواحق والتراكيب الشائعة",
+          desc: "التدريب على بادئات الكلمات ونهاياتها الشائعة (ال التعريف، التاء المربوطة، التنوين).",
+          keys: ["التعليم", "المستمر", "الإتقان"],
+          text: "التعلم المستمر التفكير السليم التطوير الدائم الإتقان التام الابتكار الرائد المحاولة المتكررة الثقة الراسخة"
         }
       ]
     },
@@ -4084,28 +3943,28 @@ var CURRICULUM = {
       id: "ar_s5",
       num: 5,
       title: "الجمل وعلامات الترقيم (Sentences)",
-      desc: "كتابة جمل فصيحة متكاملة واستخدام الفاصلة والنقطة والمسافات بدقة.",
+      desc: "كتابة جمل فصيحة متكاملة واستخدام الفاصلة والنقطة والمسافات بدقة دون النظر.",
       lessons: [
         {
           id: "ar_5_1",
-          title: "جمل قصيرة مع علامات الترقيم الأساسية",
-          desc: "تعلم إدراج الفاصلة (،) والنقطة (.) بعد الكلمات بمسافة واحدة.",
+          title: "جمل قصيرة متقنة مع علامات الترقيم",
+          desc: "تعلم إدراج الفاصلة (،) والنقطة (.) بعد الكلمات مع مسافة واحدة صحيحة.",
           keys: ["،", "."],
-          text: "العلم نور، والجهل ظلام. الصدق منجاة، والكذب خيبة. العمل عبادة، والإخلاص شرف."
+          text: "الصدق منجاة، والكذب مهواة. الصبر مفتاح الفرج، والعمل شرف الإنسان. الوقت كنز ثمين، فاغتنمه بالخير."
         },
         {
           id: "ar_5_2",
-          title: "أمثال وحكم عربية مأثورة",
-          desc: "نصوص لغوية رصينة تعزز مهارة القراءة المسبقة بالعين أثناء الطباعة بالأصابع.",
-          keys: ["الصبر", "الفرج", "الوقت"],
-          text: "الصبر مفتاح الفرج، ومن جد وجد ومن زرع حصد. الوقت كالسيف إن لم تقطعه قطعك."
+          title: "أمثال وحكم عربية بليغة",
+          desc: "نصوص رصينة تعزز مهارة القراءة المسبقة بالعين أثناء طباعة الكلمات الحالية بالأصابع.",
+          keys: ["حكمة", "مثل", "أثر"],
+          text: "من جد وجد ومن زرع حصد، ومن سار على الدرب وصل. خير الكلام ما قل ودل، وخير العمل ما نفع الناس."
         },
         {
           id: "ar_5_3",
-          title: "نصوص فكرية وانسيابية متصلة",
-          desc: "فقرات متصلة تدربك على الحفاظ على وتيرة موحدة وثابتة كعازف البيانو المحترف.",
-          keys: ["الثقة", "العمل", "الطموح"],
-          text: "تبدأ الثقة بالنفس عندما يتصالح الإنسان مع ذاته، ويعمل بجد مستمر لتحقيق طموحاته العالية."
+          title: "تدفق الفقرات المتصلة",
+          desc: "الحفاظ على وتيرة موحدة وثابتة أثناء الانتقال بين جملتين دون تباطؤ.",
+          keys: ["فقرات", "انسيابية", "ثبات"],
+          text: "تبدأ رحلة النجاح بخطوة واثقة نحو الهدف المنشود، والعزيمة الصادقة تذلل أصعب العقبات في طريق التميز."
         }
       ]
     },
@@ -4113,28 +3972,28 @@ var CURRICULUM = {
       id: "ar_s6",
       num: 6,
       title: "السرعة والتمكن (Speed & Mastery)",
-      desc: "رفع معدل الكلمات في الدقيقة (WPM) وتحقيق دقة 95%+ للحصول على التاج الذهبي.",
+      desc: "رفع معدل الكلمات في الدقيقة (WPM) وتحقيق دقة 90%+ للحصول على شهادة الإتقان والتاج.",
       lessons: [
         {
           id: "ar_6_1",
-          title: "سباق الانطلاق السريع (هدف 25+ WPM)",
-          desc: "تحدي زمني سريع لكسر حاجز 25 كلمة بالدقيقة مع الحفاظ على دقة لا تقل عن 90%.",
-          keys: ["سباق", "سرعة", "تفاؤل"],
-          text: "كن جميلا ترى الوجود جميلا، وتفاءل بالخير تجده في كل خطوة تخطوها نحو أهدافك المستقبلية."
+          title: "سباق السرعة الأول (هدف 25+ WPM)",
+          desc: "تحدي زمني سريع لاختبار دقة وسرعة انطلاق أصابعك على لوحة المفاتيح.",
+          keys: ["تحدي", "سرعة", "انطلاق"],
+          text: "كن متفائلا في كل خطوة، فالأمل يفتح الأبواب المغلقة ويمنحك القوة لمواصلة الكفاح بثبات وثقة عالية."
         },
         {
           id: "ar_6_2",
           title: "سباق الكفاءة العالية (هدف 40+ WPM)",
-          desc: "رفع الإيقاع الذهني والحركي لمستوى الطباعين المحترفين بسرعة 40 كلمة بالدقيقة.",
-          keys: ["معرفة", "قوة", "تميز"],
-          text: "إن المعرفة قوة متجددة لا تنضب، والحرص على اكتساب المهارات الحديثة يفتح آفاقا واسعة للنجاح والتميز."
+          desc: "رفع الإيقاع الذهني والحركي لمستوى الطباعين المحترفين بسرعة تتجاوز 40 كلمة بالدقيقة.",
+          keys: ["كفاءة", "إتقان", "احتراف"],
+          text: "إن سرعة التفكير وجودة التنفيذ ركيزتان أساسيتان لتحقيق الإنجازات الكبرى في عالم سريع التغير ومتسارع الخطى."
         },
         {
           id: "ar_6_3",
-          title: "اختبار التخرج الشامل والتاج الذهبي",
-          desc: "الاختبار النهائي لمسار التعلم العربي! أثبت تمكنك الكامل واحصل على التاج الذهبي.",
-          keys: ["تخرج", "إتقان", "احتراف"],
-          text: "الطباعة باللمس مهارة حيوية تمنحك سرعة التعبير ودقة الإنجاز، وممارسة اليوم تصنع احتراف الغد بامتياز."
+          title: "الاختبار النهائي والتاج الذهبي",
+          desc: "الاختبار الشامل لمسار التعلم! أثبت تمكنك الكامل بدقة 95%+ لتتوج بالتاج الذهبي.",
+          keys: ["تتويج", "تاج", "نجاح"],
+          text: "الطباعة السريعة باللمس مهارة حيوية تجعل لوحة المفاتيح امتدادا طبيعيا لأفكارك، ومبارك وصولك لقمة الاحتراف."
         }
       ]
     }
@@ -4149,23 +4008,23 @@ var CURRICULUM = {
         {
           id: "en_1_1",
           title: "Anchor Keys & Index Fingers (F, J)",
-          desc: "Left index rests on F and right index on J. Feel the tactile ridges on both keycaps.",
-          keys: ["f", "j", " "],
-          text: "ff jj fj jf ff jj fjf jfj fff jjj f j j f fj jf ff jj fj jf"
+          desc: "Left index rests on F and right index on J. Feel the tactile bumps on both keycaps.",
+          keys: ["f", "j", "space"],
+          text: "ff jj fj jf ff jj fjf jfj fff jjj f j j f fj jf ff jj fj jf fjf jfj ff jj"
         },
         {
           id: "en_1_2",
-          title: "Middle, Ring & Pinky Fingers (D, K / S, L / A, ;)",
-          desc: "Left hand: D, S, A. Right hand: K, L, ;. Keep wrists slightly hovering and relaxed.",
-          keys: ["a", "s", "d", "f", "j", "k", "l", ";"],
-          text: "asdf jkl; as df jk l; a s d f j k l ; ask dad lad fall flask salads"
+          title: "Core Home Row (D, K, S, L, A, ;)",
+          desc: "Left hand: D, S, A. Right hand: K, L, ;. Keep wrists relaxed and slightly hovering.",
+          keys: ["d", "k", "s", "l", "a", ";"],
+          text: "ask dad lad fall flask salads all sad salads ask dad fall flask alas salads all lad dad"
         },
         {
           id: "en_1_3",
-          title: "Full Home Row & Spacebar Mastery",
-          desc: "Combine all home row keys with thumbs on the spacebar to form real vocabulary.",
-          keys: ["a", "s", "d", "f", "g", "h", "j", "k", "l", ";"],
-          text: "all add ask dad glad flag flash fall half glass alas salads flask alfalfa"
+          title: "Index Reaches (G, H) & Full Home Row",
+          desc: "Stretch left index to G and right index to H. Return instantly to anchor keys.",
+          keys: ["g", "h"],
+          text: "glad flag flash half glass alas dash had shall salads flask alfalfa fall glad half glass flag"
         }
       ]
     },
@@ -4177,24 +4036,24 @@ var CURRICULUM = {
       lessons: [
         {
           id: "en_2_1",
-          title: "Index & Middle Upper Reaches (R, U / E, I)",
-          desc: "Left reaches up to R and E. Right reaches up to U and I. Return to home keys immediately.",
-          keys: ["r", "u", "e", "i"],
-          text: "red fur rid jar fire user deer rude sure rise fair ride direct figure"
+          title: "Upper Index & Middle (E, R, U, I)",
+          desc: "Left reaches up to E and R. Right reaches up to U and I. Return to home keys immediately.",
+          keys: ["e", "r", "u", "i"],
+          text: "fire rude sure user deer fair ride free gear hear lake like hide rise rush leaf life safe"
         },
         {
           id: "en_2_2",
-          title: "Ring & Pinky Upper Reaches (W, O / Q, P)",
-          desc: "Left ring to W, pinky to Q. Right ring to O, pinky to P with light, accurate taps.",
-          keys: ["w", "o", "q", "p"],
-          text: "pop wow quip loop pour wipe drop slow walk wrap pool paper power queen"
+          title: "Upper Ring, Pinky & Reaches (W, O, Q, P, T, Y)",
+          desc: "Reach W, Q on the left; O, P on the right; and reaches T, Y with your index fingers.",
+          keys: ["w", "o", "q", "p", "t", "y"],
+          text: "write world quote quiet water today great power yellow people light party treat sweet youth"
         },
         {
           id: "en_2_3",
           title: "Home & Upper Row Word Integration",
           desc: "Connect the home row and top row smoothly to form rich English vocabulary.",
-          keys: ["world", "quick", "quiet", "water"],
-          text: "write people world floor quiet sleep quick apple please yellow water forward"
+          keys: ["great", "people", "write", "future"],
+          text: "great people write great poetry free youth walk toward bright future fresh water fills deep wells"
         }
       ]
     },
@@ -4206,24 +4065,24 @@ var CURRICULUM = {
       lessons: [
         {
           id: "en_3_1",
-          title: "Index & Middle Lower Reaches (V, M / C, ,)",
-          desc: "Left index to V, middle to C. Right index to M, middle to comma (,).",
-          keys: ["v", "m", "c", ","],
-          text: "van map come cave move calm view camp music cover victim vacuum cream"
+          title: "Lower Index & Middle (V, B, N, M)",
+          desc: "Left index curls down to V, B. Right index curls to N, M. Keep light rhythmic taps.",
+          keys: ["v", "b", "n", "m"],
+          text: "move brave name best time make mind number given verb dream brain river balance combine"
         },
         {
           id: "en_3_2",
-          title: "Ring, Pinky & Punctuation (X, . / Z, /)",
-          desc: "Left ring to X, pinky to Z. Right ring to period (.), pinky to slash (/).",
-          keys: ["x", ".", "z", "/"],
-          text: "box zip zero next size fix pixel maze zeal six bronze apex exit. size. next."
+          title: "Lower Ring, Pinky & Punctuation (C, X, Z, Comma, Period)",
+          desc: "Complete the alphabet with C, X, Z, along with standard comma and period punctuation.",
+          keys: ["c", "x", "z", ",", "."],
+          text: "the quick brown fox jumps over the lazy dog, and packs five dozen velvet jugs. zero extra complex size."
         },
         {
           id: "en_3_3",
           title: "Full Keyboard Pangrams & Three-Row Flow",
           desc: "Practice comprehensive pangrams that exercise every letter across all three keyboard rows.",
-          keys: ["quick", "brown", "fox", "jumps"],
-          text: "the quick brown fox jumps over the lazy dog and packs five dozen velvet jugs"
+          keys: ["pangram", "flow", "rhythm"],
+          text: "pack my box with five dozen liquor jugs. bright vixens jump; dozy fowl quack. crazy frederick bought opal jewels."
         }
       ]
     },
@@ -4235,24 +4094,24 @@ var CURRICULUM = {
       lessons: [
         {
           id: "en_4_1",
-          title: "Top 50 Most Common Words",
-          desc: "Master the core words that constitute over 50% of everyday English texts.",
-          keys: ["the", "and", "that", "have"],
-          text: "the of and to a in is you that it he was for on are as with his they at be this have from"
+          title: "Top Most Common Words",
+          desc: "Master the high-frequency words that constitute the majority of everyday English reading.",
+          keys: ["the", "that", "have", "with"],
+          text: "the of and to a in is you that it he was for on are as with his they at be this have from one all would"
         },
         {
           id: "en_4_2",
-          title: "Capital Letters with Opposite Shift",
-          desc: "Press the opposite Shift key using pinky fingers while typing capitalized initials.",
-          keys: ["Shift", "Capitals"],
-          text: "London Paris Tokyo Cairo New York Monday Friday Apple Google Python JavaScript"
+          title: "Rhythmic Hand Alternation",
+          desc: "Words that alternate cleanly between left and right hands for effortless typing speed.",
+          keys: ["balance", "cadence", "rhythm"],
+          text: "problem visual island profit formal enrich signals visual height authentic element panel field suspend dynamic"
         },
         {
           id: "en_4_3",
-          title: "Common Prefixes & Suffixes",
-          desc: "Train automatic finger sequences for common endings: -ing, -tion, -ment, -able.",
-          keys: ["tion", "ment", "able"],
-          text: "action learning movement stable kindness national building development powerful creative"
+          title: "Common Prefixes and Suffixes",
+          desc: "Train automatic finger sequences for common endings: -ing, -tion, -ment, -able, -ness.",
+          keys: ["ing", "tion", "ment", "ness"],
+          text: "learning movement kindness powerful development creative building action national stable forward beautiful"
         }
       ]
     },
@@ -4264,24 +4123,24 @@ var CURRICULUM = {
       lessons: [
         {
           id: "en_5_1",
-          title: "Everyday Conversational Sentences",
-          desc: "Practice natural sentence flow with proper spacing after commas and periods.",
+          title: "Conversational Flow & Punctuation",
+          desc: "Practice natural sentence flow with proper single spacing after commas and periods.",
           keys: [",", "."],
-          text: "Consistency is the key to mastering typing. Practice a little bit every day, and your fingers will fly."
+          text: "Consistency is the true secret of speed. Practice every day with calm focus, and your fingers will fly across the keys."
         },
         {
           id: "en_5_2",
-          title: "Inspirational Wisdom & Quotes",
-          desc: "Read whole words ahead with your eyes while your fingers execute the current word.",
-          keys: ["future", "dreams", "courage"],
-          text: "The future belongs to those who believe in the beauty of their dreams. Keep moving forward with courage."
+          title: "Inspiring Quotes & Timeless Wisdom",
+          desc: "Read whole words ahead with your eyes while your fingers execute the current word automatically.",
+          keys: ["focus", "wisdom", "dreams"],
+          text: "The future belongs to those who believe in the beauty of their dreams. Small daily improvements lead to stunning results."
         },
         {
           id: "en_5_3",
-          title: "Continuous Multi-Sentence Flow",
+          title: "Flowing Multi-Sentence Paragraphs",
           desc: "Maintain a smooth, piano-like cadence without stopping abruptly between words.",
-          keys: ["skill", "patience", "mastery"],
-          text: "True skill comes from patience and deliberate repetition. When your mind relaxes, muscle memory takes over naturally."
+          keys: ["cadence", "fluidity", "harmony"],
+          text: "True skill comes from relaxed repetition and patience. When your mind quiets down, muscle memory takes over naturally."
         }
       ]
     },
@@ -4289,33 +4148,34 @@ var CURRICULUM = {
       id: "en_s6",
       num: 6,
       title: "Speed & Mastery",
-      desc: "Push your speed beyond 40+ WPM with 95%+ accuracy to earn your Grand Master Certification.",
+      desc: "Push your speed beyond 40+ WPM with 90%+ accuracy to earn your Grand Master Certification.",
       lessons: [
         {
           id: "en_6_1",
           title: "Speed Sprint 1 (Goal: 30+ WPM)",
           desc: "Fast-paced sprint test. Focus on clean, rhythmic typing with minimal backspacing.",
-          keys: ["speed", "accuracy", "confidence"],
-          text: "Speed comes as a natural byproduct of accuracy. Type with confidence and let each stroke land cleanly."
+          keys: ["speed", "sprint", "rhythm"],
+          text: "Speed is a natural consequence of rhythm and precision. Trust your fingers and let each keystroke land with clear confidence."
         },
         {
           id: "en_6_2",
-          title: "Advanced Pro Sprint (Goal: 50+ WPM)",
-          desc: "Elevate your pace to match professional touch-typists worldwide.",
-          keys: ["pro", "speed", "execution"],
-          text: "Technology accelerates when human creativity connects with fast execution. Every keystroke is an idea taking flight."
+          title: "Advanced Pro Sprint (Goal: 45+ WPM)",
+          desc: "Elevate your pace to match professional touch-typists worldwide with unwavering accuracy.",
+          keys: ["precision", "pro", "mastery"],
+          text: "Every master was once a beginner who refused to quit. Keep your eyes on the text and let muscle memory drive your typing speed."
         },
         {
           id: "en_6_3",
           title: "Grand Master Graduation & Gold Crown",
-          desc: "The ultimate challenge! Complete this final exam with 95%+ accuracy to graduate with honors.",
-          keys: ["mastery", "crown", "certified"],
-          text: "Congratulations on reaching the pinnacle of touch typing mastery. Your fingers now express your thoughts with effortless lightning speed."
+          desc: "The ultimate challenge! Complete this final exam with 90%+ accuracy to graduate with honors.",
+          keys: ["crown", "graduation", "gold"],
+          text: "Congratulations on achieving true touch typing mastery. Your fingers now express your ideas at the speed of thought."
         }
       ]
     }
   ]
 };
+
 
 // ==============================================================
 // 2. KEYBOARD & FINGER MAPPINGS (IQUNIX A80 - FIXED PHYSICAL LTR)
@@ -4403,6 +4263,46 @@ var KB_ROWS = [
   ]
 ];
 
+var QWERTY_TO_AR = {
+  "`":"ذ", "~":"ّ", "1":"1", "!":"!", "2":"2", "@":"@", "3":"3", "#":"#",
+  "4":"4", "$":"$", "5":"5", "%":"%", "6":"6", "^":"^", "7":"7", "&":"&",
+  "8":"8", "*":"*", "9":"9", "(":"(", "0":"0", ")":")", "-":"-", "_":"_",
+  "=":"=", "+":"+",
+  "q":"ض", "Q":"َ", "w":"ص", "W":"ً", "e":"ث", "E":"ُ", "r":"ق", "R":"ٌ",
+  "t":"ف", "T":"لإ", "y":"غ", "Y":"إ", "u":"ع", "U":"‘", "i":"ه", "I":"÷",
+  "o":"خ", "O":"×", "p":"ح", "P":"؛", "[":"ج", "{":"<", "]":"د", "}":">",
+  "\\":"\\", "|":"|",
+  "a":"ش", "A":"ِ", "s":"س", "S":"ٍ", "d":"ي", "D":"]", "f":"ب", "F":"[",
+  "g":"ل", "G":"لأ", "h":"ا", "H":"أ", "j":"ت", "J":"ـ", "k":"ن", "K":"،",
+  "l":"م", "L":"/", ";":"ك", ":":":", "'":"ط", "\"": "\"",
+  "z":"ئ", "Z":"~", "x":"ء", "X":"ْ", "c":"ؤ", "C":"}", "v":"ر", "V":"{",
+  "b":"لا", "B":"لآ", "n":"ى", "N":"آ", "m":"ة", "M":"’", ",":"و", "<":",",
+  ".":"ز", ">":".", "/":"ظ", "?":"؟", " ":" "
+};
+
+function normalizeArabic(c) {
+  if (!c) return "";
+  if (c === "أ" || c === "إ" || c === "آ" || c === "ٱ") return "ا";
+  if (c === "ة") return "ه";
+  if (c === "ى") return "ي";
+  return c;
+}
+
+function matchTypedKey(typed, expected, lang) {
+  if (typed === expected) return true;
+  if (lang === "ar") {
+    if (normalizeArabic(typed) === normalizeArabic(expected)) return true;
+    var mapped = QWERTY_TO_AR[typed];
+    if (mapped) {
+      if (mapped === expected) return true;
+      if (normalizeArabic(mapped) === normalizeArabic(expected)) return true;
+    }
+  } else {
+    if (typed.toLowerCase() === expected.toLowerCase()) return true;
+  }
+  return false;
+}
+
 var VK_FINGER_MAP = {
   tilda: 'lp', '1': 'lp', q: 'lp', a: 'lp', z: 'lp',
   tab: 'lp', capslock: 'lp', 'shift-left': 'lp', control: 'lp',
@@ -4445,9 +4345,9 @@ function mapCharToVkId(ch, lang) {
 }
 
 // ==============================================================
-// 3. STORAGE & PROGRESS SYSTEM
+// 3. STORAGE & VERSIONED PROGRESS SYSTEM (INDEPENDENT AR/EN)
 // ==============================================================
-var STORAGE_KEY = "barqtype_learn_v1";
+var STORAGE_KEY = "barqtype_learn_v2";
 var USER_PROGRESS = {
   ar: { completed: {}, bestWpm: {}, bestAcc: {}, stars: {}, lastStage: "ar_s1", lastLesson: "ar_1_1" },
   en: { completed: {}, bestWpm: {}, bestAcc: {}, stars: {}, lastStage: "en_s1", lastLesson: "en_1_1" }
@@ -4455,7 +4355,7 @@ var USER_PROGRESS = {
 
 function loadProgress() {
   try {
-    var raw = localStorage.getItem(STORAGE_KEY);
+    var raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem("barqtype_learn_v1");
     if (raw) {
       var parsed = JSON.parse(raw);
       if (parsed.ar) USER_PROGRESS.ar = Object.assign(USER_PROGRESS.ar, parsed.ar);
@@ -4475,13 +4375,10 @@ function saveProgress() {
 }
 
 // ==============================================================
-// 4. SOUND ENGINE (RAZER GREEN MECHANICAL SYNTHESIS)
+// 4. SOUND ENGINE (RAZER GREEN SYNTHESIS)
 // ==============================================================
 var SOUND_ENABLED = true;
-var _actx = null;
-var _rgSounds = [];
-var _spaceSound = null;
-var _errSound = null;
+var _actx = null, _rgSounds = [], _spaceSound = null, _errSound = null;
 
 function initAudio() {
   if (_actx) return;
@@ -4536,11 +4433,7 @@ function playKeySound(isSpace) {
   if (_actx.state === 'suspended') _actx.resume();
   try {
     var src = _actx.createBufferSource();
-    if (isSpace && _spaceSound) {
-      src.buffer = _spaceSound;
-    } else if (_rgSounds.length) {
-      src.buffer = _rgSounds[Math.floor(Math.random() * _rgSounds.length)];
-    }
+    src.buffer = (isSpace && _spaceSound) ? _spaceSound : _rgSounds[Math.floor(Math.random() * _rgSounds.length)];
     var gain = _actx.createGain();
     gain.gain.value = 0.65;
     src.connect(gain);
@@ -4599,7 +4492,7 @@ function setLanguage(lang) {
   CURRENT_LANG = lang;
   document.documentElement.lang = lang;
   document.documentElement.dir = (lang === "ar" ? "rtl" : "ltr");
-  
+
   var btnAr = document.getElementById("lang-ar");
   var btnEn = document.getElementById("lang-en");
   if (btnAr) btnAr.className = "pb" + (lang === "ar" ? " on" : "");
@@ -4607,10 +4500,8 @@ function setLanguage(lang) {
 
   var isAr = (lang === "ar");
 
-  // Page title
-  document.title = isAr ? "Barqtype – سباق الكتابة الخاطف" : "Barqtype – Lightning Fast Typing Race";
+  document.title = isAr ? "Barqtype – مسار تعلم الطباعة ثنائي اللغة" : "Barqtype – Bilingual Typing Learning Path";
 
-  // Navigation Items Localization (Matching index.html exactly)
   var navTest = document.getElementById("txt-nav-test");
   var navStats = document.getElementById("txt-nav-stats");
   var navLearn = document.getElementById("txt-nav-learn");
@@ -4618,7 +4509,6 @@ function setLanguage(lang) {
   if (navStats) navStats.textContent = isAr ? "إحصاءات" : "Stats";
   if (navLearn) navLearn.textContent = isAr ? "تعلم" : "Learn";
 
-  // Hero section
   document.getElementById("hero-title").textContent = isAr ? "مسار التعلم الذكي لطباعة اللمس" : "Smart Bilingual Touch-Typing Curriculum";
   document.getElementById("hero-desc").textContent = isAr
     ? "خطة تعليمية منهجية من 6 مراحل و18 درساً تنتقل بك من الصفر إلى الاحتراف بذاكرة عضلية فائقة ودون النظر إلى الكيبورد."
@@ -4667,7 +4557,7 @@ function showActiveLessonView(lesson) {
 }
 
 // ==============================================================
-// 6. RENDER STAGES & LESSONS
+// 6. RENDER STAGES & LESSONS (6 STAGES WITH PROGRESS)
 // ==============================================================
 function renderStagesGrid() {
   var container = document.getElementById("stages-container");
@@ -4690,6 +4580,7 @@ function renderStagesGrid() {
 
     var isCompleted = (stageCompleted === stage.lessons.length);
     var isStarted = (stageCompleted > 0);
+    var stagePct = Math.round((stageCompleted / stage.lessons.length) * 100);
 
     var card = document.createElement("div");
     card.className = "stage-card" + (isCompleted ? " completed" : "");
@@ -4697,9 +4588,9 @@ function renderStagesGrid() {
 
     var statusHtml = "";
     if (isCompleted) {
-      statusHtml = '<span class="stage-status-badge status-completed">✓ ' + (CURRENT_LANG === "ar" ? "مكتمل" : "Completed") + '</span>';
+      statusHtml = '<span class="stage-status-badge status-completed">✓ ' + (CURRENT_LANG === "ar" ? "مكتمل (100%)" : "Completed (100%)") + '</span>';
     } else if (isStarted) {
-      statusHtml = '<span class="stage-status-badge status-progress">⏳ ' + stageCompleted + '/3 ' + (CURRENT_LANG === "ar" ? "مكتمل" : "Done") + '</span>';
+      statusHtml = '<span class="stage-status-badge status-progress">⏳ ' + stageCompleted + '/3 (' + stagePct + '%)</span>';
     } else {
       statusHtml = '<span class="stage-status-badge status-locked">🎯 ' + (CURRENT_LANG === "ar" ? "متاح للبدء" : "Ready") + '</span>';
     }
@@ -4714,8 +4605,8 @@ function renderStagesGrid() {
         '<p>' + stage.desc + '</p>' +
       '</div>' +
       '<div class="stage-card-footer">' +
-        '<span class="stage-lessons-count">📚 3 ' + (CURRENT_LANG === "ar" ? "دروس تطبيقية" : "Lessons") + '</span>' +
-        '<button class="stage-action-btn">' + (isStarted ? (CURRENT_LANG === "ar" ? "متابعة" : "Continue") : (CURRENT_LANG === "ar" ? "استكشاف" : "Explore")) + '</button>' +
+        '<span class="stage-lessons-count">📚 3 ' + (CURRENT_LANG === "ar" ? "دروس منهجية" : "Lessons") + '</span>' +
+        '<button class="stage-action-btn">' + (isStarted ? (CURRENT_LANG === "ar" ? "متابعة" : "Continue") : (CURRENT_LANG === "ar" ? "بدء المرحلة" : "Start Stage")) + '</button>' +
       '</div>';
 
     container.appendChild(card);
@@ -4855,7 +4746,10 @@ function highlightTargetKey(targetChar) {
       break;
     }
     if (isAr) {
-      if (kEl.dataset.ar === targetChar) { targetEl = kEl; break; }
+      if (kEl.dataset.ar === targetChar || normalizeArabic(kEl.dataset.ar) === normalizeArabic(targetChar)) {
+        targetEl = kEl;
+        break;
+      }
     } else {
       if (kEl.dataset.k && kEl.dataset.k.toLowerCase() === targetChar.toLowerCase()) {
         targetEl = kEl;
@@ -4933,7 +4827,7 @@ function animateHandTap(ok) {
 }
 
 // ==============================================================
-// 8. ACTIVE LESSON ENGINE
+// 8. ACTIVE LESSON ENGINE & TYPING LOGIC
 // ==============================================================
 function startLesson(lesson) {
   initAudio();
@@ -4959,7 +4853,12 @@ function startLesson(lesson) {
   highlightTargetKey(LESSON_STATE.text[0]);
 
   var typingBox = document.getElementById("typing-box");
-  typingBox.focus();
+  var mobileInp = document.getElementById("learn-inp");
+  if (typingBox) typingBox.focus();
+  if (mobileInp) {
+    mobileInp.value = "";
+    mobileInp.focus({ preventScroll: true });
+  }
 }
 
 function stopLesson() {
@@ -4988,12 +4887,21 @@ function renderTypingFlow() {
     }
   }
   flow.innerHTML = h;
+
+  // Auto scroll active char into center view if multi-line
+  var curSpan = flow.querySelector(".ch-current");
+  if (curSpan) {
+    var box = document.getElementById("typing-box");
+    if (box && curSpan.offsetTop > box.clientHeight * 0.55) {
+      box.scrollTop = curSpan.offsetTop - box.clientHeight * 0.28;
+    }
+  }
 }
 
 function updateLiveStats() {
   if (LESSON_STATE.startTime) {
     var elapsedMin = (Date.now() - LESSON_STATE.startTime) / 60000;
-    if (elapsedMin > 0.005) {
+    if (elapsedMin > 0.004) {
       var netChars = Math.max(0, LESSON_STATE.idx - LESSON_STATE.errors);
       LESSON_STATE.wpm = Math.round((netChars / 5) / elapsedMin);
     }
@@ -5009,7 +4917,51 @@ function updateLiveStats() {
   document.getElementById("live-progress").textContent = pct + "%";
 }
 
-// KEYBOARD INPUT LISTENER
+function handleLessonCharTyped(typedChar, isBackspace) {
+  if (!LESSON_STATE.active) return;
+
+  if (isBackspace) {
+    if (LESSON_STATE.idx > 0) {
+      LESSON_STATE.idx--;
+      playKeySound(false);
+      renderTypingFlow();
+      highlightTargetKey(LESSON_STATE.text[LESSON_STATE.idx]);
+      updateLiveStats();
+    }
+    return;
+  }
+
+  if (!typedChar) return;
+
+  if (!LESSON_STATE.startTime) {
+    LESSON_STATE.startTime = Date.now();
+    LESSON_STATE.timerInterval = setInterval(updateLiveStats, 200);
+  }
+
+  var expected = LESSON_STATE.text[LESSON_STATE.idx];
+  var isMatch = matchTypedKey(typedChar, expected, CURRENT_LANG);
+
+  if (isMatch) {
+    playKeySound(expected === " ");
+    animateHandTap(true);
+    LESSON_STATE.idx++;
+
+    if (LESSON_STATE.idx >= LESSON_STATE.text.length) {
+      completeLesson();
+      return;
+    }
+  } else {
+    playErrSound();
+    animateHandTap(false);
+    LESSON_STATE.errors++;
+  }
+
+  updateLiveStats();
+  renderTypingFlow();
+  highlightTargetKey(LESSON_STATE.text[LESSON_STATE.idx]);
+}
+
+// 1. DESKTOP PHYSICAL KEYBOARD LISTENER
 window.addEventListener("keydown", function(e) {
   if (!LESSON_STATE.active) return;
   if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -5034,37 +4986,71 @@ window.addEventListener("keydown", function(e) {
     return;
   }
 
+  if (e.key === "Backspace") {
+    e.preventDefault();
+    handleLessonCharTyped("", true);
+    var mobileInp = document.getElementById("learn-inp");
+    if (mobileInp) mobileInp.value = "";
+    return;
+  }
+
   if (e.key.length === 1 || e.key === "Spacebar" || e.key === " ") {
     e.preventDefault();
-
-    if (!LESSON_STATE.startTime) {
-      LESSON_STATE.startTime = Date.now();
-      LESSON_STATE.timerInterval = setInterval(updateLiveStats, 200);
-    }
-
-    var expected = LESSON_STATE.text[LESSON_STATE.idx];
     var typed = (e.key === "Spacebar" ? " " : e.key);
-
-    if (typed === expected) {
-      playKeySound(typed === " ");
-      animateHandTap(true);
-      LESSON_STATE.idx++;
-
-      if (LESSON_STATE.idx >= LESSON_STATE.text.length) {
-        completeLesson();
-        return;
-      }
-    } else {
-      playErrSound();
-      animateHandTap(false);
-      LESSON_STATE.errors++;
-    }
-
-    updateLiveStats();
-    renderTypingFlow();
-    highlightTargetKey(LESSON_STATE.text[LESSON_STATE.idx]);
+    handleLessonCharTyped(typed, false);
+    var mobileInp = document.getElementById("learn-inp");
+    if (mobileInp) mobileInp.value = "";
   }
 });
+
+// 2. MOBILE INPUT PIPELINE (NATIVE OS KEYBOARD TARGET)
+(function setupMobileInput() {
+  var inp = document.getElementById("learn-inp");
+  var box = document.getElementById("typing-box");
+  if (!inp || !box) return;
+
+  function focusInp() {
+    inp.focus({ preventScroll: true });
+    setTimeout(function() { inp.focus({ preventScroll: true }); }, 40);
+  }
+
+  box.addEventListener("click", focusInp);
+  box.addEventListener("touchend", focusInp);
+
+  var isComposing = false;
+  inp.addEventListener("compositionstart", function() { isComposing = true; });
+  inp.addEventListener("compositionend", function(e) {
+    isComposing = false;
+    var data = e.data || "";
+    for (var i = 0; i < data.length; i++) {
+      handleLessonCharTyped(data[i], false);
+    }
+    inp.value = "";
+  });
+
+  inp.addEventListener("beforeinput", function(e) {
+    if (e.inputType === "deleteContentBackward" || e.inputType === "deleteContentForward") {
+      e.preventDefault();
+      handleLessonCharTyped("", true);
+      inp.value = "";
+    }
+  });
+
+  inp.addEventListener("input", function(e) {
+    if (isComposing) return;
+    if (e.inputType === "deleteContentBackward") {
+      inp.value = "";
+      return;
+    }
+    var val = inp.value;
+    if (val) {
+      for (var i = 0; i < val.length; i++) {
+        handleLessonCharTyped(val[i], false);
+      }
+      inp.value = "";
+    }
+  });
+})();
 
 function completeLesson() {
   stopLesson();
@@ -5083,6 +5069,8 @@ function completeLesson() {
   if (!prog.bestWpm[CURRENT_LESSON.id] || wpm > prog.bestWpm[CURRENT_LESSON.id]) prog.bestWpm[CURRENT_LESSON.id] = wpm;
   if (!prog.bestAcc[CURRENT_LESSON.id] || acc > prog.bestAcc[CURRENT_LESSON.id]) prog.bestAcc[CURRENT_LESSON.id] = acc;
   if (!prog.stars[CURRENT_LESSON.id] || stars > prog.stars[CURRENT_LESSON.id]) prog.stars[CURRENT_LESSON.id] = stars;
+  prog.lastStage = CURRENT_STAGE_ID;
+  prog.lastLesson = CURRENT_LESSON.id;
   saveProgress();
 
   var isAr = (CURRENT_LANG === "ar");
@@ -5097,7 +5085,10 @@ function completeLesson() {
 
   document.getElementById("modal-feedback").textContent = passed
     ? (isAr ? "رائع جداً! حققت نسبة الدقة الموصى بها (90%+) وثبتّ ذاكرتك العضلية." : "Excellent! You achieved the recommended 90%+ accuracy threshold.")
-    : (isAr ? "دقتك أقل من 90%. نوصي بإعادة التمرين لتثبيت الحركات، أو يمكنك المتابعة." : "Accuracy is under 90%. We recommend retrying to reinforce finger memory, or you may proceed.");
+    : (isAr ? "دقتك أقل من 90%. نوصي بإعادة التمرين لتثبيت الحركات، أو يمكنك المتابعة للدرس التالي." : "Accuracy is under 90%. We recommend retrying to reinforce finger memory, or you may proceed to the next lesson.");
+
+  document.getElementById("btn-modal-retry").textContent = isAr ? "إعادة التمرين (Tab)" : "Retry Lesson (Tab)";
+  document.getElementById("btn-modal-next").textContent = isAr ? "الدرس التالي (Enter)" : "Next Lesson (Enter)";
 
   document.getElementById("result-modal").classList.add("open");
 }
@@ -5111,13 +5102,14 @@ function goToNextLesson() {
   document.getElementById("result-modal").classList.remove("open");
   var stages = CURRICULUM[CURRENT_LANG];
   var nextLesson = null;
+  var nextStageId = CURRENT_STAGE_ID;
   var found = false;
 
   for (var i = 0; i < stages.length; i++) {
     for (var j = 0; j < stages[i].lessons.length; j++) {
       if (found) {
         nextLesson = stages[i].lessons[j];
-        CURRENT_STAGE_ID = stages[i].id;
+        nextStageId = stages[i].id;
         break;
       }
       if (stages[i].lessons[j].id === CURRENT_LESSON.id) {
@@ -5128,6 +5120,7 @@ function goToNextLesson() {
   }
 
   if (nextLesson) {
+    CURRENT_STAGE_ID = nextStageId;
     showActiveLessonView(nextLesson);
   } else {
     showStagesView();
