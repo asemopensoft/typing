@@ -198,84 +198,212 @@
           "رأيت العلم صاحبه كريم، ولو ولدته آباء لئام، فليس يزال يرفعه إلى أن يعظم أمره القوم الكرام.",
           "ما حك جلدك مثل ظفرك، فتول أنت جميع أمرك، وإذا قصدت لحاجة فاقصد لمعترف بفضلك.",
           "إذا غامرت في شرف مروم، فلا تقنع بما دون النجوم، فطعم الموت في أمر حقير كطعم الموت في أمر عظيم.",
-          "تجري الرياح بما لا تشتهي السفن، ولكن همة القبطان الصابر تحول مسار الأشرعة لتبلغ بر الأمان.",
-          "لسان الفتى نصف ونصف فؤاده، فلم يبق إلا صورة اللحم والدم، فجمل حديثك بالحكمة والوقار.",
-          "أعز مكان في الدنى سرج سابح، وخير جليس في الزمان كتاب، فالعلم مؤنس في الوحشة ونور في الظلمات.",
-          "ليس الجمال بأثواب تزيننا، إن الجمال جمال العلم والأدب، فمن تحلى بالأخلاق الفاضلة فقد حاز الفخر كله.",
-          "إذا كنت في كل الأمور معاتبًا صديقك لم تلق الذي لا تعاتبه، فعش واحدًا أو صل أخاك فإنه مقارف ذنب مرة ومجانبه.",
-          "تعلم فليس المرء يولد عالمًا، وليس أخو علم كمن هو جاهل، وإن كبير القوم لا علم عنده صغير إذا التفت عليه المحافل.",
-          "إن الأمور إذا سدت مسالكها، فالصبر يفتح منها كل ما ارتتجا، لا تيأسن وإن طالت مطالبة، إذا استعنت بحسن الصبر لم تخف.",
-          "قد ينعم الله بالبلوى وإن عظمت، ويبتلي الله بعض القوم بالنعم، فكن شاكرًا في السراء صابرًا في الضراء.",
-          "من سلك طريقًا يلتمس فيه علمًا، سهل الله له به طريقًا إلى الجنة، وإن الملائكة لتضع أجنحتها لطالب العلم رضًا بما يصنع.",
-          "احرص على ما ينفعك، واستعن بالله ولا تعجز، فإن أصابك شيء فلا تقل لو أني فعلت كذا كان كذا، ولكن قل قدر الله وما شاء فعل.",
-          "الصمت حكمة وقليل فاعله، والكلام بغير هدى عثار، فزن كلامك قبل أن تنطق به تسلم من الندامة.",
-          "لا تكن رطبًا فتعصر، ولا يابسًا فتكسر، وخير الأمور أوسطها في القول والعمل وحسن التدبير.",
-          "اتق شر من أحسنت إليه بتمام الإحسان وعلو الهمة، واجعل المعروف ديدنك خالصًا لوجه الله لا لثناء الخلق.",
-          "إنما الأمم الأخلاق ما بقيت، فإن هم ذهبت أخلاقهم ذهبوا، فالأمم تشيد على القيم والمبادئ الراسخة.",
-          "دوام الحال من المحال، والأيام دول، فيوم لك ويوم عليك، فإن كان لك فلا تبطر وإن كان عليك فاصبر.",
-          "من يهن يسهل الهوان عليه، ما لجرح بميت إيلام، فارفع همتك واطلب معالي الأمور تكن سيدًا في قومك.",
-          "ذو العقل يشقى في النعيم بعقله، وأخو الجهالة في الشقاوة ينعم، ولكن نور البصيرة خير من حلاوة الغفلة.",
-          "لكل شيء إذا ما تم نقصان، فلا يغر بطيب العيش إنسان، وهي الأمور كما شاهدتها دول من سره زمن ساءته أزمان.",
-          "لا خير في ود امرئ متملق، حلو اللسان وقلبه يتلهب، يعطيك من طرف اللسان حلاوة، ويروغ منك كما يروغ الثعلب.",
-          "كن كالنخيل عن الأحقاد مرتفعًا، يرمى بصخر فيلقي أطيب الثمر، فالصفح الجميل يطفئ نيران الغضب والعداوة.",
-          "ألا كل شيء ما خلا الله باطل، وكل نعيم لا محالة زائل، واعمل لدار الخلد واطلب رضا الإله تنل الفوز العظيم."
+          "تجري الرياح بما لا تشتهي السفن، ولكن همة القبطان الصابر تحول مسارها."
         ]
       }
     };
 
-    var LESSONS_I18N = {
-      ar: {
-        home: { t: "الصف الأساسي", d: "ASDF JKL" },
-        top: { t: "الصف العلوي", d: "QWER YUIOP" },
-        bot: { t: "الصف السفلي", d: "ZXCV BNM" },
-        num: { t: "الأرقام", d: "0-9" },
-        cap: { t: "الحروف الكبيرة", d: "Shift" },
-        pun: { t: "علامات الترقيم", d: ".,!?:" },
-        spd: { t: "تدريب السرعة", d: "كلمات شائعة" },
-        cod: { t: "مفاتيح البرمجة", d: "(){}[]=" }
-      },
-      en: {
-        home: { t: "Home Row", d: "ASDF JKL" },
-        top: { t: "Top Row", d: "QWER YUIOP" },
-        bot: { t: "Bottom Row", d: "ZXCV BNM" },
-        num: { t: "Numbers", d: "0-9" },
-        cap: { t: "Capital Letters", d: "Shift" },
-        pun: { t: "Punctuation", d: ".,!?:" },
-        spd: { t: "Speed Sprint", d: "Common Words" },
-        cod: { t: "Code Syntax", d: "(){}[]=" }
+    // ── HIGH-PERFORMANCE KEYBOARD & KEY CACHE (O(1) LOOKUPS) ──────
+    var _cachedKbKeys = [];
+    var _keyMap = {};
+    var _lastTargetKeyEl = null;
+    var _lastShiftKeyEls = [];
+    var _lastShiftCasingState = null;
+
+    function _reindexKeyboardKeys() {
+      _cachedKbKeys = Array.prototype.slice.call(document.querySelectorAll(".kb-key"));
+      _keyMap = {};
+      _lastTargetKeyEl = null;
+      _lastShiftKeyEls.length = 0;
+      _lastShiftCasingState = null;
+
+      for (var i = 0; i < _cachedKbKeys.length; i++) {
+        var el = _cachedKbKeys[i];
+        var k = el.dataset.k;
+        var ar = el.dataset.ar;
+        if (!k) continue;
+
+        if (k === "Space") {
+          _keyMap[" "] = el;
+          _keyMap["space"] = el;
+        } else if (k === "Backspace") {
+          _keyMap["backspace"] = el;
+        } else if (k.length === 1) {
+          _keyMap[k.toLowerCase()] = el;
+          _keyMap[k.toUpperCase()] = el;
+        } else if (k.length === 2) {
+          _keyMap[k[0]] = el;
+          _keyMap[k[1]] = el;
+        }
+
+        if (ar) {
+          _keyMap[ar] = el;
+          var normAr = normalizeAr(ar);
+          if (normAr) _keyMap[normAr] = el;
+        }
+
+        var qwertyMapped = QWERTY_TO_AR[k];
+        if (qwertyMapped) {
+          if (!_keyMap[qwertyMapped]) _keyMap[qwertyMapped] = el;
+          var normQw = normalizeAr(qwertyMapped);
+          if (normQw && !_keyMap[normQw]) _keyMap[normQw] = el;
+        }
       }
-    };
+    }
 
-    var ACHS_I18N = {
-      ar: {
-        ft: { n: "الخطوة الأولى", d: "أكمل اختبارك الأول" },
-        w50: { n: "50 WPM", d: "حقق 50 كلمة/دقيقة" },
-        w80: { n: "80 WPM", d: "حقق 80 كلمة/دقيقة" },
-        a100: { n: "الكمال", d: "دقة 100%" },
-        t10: { n: "المداوم", d: "أكمل 10 اختبارات" }
-      },
-      en: {
-        ft: { n: "First Step", d: "Complete your first test" },
-        w50: { n: "50 WPM", d: "Reach 50 words per minute" },
-        w80: { n: "80 WPM", d: "Reach 80 words per minute" },
-        a100: { n: "Perfection", d: "Reach 100% accuracy" },
-        t10: { n: "Dedicated", d: "Complete 10 typing tests" }
+    function buildLegend() {
+      var leg = document.getElementById("kb-legend");
+      if (!leg) return;
+      var isAr = (S.lang === "ar");
+      var list = [
+        { c: FINGER_DATA.lp.color, l: isAr ? "خنصر يسار" : "L-Pinky" },
+        { c: FINGER_DATA.lr.color, l: isAr ? "بنسر يسار" : "L-Ring" },
+        { c: FINGER_DATA.lm.color, l: isAr ? "وسطى يسار" : "L-Middle" },
+        { c: FINGER_DATA.li.color, l: isAr ? "سبابة يسار" : "L-Index" },
+        { c: FINGER_DATA.th.color, l: isAr ? "إبهام" : "Thumbs" },
+        { c: FINGER_DATA.ri.color, l: isAr ? "سبابة يمين" : "R-Index" },
+        { c: FINGER_DATA.rm.color, l: isAr ? "وسطى يمين" : "R-Middle" },
+        { c: FINGER_DATA.rr.color, l: isAr ? "بنسر يمين" : "R-Ring" },
+        { c: FINGER_DATA.rp.color, l: isAr ? "خنصر يمين" : "R-Pinky" }
+      ];
+      var h = "";
+      for (var i = 0; i < list.length; i++) {
+        h += '<div class="kb-legend-item"><div class="kb-legend-dot" style="background:' + list[i].c + '"></div><span class="kb-legend-lbl">' + list[i].l + '</span></div>';
       }
-    };
+      leg.innerHTML = h;
+    }
 
-    var LESSONS = [
-      { id: "home", lv: 1, ic: "🏠", t: "الصف الأساسي", d: "ASDF JKL", ks: "a s d f j k l".split(" "), pe: "fall flask glad half jag lads safe ask", pa: "في من إلى على هذا كان ما لا" },
-      { id: "top", lv: 2, ic: "⬆️", t: "الصف العلوي", d: "QWER YUIOP", ks: "q w e r t y u i o p".split(" "), pe: "your type quite port write tower power quiet", pa: "التي يكون تكون الذي وهو وهي" },
-      { id: "bot", lv: 2, ic: "⬇️", t: "الصف السفلي", d: "ZXCV BNM", ks: "z x c v b n m".split(" "), pe: "black zinc move verb next calm brim", pa: "مثل حتى فإن وقد كما بما ولا" },
-      { id: "num", lv: 3, ic: "🔢", t: "الأرقام", d: "0-9", ks: "1 2 3 4 5 6 7 8 9 0".split(" "), pe: "score 42 win by 100 order 7", pa: "يوم 24 ساعة عام 365" },
-      { id: "cap", lv: 3, ic: "🔠", t: "الحروف الكبيرة", d: "Shift", ks: ["Shift"], pe: "The Quick Brown Fox Jumps", pa: "اللغة العربية جميلة" },
-      { id: "pun", lv: 3, ic: "✏️", t: "علامات الترقيم", d: ".,!?:", ks: ". , ! ? :".split(" "), pe: "Hello, world! How are you?", pa: "مرحبا كيف حالك؟" },
-      { id: "spd", lv: 4, ic: "⚡", t: "تدريب السرعة", d: "كلمات شائعة", ks: [], pe: "the quick brown fox jumps over", pa: "من جد وجد ومن زرع حصد" },
-      { id: "cod", lv: 4, ic: "💻", t: "مفاتيح البرمجة", d: "(){}[]=", ks: "( ) { } [ ] = /".split(" "), pe: "function hello() { return true; }", pa: "دالة مرحبا() إرجاع صحيح" }
-    ];
+    // O(1) Instant Key Element Lookup
+    function findKeyElForChar(char) {
+      if (!char) return null;
+      var el = _keyMap[char];
+      if (el) return el;
+      var norm = normalizeAr(char);
+      if (norm && _keyMap[norm]) return _keyMap[norm];
+      var lower = char.toLowerCase();
+      if (_keyMap[lower]) return _keyMap[lower];
+      return null;
+    }
 
-    var ACHS = [
-      { id: "ft", ic: "🎯", n: "الخطوة الأولى", d: "أكمل اختبارك الأول" },
+    // Only update casing when shift state actually flips (saves looping 70 keys on 95% of strokes)
+    function updateKeyboardCasing(isShiftActive) {
+      if (S.lang === "ar" || _lastShiftCasingState === isShiftActive) return;
+      _lastShiftCasingState = isShiftActive;
+      for (var i = 0; i < _cachedKbKeys.length; i++) {
+        var el = _cachedKbKeys[i];
+        var k = el.dataset.k;
+        if (!k || el.classList.contains("special")) continue;
+        var mainLblEl = el.querySelector(".kb-lbl-main");
+        if (!mainLblEl) continue;
+        if (k.length === 1 && k.toLowerCase() >= 'a' && k.toLowerCase() <= 'z') {
+          mainLblEl.textContent = isShiftActive ? k.toUpperCase() : k.toLowerCase();
+        } else if (k.length === 2) {
+          mainLblEl.textContent = isShiftActive ? k[1] : k[0];
+        }
+      }
+    }
+
+    // Update Target Key with zero global DOM queries
+    function updateTargetKey() {
+      if (_lastTargetKeyEl) {
+        _lastTargetKeyEl.classList.remove("target-key");
+        _lastTargetKeyEl = null;
+      }
+      for (var i = 0; i < _lastShiftKeyEls.length; i++) {
+        _lastShiftKeyEls[i].classList.remove("shift-needed");
+      }
+      _lastShiftKeyEls.length = 0;
+
+      var badge = document.getElementById("kb-next-badge");
+      var fBadge = document.getElementById("kb-finger-badge");
+      var fDot = document.getElementById("kb-finger-dot");
+      var fText = document.getElementById("kb-finger-text");
+      var isAr = (S.lang === "ar");
+
+      if (!S.text || S.idx >= S.text.length) {
+        if (badge) badge.textContent = "—";
+        if (fText) fText.textContent = isAr ? "مكتمل" : "Complete";
+        updateKeyboardCasing(false);
+        if (window.updateHandTargetFinger) updateHandTargetFinger(null, null);
+        return;
+      }
+
+      var nextCh = S.text[S.idx];
+      var el = findKeyElForChar(nextCh);
+
+      if (badge) {
+        badge.textContent = (nextCh === " ") ? (isAr ? "مسافة" : "SPACE") : nextCh;
+      }
+
+      var isUpperEn = (nextCh >= "A" && nextCh <= "Z");
+      var isShiftSym = '~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0;
+      var needsShift = (isUpperEn || isShiftSym);
+
+      updateKeyboardCasing(needsShift);
+
+      if (el) {
+        el.classList.add("target-key");
+        _lastTargetKeyEl = el;
+        var fCode = el.dataset.f;
+        var fInfo = FINGER_DATA[fCode] || FINGER_DATA.th;
+        if (fDot) fDot.style.background = fInfo.color;
+        if (fText) fText.textContent = isAr ? fInfo.ar : fInfo.en;
+        if (fBadge) fBadge.style.borderColor = fInfo.color;
+
+        if (window.updateHandTargetFinger) updateHandTargetFinger(fCode, el);
+
+        if (needsShift) {
+          var oppSide = (fInfo.hand === "L") ? "right" : "left";
+          for (var s = 0; s < _cachedKbKeys.length; s++) {
+            var sk = _cachedKbKeys[s];
+            if (sk.dataset.k === "Shift" && sk.dataset.side === oppSide) {
+              sk.classList.add("shift-needed");
+              _lastShiftKeyEls.push(sk);
+            }
+          }
+        }
+      } else {
+        if (fDot) fDot.style.background = "#e2b714";
+        if (fText) fText.textContent = isAr ? "إبهام" : "Thumbs";
+        if (window.updateHandTargetFinger) updateHandTargetFinger('th', null);
+      }
+    }
+
+    // Direct O(1) pressed key highlight
+    function highlightPressedKey(evKey, ok) {
+      var matchedKeyEl = findKeyElForChar(evKey);
+      if (matchedKeyEl) {
+        _animateKeyPress(matchedKeyEl, ok);
+      }
+
+      if (ok) {
+        var f = matchedKeyEl ? matchedKeyEl.dataset.f : _currentHandTargetFinger;
+        animateHandFinger(f, true);
+      } else {
+        animateHandFinger(_currentHandTargetFinger, false);
+      }
+    }
+
+    // Zero-reflow mechanical keypress animation (no void el.offsetWidth)
+    function _animateKeyPress(el, ok) {
+      var id = el.id;
+      if (_kbTimeouts[id]) {
+        clearTimeout(_kbTimeouts[id]);
+        _kbTimeouts[id] = null;
+      }
+      el.classList.remove("pressed-ok", "pressed-err");
+      requestAnimationFrame(function () {
+        el.classList.add(ok ? "pressed-ok" : "pressed-err");
+      });
+
+      _kbTimeouts[id] = setTimeout(function () {
+        el.classList.remove("pressed-ok", "pressed-err");
+        _kbTimeouts[id] = null;
+      }, 120);
+    }
+
+    var BADGES = [
+      { id: "ft", ic: "🌱", n: "أول خطوة", d: "أكمل أول اختبار لك" },
       { id: "w50", ic: "⚡", n: "50 WPM", d: "حقق 50 كلمة/دقيقة" },
       { id: "w80", ic: "🚀", n: "80 WPM", d: "حقق 80 كلمة/دقيقة" },
       { id: "a100", ic: "✨", n: "الكمال", d: "دقة 100%" },
@@ -1671,14 +1799,15 @@
       var yMax = Math.ceil((maxVal + 6) / 10) * 10;
       if (yMax < 30) yMax = 30;
 
+      var themeAccent = (getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#e8af47').trim();
       var html = "";
       html += '<defs>';
       html += '<linearGradient id="barqAreaGrad" x1="0" y1="0" x2="0" y2="1">';
-      html += '<stop offset="0%" stop-color="#e8af47" stop-opacity="0.25"/>';
-      html += '<stop offset="100%" stop-color="#e8af47" stop-opacity="0"/>';
+      html += '<stop offset="0%" stop-color="' + themeAccent + '" stop-opacity="0.28"/>';
+      html += '<stop offset="100%" stop-color="' + themeAccent + '" stop-opacity="0"/>';
       html += '</linearGradient>';
       html += '<filter id="barqGlow" x="-20%" y="-20%" width="140%" height="140%">';
-      html += '<feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#e8af47" flood-opacity="0.5"/>';
+      html += '<feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="' + themeAccent + '" flood-opacity="0.5"/>';
       html += '</filter>';
       html += '</defs>';
 
@@ -1711,7 +1840,7 @@
 
       var areaD = pathD + " L " + pts[pts.length - 1].x + " " + (padT + plotH) + " L " + pts[0].x + " " + (padT + plotH) + " Z";
       html += '<path d="' + areaD + '" fill="url(#barqAreaGrad)"/>';
-      html += '<path d="' + pathD + '" fill="none" stroke="#e8af47" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#barqGlow)"/>';
+      html += '<path d="' + pathD + '" fill="none" stroke="' + themeAccent + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#barqGlow)"/>';
 
       // Dashed blue average speed line
       var yAvgPos = padT + plotH - ((r.wpm / yMax) * plotH);
@@ -1736,19 +1865,19 @@
           if (pts[pi].item.wpm > maxPt.item.wpm) maxPt = pts[pi];
         }
         if (maxPt.item.wpm > 0) {
-          html += '<line x1="' + maxPt.x + '" y1="' + padT + '" x2="' + maxPt.x + '" y2="' + (padT + plotH) + '" stroke="rgba(232,175,71,0.4)" stroke-dasharray="3,3" stroke-width="1.2"/>';
-          html += '<circle cx="' + maxPt.x + '" cy="' + maxPt.y + '" r="5" fill="#e8af47" stroke="#ffffff" stroke-width="2"/>';
+          html += '<line x1="' + maxPt.x + '" y1="' + padT + '" x2="' + maxPt.x + '" y2="' + (padT + plotH) + '" stroke="' + themeAccent + '" stroke-opacity="0.45" stroke-dasharray="3,3" stroke-width="1.2"/>';
+          html += '<circle cx="' + maxPt.x + '" cy="' + maxPt.y + '" r="5" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="2"/>';
           var tipW = 80, tipH = 26;
           var tipX = Math.max(padL, Math.min(padL + plotW - tipW, maxPt.x - tipW / 2));
           var tipY = Math.max(padT, maxPt.y - 34);
-          html += '<rect x="' + tipX + '" y="' + tipY + '" width="' + tipW + '" height="' + tipH + '" rx="6" fill="#1e293b" stroke="rgba(232,175,71,0.5)" stroke-width="1"/>';
+          html += '<rect x="' + tipX + '" y="' + tipY + '" width="' + tipW + '" height="' + tipH + '" rx="6" fill="#1e293b" stroke="' + themeAccent + '" stroke-opacity="0.5" stroke-width="1"/>';
           html += '<text x="' + (tipX + tipW / 2) + '" y="' + (tipY + 17) + '" fill="#ffffff" font-size="11" font-weight="700" font-family="var(--fen)" text-anchor="middle">' + maxPt.item.wpm + ' WPM</text>';
         }
       }
 
       // Final point dot
       var lastPt = pts[pts.length - 1];
-      html += '<circle cx="' + lastPt.x + '" cy="' + lastPt.y + '" r="4.5" fill="#e8af47" stroke="#ffffff" stroke-width="2"/>';
+      html += '<circle cx="' + lastPt.x + '" cy="' + lastPt.y + '" r="4.5" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="2"/>';
 
       // X-Axis time intervals (e.g. 0:00, 0:05, 0:10, 0:15, 0:20, 0:24)
       var numIntervals = Math.min(6, Math.max(3, totalSec));
@@ -2310,8 +2439,8 @@
         var footerEl = el("app-footer");
         if (footerEl) {
           footerEl.innerHTML = isAr ?
-            "<span>Barqtype &bull; تصميم ميكانيكي IQUNIX A80 &bull; صوت سويتشات Razer Green الخاطف</span>" :
-            "<span>Barqtype &bull; IQUNIX A80 Mechanical Design &bull; Razer Green Clicky Audio</span>";
+            "<span>Barqtype &bull; تم الإنشاء والتطوير بواسطة المهندس Asem Alselme</span>" :
+            "<span>Barqtype &bull; Created &amp; Developed by Eng. Asem Alselme</span>";
         }
 
         // 10. Re-render active tab content if visible

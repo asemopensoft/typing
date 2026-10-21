@@ -1715,7 +1715,7 @@ footer{padding:14px 24px;border-top:1px solid var(--bdr);display:flex;justify-co
   </div><!-- /om-box -->
 </div><!-- /#online-modal -->
 
- <footer><span>TypeMaster &bull; IQUNIX A80 Mechanical Design &bull; Razer Green Audio</span></footer>
+  <footer id="app-footer"><span>Barqtype &bull; تم الإنشاء والتطوير بواسطة المهندس Asem Alselme</span></footer>
  <div id="toasts"></div>
 </div>
 
@@ -2768,6 +2768,14 @@ function updateUILanguage(l){
   // 6. Keyboard Guide Next Key Label
   var nextLbl = document.getElementById("kb-next-lbl");
   if(nextLbl) nextLbl.textContent = isAr ? "الحرف التالي:" : "Next Key:";
+
+  // 7. Footer Attribution
+  var footerEl = document.getElementById("app-footer") || document.querySelector("footer");
+  if(footerEl){
+    footerEl.innerHTML = isAr ?
+      "<span>Barqtype &bull; تم الإنشاء والتطوير بواسطة المهندس Asem Alselme</span>" :
+      "<span>Barqtype &bull; Created &amp; Developed by Eng. Asem Alselme</span>";
+  }
 }
 
 // CONTROL FUNCTIONS

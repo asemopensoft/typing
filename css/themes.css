@@ -1,0 +1,176 @@
+/* ==============================================================
+   BARQTYPE THEME SYSTEM — DUAL THEME ENGINE (GOLD & CARBON)
+   (STRICTLY VECTOR SVG ICONS — ZERO CASUAL EMOJIS)
+   ============================================================== */
+
+/* ── 1. DEFAULT: BARQ GOLD (برق الذهبي — الهوية الأصلية) ── */
+:root,
+[data-theme="gold"] {
+  --theme-id: "gold";
+  --bg: #17242d;
+  --bg2: #213442;
+  --bg3: #2c4354;
+  --bg4: #385266;
+  --text: #f4f3ef;
+  --sub: #7993a4;
+  --accent: #e8af47;
+  --accent-rgb: 232, 175, 71;
+  --accent-glow: rgba(232, 175, 71, 0.45);
+  --accent-dim: rgba(232, 175, 71, 0.15);
+  --accent-subtle: rgba(232, 175, 71, 0.08);
+  --bdr: rgba(255, 255, 255, 0.09);
+  --card-bg: rgba(33, 52, 66, 0.72);
+  --bg-gradient: radial-gradient(circle at 50% 15%, #253947 0%, #17242d 55%, #111a21 100%);
+  --logo-gradient: linear-gradient(135deg, #f5c842 0%, #e8831c 100%);
+  --key-accent-bg: linear-gradient(180deg, #f5bd55 0%, #dfa037 100%);
+  --key-accent-shadow: #ad781b;
+  --key-accent-text: #17242d;
+  --tbox-border: rgba(232, 175, 71, 0.35);
+  --tbox-glow: rgba(232, 175, 71, 0.2);
+}
+
+/* ── 2. CARBON MINIMAL (كاربون مونوكروم — أبيض وأسود فاخر) ── */
+[data-theme="carbon"] {
+  --theme-id: "carbon";
+  --bg: #111317;
+  --bg2: #181b22;
+  --bg3: #222630;
+  --bg4: #2e3342;
+  --text: #f8fafc;
+  --sub: #94a3b8;
+  --accent: #f8fafc;
+  --accent-rgb: 248, 250, 252;
+  --accent-glow: rgba(255, 255, 255, 0.35);
+  --accent-dim: rgba(255, 255, 255, 0.12);
+  --accent-subtle: rgba(255, 255, 255, 0.06);
+  --bdr: rgba(255, 255, 255, 0.12);
+  --card-bg: rgba(24, 27, 34, 0.82);
+  --bg-gradient: radial-gradient(circle at 50% 15%, #1e222b 0%, #111317 55%, #0a0b0d 100%);
+  --logo-gradient: linear-gradient(135deg, #ffffff 0%, #64748b 100%);
+  --key-accent-bg: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+  --key-accent-shadow: #64748b;
+  --key-accent-text: #0f172a;
+  --tbox-border: rgba(255, 255, 255, 0.45);
+  --tbox-glow: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Dynamic Core Overrides ── */
+html, body {
+  background: var(--bg-gradient, radial-gradient(circle at 50% 15%, #253947 0%, #17242d 55%, #111a21 100%)) !important;
+  color: var(--text) !important;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.logo-ico {
+  background: var(--logo-gradient, linear-gradient(135deg, #f5c842 0%, #e8831c 100%)) !important;
+  box-shadow: 0 0 18px var(--accent-glow), 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+}
+
+#tbox.card {
+  border: 1px solid var(--tbox-border, rgba(232, 175, 71, 0.35)) !important;
+  box-shadow: 0 18px 52px -8px var(--tbox-glow, rgba(232, 175, 71, 0.3)) !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kb-key.key-accent {
+  background: var(--key-accent-bg, linear-gradient(180deg, #f5bd55 0%, #dfa037 100%)) !important;
+  box-shadow: 0 4px 0 var(--key-accent-shadow, #ad781b), 0 6px 14px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+.kb-key.key-accent .kb-lbl-main {
+  color: var(--key-accent-text, #17242d) !important;
+}
+
+/* Caret / Active char indicator */
+.c.now::before {
+  background: var(--accent) !important;
+  box-shadow: 0 0 10px var(--accent-glow) !important;
+}
+
+/* ── UI INSTANT THEME TOGGLE BUTTON ── */
+#btn-theme-picker,
+.theme-picker-btn {
+  background: var(--bg2) !important;
+  border: 1px solid var(--bdr) !important;
+  color: var(--text) !important;
+  padding: 5px 11px !important;
+  border-radius: 9px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  font-size: 12px !important;
+  font-family: inherit !important;
+  font-weight: 700 !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  user-select: none !important;
+}
+#btn-theme-picker:hover,
+.theme-picker-btn:hover {
+  background: var(--bg3) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--accent-subtle);
+}
+#btn-theme-picker:active,
+.theme-picker-btn:active {
+  transform: scale(0.93) translateY(0);
+}
+.theme-btn-svg {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+#btn-theme-picker:hover .theme-btn-svg {
+  transform: rotate(15deg);
+}
+.theme-current-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+  display: inline-block;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ── QUICK NON-BLOCKING THEME TOAST BADGE (ZERO MODALS) ── */
+#barq-theme-quick-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(24px) scale(0.92);
+  background: var(--bg2);
+  border: 1.5px solid var(--accent);
+  color: var(--text);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), 0 0 20px var(--accent-glow);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-family: var(--far, inherit);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  direction: rtl;
+}
+#barq-theme-quick-toast.barq-theme-toast-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+#barq-theme-quick-toast .btq-icon {
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+}
+#barq-theme-quick-toast .btq-text {
+  letter-spacing: 0.3px;
+}
+
