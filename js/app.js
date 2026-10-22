@@ -1453,7 +1453,10 @@
 
     // ── SMOOTH SLIDING CARET ──────────────────────────────────────
     // Reads current char's rect and slides #caret to it with GPU transition
-    function moveCaret() {
+    var caretIdleTimer = null;
+    var lastCaretY = -1;
+
+    function moveCaret(instant) {
       var caretEl = document.getElementById('caret');
       if (!caretEl) return;
 
@@ -1463,36 +1466,49 @@
 
       var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : null;
       if (!curEl) {
-        // End of text: hide caret
         caretEl.style.opacity = '0';
         return;
       }
 
+      // 1. الإلغاء الفوري للوميض أثناء الكتابة لتكون ثابتة وواضحة بدون تشتيت
+      caretEl.classList.remove('blink');
       caretEl.style.opacity = '1';
 
-      // Position relative to the card element
+      // 2. تفعيل وميض خفيف وهادئ فقط إذا توقف المستخدم عن الكتابة لأكثر من نصف ثانية
+      if (caretIdleTimer) clearTimeout(caretIdleTimer);
+      caretIdleTimer = setTimeout(function () {
+        if (!S.fin) {
+          caretEl.classList.add('blink');
+        }
+      }, 550);
+
       var cardRect = card.getBoundingClientRect();
       var charRect = curEl.getBoundingClientRect();
 
-      // Left edge of char, adjusted for scroll
       var isAr = S.lang === 'ar';
       var caretX, caretY, caretH;
 
-      // MonkeyType-style tall prominent caret: 92% of character box height
       caretH = Math.round(charRect.height * 0.92);
       caretY = charRect.top - cardRect.top + (charRect.height - caretH) / 2;
 
       if (isAr) {
-        // RTL: caret on right edge
         caretX = charRect.right - cardRect.left - 1.5;
       } else {
-        // LTR: caret on left edge of current char
         caretX = charRect.left - cardRect.left - 1.5;
       }
 
-      // Use transform (GPU) — position base is top:0,left:0 of card
-      caretEl.style.height = caretH + 'px';
-      caretEl.style.transform = 'translate(' + caretX + 'px,' + caretY + 'px)';
+      // 3. حركة سلسة ومرنة وسريعة بدون انقطاع أو قفز قطري عند الانتقال لسطر جديد
+      if (instant || (lastCaretY !== -1 && Math.abs(caretY - lastCaretY) > 15)) {
+        caretEl.style.transition = 'none';
+        caretEl.style.height = caretH + 'px';
+        caretEl.style.transform = 'translate(' + caretX + 'px,' + caretY + 'px)';
+        void caretEl.offsetWidth;
+        caretEl.style.transition = 'transform 70ms cubic-bezier(0.2, 0.9, 0.3, 1), height 70ms ease, opacity 0.15s ease';
+      } else {
+        caretEl.style.height = caretH + 'px';
+        caretEl.style.transform = 'translate(' + caretX + 'px,' + caretY + 'px)';
+      }
+      lastCaretY = caretY;
     }
 
     function updRing(l, t) {

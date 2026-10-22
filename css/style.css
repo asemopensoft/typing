@@ -91,11 +91,11 @@
       width: 34px;
       height: 34px;
       border-radius: 9px;
-      background: linear-gradient(135deg, #f5c842 0%, #e8831c 100%);
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 18px rgba(232, 175, 71, 0.55), 0 2px 6px rgba(0, 0, 0, 0.4);
+      box-shadow: none;
       will-change: transform;
     }
 
@@ -429,32 +429,34 @@
       color: var(--sub)
     }
 
-    /* ── SMOOTH SLIDING CARET (MonkeyType style) ── */
+    /* ── ULTRA-SMOOTH SLIDING CARET (MonkeyType Fluid Style) ── */
     #caret {
       position: absolute;
-      width: 3px;
+      width: 2.5px;
       border-radius: 2px;
       background: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow), 0 0 3px var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow), 0 0 2px var(--accent);
       pointer-events: none;
       z-index: 10;
       top: 0;
       left: 0;
-      /* GPU-composited slide */
-      transition: transform 80ms cubic-bezier(0.22, 1, 0.36, 1), height 80ms, opacity .12s;
-      will-change: transform;
+      /* Ultra-responsive elastic glide (GPU composited) */
+      transition: transform 70ms cubic-bezier(0.2, 0.9, 0.3, 1), height 70ms ease, opacity 0.15s ease;
+      will-change: transform, height, opacity;
     }
 
     #caret.blink {
-      animation: caret-blink 1.1s ease infinite;
+      animation: caret-blink 1s ease-in-out infinite;
     }
 
     @keyframes caret-blink {
-
-      0%,
-      100% {
-        opacity: 1
+      0%, 100% {
+        opacity: 1;
       }
+      50% {
+        opacity: 0.15;
+      }
+    }
 
       50% {
         opacity: 0
@@ -4921,23 +4923,28 @@
         display: none !important;
       }
 
-      /* 2. Compact clean header on mobile */
+      /* 2. Compact clean responsive header on mobile */
       header {
-        padding: 0 8px !important;
-        height: 48px !important;
+        padding: 6px 10px 8px !important;
+        height: auto !important;
         min-height: 48px !important;
         gap: 6px !important;
         display: flex !important;
+        flex-wrap: wrap !important;
         align-items: center !important;
         justify-content: space-between !important;
-        overflow: hidden !important;
+        width: 100% !important;
         max-width: 100vw !important;
         box-sizing: border-box !important;
+        background: rgba(18, 26, 33, 0.95) !important;
+        backdrop-filter: blur(12px) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
       }
 
       .logo {
         flex-shrink: 0 !important;
         gap: 0 !important;
+        order: 1 !important;
       }
 
       .logo-ico {
@@ -4959,14 +4966,16 @@
       nav {
         display: flex !important;
         align-items: center !important;
+        justify-content: center !important;
         flex: 1 1 auto !important;
         min-width: 0 !important;
         overflow-x: auto !important;
         overflow-y: hidden !important;
         -webkit-overflow-scrolling: touch !important;
         scrollbar-width: none !important;
-        gap: 3px !important;
-        padding: 2px 0 !important;
+        gap: 4px !important;
+        padding: 0 !important;
+        order: 2 !important;
       }
 
       nav::-webkit-scrollbar {
@@ -4978,37 +4987,46 @@
       .nb {
         white-space: nowrap !important;
         flex-shrink: 0 !important;
-        padding: 4px 8px !important;
-        font-size: 11px !important;
+        padding: 5px 9px !important;
+        font-size: 11.5px !important;
+        font-weight: 600 !important;
         border-radius: 6px !important;
       }
 
       .ctrls {
+        order: 3 !important;
+        width: 100% !important;
         display: flex !important;
         align-items: center !important;
-        flex-shrink: 0 !important;
-        gap: 4px !important;
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        padding-top: 5px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
       }
 
       .pg {
-        padding: 1px !important;
-        gap: 1px !important;
+        padding: 2px !important;
+        gap: 2px !important;
         border-radius: 6px !important;
+        display: flex !important;
+        align-items: center !important;
       }
 
       .pb {
-        padding: 3px 6px !important;
-        font-size: 10px !important;
+        padding: 3px 8px !important;
+        font-size: 11px !important;
         font-weight: 600 !important;
-        border-radius: 4px !important;
+        border-radius: 5px !important;
+        white-space: nowrap !important;
       }
 
       select,
       #msel {
-        padding: 2px 4px !important;
-        font-size: 10px !important;
-        height: 24px !important;
-        max-width: 66px !important;
+        padding: 3px 6px !important;
+        font-size: 11px !important;
+        height: 26px !important;
+        max-width: 110px !important;
         border-radius: 6px !important;
       }
 

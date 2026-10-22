@@ -62,8 +62,8 @@ html, body {
 }
 
 .logo-ico {
-  background: var(--logo-gradient, linear-gradient(135deg, #f5c842 0%, #e8831c 100%)) !important;
-  box-shadow: 0 0 18px var(--accent-glow), 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 #tbox.card {
