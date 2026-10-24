@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>Barqtype – إملاء صوتي</title>
+<meta name="description" content="تمرين الإملاء الصوتي - اسمع الكلمة واكتبها! يدعم العربية والإنجليزية مع ثلاث مستويات صعوبة.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/dictation.css">
+<link rel="stylesheet" href="css/themes.css">
+<link rel="icon" type="image/png" sizes="32x32" href="logo/BarqType-icon-32px.png">
+<link rel="icon" type="image/png" sizes="64x64" href="logo/BarqType-icon-64px.png">
+<link rel="apple-touch-icon" sizes="128x128" href="logo/BarqType-icon-128px.png">
+</head>
+<body>
+<div id="app">
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo" title="Barqtype">
+      <div class="logo-ico"><img src="logo/BarqType-icon-64px.png" alt="BarqType" width="28" height="28" style="display:block;border-radius:6px;"></div>
+      <div class="logo-text">
+        Barqtype <span class="logo-badge">BETA</span>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html" class="nb" id="n-test"><span>تدريب</span></a>
+      <a href="index.html#stats" class="nb" id="n-stats"><span>إحصاءات</span></a>
+      <a href="learn.html" class="nb" id="n-learn"><span>تعلم</span></a>
+      <a href="dictation.html" class="nb on" id="n-dictation"><span>إملاء</span></a>
+      <a href="index.html#race" class="nb" id="n-race"><span>سباق</span></a>
+    </nav>
+    <div class="ctrls">
+      <div class="pg">
+        <button class="pb" id="dict-lang-en" onclick="setDictLang('en')">EN</button>
+        <button class="pb on" id="dict-lang-ar" onclick="setDictLang('ar')">AR</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- GAME AREA -->
+    <div class="dict-game" id="dict-game">
+      <!-- Stats -->
+      <div class="dict-stats">
+        <div class="dict-stat-pill">
+          <div class="stat-val" id="dict-word-num">1/10</div>
+          <div class="stat-lbl">الكلمة</div>
+        </div>
+        <div class="dict-stat-pill">
+          <div class="stat-val" id="dict-score">0</div>
+          <div class="stat-lbl">النقاط</div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="dict-progress-wrap">
+        <div class="dict-progress-fill" id="dict-progress-fill"></div>
+      </div>
+
+      <!-- Speaker -->
+      <div class="dict-speaker-area">
+        <button class="dict-speaker-btn" id="dict-speaker" title="Click to listen">
+          <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+        </button>
+        <div class="dict-speaker-hint" id="dict-speaker-hint">اضغط للاستماع للكلمة</div>
+        <div class="dict-replays" id="dict-replays"></div>
+      </div>
+
+      <!-- Input -->
+      <div class="dict-input-area">
+        <input type="text" class="dict-input" id="dict-input" dir="rtl" placeholder="اكتب ثم Enter..."
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        <div class="dict-shortcuts">
+          <span class="shortcut-key">Enter</span> <span class="shortcut-lbl">تحقق</span>
+          <span class="shortcut-sep">·</span>
+          <span class="shortcut-key">Space</span> <span class="shortcut-lbl">أعد السماع</span>
+          <span class="shortcut-sep">·</span>
+          <span class="shortcut-key">Tab</span> <span class="shortcut-lbl">تخطي</span>
+        </div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="dict-feedback" id="dict-feedback"></div>
+
+      <!-- Settings & Controls -->
+      <div class="dict-settings">
+        <div class="dict-settings-row">
+          <div class="pg">
+            <button class="pb on" id="dict-easy" onclick="setDictDifficulty('easy')">سهل</button>
+            <button class="pb" id="dict-med" onclick="setDictDifficulty('medium')">متوسط</button>
+            <button class="pb" id="dict-hard" onclick="setDictDifficulty('hard')">صعب</button>
+          </div>
+          <div class="pg">
+            <button class="pb" id="dict-spd-slow" onclick="setDictSpeed(0.85)" title="سرعة بطيئة">0.85×</button>
+            <button class="pb on" id="dict-spd-norm" onclick="setDictSpeed(1.0)" title="سرعة عادية">1.0×</button>
+            <button class="pb" id="dict-spd-fast" onclick="setDictSpeed(1.15)" title="سرعة سريعة">1.15×</button>
+          </div>
+        </div>
+        <div class="dict-audio-notice hidden" id="dict-audio-notice"></div>
+      </div>
+    </div>
+
+    <!-- RESULTS AREA -->
+    <div class="dict-results" id="dict-results"></div>
+  </main>
+</div>
+
+<script src="js/themes.js"></script>
+<script src="js/dictation.js"></script>
+</body>
+</html>
