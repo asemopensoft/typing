@@ -21,3 +21,4 @@ Thumbs.db
 .gemini/
 *.tsbuildinfo
 next-env.d.ts
+telegram_owner.json
