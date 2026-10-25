@@ -811,7 +811,7 @@ function setLanguage(lang) {
   var footerEl = document.getElementById("learn-footer");
   if (footerEl) {
     footerEl.innerHTML = isAr
-      ? "Barqtype Learn &bull; تم الإنشاء والتطوير بواسطة المهندس Asem Alselme"
+      ? "Barqtype Learn &bull; تم الإنشاء والتطوير بواسطة المبرمج انس  Asem Alselme"
       : "Barqtype Learn &bull; Created &amp; Developed by Eng. Asem Alselme";
   }
 

@@ -2455,7 +2455,7 @@
         var footerEl = el("app-footer");
         if (footerEl) {
           footerEl.innerHTML = isAr ?
-            "<span>Barqtype &bull; تم الإنشاء والتطوير بواسطة المهندس Asem Alselme</span>" :
+            "<span>Barqtype &bull; تم الإنشاء والتطوير بواسطة المبرمج انس  Asem Alselme</span>" :
             "<span>Barqtype &bull; Created &amp; Developed by Eng. Asem Alselme</span>";
         }
 
