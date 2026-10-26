@@ -341,9 +341,35 @@ def query_groq(user_prompt: str) -> str:
                 return content
         except urllib.error.HTTPError as e:
             err_body = e.read().decode("utf-8", errors="ignore")
+            # استخراج ذكي إذا قام النموذج باستدعاء أداة وتم رفضها بـ tool_use_failed من خادم Groq
+            try:
+                err_data = json.loads(err_body)
+                err_info = err_data.get("error", {})
+                if err_info.get("code") == "tool_use_failed" and "failed_generation" in err_info:
+                    failed_gen = err_info["failed_generation"]
+                    gen_data = json.loads(failed_gen) if isinstance(failed_gen, str) and failed_gen.strip().startswith("{") else {}
+                    tool_name = gen_data.get("name", "")
+                    tool_args = gen_data.get("arguments", {})
+                    if tool_name == "python" and "code" in tool_args:
+                        print(f"✅ تم التقاط كود بايثون من failed_generation بنجاح!")
+                        return f"```python\n{tool_args['code']}\n```"
+                    elif tool_name in ("container.exec", "run_command") and "cmd" in tool_args:
+                        cmd = tool_args["cmd"]
+                        if isinstance(cmd, list):
+                            cmd = " ".join(cmd)
+                        return f"```powershell\n{cmd}\n```"
+                    elif tool_name == "replace_text":
+                        s = tool_args.get("search", "")
+                        r = tool_args.get("replace", "")
+                        return f"```python\nres = replace_text({json.dumps(s)}, {json.dumps(r)})\nprint(res)\n```"
+                    elif tool_name == "repo_browser.search" and "query" in tool_args:
+                        q = tool_args["query"]
+                        return f"```python\nprint(search_files({json.dumps(q)}))\n```"
+            except Exception as parse_e:
+                print(f"⚠️ خطأ أثناء تحليل failed_generation: {parse_e}")
+
             last_error = f"{e.code}: {err_body}"
             print(f"⚠️ النموذج {model} واجه خطأ ({e.code})، جاري التبديل التلقائي للنموذج التالي...")
-            # الانتقال التلقائي للنموذج التالي لأي خطأ (سواء 400 أو 413 أو 429 أو غيره)
             continue
         except Exception as e:
             last_error = str(e)
@@ -584,6 +610,35 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         raw_new_txt = match_rep.group(2).strip()
         new_txt = re.sub(r"\s+(?:بس|فقط)$", "", raw_new_txt).strip()
         status_msg = await update.message.reply_text(f"⚡ جاري الاستبدال المباشر لـ '{old_txt}' بـ '{new_txt}' في كافة الملفات...")
+        result = replace_text(old_txt, new_txt)
+        await status_msg.edit_text(result)
+        return
+
+    # 3) فحص سريع للرسائل متعددة الأسطر (مثل: "قم بتعديل هذا النص\nنص قديم\nنص جديد")
+    lines = [l.strip() for l in user_text.splitlines() if l.strip()]
+    if len(lines) >= 3 and any(k in lines[0] for k in ["تعديل", "استبدال", "تغيير", "بدل"]):
+        txt_a = re.sub(r"^(?:القديم|من|بحث|النص)\s*[:=\-]\s*", "", lines[1]).strip()
+        txt_b = re.sub(r"^(?:الجديد|إلى|الى|بديل|استبدال)\s*[:=\-]\s*", "", lines[2]).strip()
+
+        def check_exists(needle: str) -> bool:
+            for root, dirs, files in os.walk(BASE_DIR):
+                dirs[:] = [d for d in dirs if d not in {".git", "node_modules", "__pycache__", ".next", "dist"}]
+                for f in files:
+                    if any(f.endswith(e) for e in [".html", ".js", ".ts", ".css", ".json", ".py"]):
+                        try:
+                            with open(os.path.join(root, f), "r", encoding="utf-8", errors="ignore") as fp:
+                                if needle in fp.read():
+                                    return True
+                        except Exception:
+                            pass
+            return False
+
+        if check_exists(txt_b) and not check_exists(txt_a):
+            old_txt, new_txt = txt_b, txt_a
+        else:
+            old_txt, new_txt = txt_a, txt_b
+
+        status_msg = await update.message.reply_text(f"⚡ جاري الاستبدال المباشر:\n`{old_txt}`\n⬇️ إلى:\n`{new_txt}`\nفي كافة الملفات...")
         result = replace_text(old_txt, new_txt)
         await status_msg.edit_text(result)
         return

@@ -811,8 +811,8 @@ function setLanguage(lang) {
   var footerEl = document.getElementById("learn-footer");
   if (footerEl) {
     footerEl.innerHTML = isAr
-      ? "Barqtype Learn &bull; تم الإنشاء والتطوير بواسطة المبرمج   الفلوس"
-      : "Barqtype Learn &bull; Created &amp; Developed by Eng. الفلوس";
+      ? "Barqtype Learn &bull; تم الإنشاء والتطوير بواسطة المبرمج   عاصم السلمي"
+      : "Barqtype Learn &bull; Created &amp; Developed by Eng. عاصم السلمي";
   }
 
   buildKeyboard();

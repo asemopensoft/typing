@@ -2455,8 +2455,8 @@ function updateUILanguage(l) {
     var footerEl = el("app-footer");
     if (footerEl) {
       footerEl.innerHTML = isAr ?
-        "<span>Barqtype &bull; تم الإنشاء والتطوير بواسطة المبرمج   الفلوس</span>" :
-        "<span>Barqtype &bull; Created &amp; Developed by Eng. الفلوس</span>";
+        "<span>Barqtype &bull; تم الإنشاء والتطوير بواسطة المبرمج   عاصم السلمي</span>" :
+        "<span>Barqtype &bull; Created &amp; Developed by Eng. عاصم السلمي</span>";
     }
 
     // 10. Re-render active tab content if visible
