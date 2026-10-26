@@ -22,3 +22,7 @@ Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
 telegram_owner.json
+telegram_config.json
+.env
+.env.local
+*.secret.json

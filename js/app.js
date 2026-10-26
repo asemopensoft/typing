@@ -1,4303 +1,4303 @@
-    // ==============================================================
-    // 0. VECTOR SVG ICONS SYSTEM (ZERO CASUAL EMOJIS)
-    // ==============================================================
-    var TM_ICONS = {
-      trophy: '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 3H18V9C18 12.3137 15.3137 15 12 15C8.68629 15 6 12.3137 6 9V3Z" fill="url(#tmTrophyGrad)" stroke="#f59e0b" stroke-width="1.5"/><path d="M6 5H3C2.44772 5 2 5.44772 2 6V7C2 9.20914 3.79086 11 6 11V11" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/><path d="M18 5H21C21.5523 5 22 5.44772 22 6V7C22 9.20914 20.2091 11 18 11V11" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/><path d="M12 15V19" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><path d="M8 21H16" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/><path d="M12 7L12.9 8.8L15 9.1L13.5 10.5L13.9 12.5L12 11.5L10.1 12.5L10.5 10.5L9 9.1L11.1 8.8L12 7Z" fill="#fff"/><defs><linearGradient id="tmTrophyGrad" x1="6" y1="3" x2="18" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#fde047"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>',
-      crown: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="display:inline-block;vertical-align:-2px"><path d="M2 19h20v2H2v-2zM2 5l4 3.5 6-4.5 6 4.5 4-3.5v12H2V5zm6.5 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm7 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',
-      medalGold: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="14" r="7" fill="#f59e0b" stroke="#fde047" stroke-width="1.5"/><path d="M9 3l3 5 3-5h3l-4 7h-4L6 3h3z" fill="#3b82f6"/><text x="12" y="17.5" font-size="9" font-weight="900" text-anchor="middle" fill="#1f2937" font-family="system-ui, sans-serif">1</text></svg>',
-      medalSilver: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="14" r="7" fill="#94a3b8" stroke="#e2e8f0" stroke-width="1.5"/><path d="M9 3l3 5 3-5h3l-4 7h-4L6 3h3z" fill="#0ea5e9"/><text x="12" y="17.5" font-size="9" font-weight="900" text-anchor="middle" fill="#0f172a" font-family="system-ui, sans-serif">2</text></svg>',
-      bolt: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="display:inline-block;vertical-align:-2px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
-      refresh: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15.5-6.36L21 8M3 22v-6h6M21 12a9 9 0 0 1-15.5 6.36L3 16"/></svg>',
-      share: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14l2 2 4-4"/></svg>',
-      door: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>',
-      globe: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
-      gear: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
-      flag: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="currentColor" style="display:inline-block;vertical-align:-2px"><path d="M4 2v20h2v-8h6l1 2h7V4h-7l-1-2H4zm8 4h3v2h-3V6zm3 2h3v2h-3V8zm-3 2h3v2h-3v-2zm-5-4h3v2H7V6zm0 4h3v2H7v-2z"/></svg>',
-      car1: '<svg viewBox="0 0 32 18" width="28" height="16" fill="none" style="display:inline-block;vertical-align:middle;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))"><path d="M2 11C2 9 4 8 7 8L11 4C13 2 17 2 22 4L27 8C30 9 31 10 31 12C31 14 30 15 28 15H4C2.5 15 2 13.5 2 11Z" fill="url(#tmCarMeGrad)"/><path d="M12 5H20L24 8H10L12 5Z" fill="#1e293b"/><path d="M2 5H5V7H2V5Z" fill="#e8af47"/><circle cx="8" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="8" cy="14" r="1.2" fill="#cbd5e1"/><circle cx="24" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="24" cy="14" r="1.2" fill="#cbd5e1"/><path d="M29 10L31 11L29 12V10Z" fill="#fef08a"/><defs><linearGradient id="tmCarMeGrad" x1="2" y1="8" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#fbbf24"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>',
-      car2: '<svg viewBox="0 0 32 18" width="28" height="16" fill="none" style="display:inline-block;vertical-align:middle;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))"><path d="M2 11C2 9 4 8 7 8L11 4C13 2 17 2 22 4L27 8C30 9 31 10 31 12C31 14 30 15 28 15H4C2.5 15 2 13.5 2 11Z" fill="url(#tmCarOppGrad)"/><path d="M12 5H20L24 8H10L12 5Z" fill="#0f172a"/><path d="M2 5H5V7H2V5Z" fill="#38bdf8"/><circle cx="8" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="8" cy="14" r="1.2" fill="#cbd5e1"/><circle cx="24" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="24" cy="14" r="1.2" fill="#cbd5e1"/><path d="M29 10L31 11L29 12V10Z" fill="#7dd3fc"/><defs><linearGradient id="tmCarOppGrad" x1="2" y1="8" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#0284c7"/></linearGradient></defs></svg>',
-      plus: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
-      link: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>',
-      rocket: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4.5c1.2-1.2 3.5-1.5 3.5-1.5"></path><path d="M15 15v5s3.03-.55 4.5-2c1.2-1.2 1.5-3.5 1.5-3.5"></path></svg>',
-      swords: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"></polyline><line x1="13" y1="19" x2="19" y2="13"></line><line x1="16" y1="16" x2="20" y2="20"></line><line x1="19" y1="21" x2="21" y2="19"></line><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"></polyline><line x1="5" y1="19" x2="11" y2="13"></line><line x1="8" y1="16" x2="4" y2="20"></line><line x1="5" y1="21" x2="3" y2="19"></line></svg>',
-      warning: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;color:var(--err)"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
-      robot: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8.01" y2="16"></line><line x1="16" y1="16" x2="16.01" y2="16"></line></svg>',
-      users: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
-      sparkle: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="currentColor" style="display:inline-block;vertical-align:-2px;color:#fde047"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"></path></svg>',
-      copy: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',
-      target: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
-      clock: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-      pulse: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
-      keyboard: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6" y2="8.01"/><line x1="10" y1="8" x2="10" y2="8.01"/><line x1="14" y1="8" x2="14" y2="8.01"/><line x1="18" y1="8" x2="18" y2="8.01"/><line x1="6" y1="12" x2="6" y2="12.01"/><line x1="18" y1="12" x2="18" y2="12.01"/><line x1="10" y1="16" x2="14" y2="16"/></svg>',
-      arrowRight: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
-      check: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><polyline points="20 6 9 17 4 12"/></svg>'
-    };
+// ==============================================================
+// 0. VECTOR SVG ICONS SYSTEM (ZERO CASUAL EMOJIS)
+// ==============================================================
+var TM_ICONS = {
+  trophy: '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 3H18V9C18 12.3137 15.3137 15 12 15C8.68629 15 6 12.3137 6 9V3Z" fill="url(#tmTrophyGrad)" stroke="#f59e0b" stroke-width="1.5"/><path d="M6 5H3C2.44772 5 2 5.44772 2 6V7C2 9.20914 3.79086 11 6 11V11" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/><path d="M18 5H21C21.5523 5 22 5.44772 22 6V7C22 9.20914 20.2091 11 18 11V11" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/><path d="M12 15V19" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><path d="M8 21H16" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/><path d="M12 7L12.9 8.8L15 9.1L13.5 10.5L13.9 12.5L12 11.5L10.1 12.5L10.5 10.5L9 9.1L11.1 8.8L12 7Z" fill="#fff"/><defs><linearGradient id="tmTrophyGrad" x1="6" y1="3" x2="18" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#fde047"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>',
+  crown: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="display:inline-block;vertical-align:-2px"><path d="M2 19h20v2H2v-2zM2 5l4 3.5 6-4.5 6 4.5 4-3.5v12H2V5zm6.5 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm7 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',
+  medalGold: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="14" r="7" fill="#f59e0b" stroke="#fde047" stroke-width="1.5"/><path d="M9 3l3 5 3-5h3l-4 7h-4L6 3h3z" fill="#3b82f6"/><text x="12" y="17.5" font-size="9" font-weight="900" text-anchor="middle" fill="#1f2937" font-family="system-ui, sans-serif">1</text></svg>',
+  medalSilver: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="14" r="7" fill="#94a3b8" stroke="#e2e8f0" stroke-width="1.5"/><path d="M9 3l3 5 3-5h3l-4 7h-4L6 3h3z" fill="#0ea5e9"/><text x="12" y="17.5" font-size="9" font-weight="900" text-anchor="middle" fill="#0f172a" font-family="system-ui, sans-serif">2</text></svg>',
+  bolt: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="display:inline-block;vertical-align:-2px"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+  refresh: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15.5-6.36L21 8M3 22v-6h6M21 12a9 9 0 0 1-15.5 6.36L3 16"/></svg>',
+  share: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M9 14l2 2 4-4"/></svg>',
+  door: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>',
+  globe: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+  gear: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+  flag: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="currentColor" style="display:inline-block;vertical-align:-2px"><path d="M4 2v20h2v-8h6l1 2h7V4h-7l-1-2H4zm8 4h3v2h-3V6zm3 2h3v2h-3V8zm-3 2h3v2h-3v-2zm-5-4h3v2H7V6zm0 4h3v2H7v-2z"/></svg>',
+  car1: '<svg viewBox="0 0 32 18" width="28" height="16" fill="none" style="display:inline-block;vertical-align:middle;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))"><path d="M2 11C2 9 4 8 7 8L11 4C13 2 17 2 22 4L27 8C30 9 31 10 31 12C31 14 30 15 28 15H4C2.5 15 2 13.5 2 11Z" fill="url(#tmCarMeGrad)"/><path d="M12 5H20L24 8H10L12 5Z" fill="#1e293b"/><path d="M2 5H5V7H2V5Z" fill="#e8af47"/><circle cx="8" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="8" cy="14" r="1.2" fill="#cbd5e1"/><circle cx="24" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="24" cy="14" r="1.2" fill="#cbd5e1"/><path d="M29 10L31 11L29 12V10Z" fill="#fef08a"/><defs><linearGradient id="tmCarMeGrad" x1="2" y1="8" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#fbbf24"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>',
+  car2: '<svg viewBox="0 0 32 18" width="28" height="16" fill="none" style="display:inline-block;vertical-align:middle;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))"><path d="M2 11C2 9 4 8 7 8L11 4C13 2 17 2 22 4L27 8C30 9 31 10 31 12C31 14 30 15 28 15H4C2.5 15 2 13.5 2 11Z" fill="url(#tmCarOppGrad)"/><path d="M12 5H20L24 8H10L12 5Z" fill="#0f172a"/><path d="M2 5H5V7H2V5Z" fill="#38bdf8"/><circle cx="8" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="8" cy="14" r="1.2" fill="#cbd5e1"/><circle cx="24" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="24" cy="14" r="1.2" fill="#cbd5e1"/><path d="M29 10L31 11L29 12V10Z" fill="#7dd3fc"/><defs><linearGradient id="tmCarOppGrad" x1="2" y1="8" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#0284c7"/></linearGradient></defs></svg>',
+  plus: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
+  link: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>',
+  rocket: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4.5c1.2-1.2 3.5-1.5 3.5-1.5"></path><path d="M15 15v5s3.03-.55 4.5-2c1.2-1.2 1.5-3.5 1.5-3.5"></path></svg>',
+  swords: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"></polyline><line x1="13" y1="19" x2="19" y2="13"></line><line x1="16" y1="16" x2="20" y2="20"></line><line x1="19" y1="21" x2="21" y2="19"></line><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"></polyline><line x1="5" y1="19" x2="11" y2="13"></line><line x1="8" y1="16" x2="4" y2="20"></line><line x1="5" y1="21" x2="3" y2="19"></line></svg>',
+  warning: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;color:var(--err)"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>',
+  robot: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8.01" y2="16"></line><line x1="16" y1="16" x2="16.01" y2="16"></line></svg>',
+  users: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+  sparkle: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="currentColor" style="display:inline-block;vertical-align:-2px;color:#fde047"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"></path></svg>',
+  copy: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>',
+  target: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  pulse: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+  keyboard: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6" y2="8.01"/><line x1="10" y1="8" x2="10" y2="8.01"/><line x1="14" y1="8" x2="14" y2="8.01"/><line x1="18" y1="8" x2="18" y2="8.01"/><line x1="6" y1="12" x2="6" y2="12.01"/><line x1="18" y1="12" x2="18" y2="12.01"/><line x1="10" y1="16" x2="14" y2="16"/></svg>',
+  arrowRight: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+  check: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><polyline points="20 6 9 17 4 12"/></svg>'
+};
 
-    function initAllVectorIcons() {
-      var setHtml = function (id, html) {
-        var el = document.getElementById(id);
-        if (el) el.innerHTML = html;
-      };
-      setHtml('n-race-ico', TM_ICONS.flag);
-      setHtml('n-online-ico', TM_ICONS.globe);
-      setHtml('rm-online-ico', TM_ICONS.globe);
-      setHtml('r-title-ico', TM_ICONS.flag);
-      setHtml('rm-ghost-ico', TM_ICONS.users);
-      setHtml('rm-bot-ico', TM_ICONS.robot);
-      setHtml('rcar1', TM_ICONS.car1);
-      setHtml('rcar2', TM_ICONS.car2);
-      setHtml('rflag1', TM_ICONS.flag);
-      setHtml('rflag2', TM_ICONS.flag);
-      setHtml('r-turn-ico', TM_ICONS.car1);
-      setHtml('race-winner-badge', TM_ICONS.trophy);
-      setHtml('rpod1-medal', TM_ICONS.medalGold);
-      setHtml('rpod2-medal', TM_ICONS.medalSilver);
-      setHtml('r-again-ico', TM_ICONS.refresh);
-      setHtml('r-exit-ico', TM_ICONS.door);
+function initAllVectorIcons() {
+  var setHtml = function (id, html) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  };
+  setHtml('n-race-ico', TM_ICONS.flag);
+  setHtml('n-online-ico', TM_ICONS.globe);
+  setHtml('rm-online-ico', TM_ICONS.globe);
+  setHtml('r-title-ico', TM_ICONS.flag);
+  setHtml('rm-ghost-ico', TM_ICONS.users);
+  setHtml('rm-bot-ico', TM_ICONS.robot);
+  setHtml('rcar1', TM_ICONS.car1);
+  setHtml('rcar2', TM_ICONS.car2);
+  setHtml('rflag1', TM_ICONS.flag);
+  setHtml('rflag2', TM_ICONS.flag);
+  setHtml('r-turn-ico', TM_ICONS.car1);
+  setHtml('race-winner-badge', TM_ICONS.trophy);
+  setHtml('rpod1-medal', TM_ICONS.medalGold);
+  setHtml('rpod2-medal', TM_ICONS.medalSilver);
+  setHtml('r-again-ico', TM_ICONS.refresh);
+  setHtml('r-exit-ico', TM_ICONS.door);
 
-      // Result Showcase Vector Icons
-      setHtml('r-acc-ico', TM_ICONS.target);
-      setHtml('r-cons-ico', TM_ICONS.pulse);
-      setHtml('r-tier-ico', TM_ICONS.bolt);
-      setHtml('r-pb-ico', TM_ICONS.trophy);
-      setHtml('r-diag-err-ico', TM_ICONS.warning);
-      setHtml('r-coach-ico', TM_ICONS.sparkle);
-      setHtml('r-replay-ico', TM_ICONS.refresh);
-      setHtml('r-next-ico', TM_ICONS.arrowRight);
-      setHtml('r-copy-ico', TM_ICONS.copy);
-      setHtml('r-drill-ico', TM_ICONS.target);
+  // Result Showcase Vector Icons
+  setHtml('r-acc-ico', TM_ICONS.target);
+  setHtml('r-cons-ico', TM_ICONS.pulse);
+  setHtml('r-tier-ico', TM_ICONS.bolt);
+  setHtml('r-pb-ico', TM_ICONS.trophy);
+  setHtml('r-diag-err-ico', TM_ICONS.warning);
+  setHtml('r-coach-ico', TM_ICONS.sparkle);
+  setHtml('r-replay-ico', TM_ICONS.refresh);
+  setHtml('r-next-ico', TM_ICONS.arrowRight);
+  setHtml('r-copy-ico', TM_ICONS.copy);
+  setHtml('r-drill-ico', TM_ICONS.target);
 
-      setHtml('om-title-ico', TM_ICONS.globe);
-      setHtml('om-gear-btn', TM_ICONS.gear);
-      setHtml('om-tab-create-ico', TM_ICONS.plus);
-      setHtml('om-tab-join-ico', TM_ICONS.link);
-      setHtml('om-create-ico', TM_ICONS.bolt);
-      setHtml('om-join-ico', TM_ICONS.rocket);
-      setHtml('om-copy-ico', TM_ICONS.copy);
-      setHtml('om-start-ico', TM_ICONS.flag);
-      setHtml('om-leave-ico', TM_ICONS.door);
-      setHtml('om-grace-ico', TM_ICONS.warning);
-      setHtml('om-my-lane-ico', TM_ICONS.flag);
-      setHtml('om-opp-lane-ico', TM_ICONS.flag);
-      setHtml('om-my-car', TM_ICONS.car1);
-      setHtml('om-opp-car', TM_ICONS.car2);
-      setHtml('om-trophy-hero', TM_ICONS.trophy);
-      setHtml('om-again-ico', TM_ICONS.refresh);
-      setHtml('om-share-ico', TM_ICONS.share);
-      setHtml('om-newroom-ico', TM_ICONS.door);
-      setHtml('om-diff-ico', TM_ICONS.bolt);
+  setHtml('om-title-ico', TM_ICONS.globe);
+  setHtml('om-gear-btn', TM_ICONS.gear);
+  setHtml('om-tab-create-ico', TM_ICONS.plus);
+  setHtml('om-tab-join-ico', TM_ICONS.link);
+  setHtml('om-create-ico', TM_ICONS.bolt);
+  setHtml('om-join-ico', TM_ICONS.rocket);
+  setHtml('om-copy-ico', TM_ICONS.copy);
+  setHtml('om-start-ico', TM_ICONS.flag);
+  setHtml('om-leave-ico', TM_ICONS.door);
+  setHtml('om-grace-ico', TM_ICONS.warning);
+  setHtml('om-my-lane-ico', TM_ICONS.flag);
+  setHtml('om-opp-lane-ico', TM_ICONS.flag);
+  setHtml('om-my-car', TM_ICONS.car1);
+  setHtml('om-opp-car', TM_ICONS.car2);
+  setHtml('om-trophy-hero', TM_ICONS.trophy);
+  setHtml('om-again-ico', TM_ICONS.refresh);
+  setHtml('om-share-ico', TM_ICONS.share);
+  setHtml('om-newroom-ico', TM_ICONS.door);
+  setHtml('om-diff-ico', TM_ICONS.bolt);
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAllVectorIcons);
+} else {
+  initAllVectorIcons();
+}
+
+// ==============================================================
+// 1. DATA AND STATE
+// ==============================================================
+var POOLS = {
+  en: {
+    common: "the be to of and a in that have it for not on with he as you do at this but his by from they we say her she or an will my one all would there their what so up out if about who get which go me when make can like time no just him know take people into year your good some could them see other than then now look only come its over think also back after use two how our work first well way even new want because any these give day most us great need large often hand high place hold world found still learn cover food state keep eye never last let thought city tree far sea draw left late run while press close night real life few open seem next white begin walk paper always music those both mark book letter until mile river car feet care second enough girl young ready above ever red list feel talk bird soon body dog family".split(" "),
+    medium: "important different following however become number through development between something national against before system company around believe public already everything another government power change together interest provide children across question within business without office process whether include continue economic social person member example research program problem support general control recent possible political market science level service create student consider complete usually remain certainly information relationship experience performance environment technology community available condition education throughout understand population management significant opportunity".split(" "),
+    code: "function const return import export interface async await typeof string number boolean undefined null array object class extends implements private public readonly static while switch case break continue try catch finally throw delete void let var true false this super module require console log error map filter reduce Promise resolve reject fetch params router component useState useEffect callback timeout interval length index value result input output default type enum".split(" "),
+    quotes: ["The quick brown fox jumps over the lazy dog.", "To be or not to be, that is the question.", "All that glitters is not gold.", "The only way to do great work is to love what you do.", "In the middle of every difficulty lies opportunity.", "Life is what happens when you are busy making other plans.", "The journey of a thousand miles begins with one step.", "Be the change that you wish to see in the world.", "You only live once, but if you do it right, once is enough."]
+  },
+  ar: {
+    common: [
+      "القراءة هي النافذة الأوسع التي يطل منها الإنسان على فضاءات الفكر وثمرات التجارب البشرية عبر العصور، فهي لا تقتصر على تلقي الكلمات بل تسهم في صقل الروح وتوسيع مدارك العقل وإثراء الخيال، وتمنح القارئ حكمة عميقة تمكنه من فهم تعقيدات الحياة واتخاذ القرارات السديدة بثقة وبصيرة.",
+      "النجاح الحقيقي ليس هبة مجانية تأتي بمحض الصدفة، بل هو ثمرة مسار طويل من الجهد المنظم والعزيمة الصادقة والإصرار الذي لا ينكسر أمام العثرات، فالأهداف العظيمة تستلزم خطوات واثقة وصبرًا جميلاً على مشاق الطريق، ومن أراد أن يترك أثرًا راسخًا فعليه أن يؤمن بقدراته ويبدأ العمل دون تردد.",
+      "الوقت هو رأس المال الحقيقي الذي يملكه الإنسان في هذه الحياة، وكل لحظة تمضي هي جزء من العمر لن يتكرر، واستثمار هذا الوقت بحكمة في طلب العلم وتطوير الذات ونفع الناس هو المعيار الفارق بين من يعيش على هامش الوجود ومن يصنع لنفسه ولأمته مجدًا يخلده التاريخ.",
+      "الأخلاق الفاضلة هي السياج الحامي للكرامة الإنسانية والركيزة التي تبنى عليها الحضارات الراقية، فالتعامل بصدق ونقاء واحترام متبادل ينشر السكينة في النفوس ويبني جسور الثقة بين أفراد المجتمع، وما من شيء يرفع مكانة المرء في أعين الناس مثل تواضعه وحسن خلقه.",
+      "المعرفة نور متجدد لا ينطفئ، والحرص على اكتساب المهارات الحديثة في كل يوم يفتح أمام الفرد آفاقًا غير محدودة للتألق والارتقاء، فالإنسان يظل عالمًا ما دام يطلب العلم، فإذا ظن أنه قد علم فقد بدأ طريق الجهل، والتعلم الدائم هو مفتاح البقاء والريادة في عالم سريع التغير.",
+      "إتقان العمل أمانة حضارية وسر من أسرار التميز الإنساني، فعندما يضع الإنسان شغفه وإخلاصه في كل مهمة ينجزها تتحول المهام الروتينية إلى إبداع حقيقي يلهم كل من حوله، والإخلاص في أداء الواجب يمنح صاحبه اعتزازًا بالنفس وشعورًا صادقًا بالرضا والإنجاز.",
+      "التعاون البناء هو القوة الدافعة خلف كل إنجاز عظيم في التاريخ الإنساني، فالطاقات الفردية مهما بلغت قوتها تظل محدودة ما لم تتشابك مع غيرها في منظومة متكاملة، وعندما تتضافر العقول وتتحد السواعد بروح الفريق الواحد تصبح التحديات الكبرى فرصًا حقيقية للنهوض والابتكار.",
+      "الصحة نعمة غالية لا يدرك قيمتها الحقيقية إلا من افتقدها، والاهتمام بالسلامة البدنية والنفسية يمنح الفرد الحيوية اللازمة لتحقيق طموحاته ومواصلة العطاء، والعيش بتوازن بين متطلبات العمل وراحة الجسد وصفاء الروح يعزز من مناعة الإنسان ويجعله أكثر قدرة على مواجهة ضغوط الحياة بتفاؤل.",
+      "التأمل في بديع صنع الطبيعة يمنح النفس طمأنينة وسكينة تعيد ترتيب الأفكار المشوشة، فنظام الكون البديع وتتابع الليل والنهار وتعاقب الفصول كلها شواهد تبعث في القلب يقينًا راسخًا بأن الحياة تحمل دائمًا في طياتها بداية جديدة وأملاً يشرق مع كل فجر.",
+      "إن أعظم استثمار تصنعه الأمم هو الاستثمار في عقول أبنائها وبناء شخصياتهم على أسس متينة من العلم والقيم، فالتربية الصالحة تغرس في نفوس النشء حب الوطن والشجاعة في قول الحق والشغف بالبحث والاكتشاف، ليكونوا قادة واعين قادرين على حمل الراية وصناعة الغد الأفضل.",
+      "تبدأ الثقة بالنفس عندما يتصالح الإنسان مع ذاته ويعترف بنقاط قوته وضعفه، متقبلاً أخطاءه بوصفها محطات ضرورية للتعلم والنمو، والخوف من الفشل هو العائق الأكبر الذي يقف بين الإنسان وأحلامه، فإذا كسر حاجز التردد وانطلق بعزم وجد أن الصعاب تتضاءل أمام الإرادة الصلبة.",
+      "الكلمة الطيبة بذرة خير تثمر محبة ووئامًا، وهي صدقة تهدي النفوس الحائرة وتضمد الجراح وتبعث الأمل في القلوب اليائسة، وللكلمة وقع عظيم قد يبني أمة أو يهدمها، فاختر من القول أحسنه ومن الحديث أصدقه لتكون دائمًا بلسمًا وناشرًا للسلام والمودة.",
+      "الخط العربي ليس مجرد وسيلة لتدوين الكلمات، بل هو فن هندسي وروحاني يتجاوز حدود الحروف ليعبر عن ذوق رفيع وهوية عريقة، وتناسق المدات وانحناءات الحروف كالرقعة والنسخ والديواني يبعث في العين راحة وتأملًا في عبقرية اللغة العربية وجمال نسيجها اللغوي.",
+      "تمتد المحيطات عبر كوكبنا كعوالم شاسعة يلفها الغموض، تحتضن تنوعًا بيولوجيًا مدهشًا وأسرارًا علمية لا تزال تنتظر من يكشفها، واستكشاف أعماق البحار يعلم الإنسان التواضع أمام عظمة الكون، ويدعوه إلى صون البيئة المائية التي تمثل شريان الحياة واستقرار المناخ العالمي.",
+      "التواضع هو جوهر العظمة الإنسانية، فالأشجار المثمرة تنحني بتواضع كلما زاد حملها، كذلك العالم الحقيقي يزداد تواضعًا كلما تعمق في بحور المعرفة، بينما التكبر علامة على قصر النظر وضعف الحيلة، وما ساد أحد في مجتمعه إلا حين نزل إلى قلوب الناس برقة ولين جانب.",
+      "الصبر شجرة جذورها مرة ولكن ثمارها شهية، وهو زاد المسافر في دروب الحياة الوعرة، فما من فكرة عظيمة رأت النور إلا بعد ليالٍ من المحاولة والانتظار الجميل، والذين يستعجلون النتائج غالبًا ما يغادرون الميدان مبكرًا، أما الصابرون فهم الذين يقطفون زهور النجاح في أوانها.",
+      "إن تنوع الثقافات والحضارات هو مصدر ثراء للوجود الإنساني وليس سببًا للنزاع والفرقة، والانفتاح الواعي على تجارب الشعوب الأخرى يثري الفكر ويعزز قيم التسامح والتعايش السلمي، فالحكمة ضالة كل مفكر، والحوار الصادق هو الجسر الوحيد لبناء عالم يسوده الأمان والاحترام المتبادل.",
+      "حين ينظر الإنسان إلى السماء المرصعة بالنجوم في ليلة صافية، يدرك مدى اتساع هذا الكون الفسيح وصغر موقعه الجغرافي فيه، وهذا التأمل الكوني يوقظ في النفس دهشة علمية عميقة تدفع العلماء للبحث عن نشأة المجرات ودراسة حركة الكواكب، موقنين بأن العلم رحلة لا تنتهي.",
+      "إن الاستماع الجيد فن نادر لا يتقنه إلا أصحاب النفوس الهادئة والعقول الكبيرة، فالإصغاء بوعي واهتمام يفتح أبواب الفهم ويزيل سوء التقدير بين الناس، ومن أحسن الاستماع تعلم الكثير وتجنب الوقوع في الزلل، فالحديث قد يمنحك متعة التعبير لكن الاستماع يمنحك الحكمة والمعرفة.",
+      "لا يولد الابتكار في مساحات الراحة والجمود، بل ينبثق من التساؤل الجريء وتحدي الأنماط المعتادة والبحث عن حلول غير تقليدية للمشكلات المعقدة، وأصحاب الرؤى المبتكرة هم الذين ينظرون إلى ما يراه الجميع ولكنهم يفكرون فيما لم يخطر على بال أحد، ليصنعوا فارقًا حقيقيًا في مسيرة العالم.",
+      "المكتبات هي مستودعات الذاكرة الإنسانية، فيها تلتقي حوارات القرون وتتسامى أفكار الفلاسفة والعلماء عبر صفحات المخطوطات والكتب النفيسة، والجلوس بين رفوف الكتب يمنح النفس سكينة لا نظير لها، ويشعر القارئ بأنه محاط بأعظم العقول التي أضاءت تاريخ الفكر البشري.",
+      "الأرض هي بيتنا المشترك وأمانة بين أيدينا للأجيال القادمة، والتوازن البيئي الهش يتطلب وعيًا جماعيًا للحد من التلوث وحماية الغابات والمياه العذبة، والمحافظة على الطبيعة ليست مجرد واجب أخلاقي، بل هي مسألة بقاء ترتبط مباشرة بجودة حياتنا واستدامة مواردنا الحيوية.",
+      "المستحيل كلمة لا توجد إلا في قواميس العاجزين الذين يتراجعون عند أول عقبة، فالإرادة الفولاذية قادرة على شق الطرق في الصخور وتجاوز أصعب المحن، وكل تقدم أحرزته البشرية كان يومًا ما يبدو مستحيلاً في أعين المتشائمين، حتى انبرى له أصحاب العزائم وحولوه إلى واقع مشهود.",
+      "الاختلاف في وجهات النظر ظاهرة طبيعية وصحية تثري النقاشات وتوضح جوانب الحقيقة المتعددة، وأدب الحوار يقوم على احترام شخص المحاور ومقارعة الحجة بالحجة دون تجريح أو تسفيه، فرأي الإنسان قد يكون صوابًا يحتمل الخطأ، ورأي غيره قد يكون خطأ يحتمل الصواب.",
+      "التغافل عن صغائر الأمور وعثرات الآخرين هو نصف الذكاء وتمام الراحة النفسية، فالذي يدقق في كل تفصيلة ويحاسب على كل شاردة يرهق قلبه ويخسر علاقاته، أما النفوس الكريمة فتتسامح وتغض الطرف لتنعم بحياة ملؤها السلام الداخلي والمودة الصافية مع من حولها.",
+      "الاعتراف بالخطأ فضيلة لا يملكها إلا الشجعان، والاعتذار الصادق لا ينقص من قدر صاحبه بل يرفع شأنه ويعيد بناء ما تهدم من ثقة ومودة، فالكمال ليس من طبع البشر، ولكن النضج الحقيقي يتجلى في القدرة على تحمل المسؤولية وتصحيح المسار بحكمة وشجاعة.",
+      "ممارسة الهوايات المحببة ليست إهدارًا للوقت، بل هي مساحة تنفس واستعادة للطاقة الحيوية بعد عناء العمل وضغوط الالتزامات اليومية، وسواء كانت هوايتك الرسم أو الكتابة أو الرياضة أو البستنة، فإنها تغذي روحك وتمنحك توازنًا ضروريًا للحفاظ على شغفك بالحياة.",
+      "الصحراء برمالها الذهبية وسكونها المهيب ليست أرضًا مواتًا، بل هي مدرسة في الصبر والتحمل والعيش ببساطة وكبرياء، وسماء الصحراء الصافية تمنح المتأمل شعورًا بالانفتاح على اللانهائي، وتذكرنا بأن الجمال قد يكمن في البساطة والتجرد من زحام المدن الصاخبة.",
+      "أن تكون سببًا في ابتسامة إنسان أو تخفيف عبء عن كاهل محتاج هو أعظم ما يمكن أن تقدمه للحياة، فالطاقة الإيجابية كالعدوى اللطيفة تنتقل من شخص لآخر، ومجرد كلمة تشجيع دافئة قد تنقذ روحًا من اليأس وتمنحها الأمل لمواصلة الكفاح بقوة وتفاؤل.",
+      "يقوم تماسك المجتمعات على تمازج حكمة الشيوخ وتجاربهم العميقة مع حماسة الشباب وطاقاتهم الوثابة، فالشباب هم محرك التغيير والتجديد، والشيوخ هم البوصلة التي تضبط الاتجاه وترسخ القيم، وحين تتكامل الأجيال معًا تنهض الأمة بخطى راسخة وتتجنب عثرات الطريق.",
+      "الصداقة الحقيقية هي الواحة التي يستريح فيها القلب من وعثاء الأيام، والصديق الصدوق هو مرآتك التي تبصر فيها عيوبك بصدق، وملاذك الذي تجد عنده الأمان في لحظات الضعف، والصداقة المبنية على النقاء والاحترام تدوم وتزداد رسوخًا بمرور السنين كالمعادن النفيسة.",
+      "ممارسة الرياضة بانتظام لا تصقل الجسد وحده، بل تبني الشخصية وتغرس قيم الانضباط الذاتي والروح الرياضية والقدرة على تقبل الخسارة بروح التعلم، فالروح التنافسية النبيلة تجعل الإنسان يسعى دائمًا لتطوير أدائه وتجاوز أرقامه السابقة دون ضغينة أو حسد للآخرين.",
+      "التخطيط الواعي هو الخريطة التي ترشدك إلى وجهتك وسط عواصف الحياة وتحدياتها، والبدء بيومك مع وجود أولويات واضحة يوفر عليك الكثير من الوقت والجهد الضائعين في التشتت، ومن خطط لنجاحه بحكمة وضع قدميه على أولى درجات سلم المجد والريادة.",
+      "لا تكتمل سعادة الفرد بنجاحه الشخصي فقط، بل تتعاظم حين يسهم في رفعة مجتمعه وتقديم يد العون للمحتاجين، فالمسؤولية الاجتماعية واجب إنساني ووطني يعزز التكافل بين الفئات المختلفة ويصنع مجتمعًا قويًا متماسكًا يشعر فيه كل فرد بقيمته وأهمية دوره.",
+      "الفضول العلمي هو الشرارة الأولى لكل كشف واختراع عرفته البشرية، فالرغبة المتقدة في معرفة أسرار الطبيعة وفهم قوانين المادة والطاقة هي التي دفعت العلماء إلى سبر أغوار الذرة وغزو الفضاء الخارجي، والعقل الفضولي لا يشيخ أبدًا بل يظل شابًا ومتألقًا بالمعرفة.",
+      "التفاؤل ليس مجرد شعور عابر بالرضا، بل هو موقف عقلي وقوة دافعة تمكن الإنسان من رؤية الفرص السانحة خلف كل أزمة والضوء المنبعث في آخر النفق المظلم، والمتفائل لا ينتظر أن تهدأ العاصفة، بل يتعلم كيف يبحر بسفينته بثبات وشجاعة نحو بر الأمان."
+    ],
+    medium: [
+      "شهد العصر الذهبي للحضارة العربية والإسلامية طفرة معرفية غير مسبوقة تجسدت في تأسيس بيت الحكمة في بغداد، حيث تلاقت الثقافات الإنسانية وترجمت أمهات الكتب في الفلسفة والطب والهندسة والفلك، مما مهد السبيل لظهور علماء أفذاذ كابن الهيثم والخوارزمي وابن سينا، وأسهم في إشعال شعلة النهضة العلمية في العالم بأسره.",
+      "يمثل الذكاء الاصطناعي اليوم تحولاً جذريًا في مسار الحضارة المعاصرة، إذ يعيد تعريف طبيعة العمل والإنتاج وطرائق معالجة المعلومات، ومع تسارع وتيرة هذا التطور تبرز أهمية ترسيخ البعد الأخلاقي والضوابط الإنسانية لضمان أن تظل هذه التكنولوجيا أداة لتمكين البشرية وتحقيق العدالة وليس لتعميق الفجوات أو طمس الهوية.",
+      "تعتمد مهارة الطباعة اللمسية السريعة على تطوير مسارات عصبية دقيقة في الدماغ تنظم حركة الأصابع وفق نمط حركي تلقائي يعرف بالذاكرة العضلية، ومع استمرار التدريب الواعي يتحرر الذهن من عبء البحث البصري عن الحروف ليركز كليًا على صياغة الأفكار وتدفق الإبداع، محولاً لوحة المفاتيح إلى امتداد طبيعي للعقل.",
+      "أثبتت التجارب التنموية الحديثة أن الموارد الطبيعية وحدها لا تصنع تقدمًا مستدامًا، بل إن الثروة الحقيقية للأمم تكمن في كفاءة مواطنيها ومستوى تعليمهم وقدرتهم على الابتكار وتوليد الحلول الخلاقة، فالاستثمار في التعليم النوعي والبحث العلمي هو الضمانة الأكيدة لبناء اقتصاد معرفي رائد ومستقبل مزدهر.",
+      "في عصر تتدفق فيه الإشعارات الرقمية بلا انقطاع وتزدحم الشاشات بالمعلومات، بات الحفاظ على الصفاء الذهني ضرورة ملحة لاستعادة التوازن النفسي، وتخصيص ساعات يومية للعزلة الإيجابية والقراءة الهادئة يمنح العقل فرصة لترتيب أولوياته والابتعاد عن التشتت، مما يجدد طاقة الإبداع والتركيز العميق.",
+      "إن مواجهة التحديات بروح إيجابية هي السمة المشتركة بين رواد الفكر والإبداع، فالصعاب التي نمر بها ليست عقبات تمنعنا من التقدم بل هي دروس تصقل خبراتنا وتبني شخصيتنا القوية القادرة على قيادة المبادرات الكبرى وصناعة التغيير الملهم في المجتمع.",
+      "يعد عبد الرحمن بن خلدون المؤسس الحقيقي لعلم الاجتماع وفلسفة التاريخ من خلال مقدمته الشهيرة التي وضع فيها قوانين العمران البشري وتطور الدول وسقوطها، مبرهنًا على أن التاريخ ليس سردًا للحوادث بل هو فهم عميق للأسباب والظروف الاقتصادية والاجتماعية التي تحكم مسيرة البشر.",
+      "أحدث الحسن بن الهيثم ثورة علمية في علم البصريات حين رفض الفرضيات النظرية المجردة وابتكر المنهج العلمي القائم على التجربة الملموسة والملاحظة الدقيقة والاستقراء الرياضي في كتابه المناظر، ليضع بذلك الحجر الأساس للفيزياء التجريبية الحديثة التي بنيت عليها كشوفات عصر النهضة.",
+      "يمثل محمد بن موسى الخوارزمي أحد أعظم العقول الرياضية في تاريخ البشرية، إذ استطاع تأسيس علم الجبر كفرع مستقل وقدم مفهوم الخوارزميات ونظام الأرقام الهندية العربية والصفر للعالم، وهي الابتكارات التي شكلت الأساس المنطقي والرياضي الذي تعمل به جميع الحواسيب والأنظمة الرقمية في عصرنا الحالي.",
+      "شكلت الأندلس عبر قرون من الزمن نموذجًا فريدًا للتعايش الفكري والتفاعل الثقافي بين شعوب البحر الأبيض المتوسط، حيث ازدهرت مدن كقرطبة وطليطلة وإشبيلية بالمكتبات والحدائق والجامعات، وكانت المعبر الرئيسي الذي انتقلت من خلاله العلوم والفلسفة العربية المترجمة إلى أوروبا لتوقظها من عصور الظلام.",
+      "في فضاء رقمي يعج بالمعلومات المضللة والمحتوى الموجه، يصبح التفكير النقدي الدرع الحصين لحماية العقل من الانقياد الأعمى والشائعات، ويتطلب ذلك مهارة التثبت من المصادر وفحص الأدلة المنطقية وتفكيك المغالطات، ليكون الإنسان قادرًا على تكوين قناعاته المستقلة بحرية ووعي كامل.",
+      "استطاع العالم الموسوعي أبو الريحان البيروني في القرن الحادي عشر ابتكار طريقة رياضية عبقرية لحساب محيط الأرض بدقة مذهلة بالاعتماد على حساب المثلثات وقياس زاوية انخفاض الأفق من قمة جبلية، في إنجاز علمي باهر أكد ريادة العلماء المسلمين في الفلك والجيوديسيا قبل مئات السنين من عصر الأقمار الصناعية.",
+      "العمارة ليست مجرد بناء جدران وأسقف، بل هي تجسيد مادي لثقافة المجتمع وهويته وتطلعاته الروحية، وتصميم المساحات الحضرية ينعكس مباشرة على سلوك الناس وعلاقاتهم الإنسانية، والعمارة الأصيلة هي التي توفق بين جماليات التراث واحتياجات العصر الحديث في تناغم بيئي ومستدام.",
+      "تؤكد الدراسات اللغوية والمعرفية أن لغة الإنسان لا تقتصر على نقل أفكاره بل تسهم بصورة جوهرية في تشكيل نمط تفكيره وتصوره للعالم من حوله، وغنى المفردات ودقة التراكيب في اللغة يمنحان العقل قدرة أوسع على التجريد والتعبير عن المشاعر المعقدة والأفكار الفلسفية العميقة.",
+      "يتجه العالم المعاصر نحو تصميم مدن ذكية تعتمد على إنترنت الأشياء والبيانات الضخمة لإدارة الموارد والطاقة وتخفيف الازدحام المروري، والغاية الحقيقية من هذه المدن ليست المظاهر التكنولوجية فحسب، بل تحسين جودة حياة السكان وخفض الانبعاثات الكربونية لضمان مستقبل صحي ومستدام للأجيال القادمة.",
+      "القيادة الحقيقية لا تستمد سلطتها من المنصب أو الصلاحيات، بل من النزاهة الأخلاقية والقدرة على إلهام الآخرين وتوحيد جهودهم نحو أهداف نبيلة، والقائد المتميز هو الذي يقدم مصلحة الفريق على مكاسبه الشخصية ويسعى لتمكين زملائه وإطلاق طاقاتهم الكامنة في بيئة تسودها الثقة والتقدير.",
+      "قدم الأطباء المسلمون كأبي بكر الرازي وابن سينا إسهامات رائدة في الملاحظة السريرية والتشخيص الدقيق وفصل الطب عن الشعوذة، وكان كتاب القانون في الطب لابن سينا المرجع الأساسي في الجامعات الأوروبية لعدة قرون، مما يبرز عمق التجربة الطبية العربية وأسبقيتها في التأسيس العلمي للعلاج.",
+      "تعد المرونة الذهنية من أهم المهارات النفسية في عالم اليوم سريع التحول، وهي القدرة على التكيف مع المتغيرات المفاجئة وإعادة بناء الإستراتيجيات عند مواجهة الفشل دون استسلام، فالمرونة ليست نقيضًا للصلابة بل هي القدرة على الانحناء أمام العاصفة ثم النهوض بقوة أكبر وتجربة أثرى.",
+      "يشهد العالم انتقالاً جذريًا من الاقتصاد القائم على استخراج الموارد المادية إلى اقتصاد المعرفة المبني على البرمجيات والبحث العلمي وحقوق الملكية الفكرية، وفي هذا الاقتصاد تصبح الأفكار الخلاقة والمواهب البشرية المدربة هي رأس المال الحقيقي الذي يحدد وزن الدول وقدرتها على المنافسة الدولية.",
+      "يعاني الإنسان المعاصر من وباء التشتت المستمر الناتج عن فيض التنبيهات والأجهزة الذكية، وتؤكد الأبحاث النفسية أن القدرة على التركيز العميق دون انقطاع لساعات محددة هي الميزة التنافسية الكبرى التي تميز المبدعين والعلماء عن غيرهم، فالتركيز هو المجهر الذي يكثف طاقات العقل لينتج إبداعًا استثنائيًا."
+    ],
+    code: [
+      "البرمجة ليست مجرد كتابة سطور من الأكواد بل هي منهجية دقيقة في التفكير الخوارزمي لتحليل المسائل وتفكيكها إلى عناصر بسيطة يمكن معالجتها بكفاءة، وكتابة الكود النظيف والموثق تعكس نضج المطور واهتمامه ببناء برمجيات مرنة وقابلة للتطوير والصيانة عبر الزمن.",
+      "تعتمد البنية التحتية للسحابة الحديثة على تصميم أنظمة موزعة قادرة على التوسع ومعالجة كميات هائلة من البيانات بتزامن فائق واستقرار مستمر، ويتطلب ذلك فهمًا عميقًا لنظريات الاتساق وتوزيع الأحمال وتصميم هياكل بيانات تضمن استجابة فورية وأعلى درجات الأمان.",
+      "إن فهم قواعد البيانات والخوارزميات وهياكل البيانات هو الأساس الصلب لأي مهندس برمجيات يسعى لبناء أنظمة رقمية سحابية متقدمة، والجمع بين التفكير الرياضي الصارم والشغف الهندسي هو الطريق لصناعة منتجات برمجية موثوقة تلبي تطلعات الملايين.",
+      "الذكاء الاصطناعي وتعلم الآلة يفتحان آفاقًا غير مسبوقة لأتمتة العمليات وتحليل البيانات الذكية، والجمع بين الشغف البرمجي والابتكار الريادي هو البوابة الحقيقية لصناعة المستقبل الرقمي وقيادة الثورة التكنولوجية القادمة.",
+      "تعد مبادئ التصميم البرمجي النظيف مثل مبادئ سوليد حجر الزاوية لبناء تطبيقات قابلة للتوسع والصيانة، حيث يعتمد المطور المحترف على عزل المسؤوليات وتجنب الاعتماديات المعقدة، مما يتيح للفريق إضافة ميزات جديدة واختبارها بسهولة دون المساس باستقرار النظام ككل.",
+      "يشكل التشفير القوي العمود الفقري للثقة الرقمية على شبكة الإنترنت، وتعتمد البروتوكولات الأمنية على خوارزميات رياضية معقدة مثل التشفير غير المتناظر لحماية بيانات المستخدمين وكلمات المرور من الاختراق، والاهتمام بالأمان السيبراني يبدأ من أول سطر كود يكتبه المبرمج.",
+      "أحدث نظام إدارة النسخ جت ثورة في العمل الجماعي لتطوير البرمجيات، حيث يمكن مئات المطورين حول العالم من المساهمة في مشروع واحد بتناغم وسلاسة عبر الفروع والدمج، والمصادر المفتوحة تمثل أعظم تعاون معرفي في التاريخ حيث تشارك العقول خبراتها مجانًا لنفع الجميع.",
+      "تعتمد بيئات التشغيل الحديثة على معمارية مدفوعة بالأحداث وبرمجة غير متزامنة لمعالجة آلاف الطلبات في الثانية دون إيقاف الخيط الرئيسي للتنفيذ، ويتطلب ذلك فهمًا عميقًا لحلقة الأحداث والوعود للتعامل مع عمليات الإدخال والإخراج والشبكات بكفاءة قصوى.",
+      "لا يمكن كتابة برنامج سريع وفعال دون اختيار هيكل البيانات المناسب، فالمفاضلة بين المصفوفات والقوائم المترابطة والأشجار وجداول التجزئة تعتمد على تعقيد الوقت والمساحة لكل عملية، والفهم العميق لنظرية التعقيد الحسابي هو ما يميز مهندس الحاسوب الحقيقي.",
+      "البرمجيات العظيمة لا تقاس فقط بقوة خوارزمياتها الخلفية، بل بسلاسة وبساطة واجهات المستخدم التي يتعامل معها الإنسان، وتصميم تجربة مستخدم بديهية وسريعة الاستجابة يراعي سهولة الوصول والجمال البصري هو الجسر الذي يجعل التكنولوجيا في متناول الجميع.",
+      "أحدثت الحوسبة السحابية تحولاً جذريًا في نشر التطبيقات وإدارتها، حيث تتيح للشركات والناشئين استئجار موارد معالجة ومساحات تخزين مرنة تتوسع تلقائيًا مع نمو عدد المستخدمين، متجاوزة قيود شراء الخوادم المادية المكلفة وتحديات صيانتها المستمرة.",
+      "كتابة الاختبارات الآلية كوحدات الاختبار واختبارات التكامل ليست رفاهية تستهلك وقت المطور، بل هي استثمار ذكي يحمي المشروع من العيوب البرمجية ويمنح الفريق الثقة الكاملة لإجراء التعديلات والتحديثات المستمرة دون الخوف من كسر الوظائف الأساسية للتطبيق.",
+      "تفضل كبرى الشركات التقنية الانتقال من النظم المتراصة إلى معمارية الخدمات المصغرة، حيث يقسم التطبيق الكبير إلى خدمات صغيرة ومستقلة تتواصل فيما بينها عبر واجهات برمجة التطبيقات، مما يسهل نشر كل خدمة وتحديثها بصورة منفصلة دون تعطيل باقي المنظومة.",
+      "تعد المترجمات من أروع الإنجازات في علوم الحاسوب، إذ تقوم بتحليل شفرات اللغات عالية المستوى نحويًا ودلاليًا ثم تحويلها إلى تعليمات برمجية دقيقة يفهمها المعالج وينفذها بسرعة هائلة، وفهم آلية عمل المترجم يساعد المبرمج على كتابة كود محسن ومراعٍ لقدرات العتاد.",
+      "حلت تقنية الحاويات واحدة من أكبر معضلات تطوير البرمجيات، وهي مشكلة عمل التطبيق على جهاز المطور وتوقفه على الخادم، فمن خلال حزم التطبيق مع جميع مكتباته وبيئة تشغيله في حاوية معزولة، أصبح النشر سلسًا ومتطابقًا عبر أي بيئة سحابية أو محلية.",
+      "مع التزايد الهائل في حجم البيانات المولدة من الأجهزة الذكية ومحركات البحث، ظهرت أدوات معالجة البيانات الموزعة التي تستطيع فحص تيرابايتات من المعلومات في ثوانٍ معدودة، واستخراج أنماط سلوك المستخدمين والتنبؤ بالاتجاهات المستقبلية في الوقت الفعلي.",
+      "يقوم الويب الحديث على معايير مفتوحة تضمن عمل المواقع والتطبيقات عبر مختلف مقاسات الشاشات وأنظمة التشغيل، ويعد التوافق مع الهواتف الذكية وسرعة تحميل الصفحات عاملين حاسمين في نجاح أي منصة رقمية وتصدرها لمحركات البحث.",
+      "تتيح خطوط أنابيب التكامل والنشر المستمر أتمتة جميع مراحل تطوير البرمجيات، بدءًا من فحص جودة الكود وتشغيل الاختبارات، وحتى رفعه إلى بيئة الإنتاج تلقائيًا بمجرد دمج التعديلات، مما يقلل الأخطاء البشرية ويسرع وصول الميزات للمستخدمين."
+    ],
+    quotes: [
+      "العلم في الصغر كالنقش على الحجر، ومن زرع حصد، ومن جد وجد، والوقت كالسيف إن لم تقطعه قطعك.",
+      "خير الكلام ما قل ودل، وخير العمل ما نفع واستمر، وخير الأصحاب من دلك على الخير وأعانك عليه.",
+      "العقل السليم في الجسم السليم، والنفس المطمئنة هي التي تجد راحتها في العمل الصالح والتفاؤل المستمر ومحبة الناس.",
+      "لا تؤجل عمل اليوم إلى الغد، فالفرص تمر مر السحاب، وحسن استثمار الوقت هو الفارق الحقيقي بين الناجح وغيره.",
+      "كن جميلاً ترى الوجود جميلاً، وتفاءل بما تهوى يكن، واصنع من كل عثرة خطوة جديدة ومحفزة نحو القمة.",
+      "جمال الشيء في بذل الجهد الصادق لأجله، وحلاوة الوصول إلى الهدف لا يشعر بها إلا من صبر على وعورة الطريق.",
+      "الحكمة ضالة المؤمن أينما وجدها فهو أحق الناس بها، فكن شغوفًا بالمعرفة وباحثًا عن الحق والعدل في كل أمر.",
+      "من طلب العلا سهر الليالي، ومن رام المجد صبر على مشاق الطريق وبذل الغالي والنفيس في طلب العلم وبناء الذات.",
+      "عامل الناس بأخلاقك لا بأخلاقهم، وتغافل عن الزلات تسلم لك مودتهم، فالصفح الجميل من شيم النفوس العظيمة.",
+      "لا تحسبن المجد تمرًا أنت آكله، لن تبلغ المجد حتى تلعق الصبرا، فكل إنجاز عظيم وراءه صبر دؤوب وعمل لا ينقطع.",
+      "على قدر أهل العزم تأتي العزائم، وتأتي على قدر الكرام المكارم، وتعظم في عين الصغير صغارها، وتصغر في عين العظيم العظائم.",
+      "رأيت العلم صاحبه كريم، ولو ولدته آباء لئام، فليس يزال يرفعه إلى أن يعظم أمره القوم الكرام.",
+      "ما حك جلدك مثل ظفرك، فتول أنت جميع أمرك، وإذا قصدت لحاجة فاقصد لمعترف بفضلك.",
+      "إذا غامرت في شرف مروم، فلا تقنع بما دون النجوم، فطعم الموت في أمر حقير كطعم الموت في أمر عظيم.",
+      "تجري الرياح بما لا تشتهي السفن، ولكن همة القبطان الصابر تحول مسارها."
+    ]
+  }
+};
+
+// ── HIGH-PERFORMANCE KEYBOARD & KEY CACHE (O(1) LOOKUPS) ──────
+var _cachedKbKeys = [];
+var _keyMap = {};
+var _lastTargetKeyEl = null;
+var _lastShiftKeyEls = [];
+var _lastShiftCasingState = null;
+
+function _reindexKeyboardKeys() {
+  _cachedKbKeys = Array.prototype.slice.call(document.querySelectorAll(".kb-key"));
+  _keyMap = {};
+  _lastTargetKeyEl = null;
+  _lastShiftKeyEls.length = 0;
+  _lastShiftCasingState = null;
+
+  for (var i = 0; i < _cachedKbKeys.length; i++) {
+    var el = _cachedKbKeys[i];
+    var k = el.dataset.k;
+    var ar = el.dataset.ar;
+    if (!k) continue;
+
+    if (k === "Space") {
+      _keyMap[" "] = el;
+      _keyMap["space"] = el;
+    } else if (k === "Backspace") {
+      _keyMap["backspace"] = el;
+    } else if (k.length === 1) {
+      _keyMap[k.toLowerCase()] = el;
+      _keyMap[k.toUpperCase()] = el;
+    } else if (k.length === 2) {
+      _keyMap[k[0]] = el;
+      _keyMap[k[1]] = el;
     }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initAllVectorIcons);
-    } else {
-      initAllVectorIcons();
+
+    if (ar) {
+      _keyMap[ar] = el;
+      var normAr = normalizeAr(ar);
+      if (normAr) _keyMap[normAr] = el;
     }
 
-    // ==============================================================
-    // 1. DATA AND STATE
-    // ==============================================================
-    var POOLS = {
-      en: {
-        common: "the be to of and a in that have it for not on with he as you do at this but his by from they we say her she or an will my one all would there their what so up out if about who get which go me when make can like time no just him know take people into year your good some could them see other than then now look only come its over think also back after use two how our work first well way even new want because any these give day most us great need large often hand high place hold world found still learn cover food state keep eye never last let thought city tree far sea draw left late run while press close night real life few open seem next white begin walk paper always music those both mark book letter until mile river car feet care second enough girl young ready above ever red list feel talk bird soon body dog family".split(" "),
-        medium: "important different following however become number through development between something national against before system company around believe public already everything another government power change together interest provide children across question within business without office process whether include continue economic social person member example research program problem support general control recent possible political market science level service create student consider complete usually remain certainly information relationship experience performance environment technology community available condition education throughout understand population management significant opportunity".split(" "),
-        code: "function const return import export interface async await typeof string number boolean undefined null array object class extends implements private public readonly static while switch case break continue try catch finally throw delete void let var true false this super module require console log error map filter reduce Promise resolve reject fetch params router component useState useEffect callback timeout interval length index value result input output default type enum".split(" "),
-        quotes: ["The quick brown fox jumps over the lazy dog.", "To be or not to be, that is the question.", "All that glitters is not gold.", "The only way to do great work is to love what you do.", "In the middle of every difficulty lies opportunity.", "Life is what happens when you are busy making other plans.", "The journey of a thousand miles begins with one step.", "Be the change that you wish to see in the world.", "You only live once, but if you do it right, once is enough."]
-      },
-      ar: {
-        common: [
-          "القراءة هي النافذة الأوسع التي يطل منها الإنسان على فضاءات الفكر وثمرات التجارب البشرية عبر العصور، فهي لا تقتصر على تلقي الكلمات بل تسهم في صقل الروح وتوسيع مدارك العقل وإثراء الخيال، وتمنح القارئ حكمة عميقة تمكنه من فهم تعقيدات الحياة واتخاذ القرارات السديدة بثقة وبصيرة.",
-          "النجاح الحقيقي ليس هبة مجانية تأتي بمحض الصدفة، بل هو ثمرة مسار طويل من الجهد المنظم والعزيمة الصادقة والإصرار الذي لا ينكسر أمام العثرات، فالأهداف العظيمة تستلزم خطوات واثقة وصبرًا جميلاً على مشاق الطريق، ومن أراد أن يترك أثرًا راسخًا فعليه أن يؤمن بقدراته ويبدأ العمل دون تردد.",
-          "الوقت هو رأس المال الحقيقي الذي يملكه الإنسان في هذه الحياة، وكل لحظة تمضي هي جزء من العمر لن يتكرر، واستثمار هذا الوقت بحكمة في طلب العلم وتطوير الذات ونفع الناس هو المعيار الفارق بين من يعيش على هامش الوجود ومن يصنع لنفسه ولأمته مجدًا يخلده التاريخ.",
-          "الأخلاق الفاضلة هي السياج الحامي للكرامة الإنسانية والركيزة التي تبنى عليها الحضارات الراقية، فالتعامل بصدق ونقاء واحترام متبادل ينشر السكينة في النفوس ويبني جسور الثقة بين أفراد المجتمع، وما من شيء يرفع مكانة المرء في أعين الناس مثل تواضعه وحسن خلقه.",
-          "المعرفة نور متجدد لا ينطفئ، والحرص على اكتساب المهارات الحديثة في كل يوم يفتح أمام الفرد آفاقًا غير محدودة للتألق والارتقاء، فالإنسان يظل عالمًا ما دام يطلب العلم، فإذا ظن أنه قد علم فقد بدأ طريق الجهل، والتعلم الدائم هو مفتاح البقاء والريادة في عالم سريع التغير.",
-          "إتقان العمل أمانة حضارية وسر من أسرار التميز الإنساني، فعندما يضع الإنسان شغفه وإخلاصه في كل مهمة ينجزها تتحول المهام الروتينية إلى إبداع حقيقي يلهم كل من حوله، والإخلاص في أداء الواجب يمنح صاحبه اعتزازًا بالنفس وشعورًا صادقًا بالرضا والإنجاز.",
-          "التعاون البناء هو القوة الدافعة خلف كل إنجاز عظيم في التاريخ الإنساني، فالطاقات الفردية مهما بلغت قوتها تظل محدودة ما لم تتشابك مع غيرها في منظومة متكاملة، وعندما تتضافر العقول وتتحد السواعد بروح الفريق الواحد تصبح التحديات الكبرى فرصًا حقيقية للنهوض والابتكار.",
-          "الصحة نعمة غالية لا يدرك قيمتها الحقيقية إلا من افتقدها، والاهتمام بالسلامة البدنية والنفسية يمنح الفرد الحيوية اللازمة لتحقيق طموحاته ومواصلة العطاء، والعيش بتوازن بين متطلبات العمل وراحة الجسد وصفاء الروح يعزز من مناعة الإنسان ويجعله أكثر قدرة على مواجهة ضغوط الحياة بتفاؤل.",
-          "التأمل في بديع صنع الطبيعة يمنح النفس طمأنينة وسكينة تعيد ترتيب الأفكار المشوشة، فنظام الكون البديع وتتابع الليل والنهار وتعاقب الفصول كلها شواهد تبعث في القلب يقينًا راسخًا بأن الحياة تحمل دائمًا في طياتها بداية جديدة وأملاً يشرق مع كل فجر.",
-          "إن أعظم استثمار تصنعه الأمم هو الاستثمار في عقول أبنائها وبناء شخصياتهم على أسس متينة من العلم والقيم، فالتربية الصالحة تغرس في نفوس النشء حب الوطن والشجاعة في قول الحق والشغف بالبحث والاكتشاف، ليكونوا قادة واعين قادرين على حمل الراية وصناعة الغد الأفضل.",
-          "تبدأ الثقة بالنفس عندما يتصالح الإنسان مع ذاته ويعترف بنقاط قوته وضعفه، متقبلاً أخطاءه بوصفها محطات ضرورية للتعلم والنمو، والخوف من الفشل هو العائق الأكبر الذي يقف بين الإنسان وأحلامه، فإذا كسر حاجز التردد وانطلق بعزم وجد أن الصعاب تتضاءل أمام الإرادة الصلبة.",
-          "الكلمة الطيبة بذرة خير تثمر محبة ووئامًا، وهي صدقة تهدي النفوس الحائرة وتضمد الجراح وتبعث الأمل في القلوب اليائسة، وللكلمة وقع عظيم قد يبني أمة أو يهدمها، فاختر من القول أحسنه ومن الحديث أصدقه لتكون دائمًا بلسمًا وناشرًا للسلام والمودة.",
-          "الخط العربي ليس مجرد وسيلة لتدوين الكلمات، بل هو فن هندسي وروحاني يتجاوز حدود الحروف ليعبر عن ذوق رفيع وهوية عريقة، وتناسق المدات وانحناءات الحروف كالرقعة والنسخ والديواني يبعث في العين راحة وتأملًا في عبقرية اللغة العربية وجمال نسيجها اللغوي.",
-          "تمتد المحيطات عبر كوكبنا كعوالم شاسعة يلفها الغموض، تحتضن تنوعًا بيولوجيًا مدهشًا وأسرارًا علمية لا تزال تنتظر من يكشفها، واستكشاف أعماق البحار يعلم الإنسان التواضع أمام عظمة الكون، ويدعوه إلى صون البيئة المائية التي تمثل شريان الحياة واستقرار المناخ العالمي.",
-          "التواضع هو جوهر العظمة الإنسانية، فالأشجار المثمرة تنحني بتواضع كلما زاد حملها، كذلك العالم الحقيقي يزداد تواضعًا كلما تعمق في بحور المعرفة، بينما التكبر علامة على قصر النظر وضعف الحيلة، وما ساد أحد في مجتمعه إلا حين نزل إلى قلوب الناس برقة ولين جانب.",
-          "الصبر شجرة جذورها مرة ولكن ثمارها شهية، وهو زاد المسافر في دروب الحياة الوعرة، فما من فكرة عظيمة رأت النور إلا بعد ليالٍ من المحاولة والانتظار الجميل، والذين يستعجلون النتائج غالبًا ما يغادرون الميدان مبكرًا، أما الصابرون فهم الذين يقطفون زهور النجاح في أوانها.",
-          "إن تنوع الثقافات والحضارات هو مصدر ثراء للوجود الإنساني وليس سببًا للنزاع والفرقة، والانفتاح الواعي على تجارب الشعوب الأخرى يثري الفكر ويعزز قيم التسامح والتعايش السلمي، فالحكمة ضالة كل مفكر، والحوار الصادق هو الجسر الوحيد لبناء عالم يسوده الأمان والاحترام المتبادل.",
-          "حين ينظر الإنسان إلى السماء المرصعة بالنجوم في ليلة صافية، يدرك مدى اتساع هذا الكون الفسيح وصغر موقعه الجغرافي فيه، وهذا التأمل الكوني يوقظ في النفس دهشة علمية عميقة تدفع العلماء للبحث عن نشأة المجرات ودراسة حركة الكواكب، موقنين بأن العلم رحلة لا تنتهي.",
-          "إن الاستماع الجيد فن نادر لا يتقنه إلا أصحاب النفوس الهادئة والعقول الكبيرة، فالإصغاء بوعي واهتمام يفتح أبواب الفهم ويزيل سوء التقدير بين الناس، ومن أحسن الاستماع تعلم الكثير وتجنب الوقوع في الزلل، فالحديث قد يمنحك متعة التعبير لكن الاستماع يمنحك الحكمة والمعرفة.",
-          "لا يولد الابتكار في مساحات الراحة والجمود، بل ينبثق من التساؤل الجريء وتحدي الأنماط المعتادة والبحث عن حلول غير تقليدية للمشكلات المعقدة، وأصحاب الرؤى المبتكرة هم الذين ينظرون إلى ما يراه الجميع ولكنهم يفكرون فيما لم يخطر على بال أحد، ليصنعوا فارقًا حقيقيًا في مسيرة العالم.",
-          "المكتبات هي مستودعات الذاكرة الإنسانية، فيها تلتقي حوارات القرون وتتسامى أفكار الفلاسفة والعلماء عبر صفحات المخطوطات والكتب النفيسة، والجلوس بين رفوف الكتب يمنح النفس سكينة لا نظير لها، ويشعر القارئ بأنه محاط بأعظم العقول التي أضاءت تاريخ الفكر البشري.",
-          "الأرض هي بيتنا المشترك وأمانة بين أيدينا للأجيال القادمة، والتوازن البيئي الهش يتطلب وعيًا جماعيًا للحد من التلوث وحماية الغابات والمياه العذبة، والمحافظة على الطبيعة ليست مجرد واجب أخلاقي، بل هي مسألة بقاء ترتبط مباشرة بجودة حياتنا واستدامة مواردنا الحيوية.",
-          "المستحيل كلمة لا توجد إلا في قواميس العاجزين الذين يتراجعون عند أول عقبة، فالإرادة الفولاذية قادرة على شق الطرق في الصخور وتجاوز أصعب المحن، وكل تقدم أحرزته البشرية كان يومًا ما يبدو مستحيلاً في أعين المتشائمين، حتى انبرى له أصحاب العزائم وحولوه إلى واقع مشهود.",
-          "الاختلاف في وجهات النظر ظاهرة طبيعية وصحية تثري النقاشات وتوضح جوانب الحقيقة المتعددة، وأدب الحوار يقوم على احترام شخص المحاور ومقارعة الحجة بالحجة دون تجريح أو تسفيه، فرأي الإنسان قد يكون صوابًا يحتمل الخطأ، ورأي غيره قد يكون خطأ يحتمل الصواب.",
-          "التغافل عن صغائر الأمور وعثرات الآخرين هو نصف الذكاء وتمام الراحة النفسية، فالذي يدقق في كل تفصيلة ويحاسب على كل شاردة يرهق قلبه ويخسر علاقاته، أما النفوس الكريمة فتتسامح وتغض الطرف لتنعم بحياة ملؤها السلام الداخلي والمودة الصافية مع من حولها.",
-          "الاعتراف بالخطأ فضيلة لا يملكها إلا الشجعان، والاعتذار الصادق لا ينقص من قدر صاحبه بل يرفع شأنه ويعيد بناء ما تهدم من ثقة ومودة، فالكمال ليس من طبع البشر، ولكن النضج الحقيقي يتجلى في القدرة على تحمل المسؤولية وتصحيح المسار بحكمة وشجاعة.",
-          "ممارسة الهوايات المحببة ليست إهدارًا للوقت، بل هي مساحة تنفس واستعادة للطاقة الحيوية بعد عناء العمل وضغوط الالتزامات اليومية، وسواء كانت هوايتك الرسم أو الكتابة أو الرياضة أو البستنة، فإنها تغذي روحك وتمنحك توازنًا ضروريًا للحفاظ على شغفك بالحياة.",
-          "الصحراء برمالها الذهبية وسكونها المهيب ليست أرضًا مواتًا، بل هي مدرسة في الصبر والتحمل والعيش ببساطة وكبرياء، وسماء الصحراء الصافية تمنح المتأمل شعورًا بالانفتاح على اللانهائي، وتذكرنا بأن الجمال قد يكمن في البساطة والتجرد من زحام المدن الصاخبة.",
-          "أن تكون سببًا في ابتسامة إنسان أو تخفيف عبء عن كاهل محتاج هو أعظم ما يمكن أن تقدمه للحياة، فالطاقة الإيجابية كالعدوى اللطيفة تنتقل من شخص لآخر، ومجرد كلمة تشجيع دافئة قد تنقذ روحًا من اليأس وتمنحها الأمل لمواصلة الكفاح بقوة وتفاؤل.",
-          "يقوم تماسك المجتمعات على تمازج حكمة الشيوخ وتجاربهم العميقة مع حماسة الشباب وطاقاتهم الوثابة، فالشباب هم محرك التغيير والتجديد، والشيوخ هم البوصلة التي تضبط الاتجاه وترسخ القيم، وحين تتكامل الأجيال معًا تنهض الأمة بخطى راسخة وتتجنب عثرات الطريق.",
-          "الصداقة الحقيقية هي الواحة التي يستريح فيها القلب من وعثاء الأيام، والصديق الصدوق هو مرآتك التي تبصر فيها عيوبك بصدق، وملاذك الذي تجد عنده الأمان في لحظات الضعف، والصداقة المبنية على النقاء والاحترام تدوم وتزداد رسوخًا بمرور السنين كالمعادن النفيسة.",
-          "ممارسة الرياضة بانتظام لا تصقل الجسد وحده، بل تبني الشخصية وتغرس قيم الانضباط الذاتي والروح الرياضية والقدرة على تقبل الخسارة بروح التعلم، فالروح التنافسية النبيلة تجعل الإنسان يسعى دائمًا لتطوير أدائه وتجاوز أرقامه السابقة دون ضغينة أو حسد للآخرين.",
-          "التخطيط الواعي هو الخريطة التي ترشدك إلى وجهتك وسط عواصف الحياة وتحدياتها، والبدء بيومك مع وجود أولويات واضحة يوفر عليك الكثير من الوقت والجهد الضائعين في التشتت، ومن خطط لنجاحه بحكمة وضع قدميه على أولى درجات سلم المجد والريادة.",
-          "لا تكتمل سعادة الفرد بنجاحه الشخصي فقط، بل تتعاظم حين يسهم في رفعة مجتمعه وتقديم يد العون للمحتاجين، فالمسؤولية الاجتماعية واجب إنساني ووطني يعزز التكافل بين الفئات المختلفة ويصنع مجتمعًا قويًا متماسكًا يشعر فيه كل فرد بقيمته وأهمية دوره.",
-          "الفضول العلمي هو الشرارة الأولى لكل كشف واختراع عرفته البشرية، فالرغبة المتقدة في معرفة أسرار الطبيعة وفهم قوانين المادة والطاقة هي التي دفعت العلماء إلى سبر أغوار الذرة وغزو الفضاء الخارجي، والعقل الفضولي لا يشيخ أبدًا بل يظل شابًا ومتألقًا بالمعرفة.",
-          "التفاؤل ليس مجرد شعور عابر بالرضا، بل هو موقف عقلي وقوة دافعة تمكن الإنسان من رؤية الفرص السانحة خلف كل أزمة والضوء المنبعث في آخر النفق المظلم، والمتفائل لا ينتظر أن تهدأ العاصفة، بل يتعلم كيف يبحر بسفينته بثبات وشجاعة نحو بر الأمان."
-        ],
-        medium: [
-          "شهد العصر الذهبي للحضارة العربية والإسلامية طفرة معرفية غير مسبوقة تجسدت في تأسيس بيت الحكمة في بغداد، حيث تلاقت الثقافات الإنسانية وترجمت أمهات الكتب في الفلسفة والطب والهندسة والفلك، مما مهد السبيل لظهور علماء أفذاذ كابن الهيثم والخوارزمي وابن سينا، وأسهم في إشعال شعلة النهضة العلمية في العالم بأسره.",
-          "يمثل الذكاء الاصطناعي اليوم تحولاً جذريًا في مسار الحضارة المعاصرة، إذ يعيد تعريف طبيعة العمل والإنتاج وطرائق معالجة المعلومات، ومع تسارع وتيرة هذا التطور تبرز أهمية ترسيخ البعد الأخلاقي والضوابط الإنسانية لضمان أن تظل هذه التكنولوجيا أداة لتمكين البشرية وتحقيق العدالة وليس لتعميق الفجوات أو طمس الهوية.",
-          "تعتمد مهارة الطباعة اللمسية السريعة على تطوير مسارات عصبية دقيقة في الدماغ تنظم حركة الأصابع وفق نمط حركي تلقائي يعرف بالذاكرة العضلية، ومع استمرار التدريب الواعي يتحرر الذهن من عبء البحث البصري عن الحروف ليركز كليًا على صياغة الأفكار وتدفق الإبداع، محولاً لوحة المفاتيح إلى امتداد طبيعي للعقل.",
-          "أثبتت التجارب التنموية الحديثة أن الموارد الطبيعية وحدها لا تصنع تقدمًا مستدامًا، بل إن الثروة الحقيقية للأمم تكمن في كفاءة مواطنيها ومستوى تعليمهم وقدرتهم على الابتكار وتوليد الحلول الخلاقة، فالاستثمار في التعليم النوعي والبحث العلمي هو الضمانة الأكيدة لبناء اقتصاد معرفي رائد ومستقبل مزدهر.",
-          "في عصر تتدفق فيه الإشعارات الرقمية بلا انقطاع وتزدحم الشاشات بالمعلومات، بات الحفاظ على الصفاء الذهني ضرورة ملحة لاستعادة التوازن النفسي، وتخصيص ساعات يومية للعزلة الإيجابية والقراءة الهادئة يمنح العقل فرصة لترتيب أولوياته والابتعاد عن التشتت، مما يجدد طاقة الإبداع والتركيز العميق.",
-          "إن مواجهة التحديات بروح إيجابية هي السمة المشتركة بين رواد الفكر والإبداع، فالصعاب التي نمر بها ليست عقبات تمنعنا من التقدم بل هي دروس تصقل خبراتنا وتبني شخصيتنا القوية القادرة على قيادة المبادرات الكبرى وصناعة التغيير الملهم في المجتمع.",
-          "يعد عبد الرحمن بن خلدون المؤسس الحقيقي لعلم الاجتماع وفلسفة التاريخ من خلال مقدمته الشهيرة التي وضع فيها قوانين العمران البشري وتطور الدول وسقوطها، مبرهنًا على أن التاريخ ليس سردًا للحوادث بل هو فهم عميق للأسباب والظروف الاقتصادية والاجتماعية التي تحكم مسيرة البشر.",
-          "أحدث الحسن بن الهيثم ثورة علمية في علم البصريات حين رفض الفرضيات النظرية المجردة وابتكر المنهج العلمي القائم على التجربة الملموسة والملاحظة الدقيقة والاستقراء الرياضي في كتابه المناظر، ليضع بذلك الحجر الأساس للفيزياء التجريبية الحديثة التي بنيت عليها كشوفات عصر النهضة.",
-          "يمثل محمد بن موسى الخوارزمي أحد أعظم العقول الرياضية في تاريخ البشرية، إذ استطاع تأسيس علم الجبر كفرع مستقل وقدم مفهوم الخوارزميات ونظام الأرقام الهندية العربية والصفر للعالم، وهي الابتكارات التي شكلت الأساس المنطقي والرياضي الذي تعمل به جميع الحواسيب والأنظمة الرقمية في عصرنا الحالي.",
-          "شكلت الأندلس عبر قرون من الزمن نموذجًا فريدًا للتعايش الفكري والتفاعل الثقافي بين شعوب البحر الأبيض المتوسط، حيث ازدهرت مدن كقرطبة وطليطلة وإشبيلية بالمكتبات والحدائق والجامعات، وكانت المعبر الرئيسي الذي انتقلت من خلاله العلوم والفلسفة العربية المترجمة إلى أوروبا لتوقظها من عصور الظلام.",
-          "في فضاء رقمي يعج بالمعلومات المضللة والمحتوى الموجه، يصبح التفكير النقدي الدرع الحصين لحماية العقل من الانقياد الأعمى والشائعات، ويتطلب ذلك مهارة التثبت من المصادر وفحص الأدلة المنطقية وتفكيك المغالطات، ليكون الإنسان قادرًا على تكوين قناعاته المستقلة بحرية ووعي كامل.",
-          "استطاع العالم الموسوعي أبو الريحان البيروني في القرن الحادي عشر ابتكار طريقة رياضية عبقرية لحساب محيط الأرض بدقة مذهلة بالاعتماد على حساب المثلثات وقياس زاوية انخفاض الأفق من قمة جبلية، في إنجاز علمي باهر أكد ريادة العلماء المسلمين في الفلك والجيوديسيا قبل مئات السنين من عصر الأقمار الصناعية.",
-          "العمارة ليست مجرد بناء جدران وأسقف، بل هي تجسيد مادي لثقافة المجتمع وهويته وتطلعاته الروحية، وتصميم المساحات الحضرية ينعكس مباشرة على سلوك الناس وعلاقاتهم الإنسانية، والعمارة الأصيلة هي التي توفق بين جماليات التراث واحتياجات العصر الحديث في تناغم بيئي ومستدام.",
-          "تؤكد الدراسات اللغوية والمعرفية أن لغة الإنسان لا تقتصر على نقل أفكاره بل تسهم بصورة جوهرية في تشكيل نمط تفكيره وتصوره للعالم من حوله، وغنى المفردات ودقة التراكيب في اللغة يمنحان العقل قدرة أوسع على التجريد والتعبير عن المشاعر المعقدة والأفكار الفلسفية العميقة.",
-          "يتجه العالم المعاصر نحو تصميم مدن ذكية تعتمد على إنترنت الأشياء والبيانات الضخمة لإدارة الموارد والطاقة وتخفيف الازدحام المروري، والغاية الحقيقية من هذه المدن ليست المظاهر التكنولوجية فحسب، بل تحسين جودة حياة السكان وخفض الانبعاثات الكربونية لضمان مستقبل صحي ومستدام للأجيال القادمة.",
-          "القيادة الحقيقية لا تستمد سلطتها من المنصب أو الصلاحيات، بل من النزاهة الأخلاقية والقدرة على إلهام الآخرين وتوحيد جهودهم نحو أهداف نبيلة، والقائد المتميز هو الذي يقدم مصلحة الفريق على مكاسبه الشخصية ويسعى لتمكين زملائه وإطلاق طاقاتهم الكامنة في بيئة تسودها الثقة والتقدير.",
-          "قدم الأطباء المسلمون كأبي بكر الرازي وابن سينا إسهامات رائدة في الملاحظة السريرية والتشخيص الدقيق وفصل الطب عن الشعوذة، وكان كتاب القانون في الطب لابن سينا المرجع الأساسي في الجامعات الأوروبية لعدة قرون، مما يبرز عمق التجربة الطبية العربية وأسبقيتها في التأسيس العلمي للعلاج.",
-          "تعد المرونة الذهنية من أهم المهارات النفسية في عالم اليوم سريع التحول، وهي القدرة على التكيف مع المتغيرات المفاجئة وإعادة بناء الإستراتيجيات عند مواجهة الفشل دون استسلام، فالمرونة ليست نقيضًا للصلابة بل هي القدرة على الانحناء أمام العاصفة ثم النهوض بقوة أكبر وتجربة أثرى.",
-          "يشهد العالم انتقالاً جذريًا من الاقتصاد القائم على استخراج الموارد المادية إلى اقتصاد المعرفة المبني على البرمجيات والبحث العلمي وحقوق الملكية الفكرية، وفي هذا الاقتصاد تصبح الأفكار الخلاقة والمواهب البشرية المدربة هي رأس المال الحقيقي الذي يحدد وزن الدول وقدرتها على المنافسة الدولية.",
-          "يعاني الإنسان المعاصر من وباء التشتت المستمر الناتج عن فيض التنبيهات والأجهزة الذكية، وتؤكد الأبحاث النفسية أن القدرة على التركيز العميق دون انقطاع لساعات محددة هي الميزة التنافسية الكبرى التي تميز المبدعين والعلماء عن غيرهم، فالتركيز هو المجهر الذي يكثف طاقات العقل لينتج إبداعًا استثنائيًا."
-        ],
-        code: [
-          "البرمجة ليست مجرد كتابة سطور من الأكواد بل هي منهجية دقيقة في التفكير الخوارزمي لتحليل المسائل وتفكيكها إلى عناصر بسيطة يمكن معالجتها بكفاءة، وكتابة الكود النظيف والموثق تعكس نضج المطور واهتمامه ببناء برمجيات مرنة وقابلة للتطوير والصيانة عبر الزمن.",
-          "تعتمد البنية التحتية للسحابة الحديثة على تصميم أنظمة موزعة قادرة على التوسع ومعالجة كميات هائلة من البيانات بتزامن فائق واستقرار مستمر، ويتطلب ذلك فهمًا عميقًا لنظريات الاتساق وتوزيع الأحمال وتصميم هياكل بيانات تضمن استجابة فورية وأعلى درجات الأمان.",
-          "إن فهم قواعد البيانات والخوارزميات وهياكل البيانات هو الأساس الصلب لأي مهندس برمجيات يسعى لبناء أنظمة رقمية سحابية متقدمة، والجمع بين التفكير الرياضي الصارم والشغف الهندسي هو الطريق لصناعة منتجات برمجية موثوقة تلبي تطلعات الملايين.",
-          "الذكاء الاصطناعي وتعلم الآلة يفتحان آفاقًا غير مسبوقة لأتمتة العمليات وتحليل البيانات الذكية، والجمع بين الشغف البرمجي والابتكار الريادي هو البوابة الحقيقية لصناعة المستقبل الرقمي وقيادة الثورة التكنولوجية القادمة.",
-          "تعد مبادئ التصميم البرمجي النظيف مثل مبادئ سوليد حجر الزاوية لبناء تطبيقات قابلة للتوسع والصيانة، حيث يعتمد المطور المحترف على عزل المسؤوليات وتجنب الاعتماديات المعقدة، مما يتيح للفريق إضافة ميزات جديدة واختبارها بسهولة دون المساس باستقرار النظام ككل.",
-          "يشكل التشفير القوي العمود الفقري للثقة الرقمية على شبكة الإنترنت، وتعتمد البروتوكولات الأمنية على خوارزميات رياضية معقدة مثل التشفير غير المتناظر لحماية بيانات المستخدمين وكلمات المرور من الاختراق، والاهتمام بالأمان السيبراني يبدأ من أول سطر كود يكتبه المبرمج.",
-          "أحدث نظام إدارة النسخ جت ثورة في العمل الجماعي لتطوير البرمجيات، حيث يمكن مئات المطورين حول العالم من المساهمة في مشروع واحد بتناغم وسلاسة عبر الفروع والدمج، والمصادر المفتوحة تمثل أعظم تعاون معرفي في التاريخ حيث تشارك العقول خبراتها مجانًا لنفع الجميع.",
-          "تعتمد بيئات التشغيل الحديثة على معمارية مدفوعة بالأحداث وبرمجة غير متزامنة لمعالجة آلاف الطلبات في الثانية دون إيقاف الخيط الرئيسي للتنفيذ، ويتطلب ذلك فهمًا عميقًا لحلقة الأحداث والوعود للتعامل مع عمليات الإدخال والإخراج والشبكات بكفاءة قصوى.",
-          "لا يمكن كتابة برنامج سريع وفعال دون اختيار هيكل البيانات المناسب، فالمفاضلة بين المصفوفات والقوائم المترابطة والأشجار وجداول التجزئة تعتمد على تعقيد الوقت والمساحة لكل عملية، والفهم العميق لنظرية التعقيد الحسابي هو ما يميز مهندس الحاسوب الحقيقي.",
-          "البرمجيات العظيمة لا تقاس فقط بقوة خوارزمياتها الخلفية، بل بسلاسة وبساطة واجهات المستخدم التي يتعامل معها الإنسان، وتصميم تجربة مستخدم بديهية وسريعة الاستجابة يراعي سهولة الوصول والجمال البصري هو الجسر الذي يجعل التكنولوجيا في متناول الجميع.",
-          "أحدثت الحوسبة السحابية تحولاً جذريًا في نشر التطبيقات وإدارتها، حيث تتيح للشركات والناشئين استئجار موارد معالجة ومساحات تخزين مرنة تتوسع تلقائيًا مع نمو عدد المستخدمين، متجاوزة قيود شراء الخوادم المادية المكلفة وتحديات صيانتها المستمرة.",
-          "كتابة الاختبارات الآلية كوحدات الاختبار واختبارات التكامل ليست رفاهية تستهلك وقت المطور، بل هي استثمار ذكي يحمي المشروع من العيوب البرمجية ويمنح الفريق الثقة الكاملة لإجراء التعديلات والتحديثات المستمرة دون الخوف من كسر الوظائف الأساسية للتطبيق.",
-          "تفضل كبرى الشركات التقنية الانتقال من النظم المتراصة إلى معمارية الخدمات المصغرة، حيث يقسم التطبيق الكبير إلى خدمات صغيرة ومستقلة تتواصل فيما بينها عبر واجهات برمجة التطبيقات، مما يسهل نشر كل خدمة وتحديثها بصورة منفصلة دون تعطيل باقي المنظومة.",
-          "تعد المترجمات من أروع الإنجازات في علوم الحاسوب، إذ تقوم بتحليل شفرات اللغات عالية المستوى نحويًا ودلاليًا ثم تحويلها إلى تعليمات برمجية دقيقة يفهمها المعالج وينفذها بسرعة هائلة، وفهم آلية عمل المترجم يساعد المبرمج على كتابة كود محسن ومراعٍ لقدرات العتاد.",
-          "حلت تقنية الحاويات واحدة من أكبر معضلات تطوير البرمجيات، وهي مشكلة عمل التطبيق على جهاز المطور وتوقفه على الخادم، فمن خلال حزم التطبيق مع جميع مكتباته وبيئة تشغيله في حاوية معزولة، أصبح النشر سلسًا ومتطابقًا عبر أي بيئة سحابية أو محلية.",
-          "مع التزايد الهائل في حجم البيانات المولدة من الأجهزة الذكية ومحركات البحث، ظهرت أدوات معالجة البيانات الموزعة التي تستطيع فحص تيرابايتات من المعلومات في ثوانٍ معدودة، واستخراج أنماط سلوك المستخدمين والتنبؤ بالاتجاهات المستقبلية في الوقت الفعلي.",
-          "يقوم الويب الحديث على معايير مفتوحة تضمن عمل المواقع والتطبيقات عبر مختلف مقاسات الشاشات وأنظمة التشغيل، ويعد التوافق مع الهواتف الذكية وسرعة تحميل الصفحات عاملين حاسمين في نجاح أي منصة رقمية وتصدرها لمحركات البحث.",
-          "تتيح خطوط أنابيب التكامل والنشر المستمر أتمتة جميع مراحل تطوير البرمجيات، بدءًا من فحص جودة الكود وتشغيل الاختبارات، وحتى رفعه إلى بيئة الإنتاج تلقائيًا بمجرد دمج التعديلات، مما يقلل الأخطاء البشرية ويسرع وصول الميزات للمستخدمين."
-        ],
-        quotes: [
-          "العلم في الصغر كالنقش على الحجر، ومن زرع حصد، ومن جد وجد، والوقت كالسيف إن لم تقطعه قطعك.",
-          "خير الكلام ما قل ودل، وخير العمل ما نفع واستمر، وخير الأصحاب من دلك على الخير وأعانك عليه.",
-          "العقل السليم في الجسم السليم، والنفس المطمئنة هي التي تجد راحتها في العمل الصالح والتفاؤل المستمر ومحبة الناس.",
-          "لا تؤجل عمل اليوم إلى الغد، فالفرص تمر مر السحاب، وحسن استثمار الوقت هو الفارق الحقيقي بين الناجح وغيره.",
-          "كن جميلاً ترى الوجود جميلاً، وتفاءل بما تهوى يكن، واصنع من كل عثرة خطوة جديدة ومحفزة نحو القمة.",
-          "جمال الشيء في بذل الجهد الصادق لأجله، وحلاوة الوصول إلى الهدف لا يشعر بها إلا من صبر على وعورة الطريق.",
-          "الحكمة ضالة المؤمن أينما وجدها فهو أحق الناس بها، فكن شغوفًا بالمعرفة وباحثًا عن الحق والعدل في كل أمر.",
-          "من طلب العلا سهر الليالي، ومن رام المجد صبر على مشاق الطريق وبذل الغالي والنفيس في طلب العلم وبناء الذات.",
-          "عامل الناس بأخلاقك لا بأخلاقهم، وتغافل عن الزلات تسلم لك مودتهم، فالصفح الجميل من شيم النفوس العظيمة.",
-          "لا تحسبن المجد تمرًا أنت آكله، لن تبلغ المجد حتى تلعق الصبرا، فكل إنجاز عظيم وراءه صبر دؤوب وعمل لا ينقطع.",
-          "على قدر أهل العزم تأتي العزائم، وتأتي على قدر الكرام المكارم، وتعظم في عين الصغير صغارها، وتصغر في عين العظيم العظائم.",
-          "رأيت العلم صاحبه كريم، ولو ولدته آباء لئام، فليس يزال يرفعه إلى أن يعظم أمره القوم الكرام.",
-          "ما حك جلدك مثل ظفرك، فتول أنت جميع أمرك، وإذا قصدت لحاجة فاقصد لمعترف بفضلك.",
-          "إذا غامرت في شرف مروم، فلا تقنع بما دون النجوم، فطعم الموت في أمر حقير كطعم الموت في أمر عظيم.",
-          "تجري الرياح بما لا تشتهي السفن، ولكن همة القبطان الصابر تحول مسارها."
-        ]
-      }
-    };
+    var qwertyMapped = QWERTY_TO_AR[k];
+    if (qwertyMapped) {
+      if (!_keyMap[qwertyMapped]) _keyMap[qwertyMapped] = el;
+      var normQw = normalizeAr(qwertyMapped);
+      if (normQw && !_keyMap[normQw]) _keyMap[normQw] = el;
+    }
+  }
+}
 
-    // ── HIGH-PERFORMANCE KEYBOARD & KEY CACHE (O(1) LOOKUPS) ──────
-    var _cachedKbKeys = [];
-    var _keyMap = {};
-    var _lastTargetKeyEl = null;
-    var _lastShiftKeyEls = [];
-    var _lastShiftCasingState = null;
+function buildLegend() {
+  var leg = document.getElementById("kb-legend");
+  if (!leg) return;
+  var isAr = (S.lang === "ar");
+  var list = [
+    { c: FINGER_DATA.lp.color, l: isAr ? "خنصر يسار" : "L-Pinky" },
+    { c: FINGER_DATA.lr.color, l: isAr ? "بنسر يسار" : "L-Ring" },
+    { c: FINGER_DATA.lm.color, l: isAr ? "وسطى يسار" : "L-Middle" },
+    { c: FINGER_DATA.li.color, l: isAr ? "سبابة يسار" : "L-Index" },
+    { c: FINGER_DATA.th.color, l: isAr ? "إبهام" : "Thumbs" },
+    { c: FINGER_DATA.ri.color, l: isAr ? "سبابة يمين" : "R-Index" },
+    { c: FINGER_DATA.rm.color, l: isAr ? "وسطى يمين" : "R-Middle" },
+    { c: FINGER_DATA.rr.color, l: isAr ? "بنسر يمين" : "R-Ring" },
+    { c: FINGER_DATA.rp.color, l: isAr ? "خنصر يمين" : "R-Pinky" }
+  ];
+  var h = "";
+  for (var i = 0; i < list.length; i++) {
+    h += '<div class="kb-legend-item"><div class="kb-legend-dot" style="background:' + list[i].c + '"></div><span class="kb-legend-lbl">' + list[i].l + '</span></div>';
+  }
+  leg.innerHTML = h;
+}
 
-    function _reindexKeyboardKeys() {
-      _cachedKbKeys = Array.prototype.slice.call(document.querySelectorAll(".kb-key"));
-      _keyMap = {};
-      _lastTargetKeyEl = null;
-      _lastShiftKeyEls.length = 0;
-      _lastShiftCasingState = null;
+// O(1) Instant Key Element Lookup
+function findKeyElForChar(char) {
+  if (!char) return null;
+  var el = _keyMap[char];
+  if (el) return el;
+  var norm = normalizeAr(char);
+  if (norm && _keyMap[norm]) return _keyMap[norm];
+  var lower = char.toLowerCase();
+  if (_keyMap[lower]) return _keyMap[lower];
+  return null;
+}
 
-      for (var i = 0; i < _cachedKbKeys.length; i++) {
-        var el = _cachedKbKeys[i];
-        var k = el.dataset.k;
-        var ar = el.dataset.ar;
-        if (!k) continue;
+// Only update casing when shift state actually flips (saves looping 70 keys on 95% of strokes)
+function updateKeyboardCasing(isShiftActive) {
+  if (S.lang === "ar" || _lastShiftCasingState === isShiftActive) return;
+  _lastShiftCasingState = isShiftActive;
+  for (var i = 0; i < _cachedKbKeys.length; i++) {
+    var el = _cachedKbKeys[i];
+    var k = el.dataset.k;
+    if (!k || el.classList.contains("special")) continue;
+    var mainLblEl = el.querySelector(".kb-lbl-main");
+    if (!mainLblEl) continue;
+    if (k.length === 1 && k.toLowerCase() >= 'a' && k.toLowerCase() <= 'z') {
+      mainLblEl.textContent = isShiftActive ? k.toUpperCase() : k.toLowerCase();
+    } else if (k.length === 2) {
+      mainLblEl.textContent = isShiftActive ? k[1] : k[0];
+    }
+  }
+}
 
-        if (k === "Space") {
-          _keyMap[" "] = el;
-          _keyMap["space"] = el;
-        } else if (k === "Backspace") {
-          _keyMap["backspace"] = el;
-        } else if (k.length === 1) {
-          _keyMap[k.toLowerCase()] = el;
-          _keyMap[k.toUpperCase()] = el;
-        } else if (k.length === 2) {
-          _keyMap[k[0]] = el;
-          _keyMap[k[1]] = el;
+// Update Target Key with zero global DOM queries
+function updateTargetKey() {
+  if (_lastTargetKeyEl) {
+    _lastTargetKeyEl.classList.remove("target-key");
+    _lastTargetKeyEl = null;
+  }
+  for (var i = 0; i < _lastShiftKeyEls.length; i++) {
+    _lastShiftKeyEls[i].classList.remove("shift-needed");
+  }
+  _lastShiftKeyEls.length = 0;
+
+  var badge = document.getElementById("kb-next-badge");
+  var fBadge = document.getElementById("kb-finger-badge");
+  var fDot = document.getElementById("kb-finger-dot");
+  var fText = document.getElementById("kb-finger-text");
+  var isAr = (S.lang === "ar");
+
+  if (!S.text || S.idx >= S.text.length) {
+    if (badge) badge.textContent = "—";
+    if (fText) fText.textContent = isAr ? "مكتمل" : "Complete";
+    updateKeyboardCasing(false);
+    if (window.updateHandTargetFinger) updateHandTargetFinger(null, null);
+    return;
+  }
+
+  var nextCh = S.text[S.idx];
+  var el = findKeyElForChar(nextCh);
+
+  if (badge) {
+    badge.textContent = (nextCh === " ") ? (isAr ? "مسافة" : "SPACE") : nextCh;
+  }
+
+  var isUpperEn = (nextCh >= "A" && nextCh <= "Z");
+  var isShiftSym = '~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0;
+  var needsShift = (isUpperEn || isShiftSym);
+
+  updateKeyboardCasing(needsShift);
+
+  if (el) {
+    el.classList.add("target-key");
+    _lastTargetKeyEl = el;
+    var fCode = el.dataset.f;
+    var fInfo = FINGER_DATA[fCode] || FINGER_DATA.th;
+    if (fDot) fDot.style.background = fInfo.color;
+    if (fText) fText.textContent = isAr ? fInfo.ar : fInfo.en;
+    if (fBadge) fBadge.style.borderColor = fInfo.color;
+
+    if (window.updateHandTargetFinger) updateHandTargetFinger(fCode, el);
+
+    if (needsShift) {
+      var oppSide = (fInfo.hand === "L") ? "right" : "left";
+      for (var s = 0; s < _cachedKbKeys.length; s++) {
+        var sk = _cachedKbKeys[s];
+        if (sk.dataset.k === "Shift" && sk.dataset.side === oppSide) {
+          sk.classList.add("shift-needed");
+          _lastShiftKeyEls.push(sk);
         }
-
-        if (ar) {
-          _keyMap[ar] = el;
-          var normAr = normalizeAr(ar);
-          if (normAr) _keyMap[normAr] = el;
-        }
-
-        var qwertyMapped = QWERTY_TO_AR[k];
-        if (qwertyMapped) {
-          if (!_keyMap[qwertyMapped]) _keyMap[qwertyMapped] = el;
-          var normQw = normalizeAr(qwertyMapped);
-          if (normQw && !_keyMap[normQw]) _keyMap[normQw] = el;
-        }
       }
     }
+  } else {
+    if (fDot) fDot.style.background = "#e2b714";
+    if (fText) fText.textContent = isAr ? "إبهام" : "Thumbs";
+    if (window.updateHandTargetFinger) updateHandTargetFinger('th', null);
+  }
+}
 
-    function buildLegend() {
-      var leg = document.getElementById("kb-legend");
-      if (!leg) return;
-      var isAr = (S.lang === "ar");
-      var list = [
-        { c: FINGER_DATA.lp.color, l: isAr ? "خنصر يسار" : "L-Pinky" },
-        { c: FINGER_DATA.lr.color, l: isAr ? "بنسر يسار" : "L-Ring" },
-        { c: FINGER_DATA.lm.color, l: isAr ? "وسطى يسار" : "L-Middle" },
-        { c: FINGER_DATA.li.color, l: isAr ? "سبابة يسار" : "L-Index" },
-        { c: FINGER_DATA.th.color, l: isAr ? "إبهام" : "Thumbs" },
-        { c: FINGER_DATA.ri.color, l: isAr ? "سبابة يمين" : "R-Index" },
-        { c: FINGER_DATA.rm.color, l: isAr ? "وسطى يمين" : "R-Middle" },
-        { c: FINGER_DATA.rr.color, l: isAr ? "بنسر يمين" : "R-Ring" },
-        { c: FINGER_DATA.rp.color, l: isAr ? "خنصر يمين" : "R-Pinky" }
-      ];
-      var h = "";
-      for (var i = 0; i < list.length; i++) {
-        h += '<div class="kb-legend-item"><div class="kb-legend-dot" style="background:' + list[i].c + '"></div><span class="kb-legend-lbl">' + list[i].l + '</span></div>';
-      }
-      leg.innerHTML = h;
+// Direct O(1) pressed key highlight
+function highlightPressedKey(evKey, ok) {
+  var matchedKeyEl = findKeyElForChar(evKey);
+  if (matchedKeyEl) {
+    _animateKeyPress(matchedKeyEl, ok);
+  }
+
+  if (ok) {
+    var f = matchedKeyEl ? matchedKeyEl.dataset.f : _currentHandTargetFinger;
+    animateHandFinger(f, true);
+  } else {
+    animateHandFinger(_currentHandTargetFinger, false);
+  }
+}
+
+// Zero-reflow mechanical keypress animation (no void el.offsetWidth)
+function _animateKeyPress(el, ok) {
+  var id = el.id;
+  if (_kbTimeouts[id]) {
+    clearTimeout(_kbTimeouts[id]);
+    _kbTimeouts[id] = null;
+  }
+  el.classList.remove("pressed-ok", "pressed-err");
+  requestAnimationFrame(function () {
+    el.classList.add(ok ? "pressed-ok" : "pressed-err");
+  });
+
+  _kbTimeouts[id] = setTimeout(function () {
+    el.classList.remove("pressed-ok", "pressed-err");
+    _kbTimeouts[id] = null;
+  }, 120);
+}
+
+var BADGES = [
+  { id: "ft", ic: "🌱", n: "أول خطوة", d: "أكمل أول اختبار لك" },
+  { id: "w50", ic: "⚡", n: "50 WPM", d: "حقق 50 كلمة/دقيقة" },
+  { id: "w80", ic: "🚀", n: "80 WPM", d: "حقق 80 كلمة/دقيقة" },
+  { id: "a100", ic: "✨", n: "الكمال", d: "دقة 100%" },
+  { id: "t10", ic: "🏅", n: "المداوم", d: "أكمل 10 اختبارات" }
+];
+
+var KR = [
+  ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+  ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+  ["z", "x", "c", "v", "b", "n", "m"]
+];
+var FM = { q: "lp", w: "lr", e: "lm", r: "li", t: "li", y: "ri", u: "ri", i: "rm", o: "rr", p: "rp", a: "lp", s: "lr", d: "lm", f: "li", g: "li", h: "ri", j: "ri", k: "rm", l: "rr", z: "lp", x: "lr", c: "lm", v: "li", b: "li", n: "ri", m: "ri" };
+var FN = { lp: "خنصر يسار", lr: "بنسر يسار", lm: "وسطى يسار", li: "سبابة يسار", ri: "سبابة يمين", rm: "وسطى يمين", rr: "بنسر يمين", rp: "خنصر يمين" };
+
+var S = { lang: "en", dur: 30, mode: "common", text: "", ch: [], idx: 0, on: false, fin: false, left: 30, ks: [], t0: 0, tk: 0, ti: null, ec: 0 };
+
+var OM = {
+  socket: null,
+  roomCode: null,
+  myId: null,
+  myName: '',
+  isHost: false,
+  oppName: '',
+  oppId: null,
+  raceText: '',
+  raceDuration: 30,
+  raceStartTime: null,
+  raceTimer: null,
+  progressInterval: null,
+  omIdx: 0,
+  omErrors: 0,
+  omTotalTyped: 0,
+  omDone: false,
+  omChars: []
+};
+
+// Local storage
+function gR() { try { return JSON.parse(localStorage.getItem("tm2") || "[]") } catch (e) { return [] } }
+function pR(r) { var a = gR(); a.unshift(r); localStorage.setItem("tm2", JSON.stringify(a.slice(0, 200))) }
+function gS() { try { return JSON.parse(localStorage.getItem("ts2") || "{}") } catch (e) { return {} } }
+function pS(o) { localStorage.setItem("ts2", JSON.stringify(o)) }
+function gA() { try { return JSON.parse(localStorage.getItem("ta2") || "[]") } catch (e) { return [] } }
+function pA(a) { localStorage.setItem("ta2", JSON.stringify(a)) }
+
+function calcWPM(c, ms) { return ms <= 0 ? 0 : Math.round(c / 5 / (ms / 60000)) }
+function calcAcc(c, t) { return t ? Math.round(c / t * 100) : 100 }
+
+// ==============================================================
+// 2. QWERTY <-> ARABIC MAPPING (PREVENTS MISMATCH ERRORS)
+// ==============================================================
+var QWERTY_TO_AR = {
+  "`": "ذ", "~": "ّ", "1": "1", "!": "!", "2": "2", "@": "@", "3": "3", "#": "#",
+  "4": "4", "$": "$", "5": "5", "%": "%", "6": "6", "^": "^", "7": "7", "&": "&",
+  "8": "8", "*": "*", "9": "9", "(": "(", "0": "0", ")": ")", "-": "-", "_": "_",
+  "=": "=", "+": "+",
+  "q": "ض", "Q": "َ", "w": "ص", "W": "ً", "e": "ث", "E": "ُ", "r": "ق", "R": "ٌ",
+  "t": "ف", "T": "لإ", "y": "غ", "Y": "إ", "u": "ع", "U": "‘", "i": "ه", "I": "÷",
+  "o": "خ", "O": "×", "p": "ح", "P": "؛", "[": "ج", "{": "<", "]": "د", "}": ">",
+  "\\": "\\", "|": "|",
+  "a": "ش", "A": "ِ", "s": "س", "S": "ٍ", "d": "ي", "D": "]", "f": "ب", "F": "[",
+  "g": "ل", "G": "لأ", "h": "ا", "H": "أ", "j": "ت", "J": "ـ", "k": "ن", "K": "،",
+  "l": "م", "L": "/", ";": "ك", ":": ":", "'": "ط", "\"": "\"",
+  "z": "ئ", "Z": "~", "x": "ء", "X": "ْ", "c": "ؤ", "C": "}", "v": "ر", "V": "{",
+  "b": "لا", "B": "لآ", "n": "ى", "N": "آ", "m": "ة", "M": "’", ",": "و", "<": ",",
+  ".": "ز", ">": ".", "/": "ظ", "?": "؟", " ": " "
+};
+
+function normalizeAr(c) {
+  if (!c) return "";
+  if (c === "أ" || c === "إ" || c === "آ" || c === "ٱ") return "ا";
+  if (c === "ة") return "ه";
+  if (c === "ى") return "ي";
+  return c;
+}
+
+function matchChar(inputKey, expectedChar) {
+  if (inputKey === expectedChar) return true;
+  var isArChar = /[\u0600-\u06FF]/.test(expectedChar);
+
+  if (S.lang === "ar" || isArChar) {
+    // 1. Direct Arabic match or normalized match
+    if (normalizeAr(inputKey) === normalizeAr(expectedChar)) return true;
+
+    // 2. If user pressed physical key on English layout, convert to Arabic key
+    var mapped = QWERTY_TO_AR[inputKey];
+    if (mapped) {
+      if (mapped === expectedChar) return true;
+      if (normalizeAr(mapped) === normalizeAr(expectedChar)) return true;
     }
+  } else {
+    // English: case-insensitive match
+    if (inputKey.toLowerCase() === expectedChar.toLowerCase()) return true;
+  }
+  return false;
+}
 
-    // O(1) Instant Key Element Lookup
-    function findKeyElForChar(char) {
-      if (!char) return null;
-      var el = _keyMap[char];
-      if (el) return el;
-      var norm = normalizeAr(char);
-      if (norm && _keyMap[norm]) return _keyMap[norm];
-      var lower = char.toLowerCase();
-      if (_keyMap[lower]) return _keyMap[lower];
-      return null;
-    }
+// ==============================================================
+// 3. EDCLUB KEYBOARD DEFINITION & ENGINE (PHYSICAL LTR LAYOUT)
+// ==============================================================
+var FINGER_DATA = {
+  lp: { color: "#6366f1", hand: "L", ar: "الخنصر الأيسر", en: "Left Pinky" },
+  lr: { color: "#a855f7", hand: "L", ar: "البنسر الأيسر", en: "Left Ring" },
+  lm: { color: "#3b82f6", hand: "L", ar: "الوسطى اليسرى", en: "Left Middle" },
+  li: { color: "#06b6d4", hand: "L", ar: "السبابة اليسرى", en: "Left Index" },
+  th: { color: "#e2b714", hand: "B", ar: "الإبهام", en: "Thumbs" },
+  ri: { color: "#10b981", hand: "R", ar: "السبابة اليمنى", en: "Right Index" },
+  rm: { color: "#84cc16", hand: "R", ar: "الوسطى اليمنى", en: "Right Middle" },
+  rr: { color: "#f59e0b", hand: "R", ar: "البنسر الأيمن", en: "Right Ring" },
+  rp: { color: "#ef4444", hand: "R", ar: "الخنصر الأيمن", en: "Right Pinky" }
+};
 
-    // Only update casing when shift state actually flips (saves looping 70 keys on 95% of strokes)
-    function updateKeyboardCasing(isShiftActive) {
-      if (S.lang === "ar" || _lastShiftCasingState === isShiftActive) return;
-      _lastShiftCasingState = isShiftActive;
-      for (var i = 0; i < _cachedKbKeys.length; i++) {
-        var el = _cachedKbKeys[i];
-        var k = el.dataset.k;
-        if (!k || el.classList.contains("special")) continue;
-        var mainLblEl = el.querySelector(".kb-lbl-main");
-        if (!mainLblEl) continue;
-        if (k.length === 1 && k.toLowerCase() >= 'a' && k.toLowerCase() <= 'z') {
-          mainLblEl.textContent = isShiftActive ? k.toUpperCase() : k.toLowerCase();
-        } else if (k.length === 2) {
-          mainLblEl.textContent = isShiftActive ? k[1] : k[0];
-        }
-      }
-    }
+// Standard Physical Keyboard rows from Left to Right (Worldwide Physical Layout)
+var KB_ROWS = [
+  // Row 0: ~ to Backspace
+  [
+    { k: "~`", ar: "ذ", w: 1, f: "lp" },
+    { k: "1!", ar: "1", w: 1, f: "lp" },
+    { k: "2@", ar: "2", w: 1, f: "lr" },
+    { k: "3#", ar: "3", w: 1, f: "lm" },
+    { k: "4$", ar: "4", w: 1, f: "li" },
+    { k: "5%", ar: "5", w: 1, f: "li" },
+    { k: "6^", ar: "6", w: 1, f: "ri" },
+    { k: "7&", ar: "7", w: 1, f: "ri" },
+    { k: "8*", ar: "8", w: 1, f: "rm" },
+    { k: "9(", ar: "9", w: 1, f: "rr" },
+    { k: "0)", ar: "0", w: 1, f: "rp" },
+    { k: "-_", ar: "-", w: 1, f: "rp" },
+    { k: "=+", ar: "=", w: 1, f: "rp" },
+    { k: "Backspace", ar: "Backspace", w: 2, f: "rp", special: true }
+  ],
+  // Row 1: Tab, Q(ض), W(ص)... to P(ح), [(ج), ](د), \
+  [
+    { k: "Tab", ar: "Tab", w: 1.5, f: "lp", special: true },
+    { k: "q", ar: "ض", w: 1, f: "lp" },
+    { k: "w", ar: "ص", w: 1, f: "lr" },
+    { k: "e", ar: "ث", w: 1, f: "lm" },
+    { k: "r", ar: "ق", w: 1, f: "li" },
+    { k: "t", ar: "ف", w: 1, f: "li" },
+    { k: "y", ar: "غ", w: 1, f: "ri" },
+    { k: "u", ar: "ع", w: 1, f: "ri" },
+    { k: "i", ar: "ه", w: 1, f: "rm" },
+    { k: "o", ar: "خ", w: 1, f: "rr" },
+    { k: "p", ar: "ح", w: 1, f: "rp" },
+    { k: "[{", ar: "ج", w: 1, f: "rp" },
+    { k: "]}", ar: "د", w: 1, f: "rp" },
+    { k: "\\|", ar: "\\", w: 1.5, f: "rp", special: true }
+  ],
+  // Row 2: Caps, A(ش), S(س)... to ;(ك), '(ط), Enter
+  [
+    { k: "Caps", ar: "Caps", w: 1.75, f: "lp", special: true },
+    { k: "a", ar: "ش", w: 1, f: "lp" },
+    { k: "s", ar: "س", w: 1, f: "lr" },
+    { k: "d", ar: "ي", w: 1, f: "lm" },
+    { k: "f", ar: "ب", w: 1, f: "li", bump: true },
+    { k: "g", ar: "ل", w: 1, f: "li" },
+    { k: "h", ar: "ا", w: 1, f: "ri" },
+    { k: "j", ar: "ت", w: 1, f: "ri", bump: true },
+    { k: "k", ar: "ن", w: 1, f: "rm" },
+    { k: "l", ar: "م", w: 1, f: "rr" },
+    { k: ";:", ar: "ك", w: 1, f: "rp" },
+    { k: "'\"", ar: "ط", w: 1, f: "rp" },
+    { k: "Enter", ar: "Enter", w: 2.25, f: "rp", special: true }
+  ],
+  // Row 3: Shift, Z(ئ), X(ء)... to /(ظ), Shift
+  [
+    { k: "Shift", ar: "Shift", w: 2.25, f: "lp", special: true, side: "left" },
+    { k: "z", ar: "ئ", w: 1, f: "lp" },
+    { k: "x", ar: "ء", w: 1, f: "lr" },
+    { k: "c", ar: "ؤ", w: 1, f: "lm" },
+    { k: "v", ar: "ر", w: 1, f: "li" },
+    { k: "b", ar: "لا", w: 1, f: "li" },
+    { k: "n", ar: "ى", w: 1, f: "ri" },
+    { k: "m", ar: "ة", w: 1, f: "ri" },
+    { k: ",<", ar: "و", w: 1, f: "rm" },
+    { k: ".>", ar: "ز", w: 1, f: "rr" },
+    { k: "/?", ar: "ظ", w: 1, f: "rp" },
+    { k: "Shift", ar: "Shift", w: 2.75, f: "rp", special: true, side: "right" }
+  ],
+  // Row 4: Space Row
+  [
+    { k: "Ctrl", ar: "Ctrl", w: 1.5, f: "lp", special: true },
+    { k: "Alt", ar: "Alt", w: 1.5, f: "th", special: true },
+    { k: "Space", ar: "Space", w: 7, f: "th", special: true },
+    { k: "Alt", ar: "Alt", w: 1.5, f: "th", special: true },
+    { k: "Ctrl", ar: "Ctrl", w: 1.5, f: "rp", special: true }
+  ]
+];
 
-    // Update Target Key with zero global DOM queries
-    function updateTargetKey() {
-      if (_lastTargetKeyEl) {
-        _lastTargetKeyEl.classList.remove("target-key");
-        _lastTargetKeyEl = null;
-      }
-      for (var i = 0; i < _lastShiftKeyEls.length; i++) {
-        _lastShiftKeyEls[i].classList.remove("shift-needed");
-      }
-      _lastShiftKeyEls.length = 0;
+var _kbVisible = true;
+var _kbTimeouts = {};
 
-      var badge = document.getElementById("kb-next-badge");
-      var fBadge = document.getElementById("kb-finger-badge");
-      var fDot = document.getElementById("kb-finger-dot");
-      var fText = document.getElementById("kb-finger-text");
-      var isAr = (S.lang === "ar");
+function buildKeyboard() {
+  var rowsEl = document.getElementById("kb-rows");
+  if (!rowsEl) return;
+  rowsEl.innerHTML = "";
+  var isAr = (S.lang === "ar");
 
-      if (!S.text || S.idx >= S.text.length) {
-        if (badge) badge.textContent = "—";
-        if (fText) fText.textContent = isAr ? "مكتمل" : "Complete";
-        updateKeyboardCasing(false);
-        if (window.updateHandTargetFinger) updateHandTargetFinger(null, null);
-        return;
-      }
+  for (var ri = 0; ri < KB_ROWS.length; ri++) {
+    var row = KB_ROWS[ri];
+    var rowEl = document.createElement("div");
+    rowEl.className = "kb-row";
 
-      var nextCh = S.text[S.idx];
-      var el = findKeyElForChar(nextCh);
+    for (var ki = 0; ki < row.length; ki++) {
+      var kd = row[ki];
+      var fInfo = FINGER_DATA[kd.f] || FINGER_DATA.th;
+      var el = document.createElement("div");
+      var isAccent = (kd.k === "Space");
+      var isMod = kd.special && !isAccent;
+      var keyTypeClass = isAccent ? " key-accent" : (isMod ? " key-mod" : " key-alpha");
+      el.className = "kb-key" + keyTypeClass + (kd.special ? " special" : "") + (kd.bump ? " has-bump" : "");
+      el.id = "kbk_" + ri + "_" + ki;
+      el.style.width = "calc(var(--k-unit) * " + kd.w + ")";
 
-      if (badge) {
-        badge.textContent = (nextCh === " ") ? (isAr ? "مسافة" : "SPACE") : nextCh;
-      }
+      // Metadata for key matching
+      el.dataset.k = kd.k;
+      el.dataset.ar = kd.ar;
+      el.dataset.f = kd.f;
+      el.dataset.side = kd.side || "";
 
-      var isUpperEn = (nextCh >= "A" && nextCh <= "Z");
-      var isShiftSym = '~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0;
-      var needsShift = (isUpperEn || isShiftSym);
-
-      updateKeyboardCasing(needsShift);
-
-      if (el) {
-        el.classList.add("target-key");
-        _lastTargetKeyEl = el;
-        var fCode = el.dataset.f;
-        var fInfo = FINGER_DATA[fCode] || FINGER_DATA.th;
-        if (fDot) fDot.style.background = fInfo.color;
-        if (fText) fText.textContent = isAr ? fInfo.ar : fInfo.en;
-        if (fBadge) fBadge.style.borderColor = fInfo.color;
-
-        if (window.updateHandTargetFinger) updateHandTargetFinger(fCode, el);
-
-        if (needsShift) {
-          var oppSide = (fInfo.hand === "L") ? "right" : "left";
-          for (var s = 0; s < _cachedKbKeys.length; s++) {
-            var sk = _cachedKbKeys[s];
-            if (sk.dataset.k === "Shift" && sk.dataset.side === oppSide) {
-              sk.classList.add("shift-needed");
-              _lastShiftKeyEls.push(sk);
-            }
-          }
+      // Labeling
+      var mainLbl = "", subLbl = "";
+      if (kd.special) {
+        if (kd.k === "Space") {
+          mainLbl = isAr ? "مسافة (SPACE)" : "SPACE";
+        } else if (kd.k === "Backspace") {
+          mainLbl = "⌫ Backspace";
+        } else if (kd.k === "Enter") {
+          mainLbl = "↵ Enter";
+        } else if (kd.k === "Shift") {
+          mainLbl = "⇧ Shift";
+        } else {
+          mainLbl = kd.k;
         }
       } else {
-        if (fDot) fDot.style.background = "#e2b714";
-        if (fText) fText.textContent = isAr ? "إبهام" : "Thumbs";
-        if (window.updateHandTargetFinger) updateHandTargetFinger('th', null);
-      }
-    }
-
-    // Direct O(1) pressed key highlight
-    function highlightPressedKey(evKey, ok) {
-      var matchedKeyEl = findKeyElForChar(evKey);
-      if (matchedKeyEl) {
-        _animateKeyPress(matchedKeyEl, ok);
-      }
-
-      if (ok) {
-        var f = matchedKeyEl ? matchedKeyEl.dataset.f : _currentHandTargetFinger;
-        animateHandFinger(f, true);
-      } else {
-        animateHandFinger(_currentHandTargetFinger, false);
-      }
-    }
-
-    // Zero-reflow mechanical keypress animation (no void el.offsetWidth)
-    function _animateKeyPress(el, ok) {
-      var id = el.id;
-      if (_kbTimeouts[id]) {
-        clearTimeout(_kbTimeouts[id]);
-        _kbTimeouts[id] = null;
-      }
-      el.classList.remove("pressed-ok", "pressed-err");
-      requestAnimationFrame(function () {
-        el.classList.add(ok ? "pressed-ok" : "pressed-err");
-      });
-
-      _kbTimeouts[id] = setTimeout(function () {
-        el.classList.remove("pressed-ok", "pressed-err");
-        _kbTimeouts[id] = null;
-      }, 120);
-    }
-
-    var BADGES = [
-      { id: "ft", ic: "🌱", n: "أول خطوة", d: "أكمل أول اختبار لك" },
-      { id: "w50", ic: "⚡", n: "50 WPM", d: "حقق 50 كلمة/دقيقة" },
-      { id: "w80", ic: "🚀", n: "80 WPM", d: "حقق 80 كلمة/دقيقة" },
-      { id: "a100", ic: "✨", n: "الكمال", d: "دقة 100%" },
-      { id: "t10", ic: "🏅", n: "المداوم", d: "أكمل 10 اختبارات" }
-    ];
-
-    var KR = [
-      ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-      ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-      ["z", "x", "c", "v", "b", "n", "m"]
-    ];
-    var FM = { q: "lp", w: "lr", e: "lm", r: "li", t: "li", y: "ri", u: "ri", i: "rm", o: "rr", p: "rp", a: "lp", s: "lr", d: "lm", f: "li", g: "li", h: "ri", j: "ri", k: "rm", l: "rr", z: "lp", x: "lr", c: "lm", v: "li", b: "li", n: "ri", m: "ri" };
-    var FN = { lp: "خنصر يسار", lr: "بنسر يسار", lm: "وسطى يسار", li: "سبابة يسار", ri: "سبابة يمين", rm: "وسطى يمين", rr: "بنسر يمين", rp: "خنصر يمين" };
-
-    var S = { lang: "en", dur: 30, mode: "common", text: "", ch: [], idx: 0, on: false, fin: false, left: 30, ks: [], t0: 0, tk: 0, ti: null, ec: 0 };
-
-    var OM = {
-      socket: null,
-      roomCode: null,
-      myId: null,
-      myName: '',
-      isHost: false,
-      oppName: '',
-      oppId: null,
-      raceText: '',
-      raceDuration: 30,
-      raceStartTime: null,
-      raceTimer: null,
-      progressInterval: null,
-      omIdx: 0,
-      omErrors: 0,
-      omTotalTyped: 0,
-      omDone: false,
-      omChars: []
-    };
-
-    // Local storage
-    function gR() { try { return JSON.parse(localStorage.getItem("tm2") || "[]") } catch (e) { return [] } }
-    function pR(r) { var a = gR(); a.unshift(r); localStorage.setItem("tm2", JSON.stringify(a.slice(0, 200))) }
-    function gS() { try { return JSON.parse(localStorage.getItem("ts2") || "{}") } catch (e) { return {} } }
-    function pS(o) { localStorage.setItem("ts2", JSON.stringify(o)) }
-    function gA() { try { return JSON.parse(localStorage.getItem("ta2") || "[]") } catch (e) { return [] } }
-    function pA(a) { localStorage.setItem("ta2", JSON.stringify(a)) }
-
-    function calcWPM(c, ms) { return ms <= 0 ? 0 : Math.round(c / 5 / (ms / 60000)) }
-    function calcAcc(c, t) { return t ? Math.round(c / t * 100) : 100 }
-
-    // ==============================================================
-    // 2. QWERTY <-> ARABIC MAPPING (PREVENTS MISMATCH ERRORS)
-    // ==============================================================
-    var QWERTY_TO_AR = {
-      "`": "ذ", "~": "ّ", "1": "1", "!": "!", "2": "2", "@": "@", "3": "3", "#": "#",
-      "4": "4", "$": "$", "5": "5", "%": "%", "6": "6", "^": "^", "7": "7", "&": "&",
-      "8": "8", "*": "*", "9": "9", "(": "(", "0": "0", ")": ")", "-": "-", "_": "_",
-      "=": "=", "+": "+",
-      "q": "ض", "Q": "َ", "w": "ص", "W": "ً", "e": "ث", "E": "ُ", "r": "ق", "R": "ٌ",
-      "t": "ف", "T": "لإ", "y": "غ", "Y": "إ", "u": "ع", "U": "‘", "i": "ه", "I": "÷",
-      "o": "خ", "O": "×", "p": "ح", "P": "؛", "[": "ج", "{": "<", "]": "د", "}": ">",
-      "\\": "\\", "|": "|",
-      "a": "ش", "A": "ِ", "s": "س", "S": "ٍ", "d": "ي", "D": "]", "f": "ب", "F": "[",
-      "g": "ل", "G": "لأ", "h": "ا", "H": "أ", "j": "ت", "J": "ـ", "k": "ن", "K": "،",
-      "l": "م", "L": "/", ";": "ك", ":": ":", "'": "ط", "\"": "\"",
-      "z": "ئ", "Z": "~", "x": "ء", "X": "ْ", "c": "ؤ", "C": "}", "v": "ر", "V": "{",
-      "b": "لا", "B": "لآ", "n": "ى", "N": "آ", "m": "ة", "M": "’", ",": "و", "<": ",",
-      ".": "ز", ">": ".", "/": "ظ", "?": "؟", " ": " "
-    };
-
-    function normalizeAr(c) {
-      if (!c) return "";
-      if (c === "أ" || c === "إ" || c === "آ" || c === "ٱ") return "ا";
-      if (c === "ة") return "ه";
-      if (c === "ى") return "ي";
-      return c;
-    }
-
-    function matchChar(inputKey, expectedChar) {
-      if (inputKey === expectedChar) return true;
-      var isArChar = /[\u0600-\u06FF]/.test(expectedChar);
-
-      if (S.lang === "ar" || isArChar) {
-        // 1. Direct Arabic match or normalized match
-        if (normalizeAr(inputKey) === normalizeAr(expectedChar)) return true;
-
-        // 2. If user pressed physical key on English layout, convert to Arabic key
-        var mapped = QWERTY_TO_AR[inputKey];
-        if (mapped) {
-          if (mapped === expectedChar) return true;
-          if (normalizeAr(mapped) === normalizeAr(expectedChar)) return true;
-        }
-      } else {
-        // English: case-insensitive match
-        if (inputKey.toLowerCase() === expectedChar.toLowerCase()) return true;
-      }
-      return false;
-    }
-
-    // ==============================================================
-    // 3. EDCLUB KEYBOARD DEFINITION & ENGINE (PHYSICAL LTR LAYOUT)
-    // ==============================================================
-    var FINGER_DATA = {
-      lp: { color: "#6366f1", hand: "L", ar: "الخنصر الأيسر", en: "Left Pinky" },
-      lr: { color: "#a855f7", hand: "L", ar: "البنسر الأيسر", en: "Left Ring" },
-      lm: { color: "#3b82f6", hand: "L", ar: "الوسطى اليسرى", en: "Left Middle" },
-      li: { color: "#06b6d4", hand: "L", ar: "السبابة اليسرى", en: "Left Index" },
-      th: { color: "#e2b714", hand: "B", ar: "الإبهام", en: "Thumbs" },
-      ri: { color: "#10b981", hand: "R", ar: "السبابة اليمنى", en: "Right Index" },
-      rm: { color: "#84cc16", hand: "R", ar: "الوسطى اليمنى", en: "Right Middle" },
-      rr: { color: "#f59e0b", hand: "R", ar: "البنسر الأيمن", en: "Right Ring" },
-      rp: { color: "#ef4444", hand: "R", ar: "الخنصر الأيمن", en: "Right Pinky" }
-    };
-
-    // Standard Physical Keyboard rows from Left to Right (Worldwide Physical Layout)
-    var KB_ROWS = [
-      // Row 0: ~ to Backspace
-      [
-        { k: "~`", ar: "ذ", w: 1, f: "lp" },
-        { k: "1!", ar: "1", w: 1, f: "lp" },
-        { k: "2@", ar: "2", w: 1, f: "lr" },
-        { k: "3#", ar: "3", w: 1, f: "lm" },
-        { k: "4$", ar: "4", w: 1, f: "li" },
-        { k: "5%", ar: "5", w: 1, f: "li" },
-        { k: "6^", ar: "6", w: 1, f: "ri" },
-        { k: "7&", ar: "7", w: 1, f: "ri" },
-        { k: "8*", ar: "8", w: 1, f: "rm" },
-        { k: "9(", ar: "9", w: 1, f: "rr" },
-        { k: "0)", ar: "0", w: 1, f: "rp" },
-        { k: "-_", ar: "-", w: 1, f: "rp" },
-        { k: "=+", ar: "=", w: 1, f: "rp" },
-        { k: "Backspace", ar: "Backspace", w: 2, f: "rp", special: true }
-      ],
-      // Row 1: Tab, Q(ض), W(ص)... to P(ح), [(ج), ](د), \
-      [
-        { k: "Tab", ar: "Tab", w: 1.5, f: "lp", special: true },
-        { k: "q", ar: "ض", w: 1, f: "lp" },
-        { k: "w", ar: "ص", w: 1, f: "lr" },
-        { k: "e", ar: "ث", w: 1, f: "lm" },
-        { k: "r", ar: "ق", w: 1, f: "li" },
-        { k: "t", ar: "ف", w: 1, f: "li" },
-        { k: "y", ar: "غ", w: 1, f: "ri" },
-        { k: "u", ar: "ع", w: 1, f: "ri" },
-        { k: "i", ar: "ه", w: 1, f: "rm" },
-        { k: "o", ar: "خ", w: 1, f: "rr" },
-        { k: "p", ar: "ح", w: 1, f: "rp" },
-        { k: "[{", ar: "ج", w: 1, f: "rp" },
-        { k: "]}", ar: "د", w: 1, f: "rp" },
-        { k: "\\|", ar: "\\", w: 1.5, f: "rp", special: true }
-      ],
-      // Row 2: Caps, A(ش), S(س)... to ;(ك), '(ط), Enter
-      [
-        { k: "Caps", ar: "Caps", w: 1.75, f: "lp", special: true },
-        { k: "a", ar: "ش", w: 1, f: "lp" },
-        { k: "s", ar: "س", w: 1, f: "lr" },
-        { k: "d", ar: "ي", w: 1, f: "lm" },
-        { k: "f", ar: "ب", w: 1, f: "li", bump: true },
-        { k: "g", ar: "ل", w: 1, f: "li" },
-        { k: "h", ar: "ا", w: 1, f: "ri" },
-        { k: "j", ar: "ت", w: 1, f: "ri", bump: true },
-        { k: "k", ar: "ن", w: 1, f: "rm" },
-        { k: "l", ar: "م", w: 1, f: "rr" },
-        { k: ";:", ar: "ك", w: 1, f: "rp" },
-        { k: "'\"", ar: "ط", w: 1, f: "rp" },
-        { k: "Enter", ar: "Enter", w: 2.25, f: "rp", special: true }
-      ],
-      // Row 3: Shift, Z(ئ), X(ء)... to /(ظ), Shift
-      [
-        { k: "Shift", ar: "Shift", w: 2.25, f: "lp", special: true, side: "left" },
-        { k: "z", ar: "ئ", w: 1, f: "lp" },
-        { k: "x", ar: "ء", w: 1, f: "lr" },
-        { k: "c", ar: "ؤ", w: 1, f: "lm" },
-        { k: "v", ar: "ر", w: 1, f: "li" },
-        { k: "b", ar: "لا", w: 1, f: "li" },
-        { k: "n", ar: "ى", w: 1, f: "ri" },
-        { k: "m", ar: "ة", w: 1, f: "ri" },
-        { k: ",<", ar: "و", w: 1, f: "rm" },
-        { k: ".>", ar: "ز", w: 1, f: "rr" },
-        { k: "/?", ar: "ظ", w: 1, f: "rp" },
-        { k: "Shift", ar: "Shift", w: 2.75, f: "rp", special: true, side: "right" }
-      ],
-      // Row 4: Space Row
-      [
-        { k: "Ctrl", ar: "Ctrl", w: 1.5, f: "lp", special: true },
-        { k: "Alt", ar: "Alt", w: 1.5, f: "th", special: true },
-        { k: "Space", ar: "Space", w: 7, f: "th", special: true },
-        { k: "Alt", ar: "Alt", w: 1.5, f: "th", special: true },
-        { k: "Ctrl", ar: "Ctrl", w: 1.5, f: "rp", special: true }
-      ]
-    ];
-
-    var _kbVisible = true;
-    var _kbTimeouts = {};
-
-    function buildKeyboard() {
-      var rowsEl = document.getElementById("kb-rows");
-      if (!rowsEl) return;
-      rowsEl.innerHTML = "";
-      var isAr = (S.lang === "ar");
-
-      for (var ri = 0; ri < KB_ROWS.length; ri++) {
-        var row = KB_ROWS[ri];
-        var rowEl = document.createElement("div");
-        rowEl.className = "kb-row";
-
-        for (var ki = 0; ki < row.length; ki++) {
-          var kd = row[ki];
-          var fInfo = FINGER_DATA[kd.f] || FINGER_DATA.th;
-          var el = document.createElement("div");
-          var isAccent = (kd.k === "Space");
-          var isMod = kd.special && !isAccent;
-          var keyTypeClass = isAccent ? " key-accent" : (isMod ? " key-mod" : " key-alpha");
-          el.className = "kb-key" + keyTypeClass + (kd.special ? " special" : "") + (kd.bump ? " has-bump" : "");
-          el.id = "kbk_" + ri + "_" + ki;
-          el.style.width = "calc(var(--k-unit) * " + kd.w + ")";
-
-          // Metadata for key matching
-          el.dataset.k = kd.k;
-          el.dataset.ar = kd.ar;
-          el.dataset.f = kd.f;
-          el.dataset.side = kd.side || "";
-
-          // Labeling
-          var mainLbl = "", subLbl = "";
-          if (kd.special) {
-            if (kd.k === "Space") {
-              mainLbl = isAr ? "مسافة (SPACE)" : "SPACE";
-            } else if (kd.k === "Backspace") {
-              mainLbl = "⌫ Backspace";
-            } else if (kd.k === "Enter") {
-              mainLbl = "↵ Enter";
-            } else if (kd.k === "Shift") {
-              mainLbl = "⇧ Shift";
-            } else {
-              mainLbl = kd.k;
-            }
-          } else {
-            if (isAr) {
-              mainLbl = kd.ar;
-              subLbl = kd.k.length === 1 ? kd.k.toLowerCase() : kd.k[0];
-            } else {
-              mainLbl = kd.k.length === 1 ? kd.k.toLowerCase() : kd.k[0];
-              subLbl = kd.ar;
-            }
-          }
-
-          // Sub label
-          if (subLbl) {
-            var subSpan = document.createElement("span");
-            subSpan.className = "kb-lbl-sub";
-            subSpan.textContent = subLbl;
-            el.appendChild(subSpan);
-          }
-
-          // Main label
-          var mainSpan = document.createElement("span");
-          mainSpan.className = "kb-lbl-main";
-          mainSpan.textContent = mainLbl;
-          el.appendChild(mainSpan);
-
-          // Finger colored bottom strip
-          var strip = document.createElement("div");
-          strip.className = "kb-finger-strip";
-          strip.style.background = fInfo.color;
-          el.appendChild(strip);
-
-          rowEl.appendChild(el);
-        }
-        rowsEl.appendChild(rowEl);
-      }
-
-      buildLegend();
-      if (window.initHandsOverlay) initHandsOverlay();
-      updateTargetKey();
-    }
-
-    function buildLegend() {
-      var leg = document.getElementById("kb-legend");
-      if (!leg) return;
-      var isAr = (S.lang === "ar");
-      var list = [
-        { c: FINGER_DATA.lp.color, l: isAr ? "خنصر يسار" : "L-Pinky" },
-        { c: FINGER_DATA.lr.color, l: isAr ? "بنسر يسار" : "L-Ring" },
-        { c: FINGER_DATA.lm.color, l: isAr ? "وسطى يسار" : "L-Middle" },
-        { c: FINGER_DATA.li.color, l: isAr ? "سبابة يسار" : "L-Index" },
-        { c: FINGER_DATA.th.color, l: isAr ? "إبهام" : "Thumbs" },
-        { c: FINGER_DATA.ri.color, l: isAr ? "سبابة يمين" : "R-Index" },
-        { c: FINGER_DATA.rm.color, l: isAr ? "وسطى يمين" : "R-Middle" },
-        { c: FINGER_DATA.rr.color, l: isAr ? "بنسر يمين" : "R-Ring" },
-        { c: FINGER_DATA.rp.color, l: isAr ? "خنصر يمين" : "R-Pinky" }
-      ];
-      var h = "";
-      for (var i = 0; i < list.length; i++) {
-        h += '<div class="kb-legend-item"><div class="kb-legend-dot" style="background:' + list[i].c + '"></div><span class="kb-legend-lbl">' + list[i].l + '</span></div>';
-      }
-      leg.innerHTML = h;
-    }
-
-    // Find key element corresponding to target character
-    function findKeyElForChar(char) {
-      if (!char) return null;
-      var isAr = (S.lang === "ar");
-      var all = document.querySelectorAll(".kb-key");
-
-      if (char === " ") {
-        for (var i = 0; i < all.length; i++) if (all[i].dataset.k === "Space") return all[i];
-      }
-
-      for (var j = 0; j < all.length; j++) {
-        var el = all[j];
-        var k = el.dataset.k;
-        var ar = el.dataset.ar;
         if (isAr) {
-          if (ar === char || normalizeAr(ar) === normalizeAr(char)) return el;
-          if (QWERTY_TO_AR[k] === char || normalizeAr(QWERTY_TO_AR[k]) === normalizeAr(char)) return el;
+          mainLbl = kd.ar;
+          subLbl = kd.k.length === 1 ? kd.k.toLowerCase() : kd.k[0];
         } else {
-          if (k.toLowerCase() === char.toLowerCase()) return el;
-          if (k.length === 2 && (k[0] === char || k[1] === char)) return el;
+          mainLbl = kd.k.length === 1 ? kd.k.toLowerCase() : kd.k[0];
+          subLbl = kd.ar;
         }
       }
 
-      // Fallback check
-      for (var m = 0; m < all.length; m++) {
-        var k2 = all[m].dataset.k;
-        if (k2.toLowerCase() === char.toLowerCase()) return all[m];
-      }
-      return null;
-    }
-
-    function updateKeyboardCasing(isShiftActive) {
-      if (S.lang === "ar") return;
-      var allKeys = document.querySelectorAll(".kb-key");
-      for (var i = 0; i < allKeys.length; i++) {
-        var el = allKeys[i];
-        var k = el.dataset.k;
-        if (!k || el.classList.contains("special")) continue;
-        var mainLblEl = el.querySelector(".kb-lbl-main");
-        if (!mainLblEl) continue;
-        if (k.length === 1 && k.toLowerCase() >= 'a' && k.toLowerCase() <= 'z') {
-          mainLblEl.textContent = isShiftActive ? k.toUpperCase() : k.toLowerCase();
-        } else if (k.length === 2) {
-          // Pairs like "1!", "2@", "-_", "=+", "[{", "]}", ";:", "'\"", ",<", ".>", "/?"
-          mainLblEl.textContent = isShiftActive ? k[1] : k[0];
-        }
-      }
-    }
-
-    // Update Target Key in EdClub style (pulsing glow + finger indicator)
-    function updateTargetKey() {
-      var prev = document.querySelectorAll(".kb-key.target-key, .kb-key.shift-needed");
-      for (var i = 0; i < prev.length; i++) {
-        prev[i].classList.remove("target-key", "shift-needed");
-      }
-
-      var badge = document.getElementById("kb-next-badge");
-      var fBadge = document.getElementById("kb-finger-badge");
-      var fDot = document.getElementById("kb-finger-dot");
-      var fText = document.getElementById("kb-finger-text");
-      var isAr = (S.lang === "ar");
-
-      if (!S.text || S.idx >= S.text.length) {
-        if (badge) badge.textContent = "—";
-        if (fText) fText.textContent = isAr ? "مكتمل" : "Complete";
-        updateKeyboardCasing(false);
-        if (window.updateHandTargetFinger) updateHandTargetFinger(null, null);
-        return;
-      }
-
-      var nextCh = S.text[S.idx];
-      var el = findKeyElForChar(nextCh);
-
-      if (badge) {
-        badge.textContent = (nextCh === " ") ? (isAr ? "مسافة" : "SPACE") : nextCh;
-      }
-
-      var isUpperEn = (nextCh >= "A" && nextCh <= "Z");
-      var isShiftSym = '~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0;
-      var needsShift = (isUpperEn || isShiftSym);
-
-      // Dynamic casing: displays lowercase for lowercase text, uppercase for uppercase text
-      updateKeyboardCasing(needsShift);
-
-      if (el) {
-        el.classList.add("target-key");
-        var fCode = el.dataset.f;
-        var fInfo = FINGER_DATA[fCode] || FINGER_DATA.th;
-        if (fDot) fDot.style.background = fInfo.color;
-        if (fText) fText.textContent = isAr ? fInfo.ar : fInfo.en;
-        if (fBadge) fBadge.style.borderColor = fInfo.color;
-
-        // Update hand guide highlight with dynamic reach kinematics
-        if (window.updateHandTargetFinger) updateHandTargetFinger(fCode, el);
-
-        // Shift helper
-        if (needsShift) {
-          var oppSide = (fInfo.hand === "L") ? "right" : "left";
-          var shifts = document.querySelectorAll(".kb-key[data-k='Shift']");
-          for (var s = 0; s < shifts.length; s++) {
-            if (shifts[s].dataset.side === oppSide) {
-              shifts[s].classList.add("shift-needed");
-            }
-          }
-        }
-      } else {
-        if (fDot) fDot.style.background = "#e2b714";
-        if (fText) fText.textContent = isAr ? "إبهام" : "Thumbs";
-        if (window.updateHandTargetFinger) updateHandTargetFinger('th', null);
-      }
-    }
-
-    // Highlight key on press (ok / err)
-    function highlightPressedKey(evKey, ok) {
-      var all = document.querySelectorAll(".kb-key");
-      var evL = evKey.toLowerCase();
-      var matchedKeyEl = null;
-
-      for (var i = 0; i < all.length; i++) {
-        var el = all[i];
-        var k = el.dataset.k;
-        var ar = el.dataset.ar;
-        var match = false;
-
-        if (k === "Space" && evKey === " ") match = true;
-        else if (k.toLowerCase() === evL) match = true;
-        else if (ar === evKey || normalizeAr(ar) === normalizeAr(evKey)) match = true;
-        else if (QWERTY_TO_AR[evKey] === ar || QWERTY_TO_AR[k] === evKey) match = true;
-        else if (k === "Backspace" && evL === "backspace") match = true;
-        else if (k.length === 2 && (k[0] === evKey || k[1] === evKey)) match = true;
-
-        if (match) {
-          matchedKeyEl = el;
-          _animateKeyPress(el, ok);
-          break;
-        }
-      }
-
-      // Educational Hand Kinematics:
-      if (ok) {
-        var f = matchedKeyEl ? matchedKeyEl.dataset.f : _currentHandTargetFinger;
-        animateHandFinger(f, true);
-      } else {
-        // On typo: alert target finger without executing downward press
-        animateHandFinger(_currentHandTargetFinger, false);
-      }
-    }
-
-    function _animateKeyPress(el, ok) {
-      var id = el.id;
-      if (_kbTimeouts[id]) {
-        clearTimeout(_kbTimeouts[id]);
-        _kbTimeouts[id] = null;
-      }
-      el.classList.remove("pressed-ok", "pressed-err");
-      void el.offsetWidth;
-      el.classList.add(ok ? "pressed-ok" : "pressed-err");
-
-      _kbTimeouts[id] = setTimeout(function () {
-        el.classList.remove("pressed-ok", "pressed-err");
-        _kbTimeouts[id] = null;
-      }, 120);
-    }
-
-    // ══════════════════════════════════════════════════════════════
-    // VKEYBOARDHAND ANATOMICAL HANDS ENGINE (BARQTYPE)
-    // Interactive Touch-Typing Hand Poses from ayuday/vkeyboardhand
-    // MIT License - Copyright (c) 2026 ayuday
-    // ══════════════════════════════════════════════════════════════
-
-    var _handVisible = true;
-    var _currentHandTargetKey = 'neutral';
-    var _currentHandTargetFinger = 'th';
-    var _lastTypedHand = 'R';
-    var _handFeedbackTimeout = null;
-
-    var VK_FINGER_MAP = {
-      tilda: 'lp', '1': 'lp', q: 'lp', a: 'lp', z: 'lp',
-      tab: 'lp', capslock: 'lp', 'shift-left': 'lp', control: 'lp',
-      '2': 'lr', w: 'lr', s: 'lr', x: 'lr',
-      '3': 'lm', e: 'lm', d: 'lm', c: 'lm',
-      '4': 'li', '5': 'li', r: 'li', t: 'li', f: 'li', g: 'li', v: 'li', b: 'li',
-      '6': 'ri', '7': 'ri', y: 'ri', u: 'ri', h: 'ri', j: 'ri', n: 'ri', m: 'ri',
-      '8': 'rm', i: 'rm', k: 'rm', comma: 'rm',
-      '9': 'rr', o: 'rr', l: 'rr', dot: 'rr',
-      '0': 'rp', minus: 'rp', equal: 'rp', p: 'rp',
-      'left-center-bracket': 'rp', 'right-center-bracket': 'rp', backslash: 'rp',
-      semicolon: 'rp', 'single-quote': 'rp', slash: 'rp',
-      enter: 'rp', 'shift-right': 'rp', backspace: 'rp', 'alt-right': 'rp',
-      space: 'th'
-    };
-
-    // Map raw key from BARQTYPE keyboard dataset to VKeyboardHand pose ID
-    function mapKeyToVkHandId(rawKey) {
-      if (!rawKey) return 'neutral';
-      var k = String(rawKey).toLowerCase();
-      if (k === ' ' || k === 'space') return 'space';
-      if (k === 'backspace') return 'backspace';
-      if (k === 'enter') return 'enter';
-      if (k === 'tab') return 'tab';
-      if (k === 'caps' || k === 'capslock') return 'capslock';
-      if (k === '`' || k === '~' || k === '`~') return 'tilda';
-      if (k === '-' || k === '_' || k === '-_') return 'minus';
-      if (k === '=' || k === '+' || k === '=+') return 'equal';
-      if (k === '[' || k === '{' || k === '[{') return 'left-center-bracket';
-      if (k === ']' || k === '}' || k === ']}') return 'right-center-bracket';
-      if (k === '\\' || k === '|' || k === '\\|') return 'backslash';
-      if (k === ';' || k === ':' || k === ';:') return 'semicolon';
-      if (k === "'" || k === '"' || k === "'\"") return 'single-quote';
-      if (k === ',' || k === '<' || k === ',<') return 'comma';
-      if (k === '.' || k === '>' || k === '.>') return 'dot';
-      if (k === '/' || k === '?' || k === '/?') return 'slash';
-      if (k.length === 2 && k[0] >= '0' && k[0] <= '9') return k[0];
-      return k;
-    }
-
-    function updateHandTargetFinger(fingerCode, targetKeyEl) {
-      if (!_handVisible) return;
-      if (!targetKeyEl) {
-        setVkHandPose('neutral', false);
-        return;
-      }
-
-      var rawKey = targetKeyEl.dataset.k;
-      var vkKey = mapKeyToVkHandId(rawKey);
-
-      var nextCh = (typeof S !== 'undefined' && S.text && S.idx < S.text.length) ? S.text[S.idx] : null;
-      var isUpperEn = nextCh && (nextCh >= 'A' && nextCh <= 'Z');
-      var isShiftSym = nextCh && ('~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0);
-      var needsShift = !!(isUpperEn || isShiftSym);
-
-      _currentHandTargetKey = vkKey;
-      _currentHandTargetFinger = fingerCode || VK_FINGER_MAP[vkKey] || 'th';
-
-      setVkHandPose(vkKey, needsShift);
-    }
-
-    function setVkHandPose(vkKey, needsShift) {
-      var svg = document.getElementById('hand-both');
-      if (!svg) return;
-
-      // 1. Hide all groups
-      var allG = svg.querySelectorAll('g[id]');
-      for (var i = 0; i < allG.length; i++) {
-        allG[i].classList.add('st0');
-        allG[i].classList.remove('show-hand');
-      }
-
-      // 2. Neutral resting state
-      if (!vkKey || vkKey === 'neutral') {
-        _showVkGroup('hand-neutral-left');
-        _showVkGroup('hand-neutral-right');
-        return;
-      }
-
-      var finger = VK_FINGER_MAP[vkKey] || '';
-      var side = finger ? finger.charAt(0) : '';
-
-      if (side === 'l') _lastTypedHand = 'L';
-      else if (side === 'r') _lastTypedHand = 'R';
-
-      // Spacebar pose
-      if (vkKey === 'space') {
-        _showVkGroup('hand-space');
-        _showVkGroup('hand-neutral-left');
-        return;
-      }
-
-      if (vkKey === 'backspace') {
-        _showVkGroup('hand-equal');
-        _showVkGroup('hand-neutral-left');
-        return;
-      }
-
-      var targetId = 'hand-' + vkKey;
-
-      if (side === 'l') {
-        // Left hand performs key reach
-        _showVkGroup(targetId);
-        if (needsShift) {
-          _showVkGroup('hand-shift-right');
-        } else {
-          _showVkGroup('hand-neutral-right');
-        }
-      } else if (side === 'r') {
-        // Right hand performs key reach
-        _showVkGroup(targetId);
-        if (needsShift) {
-          _showVkGroup('hand-shift-left');
-        } else {
-          _showVkGroup('hand-neutral-left');
-        }
-      } else {
-        _showVkGroup(targetId);
-        _showVkGroup('hand-neutral-right');
-      }
-    }
-
-    function _showVkGroup(id) {
-      var el = document.getElementById(id);
-      if (el) {
-        el.classList.remove('st0');
-        el.classList.add('show-hand');
-      }
-    }
-
-    function animateHandFinger(fingerCode, ok) {
-      if (!_handVisible) return;
-      var svg = document.getElementById('hand-both');
-      if (!svg) return;
-
-      if (_handFeedbackTimeout) {
-        clearTimeout(_handFeedbackTimeout);
-        _handFeedbackTimeout = null;
-      }
-
-      if (ok) {
-        svg.classList.remove('hf-error', 'hf-pressed');
-        void svg.offsetWidth;
-        svg.classList.add('hf-pressed');
-        _handFeedbackTimeout = setTimeout(function () {
-          if (svg) svg.classList.remove('hf-pressed');
-        }, 120);
-      } else {
-        svg.classList.remove('hf-error', 'hf-pressed');
-        void svg.offsetWidth;
-        svg.classList.add('hf-error');
-        _handFeedbackTimeout = setTimeout(function () {
-          if (svg) svg.classList.remove('hf-error');
-        }, 220);
-      }
-    }
-
-    function animateHandForKey(evKey, ok) {
-      if (!_handVisible) return;
-      animateHandFinger(_currentHandTargetFinger, ok);
-    }
-
-    function initHandsOverlay() {
-      setVkHandPose('neutral', false);
-    }
-
-    function toggleHandOverlay() {
-      _handVisible = !_handVisible;
-      var overlay = document.getElementById('vk-hands-wrapper');
-      var stage = document.getElementById('kb-stage');
-      var btn = document.getElementById('hand-toggle-btn');
-      var lbl = document.getElementById('hand-toggle-lbl');
-      var isAr = (typeof S !== 'undefined' && S.lang === 'ar');
-
-      if (_handVisible) {
-        if (overlay) overlay.classList.remove('hidden');
-        if (stage) stage.classList.remove('hands-hidden');
-        if (btn) btn.classList.add('on');
-        if (lbl) lbl.textContent = isAr ? 'إخفاء اليدين' : 'Hide Hands';
-        if (typeof updateTargetKey === 'function') updateTargetKey();
-      } else {
-        if (overlay) overlay.classList.add('hidden');
-        if (stage) stage.classList.add('hands-hidden');
-        if (btn) btn.classList.remove('on');
-        if (lbl) lbl.textContent = isAr ? 'إظهار اليدين' : 'Show Hands';
-      }
-    }
-
-    function toggleKeyboard() {
-      _kbVisible = !_kbVisible;
-      var wrap = document.getElementById("kb-wrap");
-      var btn = document.getElementById("kb-toggle-btn");
-      var lbl = document.getElementById("kb-toggle-lbl");
-      var isAr = (S.lang === "ar");
-
-      if (_kbVisible) {
-        wrap.classList.remove("hidden");
-        btn.classList.add("on");
-        lbl.textContent = isAr ? "إخفاء الكيبورد" : "Hide Keyboard";
-      } else {
-        wrap.classList.add("hidden");
-        btn.classList.remove("on");
-        lbl.textContent = isAr ? "إظهار الكيبورد" : "Show Keyboard";
-      }
-    }
-
-    // ==============================================================
-    // 4. ZERO-LATENCY RAZER GREEN MECHANICAL SWITCH AUDIO
-    // ==============================================================
-    var _actx = null, _masterGain = null;
-    var _rgSounds = [], _spaceSound = null, _errSound = null, _backspaceSound = null;
-
-    function _initAudio() {
-      if (_actx) {
-        if (_actx.state === 'suspended') _actx.resume();
-        return;
-      }
-      try {
-        var AudioCtx = window.AudioContext || window.webkitAudioContext;
-        if (!AudioCtx) return;
-        _actx = new AudioCtx({ latencyHint: 0, sampleRate: 44100 });
-        if (_actx.state === 'suspended') _actx.resume();
-
-        _masterGain = _actx.createGain();
-        _masterGain.gain.setValueAtTime(0.85, _actx.currentTime);
-        _masterGain.connect(_actx.destination);
-
-        var silentBuf = _actx.createBuffer(1, 128, _actx.sampleRate);
-        var silentSrc = _actx.createBufferSource();
-        silentSrc.buffer = silentBuf;
-        silentSrc.loop = true;
-        silentSrc.connect(_actx.destination);
-        silentSrc.start(0);
-
-        _rgSounds = [
-          _synthesizeRGSound(_actx, 0),
-          _synthesizeRGSound(_actx, 1),
-          _synthesizeRGSound(_actx, 2),
-          _synthesizeRGSound(_actx, 3),
-          _synthesizeRGSound(_actx, 4),
-          _synthesizeRGSound(_actx, 5)
-        ];
-        _spaceSound = _synthesizeSpaceSound(_actx);
-        _backspaceSound = _synthesizeRGSound(_actx, 2, false, true);
-        _errSound = _synthesizeErrorSound(_actx);
-      } catch (e) { }
-    }
-
-    function _synthesizeRGSound(actx, variant, isSpace, isBackspace) {
-      return _createRealMechanicalSwitch(actx, variant, isSpace, isBackspace);
-    }
-    function _createRealMechanicalSwitch(actx, variant, isSpace, isBackspace) {
-      var sr = actx.sampleRate;
-      var dur = isSpace ? 0.075 : (isBackspace ? 0.048 : 0.052);
-      var len = Math.floor(sr * dur);
-      var buf = actx.createBuffer(1, len, sr);
-      var d = buf.getChannelData(0);
-
-      var pitch = 1.0 + (variant - 2.5) * 0.035;
-      if (isSpace) pitch *= 0.62;
-      if (isBackspace) pitch *= 1.15;
-
-      var thockFreq = (isSpace ? 185 : 365) * pitch;
-      var thockDecay = isSpace ? 48 : 78;
-      var clackFreq = (isSpace ? 470 : 860) * pitch;
-      var clackDecay = isSpace ? 82 : 125;
-      var snapFreq = (isSpace ? 2100 : 3300) * pitch;
-      var clickFreq = (isSpace ? 2900 : 4100) * pitch;
-      var clickDecay = isSpace ? 360 : 520;
-
-      function makeFilter(f, Q) {
-        var w = 2 * Math.PI * f / sr;
-        var alpha = Math.sin(w) / (2 * Q);
-        var a0 = 1 + alpha;
-        return {
-          b0: alpha / a0,
-          a1: (-2 * Math.cos(w)) / a0,
-          a2: (1 - alpha) / a0,
-          x1: 0, x2: 0, y1: 0, y2: 0,
-          tick: function (x) {
-            var y = this.b0 * (x - this.x2) - this.a1 * this.y1 - this.a2 * this.y2;
-            this.x2 = this.x1;
-            this.x1 = x;
-            this.y2 = this.y1;
-            this.y1 = y;
-            return y;
-          }
-        };
-      }
-
-      var fThock = makeFilter(thockFreq, isSpace ? 3.6 : 4.0);
-      var fClack = makeFilter(clackFreq, 4.6);
-      var fSnap = makeFilter(snapFreq, 5.8);
-      var fClick = makeFilter(clickFreq, 7.2);
-
-      for (var i = 0; i < len; i++) {
-        var t = i / sr;
-        var impactEnv = Math.exp(-t * 1900);
-        var spike = (i === 0) ? 0.95 : (i === 1) ? -0.8 : (i === 2) ? 0.55 : (i === 3) ? -0.35 : 0;
-        var contactNoise = (Math.random() * 2 - 1) * impactEnv;
-        var x = spike * 0.75 + contactNoise * 0.45;
-
-        var resThock = fThock.tick(x);
-        var resClack = fClack.tick(x);
-        var resSnap = fSnap.tick(x);
-        var resClick = fClick.tick(x);
-
-        var bottomOut = Math.sin(2 * Math.PI * thockFreq * t) * Math.exp(-t * thockDecay) * (isSpace ? 0.56 : 0.38);
-        var stemSnap = (Math.random() * 2 - 1) * Math.exp(-t * (isSpace ? 420 : 660)) * 0.18;
-        var highTick = Math.cos(2 * Math.PI * clickFreq * t) * Math.exp(-t * clickDecay) * 0.16;
-
-        var sample = resThock * 1.7 + resClack * 1.15 + resSnap * 0.7 + resClick * 0.5 + bottomOut + stemSnap + highTick;
-
-        var masterEnv = t < 0.0003 ? (t / 0.0003) : Math.exp(-t * (isSpace ? 40 : 60));
-        sample *= masterEnv;
-
-        d[i] = Math.tanh(sample * 1.35) * (isSpace ? 0.92 : 0.86);
-      }
-      return buf;
-    }
-    function _oldRGSound(actx, variant) {
-      var sr = actx.sampleRate;
-      var len = Math.floor(sr * 0.045);
-      var buf = actx.createBuffer(1, len, sr);
-      var d = buf.getChannelData(0);
-      var pitch = 1 + (variant - 1.5) * 0.04;
-      var clickFreq = 4300 * pitch, clackFreq = 1100 * pitch, thudFreq = 260 * pitch;
-
-      for (var i = 0; i < len; i++) {
-        var t = i / sr;
-        var impulse = (i === 0) ? 0.95 : (i === 1) ? -0.75 : (i === 2) ? 0.55 : (i < 8) ? (Math.random() * 2 - 1) * 0.25 : 0;
-        var click = Math.cos(2 * Math.PI * clickFreq * t) * Math.exp(-t * 680) * 0.45;
-        var clack = Math.sin(2 * Math.PI * clackFreq * t) * Math.exp(-t * 220) * 0.35;
-        var thud = Math.sin(2 * Math.PI * thudFreq * t) * Math.exp(-t * 110) * 0.25;
-        d[i] = (impulse * 0.4 + click + clack + thud) * 0.85;
-      }
-      return buf;
-    }
-
-    function _synthesizeSpaceSound(actx) {
-      return _createRealMechanicalSwitch(actx, 0, true, false);
-    }
-    function _oldSpaceSound(actx) {
-      var sr = actx.sampleRate;
-      var len = Math.floor(sr * 0.065);
-      var buf = actx.createBuffer(1, len, sr);
-      var d = buf.getChannelData(0);
-
-      for (var i = 0; i < len; i++) {
-        var t = i / sr;
-        var impulse = (i === 0) ? 0.85 : (i === 1) ? -0.65 : (i < 8) ? (Math.random() * 2 - 1) * 0.2 : 0;
-        var click = Math.cos(2 * Math.PI * 3000 * t) * Math.exp(-t * 500) * 0.3;
-        var clack = Math.sin(2 * Math.PI * 750 * t) * Math.exp(-t * 160) * 0.45;
-        var thud = Math.sin(2 * Math.PI * 210 * t) * Math.exp(-t * 70) * 0.45;
-        d[i] = (impulse * 0.3 + click + clack + thud) * 0.9;
-      }
-      return buf;
-    }
-
-    function _synthesizeErrorSound(actx) {
-      var sr = actx.sampleRate;
-      var len = Math.floor(sr * 0.062);
-      var buf = actx.createBuffer(1, len, sr);
-      var d = buf.getChannelData(0);
-      var thudFreq = 165;
-      for (var i = 0; i < len; i++) {
-        var t = i / sr;
-        var impact = (i === 0) ? 0.7 : (i === 1) ? -0.5 : (i === 2) ? 0.3 : 0;
-        var wobble = (Math.random() * 2 - 1) * Math.exp(-t * 320) * 0.22;
-        var lowThud = Math.sin(2 * Math.PI * thudFreq * t) * Math.exp(-t * 68) * 0.58;
-        var bodyPop = Math.sin(2 * Math.PI * 320 * t) * Math.exp(-t * 115) * 0.32;
-        var sample = (impact * 0.3 + wobble + lowThud + bodyPop) * Math.exp(-t * 42);
-        d[i] = Math.tanh(sample * 1.2) * 0.8;
-      }
-      return buf;
-    }
-    function _oldErrorSound(actx) {
-      var sr = actx.sampleRate;
-      var len = Math.floor(sr * 0.07);
-      var buf = actx.createBuffer(1, len, sr);
-      var d = buf.getChannelData(0);
-
-      for (var i = 0; i < len; i++) {
-        var t = i / sr;
-        var impulse = (i === 0) ? 0.7 : (i === 1) ? -0.5 : 0;
-        var lowThud = Math.sin(2 * Math.PI * 190 * t) * Math.exp(-t * 90) * 0.55;
-        var woodPop = Math.sin(2 * Math.PI * 380 * t) * Math.exp(-t * 140) * 0.35;
-        d[i] = (impulse * 0.25 + lowThud + woodPop) * 0.8;
-      }
-      return buf;
-    }
-
-    window.addEventListener("pointerdown", _initAudio, { passive: true });
-    window.addEventListener("mousedown", _initAudio, { passive: true });
-    window.addEventListener("keydown", _initAudio, { passive: true });
-
-    function playCorrectSound(isSpace, isBackspace) {
-      if (!_actx) _initAudio();
-      if (!_actx) return;
-      if (_actx.state === 'suspended') _actx.resume();
-      try {
-        var src = _actx.createBufferSource();
-        src.buffer = (isSpace && _spaceSound) ? _spaceSound : (isBackspace && _backspaceSound) ? _backspaceSound : _rgSounds[Math.floor(Math.random() * _rgSounds.length)];
-        src.connect(_masterGain);
-        src.start(_actx.currentTime);
-      } catch (e) { }
-    }
-
-    function playErrorSound() {
-      if (!_actx) _initAudio();
-      if (!_actx) return;
-      if (_actx.state === 'suspended') _actx.resume();
-      try {
-        var src = _actx.createBufferSource();
-        if (_errSound) src.buffer = _errSound;
-        src.connect(_masterGain);
-        src.start(_actx.currentTime);
-      } catch (e) { }
-    }
-
-    // ==============================================================
-    // 5. TEST FLOW AND KEYBOARD EVENT HANDLERS
-    // ==============================================================
-    var _arRecentHistory = { common: [], medium: [], code: [], quotes: [], race: [] };
-
-    function getNonRepeatingArIndex(mode, poolLength) {
-      if (!_arRecentHistory[mode]) _arRecentHistory[mode] = [];
-      var hist = _arRecentHistory[mode];
-      var maxRecent = Math.min(Math.floor(poolLength * 0.65), 20);
-      var available = [];
-      for (var i = 0; i < poolLength; i++) {
-        if (hist.indexOf(i) === -1) available.push(i);
-      }
-      if (available.length === 0) {
-        hist.length = 0;
-        for (var j = 0; j < poolLength; j++) available.push(j);
-      }
-      var chosen = available[Math.floor(Math.random() * available.length)];
-      hist.push(chosen);
-      if (hist.length > maxRecent) hist.shift();
-      return chosen;
-    }
-
-    function genText() {
-      if (S.lang === "ar") {
-        var pool = POOLS.ar[S.mode] || POOLS.ar.common;
-        if (S.mode === "quotes") {
-          var numQuotes = S.dur === 15 ? 1 : S.dur === 30 ? 2 : 3;
-          var selectedQuotes = [];
-          for (var q = 0; q < numQuotes; q++) {
-            var qIdx = getNonRepeatingArIndex("quotes", pool.length);
-            selectedQuotes.push(pool[qIdx]);
-          }
-          return selectedQuotes.join(" ");
-        }
-        // For 15 seconds: one complete, inspiring, cohesive paragraph with no repeats
-        if (S.dur === 15) {
-          var idx15 = getNonRepeatingArIndex(S.mode, pool.length);
-          return pool[idx15];
-        }
-        // For 30 and 60 seconds: assemble full cohesive paragraphs with non-repeating start
-        var targetWords = S.dur === 30 ? 55 : 110;
-        var firstIdx = getNonRepeatingArIndex(S.mode, pool.length);
-        var combined = [pool[firstIdx]];
-        var count = pool[firstIdx].split(/\s+/).length;
-        var nextOffset = 1;
-        while (count < targetWords && nextOffset < pool.length) {
-          var nextIdx = (firstIdx + nextOffset) % pool.length;
-          combined.push(pool[nextIdx]);
-          count += pool[nextIdx].split(/\s+/).length;
-          nextOffset++;
-        }
-        return combined.join(" ");
-      }
-
-      var p = POOLS.en[S.mode] || POOLS.en.common;
-      if (S.mode === "quotes") return p[Math.floor(Math.random() * p.length)];
-      var w = [];
-      for (var m = 0; m < 140; m++) w.push(p[Math.floor(Math.random() * p.length)]);
-      return w.join(" ");
-    }
-
-    function initTest() {
-      if (S.ti) clearInterval(S.ti);
-      S.text = genText();
-      S.ch = [];
-      for (var i = 0; i < S.text.length; i++) S.ch.push({ c: S.text[i], s: i === 0 ? "now" : "w" });
-      S.idx = 0;
-      S.on = false;
-      S.fin = false;
-      S.left = S.dur;
-      S.ks = [];
-      S.ec = 0;
-      S.cor = 0;
-      S.t0 = 0;
-      S.tk = 0;
-      S._rendered = false;
-      // Reset caret to blink state
-      var _c = document.getElementById('caret');
-      if (_c) { _c.classList.add('blink'); _c.style.opacity = '1'; }
-
-      document.getElementById("xwpm").innerHTML = "&mdash;";
-      document.getElementById("xacc").innerHTML = "&mdash;";
-      document.getElementById("xerr").textContent = "0";
-      document.getElementById("timer").textContent = S.dur;
-      document.getElementById("timer").className = "num";
-      document.getElementById("hint").style.display = "block";
-      document.getElementById("tcard").className = "card";
-
-      var w = document.getElementById("words");
-      w.scrollTop = 0;
-      w.className = S.lang === "ar" ? "ar" : "";
-      renderChars();
-      updRing(S.dur, S.dur);
-      updateTargetKey();
-
-      var nTest = document.getElementById("n-test");
-      if (!nTest || nTest.classList.contains("on")) {
-        document.getElementById("p-test").className = "page show";
-      }
-      document.getElementById("p-result").className = "page";
-      document.getElementById("inp").value = "";
-      document.getElementById("inp").focus();
-    }
-
-    // ── FAST INCREMENTAL RENDERER ─────────────────────────────────
-    // On first call (or full reset), builds innerHTML once.
-    // On subsequent keystrokes, only patches the 2-3 changed spans.
-    function renderChars() {
-      var wordsEl = document.getElementById('words');
-      var ch = S.ch;
-
-      // Full render: build HTML string once and cache span references
-      if (!S._rendered) {
-        var parts = [], curWord = [];
-        for (var i = 0; i < ch.length; i++) {
-          var o = ch[i];
-          if (o.c === ' ') {
-            if (curWord.length) { parts.push('<span class="word">' + curWord.join('') + '</span>'); curWord = []; }
-            parts.push('<span class="c sp ' + o.s + '" data-ci="' + i + '">&nbsp;</span>');
-          } else {
-            curWord.push('<span class="c ' + o.s + '" data-ci="' + i + '">' + o.c + '</span>');
-          }
-        }
-        if (curWord.length) parts.push('<span class="word">' + curWord.join('') + '</span>');
-        wordsEl.innerHTML = parts.join('');
-        S._rendered = true;
-        S._charEls = wordsEl.querySelectorAll('.c[data-ci]');
-      } else {
-        // Incremental patch: only changed indices (prev, current, next)
-        var dirty = [];
-        var idx = S.idx;
-        if (idx > 0) dirty.push(idx - 1);
-        dirty.push(idx);
-        if (idx + 1 < ch.length) dirty.push(idx + 1);
-        for (var j = 0; j < dirty.length; j++) {
-          var di = dirty[j];
-          var span = S._charEls[di];
-          if (!span) continue;
-          var newCls = 'c' + (ch[di].c === ' ' ? ' sp' : '') + ' ' + ch[di].s;
-          if (span.className !== newCls) span.className = newCls;
-        }
-      }
-
-      // Smooth scroll active char into view
-      var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : wordsEl.querySelector('.c.now');
-      if (curEl) {
-        var cardH = wordsEl.clientHeight;
-        var topPos = curEl.offsetTop;
-        if (topPos > cardH * 0.55) wordsEl.scrollTop = topPos - cardH * 0.28;
-        else wordsEl.scrollTop = 0;
-      }
-      // Move sliding caret to current character position
-      moveCaret();
-    }
-
-    // ── SMOOTH SLIDING CARET ──────────────────────────────────────
-    // Reads current char's rect and slides #caret to it with GPU transition
-    var caretIdleTimer = null;
-    var lastCaretY = -1;
-
-    function moveCaret(instant) {
-      var caretEl = document.getElementById('caret');
-      if (!caretEl) return;
-
-      var card = document.getElementById('tcard');
-      var wordsEl = document.getElementById('words');
-      if (!card || !wordsEl) return;
-
-      var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : null;
-      if (!curEl) {
-        caretEl.style.opacity = '0';
-        return;
-      }
-
-      // 1. الإلغاء الفوري للوميض أثناء الكتابة لتكون ثابتة وواضحة بدون تشتيت
-      caretEl.classList.remove('blink');
-      caretEl.style.opacity = '1';
-
-      // 2. تفعيل وميض خفيف وهادئ فقط إذا توقف المستخدم عن الكتابة لأكثر من نصف ثانية
-      if (caretIdleTimer) clearTimeout(caretIdleTimer);
-      caretIdleTimer = setTimeout(function () {
-        if (!S.fin) {
-          caretEl.classList.add('blink');
-        }
-      }, 550);
-
-      var cardRect = card.getBoundingClientRect();
-      var charRect = curEl.getBoundingClientRect();
-
-      var isAr = S.lang === 'ar';
-      var caretX, caretY, caretH;
-
-      caretH = Math.round(charRect.height * 0.92);
-      caretY = charRect.top - cardRect.top + (charRect.height - caretH) / 2;
-
-      if (isAr) {
-        caretX = charRect.right - cardRect.left - 1.5;
-      } else {
-        caretX = charRect.left - cardRect.left - 1.5;
-      }
-
-      // 3. حركة سلسة ومرنة وسريعة بدون انقطاع أو قفز قطري عند الانتقال لسطر جديد
-      if (instant || (lastCaretY !== -1 && Math.abs(caretY - lastCaretY) > 15)) {
-        caretEl.style.transition = 'none';
-        caretEl.style.height = caretH + 'px';
-        caretEl.style.transform = 'translate(' + caretX + 'px,' + caretY + 'px)';
-        void caretEl.offsetWidth;
-        caretEl.style.transition = 'transform 70ms cubic-bezier(0.2, 0.9, 0.3, 1), height 70ms ease, opacity 0.15s ease';
-      } else {
-        caretEl.style.height = caretH + 'px';
-        caretEl.style.transform = 'translate(' + caretX + 'px,' + caretY + 'px)';
-      }
-      lastCaretY = caretY;
-    }
-
-    function updRing(l, t) {
-      var r = document.getElementById("ring");
-      r.style.strokeDashoffset = 201.06 * (1 - l / t);
-      r.style.stroke = (l <= 5 && S.on) ? "var(--err)" : "var(--accent)";
-    }
-
-    // ── TEST COMPLETION & TELEMETRY ENGINE ─────────────────────────
-    function finishTest() {
-      if (S.ti) clearInterval(S.ti);
-      S.fin = true;
-      S.on = false;
-      document.getElementById("tcard").className = "card";
-      document.getElementById("hint").style.display = "none";
-      // Hide caret when done
-      var _c = document.getElementById('caret');
-      if (_c) { _c.style.opacity = '0'; _c.classList.remove('blink'); }
-
-      var el = Math.max(0.5, (performance.now() - S.t0) / 1000);
-      var cor = 0, em = {}, tm = {};
-      for (var i = 0; i < S.ks.length; i++) {
-        var k = S.ks[i];
-        if (k.ok) cor++;
-        else em[k.ex] = (em[k.ex] || 0) + 1;
-        if (k.ok && k.dur > 0 && k.dur < 2000) {
-          if (!tm[k.ch]) tm[k.ch] = [];
-          tm[k.ch].push(k.dur);
-        }
-      }
-      var errs = 0;
-      for (var x in em) errs += em[x];
-
-      // Consistency % calculation (coefficient of variation of keystroke intervals)
-      var durs = [];
-      for (var di = 0; di < S.ks.length; di++) {
-        if (S.ks[di].dur > 20 && S.ks[di].dur < 2200) durs.push(S.ks[di].dur);
-      }
-      var consistency = 90;
-      if (durs.length > 3) {
-        var sumD = 0;
-        for (var j = 0; j < durs.length; j++) sumD += durs[j];
-        var meanD = sumD / durs.length;
-        var varD = 0;
-        for (var j = 0; j < durs.length; j++) varD += Math.pow(durs[j] - meanD, 2);
-        var sd = Math.sqrt(varD / durs.length);
-        var cov = sd / (meanD || 1);
-        consistency = Math.max(10, Math.min(100, Math.round(100 * (1 - Math.min(cov, 0.9)))));
-      }
-
-      // Timeline calculation for dynamic SVG chart
-      var totalSec = Math.max(1, Math.round(el));
-      var timeline = [];
-      var peakWpm = 0;
-      for (var sec = 1; sec <= totalSec; sec++) {
-        var maxMs = sec * 1000;
-        var corSec = 0, totSec = 0, errSec = 0;
-        for (var ki = 0; ki < S.ks.length; ki++) {
-          var item = S.ks[ki];
-          var tVal = (item.t !== undefined) ? item.t : ((ki / S.ks.length) * el * 1000);
-          if (tVal <= maxMs) {
-            totSec++;
-            if (item.ok) corSec++;
-          }
-          if (tVal > (sec - 1) * 1000 && tVal <= maxMs && !item.ok) {
-            errSec++;
-          }
-        }
-        var curWpm = calcWPM(corSec, maxMs);
-        var curRaw = calcWPM(totSec, maxMs);
-        if (curWpm > peakWpm) peakWpm = curWpm;
-        timeline.push({ sec: sec, wpm: curWpm, raw: curRaw, errs: errSec });
-      }
-
-      var finalWpm = calcWPM(cor, el * 1000);
-      if (peakWpm === 0) peakWpm = finalWpm;
-
-      // Speed Tier Determination
-      var isAr = (S.lang === "ar");
-      var tier = {
-        name: isAr ? "⚡ فئة البرق الخاطف" : "⚡ Supersonic Flash",
-        color: "var(--accent)",
-        glow: "var(--accent-glow)",
-        percentile: isAr ? "سرعة قياسية خارقة تفوق 90% من الطباعين" : "Elite pace! Top 10% speed"
-      };
-      if (finalWpm >= 110) {
-        tier = {
-          name: isAr ? "⚡ البرق الخارق (Supersonic)" : "⚡ Supersonic Champion",
-          color: "#c084fc", glow: "rgba(192,132,252,0.45)",
-          percentile: isAr ? "مستوى أسطوري! أسرع من 99% من المتسابقين" : "God tier! Faster than 99% of racers"
-        };
-      } else if (finalWpm >= 85) {
-        tier = {
-          name: isAr ? "⚡ البرق الخاطف (Lightning)" : "⚡ Lightning Fast",
-          color: "var(--accent)", glow: "var(--accent-glow)",
-          percentile: isAr ? "سرعة قياسية خارقة تفوق 90% من الطباعين" : "Elite pace! Top 10% speed"
-        };
-      } else if (finalWpm >= 65) {
-        tier = {
-          name: isAr ? "🚀 الصاروخ المنطلق (Rocket)" : "🚀 Rocket Swift",
-          color: "#38bdf8", glow: "rgba(56,189,248,0.4)",
-          percentile: isAr ? "سرعة متقدمة ومنافسة قوية في السباقات" : "Advanced competitive racer speed"
-        };
-      } else if (finalWpm >= 45) {
-        tier = {
-          name: isAr ? "🦅 الصقر الطائر (Falcon)" : "🦅 Flying Falcon",
-          color: "#4ade80", glow: "rgba(74,222,128,0.4)",
-          percentile: isAr ? "سرعة جيدة جداً وتفوق المعدل العالمي" : "Solid typing pace above global average"
-        };
-      } else {
-        tier = {
-          name: isAr ? "🎯 المتدرب الواعد (Rising Star)" : "🎯 Rising Star",
-          color: "#94a3b8", glow: "rgba(148,163,184,0.3)",
-          percentile: isAr ? "بداية ممتازة، التمرين المنتظم سيضاعف سرعتك" : "Great start, keep practicing to boost speed"
-        };
-      }
-
-      // Check Personal Best
-      var prevRuns = gR();
-      var prevBest = 0;
-      for (var pr = 0; pr < prevRuns.length; pr++) {
-        if (prevRuns[pr].wpm > prevBest) prevBest = prevRuns[pr].wpm;
-      }
-      var isNewRecord = (finalWpm > 0 && finalWpm > prevBest && prevRuns.length > 0);
-
-      var res = {
-        wpm: finalWpm,
-        raw: calcWPM(S.ks.length, el * 1000),
-        acc: calcAcc(cor, S.ks.length),
-        cor: cor,
-        errs: errs,
-        tot: S.ks.length,
-        dur: el,
-        em: em,
-        tm: tm,
-        ts: Date.now(),
-        lang: S.lang,
-        consistency: consistency,
-        timeline: timeline,
-        peakWpm: peakWpm,
-        tier: tier,
-        isNewRecord: isNewRecord
-      };
-
-      window._lastRes = res;
-      pR(res);
-      showResult(res);
-      chkAch();
-    }
-
-    // ── SHOWCASE RESULT DASHBOARD ─────────────────────────────────
-    // ── SHOWCASE RESULT DASHBOARD ─────────────────────────────────
-    function showResult(r) {
-      document.getElementById("p-test").className = "page";
-      var rp = document.getElementById("p-result");
-      rp.className = "page show";
-
-      var isAr = (S.lang === "ar");
-
-      // 1. Text Labels
-      var setTxt = function (id, txt) {
-        var el = document.getElementById(id);
-        if (el) el.textContent = txt;
-      };
-      setTxt("r-status-badge-txt", isAr ? "انتهت المحاولة بنجاح" : "Attempt completed successfully");
-      setTxt("r-hero-subheading", isAr ? "كل حرف تكتبه يجعلك أفضل من الأمس، استمر في التطور." : "Every key you type makes you better than yesterday. Keep pushing forward.");
-      setTxt("r-retry-title", isAr ? "تحدَّ نفسك مرة أخرى" : "Challenge yourself again");
-      setTxt("r-btn-retest-txt", isAr ? "إعادة الاختبار" : "Retest");
-      setTxt("r-lbl-speed", isAr ? "السرعة" : "Speed");
-      setTxt("r-lbl-acc", isAr ? "الدقة" : "Accuracy");
-      setTxt("r-chart-title", isAr ? "معدل السرعة خلال الاختبار" : "Speed rate during test");
-      setTxt("r-leg-actual", isAr ? "السرعة الفعلية" : "Actual Speed");
-      setTxt("r-leg-avg", isAr ? "السرعة المتوسطة" : "Average Speed");
-      setTxt("r-lbl-dur", isAr ? "مدة الاختبار" : "Duration");
-      setTxt("r-lbl-tot", isAr ? "عدد الأحرف الكلي" : "Total Characters");
-      setTxt("r-lbl-cor", isAr ? "الأحرف الصحيحة" : "Correct Characters");
-      setTxt("r-lbl-err", isAr ? "الأخطاء" : "Errors");
-      setTxt("r-lbl-cons", isAr ? "الالتزام" : "Consistency");
-      setTxt("r-lbl-next-goal", isAr ? "الهدف القادم" : "Next Goal");
-      setTxt("r-btn-replay-lbl", isAr ? "تحدَّ نفسك من جديد" : "Challenge yourself again");
-      setTxt("r-btn-copy-lbl", isAr ? "نسخ النتيجة" : "Copy Result");
-      setTxt("r-diag-title", isAr ? "الحروف الأكثر تعثراً (Mistake Keys):" : "Mistake Keys:");
-      setTxt("r-drill-lbl", isAr ? "تدريب الأخطاء" : "Drill Mistakes");
-
-      // Buttons titles & hints
-      var btnReplay = document.getElementById("r-btn-replay");
-      if (btnReplay) btnReplay.title = isAr ? "إعادة نفس النص (Tab)" : "Restart same test (Tab)";
-      var btnCopy = document.getElementById("r-btn-copy");
-      if (btnCopy) btnCopy.title = isAr ? "نسخ النتيجة للمشاركة" : "Copy result to share";
-
-      // 2. Metrics & Gauge
-      var rw = document.getElementById("rw");
-      var ra = document.getElementById("ra");
-      var rCons = document.getElementById("r-consistency");
-      var rCor = document.getElementById("r-cor-cnt");
-      var re = document.getElementById("re");
-      var rTot = document.getElementById("r-tot-cnt");
-      var rt = document.getElementById("rt");
-
-      if (rw) rw.textContent = r.wpm;
-      if (ra) ra.textContent = r.acc + "%";
-      if (rCons) rCons.textContent = (r.consistency || 90) + "%";
-      if (rCor) rCor.textContent = r.cor;
-      if (re) re.textContent = r.errs;
-      if (rTot) rTot.textContent = r.tot;
-      if (rt) rt.textContent = Math.round(r.dur) + "s";
-
-      // Circular gauge animation
-      var arc = document.getElementById("r-gauge-arc");
-      if (arc) {
-        var wpmRatio = Math.min(1, Math.max(0.05, r.wpm / 110));
-        arc.style.strokeDashoffset = 330 * (1 - wpmRatio);
-      }
-
-      // Trends comparison
-      var prevRuns = gR();
-      var wDiff = 4, aDiff = 5;
-      if (prevRuns.length > 1) {
-        var last = prevRuns[prevRuns.length - 2];
-        wDiff = r.wpm - last.wpm;
-        aDiff = r.acc - last.acc;
-      }
-      var wDiffEl = document.getElementById("r-wpm-diff");
-      if (wDiffEl) {
-        wDiffEl.textContent = (wDiff >= 0 ? "+" : "") + wDiff;
-        var wTrend = document.getElementById("r-wpm-trend");
-        if (wTrend) wTrend.className = wDiff < 0 ? "res-gauge-trend down" : "res-gauge-trend";
-      }
-      var aDiffEl = document.getElementById("r-acc-diff");
-      if (aDiffEl) aDiffEl.textContent = (aDiff >= 0 ? "+" : "") + aDiff + "%";
-
-      // Evaluation badge
-      var evalText = document.getElementById("r-eval-text");
-      if (evalText) {
-        if (r.wpm >= 85) evalText.textContent = isAr ? "أداء أسطوري! سرعة خارقة تفوق 90% 🏆" : "God tier speed! Top 10% 🏆";
-        else if (r.wpm >= 60) evalText.textContent = isAr ? "سرعة متقدمة ومنافسة قوية جداً! 🚀" : "Advanced competitive racer speed! 🚀";
-        else if (r.wpm >= 35) evalText.textContent = isAr ? "نتيجة ممتازة، بداية انطلاقة قوية! ⚡" : "Great result, solid foundation! ⚡";
-        else evalText.textContent = isAr ? "نتيجة جيدة، يمكنك أفضل! 🏆" : "Good result, you can do better! 🏆";
-      }
-
-      // Next Goal calculation
-      var nextTarget = Math.max(r.wpm + 1, Math.ceil((r.wpm + 1) / 5) * 5);
-      if (nextTarget === r.wpm) nextTarget = r.wpm + 5;
-      setTxt("r-next-target-wpm", nextTarget + " WPM");
-      setTxt("r-goal-target-num", nextTarget + " WPM");
-      setTxt("r-goal-ratio", r.wpm + " / " + nextTarget);
-      var goalPct = Math.min(100, Math.round((r.wpm / nextTarget) * 100));
-      var goalFill = document.getElementById("r-goal-bar-fill");
-      if (goalFill) goalFill.style.width = goalPct + "%";
-
-      // Dynamic SVG Chart
-      renderBarqChart(r);
-
-      // Diagnostics: Mistake Keys
-      var te = [];
-      for (var c in r.em) te.push([c, r.em[c]]);
-      te.sort(function (a, b) { return b[1] - a[1]; });
-      te = te.slice(0, 8);
-      var ec = document.getElementById("rerr");
-      var drillBtn = document.getElementById("r-drill-btn");
-      var mistWrap = document.getElementById("r-mistakes-wrap");
-      if (te.length && ec) {
-        if (mistWrap) mistWrap.style.display = "block";
-        var h = "";
-        for (var i = 0; i < te.length; i++) {
-          var ch = te[i][0] === " " ? "⎵" : te[i][0];
-          h += "<div class='barq-chip'><div class='ch2'>" + ch + "</div><div class='cn'>x" + te[i][1] + "</div></div>";
-        }
-        ec.innerHTML = h;
-        if (drillBtn) drillBtn.style.display = "inline-flex";
-      } else {
-        if (mistWrap) mistWrap.style.display = "none";
-      }
-
-      if (window.initAllVectorIcons) initAllVectorIcons();
-    }
-
-    // ── DYNAMIC PURE SVG SPEED CURVE CHART ─────────────────────────
-    function renderBarqChart(r) {
-      var svg = document.getElementById("r-speed-chart");
-      var emptyMsg = document.getElementById("barq-chart-empty");
-      if (!svg) return;
-
-      var timeline = r.timeline || [];
-      if (timeline.length < 2) {
-        var durSec = Math.max(1, Math.round(r.dur));
-        timeline = [
-          { sec: 1, wpm: Math.round(r.wpm * 0.82), raw: Math.round(r.raw * 0.85), errs: 0 },
-          { sec: durSec, wpm: r.wpm, raw: r.raw, errs: r.errs }
-        ];
-      }
-      if (emptyMsg) emptyMsg.style.display = "none";
-
-      var W = 880, H = 230;
-      var padL = 48, padR = 32, padT = 32, padB = 34;
-      var plotW = W - padL - padR;
-      var plotH = H - padT - padB;
-
-      var maxVal = 30;
-      for (var i = 0; i < timeline.length; i++) {
-        if (timeline[i].wpm > maxVal) maxVal = timeline[i].wpm;
-        if (timeline[i].raw > maxVal) maxVal = timeline[i].raw;
-      }
-      var yMax = Math.ceil((maxVal + 6) / 10) * 10;
-      if (yMax < 30) yMax = 30;
-
-      var themeAccent = (getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#e8af47').trim();
-      var html = "";
-      html += '<defs>';
-      html += '<linearGradient id="barqAreaGrad" x1="0" y1="0" x2="0" y2="1">';
-      html += '<stop offset="0%" stop-color="' + themeAccent + '" stop-opacity="0.28"/>';
-      html += '<stop offset="100%" stop-color="' + themeAccent + '" stop-opacity="0"/>';
-      html += '</linearGradient>';
-      html += '<filter id="barqGlow" x="-20%" y="-20%" width="140%" height="140%">';
-      html += '<feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="' + themeAccent + '" flood-opacity="0.5"/>';
-      html += '</filter>';
-      html += '</defs>';
-
-      // Horizontal grid lines (0, 10, 20, 30...)
-      var numSteps = Math.min(5, Math.floor(yMax / 10));
-      for (var g = 0; g <= numSteps; g++) {
-        var stepVal = Math.round((g / numSteps) * yMax);
-        var yPos = padT + plotH - ((stepVal / yMax) * plotH);
-        html += '<line x1="' + padL + '" y1="' + yPos + '" x2="' + (padL + plotW) + '" y2="' + yPos + '" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>';
-        html += '<text x="' + (padL - 10) + '" y="' + (yPos + 4) + '" fill="#64748b" font-size="10" font-family="var(--fen)" text-anchor="end">' + stepVal + '</text>';
-      }
-
-      var totalSec = timeline[timeline.length - 1].sec || Math.max(1, Math.round(r.dur));
-      var pts = [];
-      for (var j = 0; j < timeline.length; j++) {
-        var item = timeline[j];
-        var x = padL + ((item.sec / totalSec) * plotW);
-        var y = padT + plotH - ((item.wpm / yMax) * plotH);
-        pts.push({ x: x, y: y, item: item });
-      }
-
-      // Smooth Curve path
-      var pathD = "M " + pts[0].x + " " + pts[0].y;
-      for (var k = 0; k < pts.length - 1; k++) {
-        var p0 = pts[k];
-        var p1 = pts[k + 1];
-        var mx = (p0.x + p1.x) / 2;
-        pathD += " C " + mx + " " + p0.y + ", " + mx + " " + p1.y + ", " + p1.x + " " + p1.y;
-      }
-
-      var areaD = pathD + " L " + pts[pts.length - 1].x + " " + (padT + plotH) + " L " + pts[0].x + " " + (padT + plotH) + " Z";
-      html += '<path d="' + areaD + '" fill="url(#barqAreaGrad)"/>';
-      html += '<path d="' + pathD + '" fill="none" stroke="' + themeAccent + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#barqGlow)"/>';
-
-      // Dashed blue average speed line
-      var yAvgPos = padT + plotH - ((r.wpm / yMax) * plotH);
-      html += '<line x1="' + padL + '" y1="' + yAvgPos + '" x2="' + (padL + plotW) + '" y2="' + yAvgPos + '" stroke="#38bdf8" stroke-dasharray="5,4" stroke-width="1.8"/>';
-
-      // Error markers: red ✕ marks
-      for (var m = 0; m < pts.length; m++) {
-        var pt = pts[m];
-        if (pt.item.errs > 0) {
-          var sz = 4.5;
-          html += '<g transform="translate(' + pt.x + ',' + pt.y + ')">';
-          html += '<line x1="-' + sz + '" y1="-' + sz + '" x2="' + sz + '" y2="' + sz + '" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round"/>';
-          html += '<line x1="-' + sz + '" y1="' + sz + '" x2="' + sz + '" y2="-' + sz + '" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round"/>';
-          html += '</g>';
-        }
-      }
-
-      // Peak / Pause highlight marker
-      if (pts.length > 2) {
-        var maxPt = pts[0];
-        for (var pi = 0; pi < pts.length; pi++) {
-          if (pts[pi].item.wpm > maxPt.item.wpm) maxPt = pts[pi];
-        }
-        if (maxPt.item.wpm > 0) {
-          html += '<line x1="' + maxPt.x + '" y1="' + padT + '" x2="' + maxPt.x + '" y2="' + (padT + plotH) + '" stroke="' + themeAccent + '" stroke-opacity="0.45" stroke-dasharray="3,3" stroke-width="1.2"/>';
-          html += '<circle cx="' + maxPt.x + '" cy="' + maxPt.y + '" r="5" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="2"/>';
-          var tipW = 80, tipH = 26;
-          var tipX = Math.max(padL, Math.min(padL + plotW - tipW, maxPt.x - tipW / 2));
-          var tipY = Math.max(padT, maxPt.y - 34);
-          html += '<rect x="' + tipX + '" y="' + tipY + '" width="' + tipW + '" height="' + tipH + '" rx="6" fill="#1e293b" stroke="' + themeAccent + '" stroke-opacity="0.5" stroke-width="1"/>';
-          html += '<text x="' + (tipX + tipW / 2) + '" y="' + (tipY + 17) + '" fill="#ffffff" font-size="11" font-weight="700" font-family="var(--fen)" text-anchor="middle">' + maxPt.item.wpm + ' WPM</text>';
-        }
-      }
-
-      // Final point dot
-      var lastPt = pts[pts.length - 1];
-      html += '<circle cx="' + lastPt.x + '" cy="' + lastPt.y + '" r="4.5" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="2"/>';
-
-      // X-Axis time intervals (e.g. 0:00, 0:05, 0:10, 0:15, 0:20, 0:24)
-      var numIntervals = Math.min(6, Math.max(3, totalSec));
-      for (var xi = 0; xi <= numIntervals; xi++) {
-        var sVal = Math.round((xi / numIntervals) * totalSec);
-        var xPos = padL + ((sVal / totalSec) * plotW);
-        var mTime = Math.floor(sVal / 60);
-        var sTime = sVal % 60;
-        var timeStr = mTime + ":" + (sTime < 10 ? "0" : "") + sTime;
-        html += '<text x="' + xPos + '" y="' + (H - 8) + '" fill="#64748b" font-size="10" font-family="var(--fen)" text-anchor="middle">' + timeStr + '</text>';
-      }
-      var isAr = (S.lang === "ar");
-      html += '<text x="' + (padL + plotW) + '" y="' + (padT + plotH + 16) + '" fill="#64748b" font-size="10" font-family="var(--far)" text-anchor="end">' + (isAr ? "الوقت" : "Time") + '</text>';
-
-      svg.innerHTML = html;
-    }
-
-    // ── RESULT ACTIONS & SHORTCUT HANDLERS ─────────────────────────
-    function repeatCurrentTest() {
-      if (S.ti) clearInterval(S.ti);
-      S.idx = 0;
-      S.on = false;
-      S.fin = false;
-      S.left = S.dur;
-      S.ks = [];
-      S.ec = 0;
-      S.cor = 0;
-      S.t0 = 0;
-      S.tk = 0;
-      S._rendered = false;
-      S.ch = [];
-      for (var i = 0; i < S.text.length; i++) S.ch.push({ c: S.text[i], s: i === 0 ? "now" : "w" });
-
-      var _c = document.getElementById('caret');
-      if (_c) { _c.classList.add('blink'); _c.style.opacity = '1'; }
-
-      document.getElementById("xwpm").innerHTML = "&mdash;";
-      document.getElementById("xacc").innerHTML = "&mdash;";
-      document.getElementById("xerr").textContent = "0";
-      document.getElementById("timer").textContent = S.dur;
-      document.getElementById("timer").className = "num";
-      document.getElementById("hint").style.display = "block";
-      document.getElementById("tcard").className = "card";
-
-      var w = document.getElementById("words");
-      w.scrollTop = 0;
-      w.className = S.lang === "ar" ? "ar" : "";
-      renderChars();
-      updRing(S.dur, S.dur);
-      updateTargetKey();
-
-      document.getElementById("p-test").className = "page show";
-      document.getElementById("p-result").className = "page";
-      document.getElementById("inp").value = "";
-      document.getElementById("inp").focus();
-    }
-
-    function drillMissedKeys() {
-      if (!window._lastRes || !window._lastRes.em) return;
-      var isAr = (S.lang === "ar");
-      var em = window._lastRes.em;
-      var problemKeys = Object.keys(em);
-      if (!problemKeys.length) {
-        showToast(isAr ? "تنبيه" : "Notice", isAr ? "لا توجد أخطاء لتدريبها! أداؤك كان مثالياً" : "Zero errors! Your run was flawless", TM_ICONS.sparkle);
-        return;
-      }
-
-      var pool = POOLS[S.lang][S.mode] || POOLS[S.lang].common;
-      var allWords = [];
-      if (Array.isArray(pool)) {
-        for (var p = 0; p < pool.length; p++) {
-          var splitWords = pool[p].split(/\s+/);
-          for (var sw = 0; sw < splitWords.length; sw++) {
-            var cleanW = splitWords[sw].replace(/[.,!?:؛،()"-]/g, '').trim();
-            if (cleanW.length >= 2) allWords.push(cleanW);
-          }
-        }
-      }
-
-      var matches = [];
-      for (var i = 0; i < allWords.length; i++) {
-        var word = allWords[i];
-        for (var k = 0; k < problemKeys.length; k++) {
-          if (word.indexOf(problemKeys[k]) >= 0) {
-            matches.push(word);
-            break;
-          }
-        }
-      }
-
-      if (matches.length < 15) {
-        for (var j = 0; j < 30; j++) {
-          var pk = problemKeys[j % problemKeys.length];
-          matches.push(pk + pk + " " + pk);
-        }
-      }
-
-      matches.sort(function () { return Math.random() - 0.5; });
-      var drillText = matches.slice(0, 35).join(" ");
-
-      if (S.ti) clearInterval(S.ti);
-      S.text = drillText;
-      S.ch = [];
-      for (var c = 0; c < S.text.length; c++) S.ch.push({ c: S.text[c], s: c === 0 ? "now" : "w" });
-      S.idx = 0;
-      S.on = false;
-      S.fin = false;
-      S.left = S.dur;
-      S.ks = [];
-      S.ec = 0;
-      S.cor = 0;
-      S.t0 = 0;
-      S.tk = 0;
-      S._rendered = false;
-
-      var _c = document.getElementById('caret');
-      if (_c) { _c.classList.add('blink'); _c.style.opacity = '1'; }
-
-      document.getElementById("xwpm").innerHTML = "&mdash;";
-      document.getElementById("xacc").innerHTML = "&mdash;";
-      document.getElementById("xerr").textContent = "0";
-      document.getElementById("timer").textContent = S.dur;
-      document.getElementById("timer").className = "num";
-      document.getElementById("hint").style.display = "block";
-      document.getElementById("tcard").className = "card";
-
-      var w = document.getElementById("words");
-      w.scrollTop = 0;
-      w.className = S.lang === "ar" ? "ar" : "";
-      renderChars();
-      updRing(S.dur, S.dur);
-      updateTargetKey();
-
-      document.getElementById("p-test").className = "page show";
-      document.getElementById("p-result").className = "page";
-      document.getElementById("inp").value = "";
-      document.getElementById("inp").focus();
-
-      showToast(isAr ? "بدء التمرين المركز" : "Focused Drill Started", isAr ? ("تم تخصيص الكلمات للحروف: " + problemKeys.join(" ")) : ("Drill generated for problematic keys: " + problemKeys.join(" ")), TM_ICONS.target);
-    }
-
-    function showToast(title, msg, ico) {
-      var con = document.getElementById("toasts");
-      if (!con) return;
-      var d = document.createElement("div");
-      d.className = "toast2";
-      d.innerHTML = "<span style='font-size:22px;display:flex;align-items:center;color:var(--accent)'>" + (ico || TM_ICONS.bolt) + "</span><div><div style='font-size:11px;color:var(--accent);text-transform:uppercase;font-weight:700'>" + title + "</div><div style='font-size:13px;font-weight:600;color:var(--text)'>" + msg + "</div></div>";
-      con.appendChild(d);
-      setTimeout(function () {
-        d.style.opacity = "0";
-        d.style.transition = "opacity .3s";
-        setTimeout(function () { d.remove(); }, 300);
-      }, 3200);
-    }
-
-    function copyBarqResult() {
-      var isAr = (S.lang === "ar");
-      var w = document.getElementById("rw") ? document.getElementById("rw").textContent : "0";
-      var r = document.getElementById("rr") ? document.getElementById("rr").textContent : "0";
-      var a = document.getElementById("ra") ? document.getElementById("ra").textContent : "0%";
-      var c = document.getElementById("r-consistency") ? document.getElementById("r-consistency").textContent : "0%";
-      var t = document.getElementById("rt") ? document.getElementById("rt").textContent : "30s";
-      var tier = (window._lastRes && window._lastRes.tier) ? window._lastRes.tier.name : "";
-
-      var text = isAr ?
-        ("⚡ Barqtype // نتيجة السباق الخاطف\n" +
-          "━━━━━━━━━━━━━━━━━━━━━\n" +
-          "⚡ السرعة الصافية: " + w + " WPM (Raw: " + r + ")\n" +
-          "🎯 الدقة: " + a + " | الاتساق: " + c + "\n" +
-          "⏱ المدة: " + t + " | الفئة: " + tier + "\n" +
-          "━━━━━━━━━━━━━━━━━━━━━\n" +
-          "تحداني في سباقات Barqtype!") :
-        ("⚡ Barqtype // Lightning Typing Result\n" +
-          "━━━━━━━━━━━━━━━━━━━━━\n" +
-          "⚡ Net Speed: " + w + " WPM (Raw: " + r + ")\n" +
-          "🎯 Accuracy: " + a + " | Consistency: " + c + "\n" +
-          "⏱ Duration: " + t + " | Tier: " + tier + "\n" +
-          "━━━━━━━━━━━━━━━━━━━━━\n" +
-          "Challenge me on Barqtype!");
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(function () {
-          showToast(isAr ? "تم النسخ بنجاح" : "Copied Successfully", isAr ? "تم نسخ بطاقة نتيجتك إلى الحافظة" : "Result card copied to clipboard", TM_ICONS.check);
-        }).catch(function () {
-          showToast(isAr ? "تنبيه" : "Notice", isAr ? "تعذر النسخ التلقائي" : "Could not copy automatically", TM_ICONS.warning);
-        });
-      } else {
-        showToast(isAr ? "تم التحديد" : "Ready", isAr ? "تم تجهيز ملخص النتيجة" : "Result summary prepared", TM_ICONS.check);
-      }
-    }
-
-
-    /* UNIFIED SHARED INPUT ENGINE (DESKTOP + MOBILE) */
-    var _lastMismatchToastTime = 0;
-
-    function handleCharacterTyped(inputKey, isBackspace) {
-      if (S.fin) return;
-
-      if (isBackspace) {
-        if (S.idx > 0) {
-          playCorrectSound(false, true);
-          highlightPressedKey("Backspace", true);
-          S.idx--;
-          S.ch[S.idx].s = "now";
-          if (S.idx + 1 < S.ch.length) S.ch[S.idx + 1].s = "w";
-          renderChars();
-          updateTargetKey();
-        }
-        return;
-      }
-
-      if (!inputKey) return;
-      var ex = S.text[S.idx];
-      if (!ex) return;
-
-      // Language mismatch hint for mobile & desktop
-      if (S.lang === "ar" && /[a-zA-Z]/.test(inputKey)) {
-        var nowT = Date.now();
-        if (nowT - _lastMismatchToastTime > 6000) {
-          _lastMismatchToastTime = nowT;
-          showToast(
-            "تنبيه لغة الإدخال",
-            "تم اختيار اللغة العربية في التطبيق، يرجى تحويل لوحة المفاتيح إلى العربية ⌨️",
-            TM_ICONS.warning
-          );
-        }
-      }
-
-      var ok = matchChar(inputKey, ex);
-
-      if (ok) {
-        playCorrectSound(ex === " ");
-      } else {
-        playErrorSound();
-      }
-      highlightPressedKey(inputKey, ok);
-
-      // Start timer on first keystroke
-      if (!S.on && S.idx === 0) {
-        S.on = true;
-        S.t0 = performance.now();
-        S.tk = S.t0;
-        var hintEl = document.getElementById("hint");
-        if (hintEl) hintEl.style.display = "none";
-        var tcardEl = document.getElementById("tcard");
-        if (tcardEl) tcardEl.className = "card glow";
-        var _caret = document.getElementById('caret');
-        if (_caret) _caret.classList.remove('blink');
-        startTimer();
-      }
-
-      var now = performance.now();
-      var dur = S.tk > 0 ? (now - S.tk) : 0;
-      S.tk = now;
-      if (ok) S.cor++; else S.ec++;
-      S.ks.push({ ch: inputKey, ex: ex, ok: ok, dur: dur, t: (now - S.t0) });
-      S.ch[S.idx].s = ok ? "ok" : "bad";
-      S.idx++;
-      if (S.idx < S.ch.length) S.ch[S.idx].s = "now";
-
-      // Batch DOM stat updates via rAF
-      var _el2 = now - S.t0;
-      var _cor2 = S.cor;
-      var _ks_len = S.ks.length;
-      var _ec = S.ec;
-      requestAnimationFrame(function () {
-        var w = calcWPM(_cor2, _el2);
-        var a = calcAcc(_cor2, _ks_len);
-        var wEl = document.getElementById("xwpm");
-        var aEl = document.getElementById("xacc");
-        var eEl = document.getElementById("xerr");
-        if (wEl) { wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
-        if (aEl) { aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
-        if (eEl) { eEl.textContent = _ec; eEl.style.color = _ec > 0 ? "var(--err)" : "var(--text)"; }
-      });
-
-      renderChars();
-      updateTargetKey();
-
-      if (S.idx >= S.text.length) finishTest();
-    }
-
-    // 1. DESKTOP PHYSICAL KEYBOARD LISTENER
-    document.addEventListener("keydown", function (e) {
-      if (e.target && e.target.id !== 'inp' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
-      var omModal = document.getElementById('online-modal');
-      if (omModal && omModal.classList.contains('show')) return;
-
-      var tp = document.getElementById("p-test");
-      var rp = document.getElementById("p-result");
-      if (tp.className.indexOf("show") < 0 && rp.className.indexOf("show") < 0) return;
-
-      // On Results Screen: Keyboard Shortcuts
-      if (rp.className.indexOf("show") >= 0) {
-        if (e.key === "Tab") { e.preventDefault(); repeatCurrentTest(); return; }
-        if (e.key === "Enter") { e.preventDefault(); initTest(); return; }
-        if (e.key === "Escape") { initTest(); return; }
-        if ((e.key === "d" || e.key === "D" || e.key === "ي") && !e.ctrlKey && !e.altKey) { drillMissedKeys(); return; }
-        if ((e.key === "c" || e.key === "C" || e.key === "ؤ") && !e.ctrlKey && !e.altKey) { copyBarqResult(); return; }
-        return;
-      }
-
-      if (e.key === "Tab") { e.preventDefault(); initTest(); return; }
-      if (e.key === "Escape") { initTest(); return; }
-      if (S.fin) return;
-      if (e.ctrlKey || e.altKey || e.metaKey) return;
-
-      if (e.key === "Backspace") {
-        e.preventDefault();
-        handleCharacterTyped("", true);
-        var _inp = document.getElementById("inp");
-        if (_inp) _inp.value = "";
-        return;
-      }
-
-      if (e.key.length === 1) {
-        e.preventDefault();
-        handleCharacterTyped(e.key, false);
-        var _inp = document.getElementById("inp");
-        if (_inp) _inp.value = "";
-      }
-    });
-
-    // 2. MOBILE NATIVE KEYBOARD PIPELINE (TOUCH, INPUT, COMPOSITION)
-    (function initMobileInputSystem() {
-      var inp = document.getElementById("inp");
-      var tcard = document.getElementById("tcard");
-      if (!inp || !tcard) return;
-
-      function focusMobileInput(e) {
-        inp.focus({ preventScroll: true });
-        // On touch devices, slight delay ensures keyboard shows without viewport jump
-        setTimeout(function () { inp.focus({ preventScroll: true }); }, 50);
-      }
-
-      tcard.addEventListener("click", focusMobileInput);
-      tcard.addEventListener("touchend", focusMobileInput);
-
-      var isComposing = false;
-      inp.addEventListener("compositionstart", function () {
-        isComposing = true;
-      });
-      inp.addEventListener("compositionend", function (e) {
-        isComposing = false;
-        var data = e.data || "";
-        for (var i = 0; i < data.length; i++) {
-          handleCharacterTyped(data[i], false);
-        }
-        inp.value = "";
-      });
-
-      inp.addEventListener("beforeinput", function (e) {
-        if (e.inputType === "deleteContentBackward" || e.inputType === "deleteContentForward") {
-          e.preventDefault();
-          handleCharacterTyped("", true);
-          inp.value = "";
-        }
-      });
-
-      inp.addEventListener("input", function (e) {
-        if (isComposing) return;
-        if (e.inputType === "deleteContentBackward") {
-          inp.value = "";
-          return;
-        }
-        var val = inp.value;
-        if (val) {
-          for (var i = 0; i < val.length; i++) {
-            handleCharacterTyped(val[i], false);
-          }
-          inp.value = "";
-        }
-      });
-
-      // Keep active text centered when mobile keyboard opens
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener("resize", function () {
-          if (window.innerWidth <= 768) {
-            var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : null;
-            var wordsEl = document.getElementById("words");
-            if (curEl && wordsEl) {
-              var cardH = wordsEl.clientHeight;
-              var topPos = curEl.offsetTop;
-              if (topPos > cardH * 0.45) wordsEl.scrollTop = topPos - cardH * 0.25;
-            }
-            moveCaret();
-          }
-        });
-      }
-    })();
-
-
-    function startTimer() {
-      S.ti = setInterval(function () {
-        S.left--;
-        document.getElementById("timer").textContent = S.left;
-        if (S.left <= 5) document.getElementById("timer").className = "num red";
-        updRing(S.left, S.dur);
-        if (S.left <= 0) finishTest();
-      }, 1000);
-    }
-
-    // UI LOCALIZATION FOR NAV TABS AND LABELS
-    function updateUILanguage(l) {
-      try {
-        var isAr = (l === "ar");
-        var el = function (id) { return document.getElementById(id); };
-
-        // 0. Page Document Title
-        document.title = isAr ? "Barqtype – سباق الكتابة الخاطف" : "Barqtype – Lightning Fast Typing Race";
-
-        // 1. Header Navigation Tabs
-        if (el("n-test")) el("n-test").textContent = isAr ? "تدريب" : "Practice";
-        if (el("n-stats")) el("n-stats").textContent = isAr ? "إحصاءات" : "Stats";
-        if (el("n-learn")) el("n-learn").textContent = isAr ? "تعلم" : "Learn";
-        if (el("n-race")) el("n-race").innerHTML = TM_ICONS.flag + ' ' + (isAr ? "سباق" : "Race");
-        if (el("n-online")) el("n-online").innerHTML = TM_ICONS.globe + ' ' + (isAr ? "شبكي" : "Online");
-        if (el("n-online-lbl")) el("n-online-lbl").textContent = isAr ? "شبكي" : "Online";
-
-        // 2. Mode Select Dropdown
-        var ms = el("msel");
-        if (ms) {
-          var curVal = ms.value;
-          if (isAr) {
-            ms.innerHTML = "<option value='common'>نصوص ثقافية</option><option value='medium'>مقالات وفكر</option><option value='quotes'>حكم واقتباسات</option><option value='code'>برمجة وتقنية</option>";
-          } else {
-            ms.innerHTML = "<option value='common'>common</option><option value='medium'>medium</option><option value='code'>code</option><option value='quotes'>quotes</option>";
-          }
-          ms.value = curVal;
-        }
-
-        // 3. Stats Bar Labels & Practice Elements
-        if (el("lbl-acc")) el("lbl-acc").textContent = isAr ? "دقة %" : "Accuracy %";
-        if (el("lbl-err")) el("lbl-err").textContent = isAr ? "أخطاء" : "Errors";
-        if (el("hint")) el("hint").textContent = isAr ? "ابدأ الكتابة للبدء • اضغط Tab للإعادة السريعة" : "Start typing to begin • Press Tab to restart";
-        if (el("gbtn-lbl")) el("gbtn-lbl").textContent = isAr ? "إعادة" : "Restart";
-        if (el("kb-toggle-lbl")) el("kb-toggle-lbl").textContent = _kbVisible ? (isAr ? "إخفاء الكيبورد" : "Hide Keyboard") : (isAr ? "إظهار الكيبورد" : "Show Keyboard");
-        if (el("hand-toggle-lbl")) el("hand-toggle-lbl").textContent = (typeof _handVisible !== 'undefined' && _handVisible) ? (isAr ? "إخفاء اليدين" : "Hide Hands") : (isAr ? "إظهار اليدين" : "Show Hands");
-        if (el("kb-next-lbl")) el("kb-next-lbl").textContent = isAr ? "الحرف التالي:" : "Next Key:";
-        if (el("kb-finger-text")) el("kb-finger-text").textContent = isAr ? "الإبهام" : "Thumbs";
-
-        // 4. Results Page Showcase
-        if (el("r-lbl-netwpm")) el("r-lbl-netwpm").textContent = isAr ? "السرعة الصافية" : "Net Speed";
-        if (el("r-lbl-acc")) el("r-lbl-acc").textContent = isAr ? "الدقة" : "Accuracy";
-        if (el("r-acc-sub")) el("r-acc-sub").textContent = isAr ? "ضربات متقنة" : "Precision Hits";
-        if (el("r-lbl-cons")) el("r-lbl-cons").textContent = isAr ? "الاتساق" : "Consistency";
-        if (el("r-cons-sub")) el("r-cons-sub").textContent = isAr ? "استقرار الإيقاع" : "Pacing Cadence";
-        if (el("r-lbl-keystrokes")) el("r-lbl-keystrokes").textContent = isAr ? "الضربات" : "Keystrokes";
-        if (el("r-lbl-dur")) el("r-lbl-dur").textContent = isAr ? "المدة الزمنية" : "Duration";
-        if (el("r-chart-title")) el("r-chart-title").textContent = isAr ? "منحنى التسارع ومواقع الأخطاء" : "Acceleration Curve & Error Points";
-        if (el("r-chart-sub")) el("r-chart-sub").textContent = isAr ? "تتبع حي لمعدل سرعة الكلمات في الدقيقة ثانية بثانية" : "Real-time WPM pace tracking second-by-second";
-        if (el("r-leg-wpm")) el("r-leg-wpm").textContent = isAr ? "السرعة (WPM)" : "Speed (WPM)";
-        if (el("r-leg-err")) el("r-leg-err").textContent = isAr ? "موقع الخطأ" : "Mistake Spot";
-        if (el("r-peak-lbl")) el("r-peak-lbl").textContent = isAr ? "القمة:" : "Peak:";
-        if (el("r-chart-empty-txt")) el("r-chart-empty-txt").textContent = isAr ? "بيانات الجولة قيد الحساب..." : "Calculating test metrics...";
-        if (el("r-diag-title")) el("r-diag-title").textContent = isAr ? "الحروف الأكثر تعثراً (Mistake Keys)" : "Problematic Keystrokes (Mistake Keys)";
-        if (el("r-drill-lbl")) el("r-drill-lbl").textContent = isAr ? "تدريب الأخطاء" : "Drill Mistakes";
-        if (el("r-coach-title")) el("r-coach-title").textContent = isAr ? "تحليل المدرب الذكي (Barq Coach)" : "Smart Coach Analysis (Barq Coach)";
-        if (el("r-btn-replay-lbl")) el("r-btn-replay-lbl").textContent = isAr ? "إعادة المحاولة" : "Try Again";
-        if (el("r-btn-replay")) el("r-btn-replay").title = isAr ? "إعادة نفس النص (Tab)" : "Restart same test (Tab)";
-        if (el("r-btn-next-lbl")) el("r-btn-next-lbl").textContent = isAr ? "نص جديد" : "New Test";
-        if (el("r-btn-next")) el("r-btn-next").title = isAr ? "نص جديد (Enter)" : "New test (Enter)";
-        if (el("r-btn-copy-lbl")) el("r-btn-copy-lbl").textContent = isAr ? "نسخ النتيجة" : "Copy Result";
-        if (el("r-btn-copy")) el("r-btn-copy").title = isAr ? "نسخ النتيجة للمشاركة" : "Copy result to share";
-        if (el("r-footer-hint")) el("r-footer-hint").innerHTML = isAr ? "<span>اضغط <kbd>Tab</kbd> للإعادة الفورية &bull; <kbd>Enter</kbd> لنص جديد &bull; <kbd>Esc</kbd> للعودة</span>" : "<span>Press <kbd>Tab</kbd> to retry &bull; <kbd>Enter</kbd> for new test &bull; <kbd>Esc</kbd> to return</span>";
-
-        // 5. Stats Page
-        if (el("semp-text")) el("semp-text").textContent = isAr ? "لا توجد إحصاءات بعد" : "No statistics recorded yet";
-        if (el("s-lbl-best")) el("s-lbl-best").textContent = isAr ? "أفضل" : "Best";
-        if (el("s-lbl-avg")) el("s-lbl-avg").textContent = isAr ? "متوسط" : "Average";
-        if (el("s-lbl-acc")) el("s-lbl-acc").textContent = isAr ? "دقة" : "Accuracy";
-        if (el("s-lbl-tests")) el("s-lbl-tests").textContent = isAr ? "اختبارات" : "Tests";
-        if (el("s-lbl-time")) el("s-lbl-time").textContent = isAr ? "وقت" : "Time";
-        if (el("s-title-wpm")) el("s-title-wpm").textContent = isAr ? "تطور السرعة" : "Speed Trend";
-        if (el("s-title-acc")) el("s-title-acc").textContent = isAr ? "تطور الدقة" : "Accuracy Trend";
-        if (el("s-lbl-old1")) el("s-lbl-old1").textContent = isAr ? "قديم" : "Oldest";
-        if (el("s-lbl-rec1")) el("s-lbl-rec1").textContent = isAr ? "حديث" : "Recent";
-        if (el("s-lbl-old2")) el("s-lbl-old2").textContent = isAr ? "قديم" : "Oldest";
-        if (el("s-lbl-rec2")) el("s-lbl-rec2").textContent = isAr ? "حديث" : "Recent";
-        if (el("s-title-hmap")) el("s-title-hmap").textContent = isAr ? "خريطة لوحة المفاتيح" : "Keyboard Heatmap";
-        if (el("s-hleg-exc")) el("s-hleg-exc").textContent = isAr ? "ممتاز" : "Excellent";
-        if (el("s-hleg-good")) el("s-hleg-good").textContent = isAr ? "جيد" : "Good";
-        if (el("s-hleg-avg")) el("s-hleg-avg").textContent = isAr ? "متوسط" : "Average";
-        if (el("s-hleg-poor")) el("s-hleg-poor").textContent = isAr ? "ضعيف" : "Poor";
-        if (el("s-title-ach")) el("s-title-ach").textContent = isAr ? "الإنجازات" : "Achievements";
-        if (el("s-title-rec")) el("s-title-rec").textContent = isAr ? "آخر الاختبارات" : "Recent Tests";
-
-        // 6. Learn Page
-        if (el("learn-title")) el("learn-title").textContent = isAr ? "مسار التعلم" : "Touch Typing Roadmap";
-        if (el("learn-sub")) el("learn-sub").textContent = isAr ? "اتبع الدروس بالترتيب لتبني أساساً قوياً" : "Follow lessons sequentially to build muscle memory";
-
-        // 7. Race Duel Page
-        if (el("race-title-txt")) el("race-title-txt").textContent = isAr ? "سباق السرعة" : "RACE DUEL";
-        if (el("race-title-sub")) el("race-title-sub").textContent = isAr ? "سباق تفاعلي على نفس الكيبورد" : "Interactive Duel on Same Keyboard";
-        if (el("rm-ghost-lbl")) el("rm-ghost-lbl").textContent = isAr ? "سباق التناوب (شبح المنافس)" : "1v1 Ghost Duel";
-        if (el("rm-online-lbl")) el("rm-online-lbl").textContent = isAr ? "سباق عن بعد" : "Remote Race";
-        if (el("rm-bot-lbl")) el("rm-bot-lbl").textContent = isAr ? "سباق ضد الروبوت" : "Race vs AI Bot";
-        if (el("rm-bot-cfg-lbl")) el("rm-bot-cfg-lbl").textContent = isAr ? "مستوى الروبوت:" : "Bot Level:";
-        if (el("r-card-hint")) el("r-card-hint").textContent = isAr ? "اكتب النص أعلاه بأقصى سرعة • اضغط Tab للإعادة" : "Type the text above as fast as possible • Press Tab to restart";
-        if (el("rp1-chip-acc")) el("rp1-chip-acc").textContent = isAr ? "دقة" : "Acc";
-        if (el("rp2-chip-acc")) el("rp2-chip-acc").textContent = isAr ? "دقة" : "Acc";
-        if (el("race-pod1-acc-lbl")) el("race-pod1-acc-lbl").textContent = isAr ? "دقة:" : "Acc:";
-        if (el("race-pod1-time-lbl")) el("race-pod1-time-lbl").textContent = isAr ? "وقت:" : "Time:";
-        if (el("race-pod2-acc-lbl")) el("race-pod2-acc-lbl").textContent = isAr ? "دقة:" : "Acc:";
-        if (el("race-pod2-time-lbl")) el("race-pod2-time-lbl").textContent = isAr ? "وقت:" : "Time:";
-        if (el("r-again-lbl")) el("r-again-lbl").textContent = isAr ? "سباق مجدداً" : "Race Again";
-        if (el("r-exit-lbl")) el("r-exit-lbl").textContent = isAr ? "الخروج إلى التدريب" : "Exit to Practice";
-
-        var botSel = el("rm-bot-level");
-        if (botSel) {
-          var curBotVal = botSel.value;
-          if (isAr) {
-            botSel.innerHTML = "<option value='35'>مبتدئ (35 WPM)</option><option value='65'>متوسط (65 WPM)</option><option value='95'>محترف (95 WPM)</option><option value='125'>خارق (125 WPM)</option>";
-          } else {
-            botSel.innerHTML = "<option value='35'>Beginner (35 WPM)</option><option value='65'>Medium (65 WPM)</option><option value='95'>Pro (95 WPM)</option><option value='125'>Beast (125 WPM)</option>";
-          }
-          botSel.value = curBotVal;
-        }
-
-        // 8. Online Multiplayer Modal
-        if (el("om-header-title")) el("om-header-title").textContent = isAr ? "السباق عبر الشبكة" : "Online Multiplayer Race";
-        if (el("om-gear-btn")) el("om-gear-btn").title = isAr ? "إعدادات الخادم" : "Server Settings";
-        if (el("om-settings-hint")) el("om-settings-hint").textContent = isAr ? "عنوان خادم السباق (اتركه فارغاً للاتصال التلقائي):" : "Race Server URL (Leave blank for auto-connect):";
-        var customSrvInp = el("om-custom-srv-inp");
-        if (customSrvInp) customSrvInp.placeholder = isAr ? "تلقائي: http://localhost:3001" : "Auto: http://localhost:3001";
-        if (el("om-tab-create-lbl")) el("om-tab-create-lbl").textContent = isAr ? "إنشاء غرفة" : "Create Room";
-        if (el("om-tab-join-lbl")) el("om-tab-join-lbl").textContent = isAr ? "الانضمام برمز" : "Join by Code";
-        if (el("om-name-lbl-c")) el("om-name-lbl-c").textContent = isAr ? "اسمك في السباق" : "Your Display Name";
-        if (el("om-name-c")) el("om-name-c").placeholder = isAr ? "اكتب اسمك هنا..." : "Enter your name...";
-        if (el("om-dur-lbl-c")) el("om-dur-lbl-c").textContent = isAr ? "مدة السباق:" : "Race Duration:";
-        if (el("om-dur-full-c")) el("om-dur-full-c").textContent = isAr ? "كامل (Full)" : "Full Text";
-        if (el("om-create-lbl")) el("om-create-lbl").textContent = isAr ? "إنشاء غرفة جديدة" : "Create New Room";
-        if (el("om-name-lbl-j")) el("om-name-lbl-j").textContent = isAr ? "اسمك في السباق" : "Your Display Name";
-        if (el("om-name-j")) el("om-name-j").placeholder = isAr ? "اكتب اسمك هنا..." : "Enter your name...";
-        if (el("om-code-lbl")) el("om-code-lbl").textContent = isAr ? "رمز الغرفة (4 أحرف)" : "Room Code (4 Letters)";
-        if (el("om-join-lbl")) el("om-join-lbl").textContent = isAr ? "الانضمام للسباق" : "Join Race";
-        if (el("om-code-share-lbl")) el("om-code-share-lbl").textContent = isAr ? "شارك هذا الرمز مع منافسك" : "Share this code with your rival";
-        if (el("om-copy-lbl")) el("om-copy-lbl").textContent = isAr ? "نسخ الرمز" : "Copy Code";
-        if (el("om-dur-lbl-lobby")) el("om-dur-lbl-lobby").textContent = isAr ? "مدة السباق:" : "Race Duration:";
-        if (el("om-dur-full-lobby")) el("om-dur-full-lobby").textContent = isAr ? "كامل (Full)" : "Full Text";
-        if (el("om-waiting-lbl")) el("om-waiting-lbl").textContent = isAr ? "في انتظار الانضمام" : "Waiting for opponent...";
-        if (el("om-start-lbl")) el("om-start-lbl").textContent = isAr ? "ابدأ السباق!" : "Start Race Now!";
-        if (el("om-leave-lbl")) el("om-leave-lbl").textContent = isAr ? "← مغادرة الغرفة" : "← Leave Room";
-        if (el("om-cd-lbl")) el("om-cd-lbl").textContent = isAr ? "استعد للانطلاق!" : "Get Ready!";
-        if (el("om-race-hint")) el("om-race-hint").textContent = isAr ? "ابدأ بالكتابة فوراً • يمكنك استخدام زر Backspace للتصحيح" : "Start typing immediately • Press Backspace to correct mistakes";
-
-        var myName = (typeof OM !== 'undefined' && OM && OM.myName) ? OM.myName : '';
-        var oppName = (typeof OM !== 'undefined' && OM && OM.oppName) ? OM.oppName : '';
-        var isHost = (typeof OM !== 'undefined' && OM && OM.isHost);
-        if (el("om-my-name-lbl")) el("om-my-name-lbl").textContent = myName || (isAr ? "أنت" : "You");
-        if (el("om-opp-name-lbl")) el("om-opp-name-lbl").textContent = oppName || (isAr ? "المنافس" : "Opponent");
-        if (el("om-race-timer-lbl")) el("om-race-timer-lbl").textContent = isAr ? "الوقت" : "Time";
-        if (el("om-again-lbl")) el("om-again-lbl").textContent = isAr ? (isHost ? "سباق مجدداً (إعادة البدء)" : "طلب جولة ثانية (انتقام)") : (isHost ? "Rematch (Start Lobby)" : "Request Rematch");
-        if (el("om-share-lbl")) el("om-share-lbl").textContent = isAr ? "مشاركة النتيجة" : "Share Result";
-        if (el("om-newroom-lbl")) el("om-newroom-lbl").textContent = isAr ? "غرفة جديدة" : "New Room";
-        if (el("om-prole-p1")) if (el("om-prole-p1").getAttribute("data-host") === "true") el("om-prole-p1").innerHTML = (isAr ? "المضيف " : "Host ") + TM_ICONS.crown;
-
-        // 9. Footer Text
-        var footerEl = el("app-footer");
-        if (footerEl) {
-          footerEl.innerHTML = isAr ?
-            "<span>Barqtype &bull; تم الإنشاء والتطوير بواسطة المبرمج انس  Asem Alselme</span>" :
-            "<span>Barqtype &bull; Created &amp; Developed by Eng. Asem Alselme</span>";
-        }
-
-        // 10. Re-render active tab content if visible
-        var resPage = el("p-result");
-        if (resPage && resPage.classList.contains("show") && window._lastRes) {
-          showResult(window._lastRes);
-        }
-        var statsPage = el("p-stats");
-        if (statsPage && statsPage.classList.contains("show")) {
-          renderStats();
-        }
-        var learnPage = el("p-learn");
-        if (learnPage && learnPage.classList.contains("show")) {
-          renderLearn();
-        }
-        var racePage = el("p-race");
-        if (racePage && racePage.classList.contains("show")) {
-          var rWords = el("r-words");
-          if (rWords) rWords.className = isAr ? "race-words ar" : "race-words";
-          renderRaceWords();
-        }
-
-        initAllVectorIcons();
-      } catch (err) {
-        console.error("updateUILanguage error:", err);
-      }
-    }
-
-    // CONTROL FUNCTIONS
-    function setLang(l) {
-      S.lang = l;
-      document.documentElement.lang = l;
-      document.documentElement.dir = (l === "ar" ? "rtl" : "ltr");
-      document.getElementById("l-en").className = "pb" + (l === "en" ? " on" : "");
-      document.getElementById("l-ar").className = "pb" + (l === "ar" ? " on" : "");
-      pS({ lang: l, dur: S.dur, mode: S.mode });
-      updateUILanguage(l);
-      buildKeyboard();
-      setTimeout(function () { if (window.initHandsOverlay) initHandsOverlay(); }, 60);
-
-      var curTab = "test";
-      var tabs = ["test", "stats", "learn", "race"];
-      for (var i = 0; i < tabs.length; i++) {
-        var nb = document.getElementById("n-" + tabs[i]);
-        if (nb && nb.classList.contains("on")) curTab = tabs[i];
-      }
-      showTab(curTab);
-    }
-
-    function setDur(d) {
-      S.dur = d;
-      document.getElementById("d-15").className = "pb" + (d === 15 ? " on" : "");
-      document.getElementById("d-30").className = "pb" + (d === 30 ? " on" : "");
-      document.getElementById("d-60").className = "pb" + (d === 60 ? " on" : "");
-      pS({ lang: S.lang, dur: d, mode: S.mode });
-      initTest();
-    }
-
-    function setMode(m) {
-      S.mode = m;
-      pS({ lang: S.lang, dur: S.dur, mode: m });
-      initTest();
-    }
-
-    function showTab(t) {
-      var tabs = ["test", "stats", "learn", "race"];
-      for (var i = 0; i < tabs.length; i++) {
-        var nb = document.getElementById("n-" + tabs[i]);
-        if (nb) nb.className = "nb" + (tabs[i] === t ? " on" : "");
-        var pg = document.getElementById("p-" + tabs[i]);
-        if (pg) pg.className = "page" + (tabs[i] === t ? " show" : "");
-      }
-      document.getElementById("p-result").className = "page";
-      if (t === "test") initTest();
-      if (t === "stats") renderStats();
-      if (t === "learn") { window.location.href = "learn.html"; return; }
-      if (t === "race") initRace();
-    }
-
-    // STATS RENDERING
-    function renderStats() {
-      var rs = gR();
-      var con = document.getElementById("scon");
-      var emp = document.getElementById("semp");
-      if (!rs.length) { emp.style.display = "block"; con.style.display = "none"; return; }
-      emp.style.display = "none"; con.style.display = "block";
-
-      var best = 0, sum = 0, sumA = 0;
-      for (var i = 0; i < rs.length; i++) {
-        if (rs[i].wpm > best) best = rs[i].wpm;
-        sum += rs[i].wpm;
-        sumA += rs[i].acc;
-      }
-      var avg = Math.round(sum / rs.length);
-      var avgA = Math.round(sumA / rs.length);
-      var tt = 0;
-      for (var j = 0; j < rs.length; j++) tt += rs[j].dur;
-
-      document.getElementById("sb").textContent = best;
-      document.getElementById("sb").style.color = "var(--accent)";
-      document.getElementById("sa").textContent = avg;
-      document.getElementById("sac").textContent = avgA + "%";
-      document.getElementById("st").textContent = rs.length;
-      document.getElementById("stm").textContent = tt < 3600 ? Math.round(tt / 60) + "m" : (tt / 3600).toFixed(1) + "h";
-
-      var l20 = rs.slice(0, 20).reverse();
-      drawChart("cwpm", l20.map(function (r) { return r.wpm; }), "var(--accent)");
-      drawChart("cacc", l20.map(function (r) { return r.acc }), "var(--ok)");
-
-      var ge = {}, gt = {};
-      for (var k = 0; k < rs.length; k++) {
-        var r = rs[k];
-        if (r.em) for (var c in r.em) ge[c] = (ge[c] || 0) + r.em[c];
-        if (r.tm) for (var c2 in r.tm) {
-          if (!gt[c2]) gt[c2] = [];
-          for (var m = 0; m < r.tm[c2].length; m++) gt[c2].push(r.tm[c2][m]);
-        }
-      }
-      renderHeatmap(ge, gt);
-      renderAch();
-
-      var rl = document.getElementById("rlist");
-      var rh = "";
-      var sl = rs.slice(0, 10);
-      for (var n = 0; n < sl.length; n++) {
-        var d = new Date(sl[n].ts);
-        var ds = d.getDate() + "/" + (d.getMonth() + 1) + " " + d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
-        var acl = sl[n].acc >= 95 ? "var(--ok)" : sl[n].acc >= 85 ? "var(--accent)" : "var(--err)";
-        rh += "<div class='recrow'><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + ds + "</span><span style='font-family:monospace;font-weight:700;color:var(--accent)'>" + sl[n].wpm + " WPM</span><span style='font-family:monospace;color:" + acl + "'>" + sl[n].acc + "%</span><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + Math.round(sl[n].dur) + "s</span><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + (sl[n].lang || "en").toUpperCase() + "</span></div>";
-      }
-      rl.innerHTML = rh;
-    }
-
-    function drawChart(id, data, color) {
-      var svg = document.getElementById(id);
-      if (!data || data.length < 2) { svg.innerHTML = ""; return; }
-      var W = 300, H = 80;
-      var max = data[0], min = data[0];
-      for (var i = 1; i < data.length; i++) {
-        if (data[i] > max) max = data[i];
-        if (data[i] < min) min = data[i];
-      }
-      var range = max - min || 1;
-      var pts = "";
-      for (var j = 0; j < data.length; j++) {
-        var x = (j / (data.length - 1)) * W;
-        var y = H - ((data[j] - min) / range) * (H - 10) - 5;
-        pts += x + "," + y + " ";
-      }
-      svg.innerHTML = "<defs><linearGradient id='g" + id + "' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='" + color + "' stop-opacity='.3'/><stop offset='100%' stop-color='" + color + "' stop-opacity='0'/></linearGradient></defs><polygon points='0," + H + " " + pts + W + "," + H + "' fill='url(#g" + id + ")'/><polyline points='" + pts + "' fill='none' stroke='" + color + "' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>";
-    }
-
-    function mastery(e, ts) {
-      var t = ts.length;
-      if (!t && !e) return 50;
-      var avg = 0;
-      if (t) {
-        var s = 0;
-        for (var i = 0; i < t; i++) s += ts[i];
-        avg = s / t;
-      } else avg = 500;
-      var sp = Math.max(0, Math.min(100, 100 - (avg - 100) / 4));
-      var er = e / (t + e + 1);
-      return Math.round(sp * .4 + (1 - er) * 100 * .6);
-    }
-
-    function renderHeatmap(em, tm) {
-      var w = document.getElementById("hmap");
-      if (!w) return;
-      var isAr = (S.lang === "ar");
-      var h = "";
-      for (var ri = 0; ri < KR.length; ri++) {
-        h += "<div class='hmrow' style='padding-left:" + (ri * 14) + "px'>";
-        for (var ci = 0; ci < KR[ri].length; ci++) {
-          var k = KR[ri][ci];
-          var e = em[k] || 0;
-          var ts = tm[k] || [];
-          var m = mastery(e, ts);
-          var has = (e > 0 || ts.length > 0);
-          var bg, bd;
-          if (m >= 80) { bg = "rgba(76,175,125,.4)"; bd = "rgba(76,175,125,.6)"; }
-          else if (m >= 60) { bg = "rgba(226,183,20,.35)"; bd = "rgba(226,183,20,.6)"; }
-          else if (m >= 40) { bg = "rgba(229,146,86,.45)"; bd = "rgba(229,146,86,.7)"; }
-          else { bg = "rgba(229,86,86,.5)"; bd = "rgba(229,86,86,.7)"; }
-          var sty = has ? "background:" + bg + ";border-color:" + bd : "";
-          var avg2 = 0;
-          if (ts.length) {
-            var s2 = 0;
-            for (var z = 0; z < ts.length; z++) s2 += ts[z];
-            avg2 = Math.round(s2 / ts.length);
-          }
-          var fn = FM[k] ? (isAr ? FN[FM[k]] : (FINGER_DATA[FM[k]] ? FINGER_DATA[FM[k]].en : FN[FM[k]])) : "";
-          var tip2 = isAr ? ("إتقان: " + m + "%\nأخطاء: " + e) : ("Mastery: " + m + "%\nErrors: " + e);
-          if (avg2) tip2 += isAr ? ("\nمتوسط: " + avg2 + "ms") : ("\nAvg: " + avg2 + "ms");
-          if (fn) tip2 += "\n" + fn;
-          h += "<div class='hmk' style='" + sty + "' title='" + tip2 + "'>" + k + "</div>";
-        }
-        h += "</div>";
-      }
-      w.innerHTML = h;
-    }
-
-    function renderAch() {
-      var ul = gA();
-      var g = document.getElementById("achg");
-      if (!g) return;
-      var h = "";
-      for (var i = 0; i < ACHS.length; i++) {
-        var a = ACHS[i];
-        var trans = (ACHS_I18N[S.lang] && ACHS_I18N[S.lang][a.id]) ? ACHS_I18N[S.lang][a.id] : { n: a.n, d: a.d };
-        var u = null;
-        for (var j = 0; j < ul.length; j++) {
-          if (ul[j].id === a.id) { u = ul[j]; break; }
-        }
-        h += "<div class='ach" + (u ? " got" : "") + "'><div class='ico'>" + a.ic + "</div><div class='nm'>" + trans.n + "</div><div class='ds'>" + trans.d + "</div></div>";
-      }
-      g.innerHTML = h;
-    }
-
-    function chkAch() {
-      var rs = gR();
-      var ul = gA();
-      var nu = [];
-      var best = 0;
-      for (var i = 0; i < rs.length; i++) if (rs[i].wpm > best) best = rs[i].wpm;
-      var cks = [
-        { id: "ft", c: rs.length >= 1 },
-        { id: "w50", c: best >= 50 },
-        { id: "w80", c: best >= 80 },
-        { id: "a100", c: false },
-        { id: "t10", c: rs.length >= 10 }
-      ];
-      for (var j = 0; j < rs.length; j++) if (rs[j].acc === 100) cks[3].c = true;
-      for (var k = 0; k < cks.length; k++) {
-        if (cks[k].c) {
-          var found = false;
-          for (var m = 0; m < ul.length; m++) if (ul[m].id === cks[k].id) found = true;
-          if (!found) {
-            ul.push({ id: cks[k].id, date: new Date().toISOString() });
-            nu.push(cks[k].id);
-          }
-        }
-      }
-      if (nu.length) {
-        pA(ul);
-        for (var n = 0; n < nu.length; n++) showAchToast(nu[n]);
-      }
-    }
-
-    function showAchToast(id) {
-      var a = null;
-      for (var i = 0; i < ACHS.length; i++) if (ACHS[i].id === id) a = ACHS[i];
-      if (!a) return;
-      var isAr = (S.lang === "ar");
-      var trans = (ACHS_I18N[S.lang] && ACHS_I18N[S.lang][a.id]) ? ACHS_I18N[S.lang][a.id] : { n: a.n, d: a.d };
-      var con = document.getElementById("toasts");
-      var d = document.createElement("div");
-      d.className = "toast2";
-      d.innerHTML = "<span style='font-size:28px'>" + a.ic + "</span><div><div style='font-size:11px;color:var(--accent);text-transform:uppercase'>" + (isAr ? "إنجاز جديد!" : "New Achievement!") + "</div><div style='font-size:14px;font-weight:600'>" + trans.n + "</div><div style='font-size:12px;color:var(--sub)'>" + trans.d + "</div></div>";
-      con.appendChild(d);
-      setTimeout(function () {
-        d.style.opacity = "0";
-        d.style.transition = "opacity .4s";
-        setTimeout(function () { d.remove(); }, 400);
-      }, 4000);
-    }
-
-    function renderLearn() {
-      var g = document.getElementById("lgrid");
-      if (!g) return;
-      var isAr = (S.lang === "ar");
-      var h = "";
-      var lvs = [1, 2, 3, 4, 5];
-      for (var li = 0; li < lvs.length; li++) {
-        var lv = lvs[li];
-        var ls = [];
-        for (var j = 0; j < LESSONS.length; j++) if (LESSONS[j].lv === lv) ls.push(LESSONS[j]);
-        if (!ls.length) continue;
-        var lvlTxt = isAr ? ("المستوى " + lv) : ("Level " + lv);
-        h += "<div class='lvs'><div class='lvh'><div class='lvb" + (lv === 1 ? " g" : "") + "'>" + lv + "</div><span class='lvl'>" + lvlTxt + "</span><div class='lvline'></div></div><div class='lgrid'>";
-        for (var k = 0; k < ls.length; k++) {
-          var l = ls[k];
-          var trans = (LESSONS_I18N[S.lang] && LESSONS_I18N[S.lang][l.id]) ? LESSONS_I18N[S.lang][l.id] : { t: l.t, d: l.d };
-          var ksh = "";
-          for (var m = 0; m < Math.min(l.ks.length, 6); m++) ksh += "<span>" + l.ks[m] + "</span>";
-          h += "<div class='lc'><div class='ico'>" + l.ic + "</div><div><div class='tt'>" + trans.t + "</div><div class='ds'>" + trans.d + "</div>" + (l.ks.length ? "<div class='ks'>" + ksh + "</div>" : "") + "</div></div>";
-        }
-        h += "</div></div>";
-      }
-      g.innerHTML = h;
-    }
-
-    // ==============================================================
-    // 7. RACE MODE ENGINE (GHOST DUEL + AI BOT SYSTEM)
-    // ==============================================================
-    var RACE = {
-      modeType: "ghost", // "ghost" or "bot"
-      botSpeed: 65,      // WPM
-      turn: 1,           // 1 = Player 1, 2 = Player 2 (Ghost race)
-      text: "",
-      p1: { idx: 0, ks: [], t0: 0, on: false, fin: false, wpm: 0, acc: 100, finTime: 0 },
-      p2: { idx: 0, ks: [], t0: 0, on: false, fin: false, wpm: 0, acc: 100, finTime: 0 },
-      ch: [],
-      ghostTimeline: [], // [{ t: ms, pct: %, wpm: N, acc: N }] recorded from Player 1
-      ghostInterval: null,
-      botInterval: null,
-      botRaf: null,
-      timerInterval: null,
-      elapsed: 0,
-      started: false,
-      done: false
-    };
-
-    function setRaceModeType(type) {
-      RACE.modeType = type;
-      document.getElementById("rm-ghost-btn").className = "rm-pill" + (type === "ghost" ? " on" : "");
-      document.getElementById("rm-bot-btn").className = "rm-pill" + (type === "bot" ? " on" : "");
-      document.getElementById("rm-bot-config").style.display = (type === "bot" ? "flex" : "none");
-      initRace();
-    }
-
-    function setBotSpeed(spd) {
-      RACE.botSpeed = parseInt(spd, 10) || 65;
-      initRace();
-    }
-
-    function genRaceText() {
-      if (S.lang === "ar") {
-        var pool = POOLS.ar.common;
-        var idx = getNonRepeatingArIndex("race", pool.length);
-        return pool[idx];
-      }
-      var p = POOLS.en["common"];
-      var w = [];
-      for (var i = 0; i < 50; i++) w.push(p[Math.floor(Math.random() * p.length)]);
-      return w.join(" ");
-    }
-
-    function initRace() {
-      if (RACE.timerInterval) clearInterval(RACE.timerInterval);
-      if (RACE.ghostInterval) clearInterval(RACE.ghostInterval);
-      if (RACE.botRaf) { cancelAnimationFrame(RACE.botRaf); RACE.botRaf = null; }
-      if (RACE.botInterval) clearInterval(RACE.botInterval); // legacy safety
-
-      RACE.turn = 1;
-      RACE.text = genRaceText();
-      RACE.done = false;
-      RACE.started = false;
-      RACE.elapsed = 0;
-      RACE.ghostTimeline = [];
-
-      RACE.p1 = { idx: 0, ks: [], t0: 0, on: false, fin: false, wpm: 0, acc: 100, finTime: 0 };
-      RACE.p2 = { idx: 0, ks: [], t0: 0, on: false, fin: false, wpm: 0, acc: 100, finTime: 0 };
-
-      RACE.ch = [];
-      for (var i = 0; i < RACE.text.length; i++) RACE.ch.push({ c: RACE.text[i], s: i === 0 ? "now" : "w" });
-
-      var isAr = (S.lang === "ar");
-
-      // Reset Track UI
-      document.getElementById("race-result").className = "";
-      document.getElementById("rbar1").style.width = "0%";
-      document.getElementById("rbar2").style.width = "0%";
-      updateCarPosition("rcar1", 0);
-      updateCarPosition("rcar2", 0);
-      document.getElementById("rp1-wpm").textContent = "—";
-      document.getElementById("rp1-acc").textContent = "—";
-      document.getElementById("rp2-wpm").textContent = "—";
-      document.getElementById("rp2-acc").textContent = "—";
-      document.getElementById("rp1-pct").textContent = "0%";
-      document.getElementById("rp2-pct").textContent = "0%";
-      document.getElementById("race-timer").textContent = "—";
-
-      if (RACE.modeType === "ghost") {
-        document.getElementById("rp1-name").textContent = isAr ? "اللاعب 1 (أنت)" : "Player 1 (You)";
-        document.getElementById("rp2-name").textContent = isAr ? "اللاعب 2 (المنافس)" : "Player 2 (Opponent)";
-        document.getElementById("rp2-avatar").textContent = "2";
-        document.getElementById("rp2-avatar").className = "race-player-avatar race-p2-avatar";
-        document.getElementById("rp1-hint").textContent = isAr ? "ابدأ الكتابة للتسجيل" : "Type to record run";
-        document.getElementById("rp2-hint").textContent = isAr ? "في انتظار دوره" : "Waiting for turn";
-
-        // Card banner
-        document.getElementById("r-main-card").className = "race-main-card glow-p1";
-        document.getElementById("r-turn-ico").innerHTML = TM_ICONS.car1;
-        document.getElementById("r-turn-txt").textContent = isAr ? "الجولة 1: دور اللاعب 1 — اكتب الآن لتسجيل مسار سيارتك!" : "Round 1: Player 1 Turn — Type to record your ghost car!";
-        document.getElementById("r-turn-sub").textContent = isAr ? "اضغط أي حرف للانطلاق" : "Press any key to start";
-      } else {
-        // Bot mode
-        document.getElementById("rp1-name").textContent = isAr ? "أنت (السيارة الصفراء)" : "You (Yellow Car)";
-        document.getElementById("rp2-name").textContent = (isAr ? "الروبوت الذكي (" : "AI Bot (") + RACE.botSpeed + " WPM)";
-        document.getElementById("rp2-avatar").innerHTML = TM_ICONS.robot;
-        document.getElementById("rp2-avatar").className = "race-player-avatar race-p2-avatar";
-        document.getElementById("rp1-hint").textContent = isAr ? "انطلق وتجاوز الروبوت" : "Beat the bot!";
-        document.getElementById("rp2-hint").textContent = isAr ? "جاهز للانطلاق" : "Ready to race";
-
-        document.getElementById("r-main-card").className = "race-main-card glow-p1";
-        document.getElementById("r-turn-ico").innerHTML = TM_ICONS.robot;
-        document.getElementById("r-turn-txt").textContent = isAr ? "تحدي الروبوت: اكتب وتغلب على سيارة الذكاء الاصطناعي!" : "Bot Duel: Beat the AI car to the finish line!";
-        document.getElementById("r-turn-sub").textContent = isAr ? "انطلق فوراً بالطباعة" : "Start typing to race";
-      }
-
-      var rw = document.getElementById("r-words");
-      rw.className = isAr ? "race-words ar" : "race-words";
-      rw.scrollTop = 0;
-      renderRaceWords();
-
-      document.getElementById("r-inp").value = "";
-      document.getElementById("r-inp").focus();
-    }
-
-    function updateCarPosition(carId, pct) {
-      var car = document.getElementById(carId);
-      var track = document.getElementById(carId === 'rcar1' ? 'rtrack1' : 'rtrack2');
-      if (!car || !track) return;
-      var trackW = track.clientWidth;
-      var carW = 30;
-      var flagW = 38;
-      var available = trackW - flagW - carW - 6;
-      var pos = Math.max(2, Math.min(available, (pct / 100) * available));
-      // Use transform for GPU-composited animation (no layout reflow)
-      car.style.transform = 'translateX(' + pos + 'px)';
-    }
-
-    function renderRaceWords() {
-      var words = [];
-      var curWord = [];
-      for (var i = 0; i < RACE.ch.length; i++) {
-        var o = RACE.ch[i];
-        if (o.c === " ") {
-          if (curWord.length > 0) { words.push('<span class="word">' + curWord.join("") + '</span>'); curWord = []; }
-          var cls = "c sp " + o.s;
-          words.push('<span class="' + cls + '">&nbsp;</span>');
-        } else {
-          var cls2 = "c " + o.s;
-          curWord.push('<span class="' + cls2 + '">' + o.c + '</span>');
-        }
-      }
-      if (curWord.length > 0) words.push('<span class="word">' + curWord.join("") + '</span>');
-      var el = document.getElementById("r-words");
-      el.innerHTML = words.join("");
-
-      // Smooth scroll
-      var cur = el.querySelector(".c.now");
-      if (cur) {
-        var h = el.clientHeight;
-        var top = cur.offsetTop;
-        if (top > h * 0.55) el.scrollTop = top - h * 0.28;
-        else el.scrollTop = 0;
-      }
-    }
-
-    function startRaceTimer() {
-      var t0 = performance.now();
-      RACE.timerInterval = setInterval(function () {
-        RACE.elapsed = Math.round((performance.now() - t0) / 1000);
-        document.getElementById("race-timer").textContent = RACE.elapsed + "s";
-      }, 500);
-    }
-
-    function calcRaceStats(player) {
-      var cor = 0;
-      for (var i = 0; i < player.ks.length; i++) if (player.ks[i].ok) cor++;
-      var errs = player.ks.length - cor;
-      var el = player.t0 > 0 ? (performance.now() - player.t0) : 1;
-      var minutes = el / 60000;
-      player.wpm = minutes > 0 ? Math.max(0, Math.round(((cor - errs) / 5) / minutes)) : 0;
-      player.acc = calcAcc(cor, player.ks.length);
-      return { wpm: player.wpm, acc: player.acc };
-    }
-
-    function updateRaceUI(playerNum, pct, wpm, acc) {
-      var barId = "rbar" + playerNum;
-      var carId = "rcar" + playerNum;
-      var wpmId = "rp" + playerNum + "-wpm";
-      var accId = "rp" + playerNum + "-acc";
-      var pctId = "rp" + playerNum + "-pct";
-
-      var barPct = Math.min(pct / RACE.text.length * 100, 93);
-      document.getElementById(barId).style.width = barPct + "%";
-      updateCarPosition(carId, barPct);
-      document.getElementById(wpmId).textContent = wpm > 0 ? wpm : "—";
-      document.getElementById(accId).textContent = acc > 0 ? acc + "%" : "—";
-      document.getElementById(pctId).textContent = Math.round(barPct) + "%";
-    }
-
-    // Start AI Bot car movement (rAF-based for silky smooth 60fps animation)
-    function startAIBot() {
-      var botCharsPerSec = (RACE.botSpeed * 5) / 60;
-      var botT0 = performance.now();
-      var totalChars = RACE.text.length;
-      var finished = false;
-
-      function botFrame(now) {
-        if (RACE.done || finished) return;
-        var el = (now - botT0) / 1000;
-        var botIdx = Math.min(totalChars, Math.floor(el * botCharsPerSec));
-        var pct = Math.min(botIdx / totalChars * 100, 93);
-
-        document.getElementById('rbar2').style.width = pct + '%';
-        updateCarPosition('rcar2', pct);
-        document.getElementById('rp2-wpm').textContent = RACE.botSpeed;
-        document.getElementById('rp2-acc').textContent = '98%';
-        document.getElementById('rp2-pct').textContent = Math.round(pct) + '%';
-
-        if (botIdx >= totalChars) {
-          finished = true;
-          document.getElementById('rbar2').style.width = '100%';
-          updateCarPosition('rcar2', 100);
-          document.getElementById('rp2-pct').textContent = '100%';
-          document.getElementById('rp2-hint').textContent = S.lang === 'ar' ? 'وصل الروبوت!' : 'Bot Finished!';
-          RACE.p2.fin = true;
-          RACE.p2.finTime = Math.round(el * 10) / 10;
-          RACE.p2.wpm = RACE.botSpeed;
-          RACE.p2.acc = 98;
-          if (RACE.p1.fin) showRaceResult();
-          return;
-        }
-        RACE.botRaf = requestAnimationFrame(botFrame);
-      }
-      RACE.botRaf = requestAnimationFrame(botFrame);
-    }
-
-    // Start Player 1 Ghost Replay during Player 2's turn
-    function startGhostReplay() {
-      var t0 = performance.now();
-      var timeline = RACE.ghostTimeline;
-      if (!timeline || !timeline.length) return;
-
-      var currentTlIdx = 0;
-      RACE.ghostInterval = setInterval(function () {
-        if (RACE.done) { clearInterval(RACE.ghostInterval); return; }
-        var el = performance.now() - t0;
-
-        while (currentTlIdx < timeline.length - 1 && timeline[currentTlIdx + 1].t <= el) {
-          currentTlIdx++;
-        }
-        var pt = timeline[currentTlIdx];
-        if (pt) {
-          var barPct = Math.min(pt.idx / RACE.text.length * 100, 93);
-          document.getElementById("rbar1").style.width = barPct + "%";
-          updateCarPosition("rcar1", barPct);
-          document.getElementById("rp1-wpm").textContent = pt.wpm;
-          document.getElementById("rp1-acc").textContent = pt.acc + "%";
-          document.getElementById("rp1-pct").textContent = Math.round(barPct) + "%";
-        }
-
-        if (currentTlIdx >= timeline.length - 1) {
-          clearInterval(RACE.ghostInterval);
-          document.getElementById("rbar1").style.width = "100%";
-          updateCarPosition("rcar1", 100);
-          document.getElementById("rp1-pct").textContent = "100%";
-        }
-      }, 100);
-    }
-
-    function handleRaceKey(e) {
-      if (RACE.done) return;
-      var isAr = (S.lang === "ar");
-
-      // Determine current active player
-      var curPlayer = (RACE.modeType === "ghost" && RACE.turn === 2) ? RACE.p2 : RACE.p1;
-      var curPlayerNum = (RACE.modeType === "ghost" && RACE.turn === 2) ? 2 : 1;
-
-      if (curPlayer.fin) return;
-
-      if (e.key === "Backspace") {
-        e.preventDefault();
-        if (curPlayer.idx > 0) {
-          curPlayer.idx--;
-          RACE.ch[curPlayer.idx].s = "now";
-          if (curPlayer.idx + 1 < RACE.ch.length) RACE.ch[curPlayer.idx + 1].s = "w";
-          renderRaceWords();
-          playCorrectSound(false, true);
-        }
-        return;
-      }
-
-      if (e.key.length !== 1) return;
-      var ex = RACE.text[curPlayer.idx];
-      if (!ex) return;
-
-      var ok = matchChar(e.key, ex);
-
-      // Player starts typing
-      if (!curPlayer.on) {
-        curPlayer.on = true;
-        curPlayer.t0 = performance.now();
-
-        if (!RACE.started) {
-          RACE.started = true;
-          startRaceTimer();
-        }
-
-        if (RACE.modeType === "bot") {
-          startAIBot();
-          document.getElementById("rp1-hint").textContent = isAr ? "تكتب الآن..." : "Typing now...";
-        } else {
-          if (RACE.turn === 1) {
-            document.getElementById("rp1-hint").textContent = isAr ? "تسجيل الجولة 1..." : "Recording P1...";
-          } else {
-            document.getElementById("rp2-hint").textContent = isAr ? "تتحدى الشبح الآن!" : "Challenging Ghost!";
-            startGhostReplay();
-          }
-        }
-      }
-
-      curPlayer.ks.push({ ch: e.key, ex: ex, ok: ok });
-      RACE.ch[curPlayer.idx].s = ok ? "ok" : "bad";
-      curPlayer.idx++;
-      if (curPlayer.idx < RACE.ch.length) RACE.ch[curPlayer.idx].s = "now";
-
-      if (ok) playCorrectSound(ex === " "); else playErrorSound();
-
-      var stats = calcRaceStats(curPlayer);
-      updateRaceUI(curPlayerNum, curPlayer.idx, stats.wpm, stats.acc);
-
-      // If Player 1 in ghost mode, record point to ghost timeline
-      if (RACE.modeType === "ghost" && RACE.turn === 1) {
-        RACE.ghostTimeline.push({
-          t: performance.now() - curPlayer.t0,
-          idx: curPlayer.idx,
-          wpm: stats.wpm,
-          acc: stats.acc
-        });
-      }
-
-      renderRaceWords();
-
-      // Check finish
-      if (curPlayer.idx >= RACE.text.length) {
-        finishPlayerRun(curPlayerNum, curPlayer);
-      }
-    }
-
-    function finishPlayerRun(playerNum, player) {
-      player.fin = true;
-      var isAr = (S.lang === "ar");
-      var el = (performance.now() - player.t0) / 1000;
-      player.finTime = Math.round(el * 10) / 10;
-      var cor = 0;
-      for (var i = 0; i < player.ks.length; i++) if (player.ks[i].ok) cor++;
-      player.wpm = calcWPM(cor, el * 1000);
-      player.acc = calcAcc(cor, player.ks.length);
-
-      document.getElementById("rbar" + playerNum).style.width = "100%";
-      updateCarPosition("rcar" + playerNum, 100);
-      document.getElementById("rp" + playerNum + "-pct").textContent = "100%";
-      document.getElementById("rp" + playerNum + "-hint").textContent = isAr ? "انتهى السباق!" : "Finished!";
-      playCorrectSound(true);
-
-      if (RACE.modeType === "bot") {
-        showRaceResult();
-      } else if (RACE.modeType === "ghost") {
-        if (RACE.turn === 1) {
-          // Transition to Player 2
-          RACE.turn = 2;
-          startRaceCountdown(function () {
-            // Reset text for Player 2
-            RACE.ch = [];
-            for (var i = 0; i < RACE.text.length; i++) RACE.ch.push({ c: RACE.text[i], s: i === 0 ? "now" : "w" });
-            renderRaceWords();
-
-            // Reset track 1 back to 0 for replay
-            document.getElementById("rbar1").style.width = "0%";
-            updateCarPosition("rcar1", 0);
-            document.getElementById("rp1-pct").textContent = "0%";
-            document.getElementById("rp1-hint").textContent = isAr ? "سيارة الشبح جاهزة" : "Ghost car ready";
-
-            // Card banner for Player 2
-            document.getElementById("r-main-card").className = "race-main-card glow-p2";
-            document.getElementById("r-turn-ico").innerHTML = TM_ICONS.car2;
-            document.getElementById("r-turn-txt").textContent = isAr ?
-              ("الجولة 2: دور اللاعب 2 — انطلق وتغلب على شبح اللاعب 1 (" + RACE.p1.wpm + " WPM)!") :
-              ("Round 2: Player 2 Turn — Beat Player 1 Ghost (" + RACE.p1.wpm + " WPM)!");
-            document.getElementById("r-turn-sub").textContent = isAr ? "انطلق فوراً بالطباعة" : "Start typing to race";
-
-            document.getElementById("r-inp").value = "";
-            document.getElementById("r-inp").focus();
-          });
-        } else {
-          // Both done
-          showRaceResult();
-        }
-      }
-    }
-
-    function showRaceResult() {
-      if (RACE.timerInterval) clearInterval(RACE.timerInterval);
-      if (RACE.ghostInterval) clearInterval(RACE.ghostInterval);
-      if (RACE.botRaf) { cancelAnimationFrame(RACE.botRaf); RACE.botRaf = null; }
-      if (RACE.botInterval) clearInterval(RACE.botInterval); // legacy safety
-      RACE.done = true;
-
-      var isAr = (S.lang === "ar");
-      var p1Wins = false;
-
-      var p1Acc = RACE.p1.acc || 0;
-      var p2Acc = RACE.p2.acc || 0;
-      var p1Net = RACE.p1.wpm || 0;
-      var p2Net = RACE.p2.wpm || 0;
-      var p1Qual = p1Acc >= 60;
-      var p2Qual = p2Acc >= 60;
-
-      if (p1Qual && !p2Qual) {
-        p1Wins = true;
-      } else if (!p1Qual && p2Qual) {
-        p1Wins = false;
-      } else if (RACE.p1.fin && RACE.p2.fin) {
-        p1Wins = p1Net !== p2Net ? p1Net > p2Net : RACE.p1.finTime <= RACE.p2.finTime;
-      } else if (RACE.p1.fin && !RACE.p2.fin) {
-        p1Wins = p1Qual;
-      } else if (!RACE.p1.fin && RACE.p2.fin) {
-        p1Wins = !p2Qual;
-      } else {
-        p1Wins = p1Net >= p2Net;
-      }
-
-      var winnerName = "";
-      if (RACE.modeType === "bot") {
-        winnerName = p1Wins ? (isAr ? "أنت (الإنسان)" : "You (Human)") : (isAr ? "الروبوت الذكي" : "AI Bot");
-      } else {
-        winnerName = p1Wins ? (isAr ? "اللاعب 1" : "Player 1") : (isAr ? "اللاعب 2" : "Player 2");
-      }
-
-      document.getElementById("race-winner-badge").innerHTML = p1Wins ? TM_ICONS.medalGold : TM_ICONS.trophy;
-      document.getElementById("race-winner-title").textContent = winnerName + (isAr ? " يفوز بالسباق!" : " Wins the Race!");
-      document.getElementById("race-winner-sub").textContent = isAr ? "انتهى التحدي — منصة التتويج والنتائج" : "Challenge Complete — Final Podium";
-
-      var pod1 = document.getElementById("race-pod1");
-      var pod2 = document.getElementById("race-pod2");
-
-      if (p1Wins) {
-        pod1.className = "race-podium-card gold";
-        pod2.className = "race-podium-card silver";
-        pod1.querySelector(".race-podium-medal").innerHTML = TM_ICONS.medalGold;
-        pod2.querySelector(".race-podium-medal").innerHTML = TM_ICONS.medalSilver;
-      } else {
-        pod1.className = "race-podium-card silver";
-        pod2.className = "race-podium-card gold";
-        pod1.querySelector(".race-podium-medal").innerHTML = TM_ICONS.medalSilver;
-        pod2.querySelector(".race-podium-medal").innerHTML = TM_ICONS.medalGold;
-      }
-
-      var p1Label = (RACE.modeType === "bot") ? (isAr ? "أنت" : "You") : (isAr ? "اللاعب 1" : "Player 1");
-      var p2Label = (RACE.modeType === "bot") ? (isAr ? "الروبوت" : "AI Bot") : (isAr ? "اللاعب 2" : "Player 2");
-
-      document.getElementById("race-pod1-name").textContent = p1Label;
-      document.getElementById("race-pod1-wpm").textContent = RACE.p1.fin ? RACE.p1.wpm : "—";
-      document.getElementById("race-pod1-acc").textContent = RACE.p1.fin ? RACE.p1.acc + "%" : "—";
-      document.getElementById("race-pod1-time").textContent = RACE.p1.fin ? RACE.p1.finTime + "s" : "DNF";
-
-      document.getElementById("race-pod2-name").textContent = p2Label;
-      document.getElementById("race-pod2-wpm").textContent = RACE.p2.fin ? RACE.p2.wpm : "—";
-      document.getElementById("race-pod2-acc").textContent = RACE.p2.fin ? RACE.p2.acc + "%" : "—";
-      document.getElementById("race-pod2-time").textContent = RACE.p2.fin ? RACE.p2.finTime + "s" : "DNF";
-
-      document.getElementById("race-result").className = "show";
-
-      // Toast
-      var toastEl = document.createElement("div");
-      toastEl.className = "toast2";
-      var winWpm = p1Wins ? RACE.p1.wpm : RACE.p2.wpm;
-      toastEl.innerHTML = "<span style='display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center'>" + TM_ICONS.trophy + "</span><div><div style='font-size:11px;color:var(--accent);text-transform:uppercase'>" + (isAr ? "مبروك الفوز!" : "Race Winner!") + "</div><div style='font-size:14px;font-weight:600'>" + winnerName + " (" + winWpm + " WPM)</div></div>";
-      document.getElementById("toasts").appendChild(toastEl);
-      setTimeout(function () { toastEl.style.opacity = "0"; toastEl.style.transition = "opacity .4s"; setTimeout(function () { toastEl.remove(); }, 400); }, 5000);
-    }
-
-    function startRaceCountdown(cb) {
-      var cd = document.getElementById("race-countdown");
-      var display = document.getElementById("race-cd-display");
-      cd.className = "";
-      var n = 3;
-      display.className = "cd-number";
-      display.textContent = n;
-
-      var interval = setInterval(function () {
-        n--;
-        if (n > 0) {
-          display.textContent = n;
-          display.className = "";
-          void display.offsetWidth;
-          display.className = "cd-number";
-        } else if (n === 0) {
-          display.textContent = (S.lang === "ar" ? "انطلق!" : "GO!");
-          display.className = "";
-          void display.offsetWidth;
-          display.className = "cd-go";
-        } else {
-          clearInterval(interval);
-          cd.className = "hidden";
-          if (cb) cb();
-        }
-      }, 750);
-    }
-
-    // Global Race keydown listener
-    document.addEventListener("keydown", function (e) {
-      if (e.target && e.target.id !== 'r-inp' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
-      var omModal = document.getElementById('online-modal');
-      if (omModal && omModal.classList.contains('show')) return;
-
-      var racePage = document.getElementById("p-race");
-      if (!racePage || racePage.className.indexOf("show") < 0) return;
-      if (RACE.done) return;
-
-      if (e.key === "Tab" && !e.ctrlKey) {
-        e.preventDefault();
-        initRace();
-        return;
-      }
-      if (e.key === "Escape") {
-        e.preventDefault();
-        initRace();
-        return;
-      }
-
-      handleRaceKey(e);
-    });
-
-    // Initialize state and app
-    var sv = gS();
-    if (sv.lang) S.lang = sv.lang;
-    if (sv.dur) S.dur = sv.dur;
-    if (sv.mode) S.mode = sv.mode;
-
-    if (sv.lang === "ar") {
-      document.getElementById("l-en").className = "pb";
-      document.getElementById("l-ar").className = "pb on";
-      document.documentElement.lang = "ar";
-      document.documentElement.dir = "rtl";
+      // Sub label
+      if (subLbl) {
+        var subSpan = document.createElement("span");
+        subSpan.className = "kb-lbl-sub";
+        subSpan.textContent = subLbl;
+        el.appendChild(subSpan);
+      }
+
+      // Main label
+      var mainSpan = document.createElement("span");
+      mainSpan.className = "kb-lbl-main";
+      mainSpan.textContent = mainLbl;
+      el.appendChild(mainSpan);
+
+      // Finger colored bottom strip
+      var strip = document.createElement("div");
+      strip.className = "kb-finger-strip";
+      strip.style.background = fInfo.color;
+      el.appendChild(strip);
+
+      rowEl.appendChild(el);
+    }
+    rowsEl.appendChild(rowEl);
+  }
+
+  buildLegend();
+  if (window.initHandsOverlay) initHandsOverlay();
+  updateTargetKey();
+}
+
+function buildLegend() {
+  var leg = document.getElementById("kb-legend");
+  if (!leg) return;
+  var isAr = (S.lang === "ar");
+  var list = [
+    { c: FINGER_DATA.lp.color, l: isAr ? "خنصر يسار" : "L-Pinky" },
+    { c: FINGER_DATA.lr.color, l: isAr ? "بنسر يسار" : "L-Ring" },
+    { c: FINGER_DATA.lm.color, l: isAr ? "وسطى يسار" : "L-Middle" },
+    { c: FINGER_DATA.li.color, l: isAr ? "سبابة يسار" : "L-Index" },
+    { c: FINGER_DATA.th.color, l: isAr ? "إبهام" : "Thumbs" },
+    { c: FINGER_DATA.ri.color, l: isAr ? "سبابة يمين" : "R-Index" },
+    { c: FINGER_DATA.rm.color, l: isAr ? "وسطى يمين" : "R-Middle" },
+    { c: FINGER_DATA.rr.color, l: isAr ? "بنسر يمين" : "R-Ring" },
+    { c: FINGER_DATA.rp.color, l: isAr ? "خنصر يمين" : "R-Pinky" }
+  ];
+  var h = "";
+  for (var i = 0; i < list.length; i++) {
+    h += '<div class="kb-legend-item"><div class="kb-legend-dot" style="background:' + list[i].c + '"></div><span class="kb-legend-lbl">' + list[i].l + '</span></div>';
+  }
+  leg.innerHTML = h;
+}
+
+// Find key element corresponding to target character
+function findKeyElForChar(char) {
+  if (!char) return null;
+  var isAr = (S.lang === "ar");
+  var all = document.querySelectorAll(".kb-key");
+
+  if (char === " ") {
+    for (var i = 0; i < all.length; i++) if (all[i].dataset.k === "Space") return all[i];
+  }
+
+  for (var j = 0; j < all.length; j++) {
+    var el = all[j];
+    var k = el.dataset.k;
+    var ar = el.dataset.ar;
+    if (isAr) {
+      if (ar === char || normalizeAr(ar) === normalizeAr(char)) return el;
+      if (QWERTY_TO_AR[k] === char || normalizeAr(QWERTY_TO_AR[k]) === normalizeAr(char)) return el;
     } else {
-      document.getElementById("l-en").className = "pb on";
-      document.getElementById("l-ar").className = "pb";
-      document.documentElement.lang = "en";
-      document.documentElement.dir = "ltr";
+      if (k.toLowerCase() === char.toLowerCase()) return el;
+      if (k.length === 2 && (k[0] === char || k[1] === char)) return el;
     }
-    if (sv.dur) {
-      document.getElementById("d-15").className = "pb" + (sv.dur === 15 ? " on" : "");
-      document.getElementById("d-30").className = "pb" + (sv.dur === 30 ? " on" : "");
-      document.getElementById("d-60").className = "pb" + (sv.dur === 60 ? " on" : "");
+  }
+
+  // Fallback check
+  for (var m = 0; m < all.length; m++) {
+    var k2 = all[m].dataset.k;
+    if (k2.toLowerCase() === char.toLowerCase()) return all[m];
+  }
+  return null;
+}
+
+function updateKeyboardCasing(isShiftActive) {
+  if (S.lang === "ar") return;
+  var allKeys = document.querySelectorAll(".kb-key");
+  for (var i = 0; i < allKeys.length; i++) {
+    var el = allKeys[i];
+    var k = el.dataset.k;
+    if (!k || el.classList.contains("special")) continue;
+    var mainLblEl = el.querySelector(".kb-lbl-main");
+    if (!mainLblEl) continue;
+    if (k.length === 1 && k.toLowerCase() >= 'a' && k.toLowerCase() <= 'z') {
+      mainLblEl.textContent = isShiftActive ? k.toUpperCase() : k.toLowerCase();
+    } else if (k.length === 2) {
+      // Pairs like "1!", "2@", "-_", "=+", "[{", "]}", ";:", "'\"", ",<", ".>", "/?"
+      mainLblEl.textContent = isShiftActive ? k[1] : k[0];
     }
-    if (sv.mode) document.getElementById("msel").value = sv.mode;
+  }
+}
 
-    try { updateUILanguage(S.lang); } catch (e) { console.error('Error in updateUILanguage:', e); }
-    try { buildKeyboard(); } catch (e) { console.error('Error in buildKeyboard:', e); }
-    try { initTest(); } catch (e) { console.error('Error in initTest:', e); }
+// Update Target Key in EdClub style (pulsing glow + finger indicator)
+function updateTargetKey() {
+  var prev = document.querySelectorAll(".kb-key.target-key, .kb-key.shift-needed");
+  for (var i = 0; i < prev.length; i++) {
+    prev[i].classList.remove("target-key", "shift-needed");
+  }
 
-    // ══════════════════════════════════════════════════════════════
-    // ONLINE RACE MODULE  (Socket.io)
-    // ══════════════════════════════════════════════════════════════
-    // Note: OM state object is defined at top-level state alongside S
+  var badge = document.getElementById("kb-next-badge");
+  var fBadge = document.getElementById("kb-finger-badge");
+  var fDot = document.getElementById("kb-finger-dot");
+  var fText = document.getElementById("kb-finger-text");
+  var isAr = (S.lang === "ar");
 
-    // ── Duration selector ─────────────────────────────────────────
-    function omSelectDuration(dur) {
-      OM.raceDuration = parseInt(dur);
-      document.querySelectorAll('#om-panel-create .om-dur-pill').forEach(function (b) {
-        b.classList.toggle('on', parseInt(b.dataset.dur) === OM.raceDuration);
-      });
-    }
+  if (!S.text || S.idx >= S.text.length) {
+    if (badge) badge.textContent = "—";
+    if (fText) fText.textContent = isAr ? "مكتمل" : "Complete";
+    updateKeyboardCasing(false);
+    if (window.updateHandTargetFinger) updateHandTargetFinger(null, null);
+    return;
+  }
 
-    function omChangeLobbyDuration(dur) {
-      if (!OM.isHost) return;
-      OM.raceDuration = parseInt(dur);
-      document.querySelectorAll('#om-dur-pills-lobby .om-dur-pill').forEach(function (b) {
-        b.classList.toggle('on', parseInt(b.dataset.dur) === OM.raceDuration);
-      });
-      if (OM.socket && OM.roomCode) {
-        OM.socket.emit('set_duration', { code: OM.roomCode, duration: OM.raceDuration });
-      }
-    }
+  var nextCh = S.text[S.idx];
+  var el = findKeyElForChar(nextCh);
 
-    // ── Server URL Configuration ──────────────────────────────────
-    // Automatically determine server URL:
-    // 1. If custom URL stored in localStorage, use it
-    // 2. If running locally (localhost, 127.0.0.1, or file://), connect to http://localhost:3001
-    // 3. If in production (deployed on Render, Railway, etc.), connect to window.location.origin
-    var OM_SERVER_URL = (function () {
-      if (typeof window !== 'undefined' && window.location) {
-        var host = (window.location.hostname || '').toLowerCase();
-        var proto = window.location.protocol || '';
-        if (proto === 'file:' || host === 'localhost' || host === '127.0.0.1' || host === '') {
-          return 'http://localhost:3001';
+  if (badge) {
+    badge.textContent = (nextCh === " ") ? (isAr ? "مسافة" : "SPACE") : nextCh;
+  }
+
+  var isUpperEn = (nextCh >= "A" && nextCh <= "Z");
+  var isShiftSym = '~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0;
+  var needsShift = (isUpperEn || isShiftSym);
+
+  // Dynamic casing: displays lowercase for lowercase text, uppercase for uppercase text
+  updateKeyboardCasing(needsShift);
+
+  if (el) {
+    el.classList.add("target-key");
+    var fCode = el.dataset.f;
+    var fInfo = FINGER_DATA[fCode] || FINGER_DATA.th;
+    if (fDot) fDot.style.background = fInfo.color;
+    if (fText) fText.textContent = isAr ? fInfo.ar : fInfo.en;
+    if (fBadge) fBadge.style.borderColor = fInfo.color;
+
+    // Update hand guide highlight with dynamic reach kinematics
+    if (window.updateHandTargetFinger) updateHandTargetFinger(fCode, el);
+
+    // Shift helper
+    if (needsShift) {
+      var oppSide = (fInfo.hand === "L") ? "right" : "left";
+      var shifts = document.querySelectorAll(".kb-key[data-k='Shift']");
+      for (var s = 0; s < shifts.length; s++) {
+        if (shifts[s].dataset.side === oppSide) {
+          shifts[s].classList.add("shift-needed");
         }
-        return window.location.origin;
-      }
-      return 'http://localhost:3001';
-    })();
-
-    function omGetServerUrl() {
-      var custom = localStorage.getItem('tm_server_url');
-      if (custom && custom.trim()) return custom.trim().replace(/\/$/, '');
-      return OM_SERVER_URL;
-    }
-
-    function omToggleSettings() {
-      var d = document.getElementById('om-settings-drawer');
-      if (!d) return;
-      var isHidden = d.style.display === 'none' || !d.style.display;
-      d.style.display = isHidden ? 'block' : 'none';
-      if (isHidden) {
-        var inp = document.getElementById('om-custom-srv-inp');
-        if (inp) inp.value = localStorage.getItem('tm_server_url') || '';
       }
     }
+  } else {
+    if (fDot) fDot.style.background = "#e2b714";
+    if (fText) fText.textContent = isAr ? "إبهام" : "Thumbs";
+    if (window.updateHandTargetFinger) updateHandTargetFinger('th', null);
+  }
+}
 
-    function omSaveCustomServer() {
-      var inp = document.getElementById('om-custom-srv-inp');
-      var val = (inp ? inp.value.trim() : '').replace(/\/$/, '');
-      if (val) {
-        localStorage.setItem('tm_server_url', val);
+// Highlight key on press (ok / err)
+function highlightPressedKey(evKey, ok) {
+  var all = document.querySelectorAll(".kb-key");
+  var evL = evKey.toLowerCase();
+  var matchedKeyEl = null;
+
+  for (var i = 0; i < all.length; i++) {
+    var el = all[i];
+    var k = el.dataset.k;
+    var ar = el.dataset.ar;
+    var match = false;
+
+    if (k === "Space" && evKey === " ") match = true;
+    else if (k.toLowerCase() === evL) match = true;
+    else if (ar === evKey || normalizeAr(ar) === normalizeAr(evKey)) match = true;
+    else if (QWERTY_TO_AR[evKey] === ar || QWERTY_TO_AR[k] === evKey) match = true;
+    else if (k === "Backspace" && evL === "backspace") match = true;
+    else if (k.length === 2 && (k[0] === evKey || k[1] === evKey)) match = true;
+
+    if (match) {
+      matchedKeyEl = el;
+      _animateKeyPress(el, ok);
+      break;
+    }
+  }
+
+  // Educational Hand Kinematics:
+  if (ok) {
+    var f = matchedKeyEl ? matchedKeyEl.dataset.f : _currentHandTargetFinger;
+    animateHandFinger(f, true);
+  } else {
+    // On typo: alert target finger without executing downward press
+    animateHandFinger(_currentHandTargetFinger, false);
+  }
+}
+
+function _animateKeyPress(el, ok) {
+  var id = el.id;
+  if (_kbTimeouts[id]) {
+    clearTimeout(_kbTimeouts[id]);
+    _kbTimeouts[id] = null;
+  }
+  el.classList.remove("pressed-ok", "pressed-err");
+  void el.offsetWidth;
+  el.classList.add(ok ? "pressed-ok" : "pressed-err");
+
+  _kbTimeouts[id] = setTimeout(function () {
+    el.classList.remove("pressed-ok", "pressed-err");
+    _kbTimeouts[id] = null;
+  }, 120);
+}
+
+// ══════════════════════════════════════════════════════════════
+// VKEYBOARDHAND ANATOMICAL HANDS ENGINE (BARQTYPE)
+// Interactive Touch-Typing Hand Poses from ayuday/vkeyboardhand
+// MIT License - Copyright (c) 2026 ayuday
+// ══════════════════════════════════════════════════════════════
+
+var _handVisible = true;
+var _currentHandTargetKey = 'neutral';
+var _currentHandTargetFinger = 'th';
+var _lastTypedHand = 'R';
+var _handFeedbackTimeout = null;
+
+var VK_FINGER_MAP = {
+  tilda: 'lp', '1': 'lp', q: 'lp', a: 'lp', z: 'lp',
+  tab: 'lp', capslock: 'lp', 'shift-left': 'lp', control: 'lp',
+  '2': 'lr', w: 'lr', s: 'lr', x: 'lr',
+  '3': 'lm', e: 'lm', d: 'lm', c: 'lm',
+  '4': 'li', '5': 'li', r: 'li', t: 'li', f: 'li', g: 'li', v: 'li', b: 'li',
+  '6': 'ri', '7': 'ri', y: 'ri', u: 'ri', h: 'ri', j: 'ri', n: 'ri', m: 'ri',
+  '8': 'rm', i: 'rm', k: 'rm', comma: 'rm',
+  '9': 'rr', o: 'rr', l: 'rr', dot: 'rr',
+  '0': 'rp', minus: 'rp', equal: 'rp', p: 'rp',
+  'left-center-bracket': 'rp', 'right-center-bracket': 'rp', backslash: 'rp',
+  semicolon: 'rp', 'single-quote': 'rp', slash: 'rp',
+  enter: 'rp', 'shift-right': 'rp', backspace: 'rp', 'alt-right': 'rp',
+  space: 'th'
+};
+
+// Map raw key from BARQTYPE keyboard dataset to VKeyboardHand pose ID
+function mapKeyToVkHandId(rawKey) {
+  if (!rawKey) return 'neutral';
+  var k = String(rawKey).toLowerCase();
+  if (k === ' ' || k === 'space') return 'space';
+  if (k === 'backspace') return 'backspace';
+  if (k === 'enter') return 'enter';
+  if (k === 'tab') return 'tab';
+  if (k === 'caps' || k === 'capslock') return 'capslock';
+  if (k === '`' || k === '~' || k === '`~') return 'tilda';
+  if (k === '-' || k === '_' || k === '-_') return 'minus';
+  if (k === '=' || k === '+' || k === '=+') return 'equal';
+  if (k === '[' || k === '{' || k === '[{') return 'left-center-bracket';
+  if (k === ']' || k === '}' || k === ']}') return 'right-center-bracket';
+  if (k === '\\' || k === '|' || k === '\\|') return 'backslash';
+  if (k === ';' || k === ':' || k === ';:') return 'semicolon';
+  if (k === "'" || k === '"' || k === "'\"") return 'single-quote';
+  if (k === ',' || k === '<' || k === ',<') return 'comma';
+  if (k === '.' || k === '>' || k === '.>') return 'dot';
+  if (k === '/' || k === '?' || k === '/?') return 'slash';
+  if (k.length === 2 && k[0] >= '0' && k[0] <= '9') return k[0];
+  return k;
+}
+
+function updateHandTargetFinger(fingerCode, targetKeyEl) {
+  if (!_handVisible) return;
+  if (!targetKeyEl) {
+    setVkHandPose('neutral', false);
+    return;
+  }
+
+  var rawKey = targetKeyEl.dataset.k;
+  var vkKey = mapKeyToVkHandId(rawKey);
+
+  var nextCh = (typeof S !== 'undefined' && S.text && S.idx < S.text.length) ? S.text[S.idx] : null;
+  var isUpperEn = nextCh && (nextCh >= 'A' && nextCh <= 'Z');
+  var isShiftSym = nextCh && ('~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0);
+  var needsShift = !!(isUpperEn || isShiftSym);
+
+  _currentHandTargetKey = vkKey;
+  _currentHandTargetFinger = fingerCode || VK_FINGER_MAP[vkKey] || 'th';
+
+  setVkHandPose(vkKey, needsShift);
+}
+
+function setVkHandPose(vkKey, needsShift) {
+  var svg = document.getElementById('hand-both');
+  if (!svg) return;
+
+  // 1. Hide all groups
+  var allG = svg.querySelectorAll('g[id]');
+  for (var i = 0; i < allG.length; i++) {
+    allG[i].classList.add('st0');
+    allG[i].classList.remove('show-hand');
+  }
+
+  // 2. Neutral resting state
+  if (!vkKey || vkKey === 'neutral') {
+    _showVkGroup('hand-neutral-left');
+    _showVkGroup('hand-neutral-right');
+    return;
+  }
+
+  var finger = VK_FINGER_MAP[vkKey] || '';
+  var side = finger ? finger.charAt(0) : '';
+
+  if (side === 'l') _lastTypedHand = 'L';
+  else if (side === 'r') _lastTypedHand = 'R';
+
+  // Spacebar pose
+  if (vkKey === 'space') {
+    _showVkGroup('hand-space');
+    _showVkGroup('hand-neutral-left');
+    return;
+  }
+
+  if (vkKey === 'backspace') {
+    _showVkGroup('hand-equal');
+    _showVkGroup('hand-neutral-left');
+    return;
+  }
+
+  var targetId = 'hand-' + vkKey;
+
+  if (side === 'l') {
+    // Left hand performs key reach
+    _showVkGroup(targetId);
+    if (needsShift) {
+      _showVkGroup('hand-shift-right');
+    } else {
+      _showVkGroup('hand-neutral-right');
+    }
+  } else if (side === 'r') {
+    // Right hand performs key reach
+    _showVkGroup(targetId);
+    if (needsShift) {
+      _showVkGroup('hand-shift-left');
+    } else {
+      _showVkGroup('hand-neutral-left');
+    }
+  } else {
+    _showVkGroup(targetId);
+    _showVkGroup('hand-neutral-right');
+  }
+}
+
+function _showVkGroup(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.classList.remove('st0');
+    el.classList.add('show-hand');
+  }
+}
+
+function animateHandFinger(fingerCode, ok) {
+  if (!_handVisible) return;
+  var svg = document.getElementById('hand-both');
+  if (!svg) return;
+
+  if (_handFeedbackTimeout) {
+    clearTimeout(_handFeedbackTimeout);
+    _handFeedbackTimeout = null;
+  }
+
+  if (ok) {
+    svg.classList.remove('hf-error', 'hf-pressed');
+    void svg.offsetWidth;
+    svg.classList.add('hf-pressed');
+    _handFeedbackTimeout = setTimeout(function () {
+      if (svg) svg.classList.remove('hf-pressed');
+    }, 120);
+  } else {
+    svg.classList.remove('hf-error', 'hf-pressed');
+    void svg.offsetWidth;
+    svg.classList.add('hf-error');
+    _handFeedbackTimeout = setTimeout(function () {
+      if (svg) svg.classList.remove('hf-error');
+    }, 220);
+  }
+}
+
+function animateHandForKey(evKey, ok) {
+  if (!_handVisible) return;
+  animateHandFinger(_currentHandTargetFinger, ok);
+}
+
+function initHandsOverlay() {
+  setVkHandPose('neutral', false);
+}
+
+function toggleHandOverlay() {
+  _handVisible = !_handVisible;
+  var overlay = document.getElementById('vk-hands-wrapper');
+  var stage = document.getElementById('kb-stage');
+  var btn = document.getElementById('hand-toggle-btn');
+  var lbl = document.getElementById('hand-toggle-lbl');
+  var isAr = (typeof S !== 'undefined' && S.lang === 'ar');
+
+  if (_handVisible) {
+    if (overlay) overlay.classList.remove('hidden');
+    if (stage) stage.classList.remove('hands-hidden');
+    if (btn) btn.classList.add('on');
+    if (lbl) lbl.textContent = isAr ? 'إخفاء اليدين' : 'Hide Hands';
+    if (typeof updateTargetKey === 'function') updateTargetKey();
+  } else {
+    if (overlay) overlay.classList.add('hidden');
+    if (stage) stage.classList.add('hands-hidden');
+    if (btn) btn.classList.remove('on');
+    if (lbl) lbl.textContent = isAr ? 'إظهار اليدين' : 'Show Hands';
+  }
+}
+
+function toggleKeyboard() {
+  _kbVisible = !_kbVisible;
+  var wrap = document.getElementById("kb-wrap");
+  var btn = document.getElementById("kb-toggle-btn");
+  var lbl = document.getElementById("kb-toggle-lbl");
+  var isAr = (S.lang === "ar");
+
+  if (_kbVisible) {
+    wrap.classList.remove("hidden");
+    btn.classList.add("on");
+    lbl.textContent = isAr ? "إخفاء الكيبورد" : "Hide Keyboard";
+  } else {
+    wrap.classList.add("hidden");
+    btn.classList.remove("on");
+    lbl.textContent = isAr ? "إظهار الكيبورد" : "Show Keyboard";
+  }
+}
+
+// ==============================================================
+// 4. ZERO-LATENCY RAZER GREEN MECHANICAL SWITCH AUDIO
+// ==============================================================
+var _actx = null, _masterGain = null;
+var _rgSounds = [], _spaceSound = null, _errSound = null, _backspaceSound = null;
+
+function _initAudio() {
+  if (_actx) {
+    if (_actx.state === 'suspended') _actx.resume();
+    return;
+  }
+  try {
+    var AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    _actx = new AudioCtx({ latencyHint: 0, sampleRate: 44100 });
+    if (_actx.state === 'suspended') _actx.resume();
+
+    _masterGain = _actx.createGain();
+    _masterGain.gain.setValueAtTime(0.85, _actx.currentTime);
+    _masterGain.connect(_actx.destination);
+
+    var silentBuf = _actx.createBuffer(1, 128, _actx.sampleRate);
+    var silentSrc = _actx.createBufferSource();
+    silentSrc.buffer = silentBuf;
+    silentSrc.loop = true;
+    silentSrc.connect(_actx.destination);
+    silentSrc.start(0);
+
+    _rgSounds = [
+      _synthesizeRGSound(_actx, 0),
+      _synthesizeRGSound(_actx, 1),
+      _synthesizeRGSound(_actx, 2),
+      _synthesizeRGSound(_actx, 3),
+      _synthesizeRGSound(_actx, 4),
+      _synthesizeRGSound(_actx, 5)
+    ];
+    _spaceSound = _synthesizeSpaceSound(_actx);
+    _backspaceSound = _synthesizeRGSound(_actx, 2, false, true);
+    _errSound = _synthesizeErrorSound(_actx);
+  } catch (e) { }
+}
+
+function _synthesizeRGSound(actx, variant, isSpace, isBackspace) {
+  return _createRealMechanicalSwitch(actx, variant, isSpace, isBackspace);
+}
+function _createRealMechanicalSwitch(actx, variant, isSpace, isBackspace) {
+  var sr = actx.sampleRate;
+  var dur = isSpace ? 0.075 : (isBackspace ? 0.048 : 0.052);
+  var len = Math.floor(sr * dur);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+
+  var pitch = 1.0 + (variant - 2.5) * 0.035;
+  if (isSpace) pitch *= 0.62;
+  if (isBackspace) pitch *= 1.15;
+
+  var thockFreq = (isSpace ? 185 : 365) * pitch;
+  var thockDecay = isSpace ? 48 : 78;
+  var clackFreq = (isSpace ? 470 : 860) * pitch;
+  var clackDecay = isSpace ? 82 : 125;
+  var snapFreq = (isSpace ? 2100 : 3300) * pitch;
+  var clickFreq = (isSpace ? 2900 : 4100) * pitch;
+  var clickDecay = isSpace ? 360 : 520;
+
+  function makeFilter(f, Q) {
+    var w = 2 * Math.PI * f / sr;
+    var alpha = Math.sin(w) / (2 * Q);
+    var a0 = 1 + alpha;
+    return {
+      b0: alpha / a0,
+      a1: (-2 * Math.cos(w)) / a0,
+      a2: (1 - alpha) / a0,
+      x1: 0, x2: 0, y1: 0, y2: 0,
+      tick: function (x) {
+        var y = this.b0 * (x - this.x2) - this.a1 * this.y1 - this.a2 * this.y2;
+        this.x2 = this.x1;
+        this.x1 = x;
+        this.y2 = this.y1;
+        this.y1 = y;
+        return y;
+      }
+    };
+  }
+
+  var fThock = makeFilter(thockFreq, isSpace ? 3.6 : 4.0);
+  var fClack = makeFilter(clackFreq, 4.6);
+  var fSnap = makeFilter(snapFreq, 5.8);
+  var fClick = makeFilter(clickFreq, 7.2);
+
+  for (var i = 0; i < len; i++) {
+    var t = i / sr;
+    var impactEnv = Math.exp(-t * 1900);
+    var spike = (i === 0) ? 0.95 : (i === 1) ? -0.8 : (i === 2) ? 0.55 : (i === 3) ? -0.35 : 0;
+    var contactNoise = (Math.random() * 2 - 1) * impactEnv;
+    var x = spike * 0.75 + contactNoise * 0.45;
+
+    var resThock = fThock.tick(x);
+    var resClack = fClack.tick(x);
+    var resSnap = fSnap.tick(x);
+    var resClick = fClick.tick(x);
+
+    var bottomOut = Math.sin(2 * Math.PI * thockFreq * t) * Math.exp(-t * thockDecay) * (isSpace ? 0.56 : 0.38);
+    var stemSnap = (Math.random() * 2 - 1) * Math.exp(-t * (isSpace ? 420 : 660)) * 0.18;
+    var highTick = Math.cos(2 * Math.PI * clickFreq * t) * Math.exp(-t * clickDecay) * 0.16;
+
+    var sample = resThock * 1.7 + resClack * 1.15 + resSnap * 0.7 + resClick * 0.5 + bottomOut + stemSnap + highTick;
+
+    var masterEnv = t < 0.0003 ? (t / 0.0003) : Math.exp(-t * (isSpace ? 40 : 60));
+    sample *= masterEnv;
+
+    d[i] = Math.tanh(sample * 1.35) * (isSpace ? 0.92 : 0.86);
+  }
+  return buf;
+}
+function _oldRGSound(actx, variant) {
+  var sr = actx.sampleRate;
+  var len = Math.floor(sr * 0.045);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+  var pitch = 1 + (variant - 1.5) * 0.04;
+  var clickFreq = 4300 * pitch, clackFreq = 1100 * pitch, thudFreq = 260 * pitch;
+
+  for (var i = 0; i < len; i++) {
+    var t = i / sr;
+    var impulse = (i === 0) ? 0.95 : (i === 1) ? -0.75 : (i === 2) ? 0.55 : (i < 8) ? (Math.random() * 2 - 1) * 0.25 : 0;
+    var click = Math.cos(2 * Math.PI * clickFreq * t) * Math.exp(-t * 680) * 0.45;
+    var clack = Math.sin(2 * Math.PI * clackFreq * t) * Math.exp(-t * 220) * 0.35;
+    var thud = Math.sin(2 * Math.PI * thudFreq * t) * Math.exp(-t * 110) * 0.25;
+    d[i] = (impulse * 0.4 + click + clack + thud) * 0.85;
+  }
+  return buf;
+}
+
+function _synthesizeSpaceSound(actx) {
+  return _createRealMechanicalSwitch(actx, 0, true, false);
+}
+function _oldSpaceSound(actx) {
+  var sr = actx.sampleRate;
+  var len = Math.floor(sr * 0.065);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+
+  for (var i = 0; i < len; i++) {
+    var t = i / sr;
+    var impulse = (i === 0) ? 0.85 : (i === 1) ? -0.65 : (i < 8) ? (Math.random() * 2 - 1) * 0.2 : 0;
+    var click = Math.cos(2 * Math.PI * 3000 * t) * Math.exp(-t * 500) * 0.3;
+    var clack = Math.sin(2 * Math.PI * 750 * t) * Math.exp(-t * 160) * 0.45;
+    var thud = Math.sin(2 * Math.PI * 210 * t) * Math.exp(-t * 70) * 0.45;
+    d[i] = (impulse * 0.3 + click + clack + thud) * 0.9;
+  }
+  return buf;
+}
+
+function _synthesizeErrorSound(actx) {
+  var sr = actx.sampleRate;
+  var len = Math.floor(sr * 0.062);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+  var thudFreq = 165;
+  for (var i = 0; i < len; i++) {
+    var t = i / sr;
+    var impact = (i === 0) ? 0.7 : (i === 1) ? -0.5 : (i === 2) ? 0.3 : 0;
+    var wobble = (Math.random() * 2 - 1) * Math.exp(-t * 320) * 0.22;
+    var lowThud = Math.sin(2 * Math.PI * thudFreq * t) * Math.exp(-t * 68) * 0.58;
+    var bodyPop = Math.sin(2 * Math.PI * 320 * t) * Math.exp(-t * 115) * 0.32;
+    var sample = (impact * 0.3 + wobble + lowThud + bodyPop) * Math.exp(-t * 42);
+    d[i] = Math.tanh(sample * 1.2) * 0.8;
+  }
+  return buf;
+}
+function _oldErrorSound(actx) {
+  var sr = actx.sampleRate;
+  var len = Math.floor(sr * 0.07);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+
+  for (var i = 0; i < len; i++) {
+    var t = i / sr;
+    var impulse = (i === 0) ? 0.7 : (i === 1) ? -0.5 : 0;
+    var lowThud = Math.sin(2 * Math.PI * 190 * t) * Math.exp(-t * 90) * 0.55;
+    var woodPop = Math.sin(2 * Math.PI * 380 * t) * Math.exp(-t * 140) * 0.35;
+    d[i] = (impulse * 0.25 + lowThud + woodPop) * 0.8;
+  }
+  return buf;
+}
+
+window.addEventListener("pointerdown", _initAudio, { passive: true });
+window.addEventListener("mousedown", _initAudio, { passive: true });
+window.addEventListener("keydown", _initAudio, { passive: true });
+
+function playCorrectSound(isSpace, isBackspace) {
+  if (!_actx) _initAudio();
+  if (!_actx) return;
+  if (_actx.state === 'suspended') _actx.resume();
+  try {
+    var src = _actx.createBufferSource();
+    src.buffer = (isSpace && _spaceSound) ? _spaceSound : (isBackspace && _backspaceSound) ? _backspaceSound : _rgSounds[Math.floor(Math.random() * _rgSounds.length)];
+    src.connect(_masterGain);
+    src.start(_actx.currentTime);
+  } catch (e) { }
+}
+
+function playErrorSound() {
+  if (!_actx) _initAudio();
+  if (!_actx) return;
+  if (_actx.state === 'suspended') _actx.resume();
+  try {
+    var src = _actx.createBufferSource();
+    if (_errSound) src.buffer = _errSound;
+    src.connect(_masterGain);
+    src.start(_actx.currentTime);
+  } catch (e) { }
+}
+
+// ==============================================================
+// 5. TEST FLOW AND KEYBOARD EVENT HANDLERS
+// ==============================================================
+var _arRecentHistory = { common: [], medium: [], code: [], quotes: [], race: [] };
+
+function getNonRepeatingArIndex(mode, poolLength) {
+  if (!_arRecentHistory[mode]) _arRecentHistory[mode] = [];
+  var hist = _arRecentHistory[mode];
+  var maxRecent = Math.min(Math.floor(poolLength * 0.65), 20);
+  var available = [];
+  for (var i = 0; i < poolLength; i++) {
+    if (hist.indexOf(i) === -1) available.push(i);
+  }
+  if (available.length === 0) {
+    hist.length = 0;
+    for (var j = 0; j < poolLength; j++) available.push(j);
+  }
+  var chosen = available[Math.floor(Math.random() * available.length)];
+  hist.push(chosen);
+  if (hist.length > maxRecent) hist.shift();
+  return chosen;
+}
+
+function genText() {
+  if (S.lang === "ar") {
+    var pool = POOLS.ar[S.mode] || POOLS.ar.common;
+    if (S.mode === "quotes") {
+      var numQuotes = S.dur === 15 ? 1 : S.dur === 30 ? 2 : 3;
+      var selectedQuotes = [];
+      for (var q = 0; q < numQuotes; q++) {
+        var qIdx = getNonRepeatingArIndex("quotes", pool.length);
+        selectedQuotes.push(pool[qIdx]);
+      }
+      return selectedQuotes.join(" ");
+    }
+    // For 15 seconds: one complete, inspiring, cohesive paragraph with no repeats
+    if (S.dur === 15) {
+      var idx15 = getNonRepeatingArIndex(S.mode, pool.length);
+      return pool[idx15];
+    }
+    // For 30 and 60 seconds: assemble full cohesive paragraphs with non-repeating start
+    var targetWords = S.dur === 30 ? 55 : 110;
+    var firstIdx = getNonRepeatingArIndex(S.mode, pool.length);
+    var combined = [pool[firstIdx]];
+    var count = pool[firstIdx].split(/\s+/).length;
+    var nextOffset = 1;
+    while (count < targetWords && nextOffset < pool.length) {
+      var nextIdx = (firstIdx + nextOffset) % pool.length;
+      combined.push(pool[nextIdx]);
+      count += pool[nextIdx].split(/\s+/).length;
+      nextOffset++;
+    }
+    return combined.join(" ");
+  }
+
+  var p = POOLS.en[S.mode] || POOLS.en.common;
+  if (S.mode === "quotes") return p[Math.floor(Math.random() * p.length)];
+  var w = [];
+  for (var m = 0; m < 140; m++) w.push(p[Math.floor(Math.random() * p.length)]);
+  return w.join(" ");
+}
+
+function initTest() {
+  if (S.ti) clearInterval(S.ti);
+  S.text = genText();
+  S.ch = [];
+  for (var i = 0; i < S.text.length; i++) S.ch.push({ c: S.text[i], s: i === 0 ? "now" : "w" });
+  S.idx = 0;
+  S.on = false;
+  S.fin = false;
+  S.left = S.dur;
+  S.ks = [];
+  S.ec = 0;
+  S.cor = 0;
+  S.t0 = 0;
+  S.tk = 0;
+  S._rendered = false;
+  // Reset caret to blink state
+  var _c = document.getElementById('caret');
+  if (_c) { _c.classList.add('blink'); _c.style.opacity = '1'; }
+
+  document.getElementById("xwpm").innerHTML = "&mdash;";
+  document.getElementById("xacc").innerHTML = "&mdash;";
+  document.getElementById("xerr").textContent = "0";
+  document.getElementById("timer").textContent = S.dur;
+  document.getElementById("timer").className = "num";
+  document.getElementById("hint").style.display = "block";
+  document.getElementById("tcard").className = "card";
+
+  var w = document.getElementById("words");
+  w.scrollTop = 0;
+  w.className = S.lang === "ar" ? "ar" : "";
+  renderChars();
+  updRing(S.dur, S.dur);
+  updateTargetKey();
+
+  var nTest = document.getElementById("n-test");
+  if (!nTest || nTest.classList.contains("on")) {
+    document.getElementById("p-test").className = "page show";
+  }
+  document.getElementById("p-result").className = "page";
+  document.getElementById("inp").value = "";
+  document.getElementById("inp").focus();
+}
+
+// ── FAST INCREMENTAL RENDERER ─────────────────────────────────
+// On first call (or full reset), builds innerHTML once.
+// On subsequent keystrokes, only patches the 2-3 changed spans.
+function renderChars() {
+  var wordsEl = document.getElementById('words');
+  var ch = S.ch;
+
+  // Full render: build HTML string once and cache span references
+  if (!S._rendered) {
+    var parts = [], curWord = [];
+    for (var i = 0; i < ch.length; i++) {
+      var o = ch[i];
+      if (o.c === ' ') {
+        if (curWord.length) { parts.push('<span class="word">' + curWord.join('') + '</span>'); curWord = []; }
+        parts.push('<span class="c sp ' + o.s + '" data-ci="' + i + '">&nbsp;</span>');
       } else {
-        localStorage.removeItem('tm_server_url');
+        curWord.push('<span class="c ' + o.s + '" data-ci="' + i + '">' + o.c + '</span>');
       }
-      var d = document.getElementById('om-settings-drawer');
-      if (d) d.style.display = 'none';
-      omShowToast(S.lang === 'ar' ? 'تم حفظ إعدادات الخادم' : 'Server settings saved');
-      if (OM.socket) {
-        OM.socket.disconnect();
-      }
-      omConnect();
     }
+    if (curWord.length) parts.push('<span class="word">' + curWord.join('') + '</span>');
+    wordsEl.innerHTML = parts.join('');
+    S._rendered = true;
+    S._charEls = wordsEl.querySelectorAll('.c[data-ci]');
+  } else {
+    // Incremental patch: only changed indices (prev, current, next)
+    var dirty = [];
+    var idx = S.idx;
+    if (idx > 0) dirty.push(idx - 1);
+    dirty.push(idx);
+    if (idx + 1 < ch.length) dirty.push(idx + 1);
+    for (var j = 0; j < dirty.length; j++) {
+      var di = dirty[j];
+      var span = S._charEls[di];
+      if (!span) continue;
+      var newCls = 'c' + (ch[di].c === ' ' ? ' sp' : '') + ' ' + ch[di].s;
+      if (span.className !== newCls) span.className = newCls;
+    }
+  }
 
-    // ── Status dot indicator ──────────────────────────────────────
-    function omSetConnStatus(state, msg) {
-      var dot = document.getElementById('om-conn-dot');
-      var nOnline = document.getElementById('rm-online-btn') || document.getElementById('n-online');
-      if (!dot) return;
-      if (state === 'connected') {
-        dot.style.background = '#10b981';
-        dot.style.boxShadow = '0 0 8px rgba(16,185,129,0.8)';
-        dot.title = S.lang === 'ar' ? 'متصل بالخادم' : 'Connected to server';
-        if (nOnline) nOnline.classList.add('connected');
-      } else if (state === 'connecting') {
-        dot.style.background = '#f59e0b';
-        dot.style.boxShadow = '0 0 6px rgba(245,158,11,0.6)';
-        dot.title = S.lang === 'ar' ? 'جارِ الاتصال...' : 'Connecting...';
-      } else if (state === 'err') {
-        dot.style.background = '#ef4444';
-        dot.style.boxShadow = '0 0 6px rgba(239,68,68,0.6)';
-        dot.title = msg || (S.lang === 'ar' ? 'غير متصل بالخادم' : 'Disconnected');
-        if (nOnline) nOnline.classList.remove('connected');
-      } else {
-        dot.style.background = '#4b5563';
-        dot.style.boxShadow = 'none';
-        dot.title = S.lang === 'ar' ? 'غير متصل' : 'Disconnected';
-        if (nOnline) nOnline.classList.remove('connected');
+  // Smooth scroll active char into view
+  var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : wordsEl.querySelector('.c.now');
+  if (curEl) {
+    var cardH = wordsEl.clientHeight;
+    var topPos = curEl.offsetTop;
+    if (topPos > cardH * 0.55) wordsEl.scrollTop = topPos - cardH * 0.28;
+    else wordsEl.scrollTop = 0;
+  }
+  // Move sliding caret to current character position
+  moveCaret();
+}
+
+// ── SMOOTH SLIDING CARET ──────────────────────────────────────
+// Reads current char's rect and slides #caret to it with GPU transition
+var caretIdleTimer = null;
+var lastCaretY = -1;
+
+function moveCaret(instant) {
+  var caretEl = document.getElementById('caret');
+  if (!caretEl) return;
+
+  var card = document.getElementById('tcard');
+  var wordsEl = document.getElementById('words');
+  if (!card || !wordsEl) return;
+
+  var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : null;
+  if (!curEl) {
+    caretEl.style.opacity = '0';
+    return;
+  }
+
+  // 1. الإلغاء الفوري للوميض أثناء الكتابة لتكون ثابتة وواضحة بدون تشتيت
+  caretEl.classList.remove('blink');
+  caretEl.style.opacity = '1';
+
+  // 2. تفعيل وميض خفيف وهادئ فقط إذا توقف المستخدم عن الكتابة لأكثر من نصف ثانية
+  if (caretIdleTimer) clearTimeout(caretIdleTimer);
+  caretIdleTimer = setTimeout(function () {
+    if (!S.fin) {
+      caretEl.classList.add('blink');
+    }
+  }, 550);
+
+  var cardRect = card.getBoundingClientRect();
+  var charRect = curEl.getBoundingClientRect();
+
+  var isAr = S.lang === 'ar';
+  var caretX, caretY, caretH;
+
+  caretH = Math.round(charRect.height * 0.92);
+  caretY = charRect.top - cardRect.top + (charRect.height - caretH) / 2;
+
+  if (isAr) {
+    caretX = charRect.right - cardRect.left - 1.5;
+  } else {
+    caretX = charRect.left - cardRect.left - 1.5;
+  }
+
+  // 3. حركة سلسة ومرنة وسريعة بدون انقطاع أو قفز قطري عند الانتقال لسطر جديد
+  if (instant || (lastCaretY !== -1 && Math.abs(caretY - lastCaretY) > 15)) {
+    caretEl.style.transition = 'none';
+    caretEl.style.height = caretH + 'px';
+    caretEl.style.transform = 'translate(' + caretX + 'px,' + caretY + 'px)';
+    void caretEl.offsetWidth;
+    caretEl.style.transition = 'transform 70ms cubic-bezier(0.2, 0.9, 0.3, 1), height 70ms ease, opacity 0.15s ease';
+  } else {
+    caretEl.style.height = caretH + 'px';
+    caretEl.style.transform = 'translate(' + caretX + 'px,' + caretY + 'px)';
+  }
+  lastCaretY = caretY;
+}
+
+function updRing(l, t) {
+  var r = document.getElementById("ring");
+  r.style.strokeDashoffset = 201.06 * (1 - l / t);
+  r.style.stroke = (l <= 5 && S.on) ? "var(--err)" : "var(--accent)";
+}
+
+// ── TEST COMPLETION & TELEMETRY ENGINE ─────────────────────────
+function finishTest() {
+  if (S.ti) clearInterval(S.ti);
+  S.fin = true;
+  S.on = false;
+  document.getElementById("tcard").className = "card";
+  document.getElementById("hint").style.display = "none";
+  // Hide caret when done
+  var _c = document.getElementById('caret');
+  if (_c) { _c.style.opacity = '0'; _c.classList.remove('blink'); }
+
+  var el = Math.max(0.5, (performance.now() - S.t0) / 1000);
+  var cor = 0, em = {}, tm = {};
+  for (var i = 0; i < S.ks.length; i++) {
+    var k = S.ks[i];
+    if (k.ok) cor++;
+    else em[k.ex] = (em[k.ex] || 0) + 1;
+    if (k.ok && k.dur > 0 && k.dur < 2000) {
+      if (!tm[k.ch]) tm[k.ch] = [];
+      tm[k.ch].push(k.dur);
+    }
+  }
+  var errs = 0;
+  for (var x in em) errs += em[x];
+
+  // Consistency % calculation (coefficient of variation of keystroke intervals)
+  var durs = [];
+  for (var di = 0; di < S.ks.length; di++) {
+    if (S.ks[di].dur > 20 && S.ks[di].dur < 2200) durs.push(S.ks[di].dur);
+  }
+  var consistency = 90;
+  if (durs.length > 3) {
+    var sumD = 0;
+    for (var j = 0; j < durs.length; j++) sumD += durs[j];
+    var meanD = sumD / durs.length;
+    var varD = 0;
+    for (var j = 0; j < durs.length; j++) varD += Math.pow(durs[j] - meanD, 2);
+    var sd = Math.sqrt(varD / durs.length);
+    var cov = sd / (meanD || 1);
+    consistency = Math.max(10, Math.min(100, Math.round(100 * (1 - Math.min(cov, 0.9)))));
+  }
+
+  // Timeline calculation for dynamic SVG chart
+  var totalSec = Math.max(1, Math.round(el));
+  var timeline = [];
+  var peakWpm = 0;
+  for (var sec = 1; sec <= totalSec; sec++) {
+    var maxMs = sec * 1000;
+    var corSec = 0, totSec = 0, errSec = 0;
+    for (var ki = 0; ki < S.ks.length; ki++) {
+      var item = S.ks[ki];
+      var tVal = (item.t !== undefined) ? item.t : ((ki / S.ks.length) * el * 1000);
+      if (tVal <= maxMs) {
+        totSec++;
+        if (item.ok) corSec++;
+      }
+      if (tVal > (sec - 1) * 1000 && tVal <= maxMs && !item.ok) {
+        errSec++;
       }
     }
+    var curWpm = calcWPM(corSec, maxMs);
+    var curRaw = calcWPM(totSec, maxMs);
+    if (curWpm > peakWpm) peakWpm = curWpm;
+    timeline.push({ sec: sec, wpm: curWpm, raw: curRaw, errs: errSec });
+  }
 
-    // ── Socket.io CDN loader ──────────────────────────────────────
-    function loadSocketIO(cb) {
-      if (typeof io !== 'undefined') { cb(); return; }
-      var s = document.createElement('script');
-      s.src = 'https://cdn.socket.io/4.7.5/socket.io.min.js';
-      s.onload = cb;
-      s.onerror = function () {
-        omSetConnStatus('err', 'Failed to load socket client');
-      };
-      document.head.appendChild(s);
+  var finalWpm = calcWPM(cor, el * 1000);
+  if (peakWpm === 0) peakWpm = finalWpm;
+
+  // Speed Tier Determination
+  var isAr = (S.lang === "ar");
+  var tier = {
+    name: isAr ? "⚡ فئة البرق الخاطف" : "⚡ Supersonic Flash",
+    color: "var(--accent)",
+    glow: "var(--accent-glow)",
+    percentile: isAr ? "سرعة قياسية خارقة تفوق 90% من الطباعين" : "Elite pace! Top 10% speed"
+  };
+  if (finalWpm >= 110) {
+    tier = {
+      name: isAr ? "⚡ البرق الخارق (Supersonic)" : "⚡ Supersonic Champion",
+      color: "#c084fc", glow: "rgba(192,132,252,0.45)",
+      percentile: isAr ? "مستوى أسطوري! أسرع من 99% من المتسابقين" : "God tier! Faster than 99% of racers"
+    };
+  } else if (finalWpm >= 85) {
+    tier = {
+      name: isAr ? "⚡ البرق الخاطف (Lightning)" : "⚡ Lightning Fast",
+      color: "var(--accent)", glow: "var(--accent-glow)",
+      percentile: isAr ? "سرعة قياسية خارقة تفوق 90% من الطباعين" : "Elite pace! Top 10% speed"
+    };
+  } else if (finalWpm >= 65) {
+    tier = {
+      name: isAr ? "🚀 الصاروخ المنطلق (Rocket)" : "🚀 Rocket Swift",
+      color: "#38bdf8", glow: "rgba(56,189,248,0.4)",
+      percentile: isAr ? "سرعة متقدمة ومنافسة قوية في السباقات" : "Advanced competitive racer speed"
+    };
+  } else if (finalWpm >= 45) {
+    tier = {
+      name: isAr ? "🦅 الصقر الطائر (Falcon)" : "🦅 Flying Falcon",
+      color: "#4ade80", glow: "rgba(74,222,128,0.4)",
+      percentile: isAr ? "سرعة جيدة جداً وتفوق المعدل العالمي" : "Solid typing pace above global average"
+    };
+  } else {
+    tier = {
+      name: isAr ? "🎯 المتدرب الواعد (Rising Star)" : "🎯 Rising Star",
+      color: "#94a3b8", glow: "rgba(148,163,184,0.3)",
+      percentile: isAr ? "بداية ممتازة، التمرين المنتظم سيضاعف سرعتك" : "Great start, keep practicing to boost speed"
+    };
+  }
+
+  // Check Personal Best
+  var prevRuns = gR();
+  var prevBest = 0;
+  for (var pr = 0; pr < prevRuns.length; pr++) {
+    if (prevRuns[pr].wpm > prevBest) prevBest = prevRuns[pr].wpm;
+  }
+  var isNewRecord = (finalWpm > 0 && finalWpm > prevBest && prevRuns.length > 0);
+
+  var res = {
+    wpm: finalWpm,
+    raw: calcWPM(S.ks.length, el * 1000),
+    acc: calcAcc(cor, S.ks.length),
+    cor: cor,
+    errs: errs,
+    tot: S.ks.length,
+    dur: el,
+    em: em,
+    tm: tm,
+    ts: Date.now(),
+    lang: S.lang,
+    consistency: consistency,
+    timeline: timeline,
+    peakWpm: peakWpm,
+    tier: tier,
+    isNewRecord: isNewRecord
+  };
+
+  window._lastRes = res;
+  pR(res);
+  showResult(res);
+  chkAch();
+}
+
+// ── SHOWCASE RESULT DASHBOARD ─────────────────────────────────
+// ── SHOWCASE RESULT DASHBOARD ─────────────────────────────────
+function showResult(r) {
+  document.getElementById("p-test").className = "page";
+  var rp = document.getElementById("p-result");
+  rp.className = "page show";
+
+  var isAr = (S.lang === "ar");
+
+  // 1. Text Labels
+  var setTxt = function (id, txt) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = txt;
+  };
+  setTxt("r-status-badge-txt", isAr ? "انتهت المحاولة بنجاح" : "Attempt completed successfully");
+  setTxt("r-hero-subheading", isAr ? "كل حرف تكتبه يجعلك أفضل من الأمس، استمر في التطور." : "Every key you type makes you better than yesterday. Keep pushing forward.");
+  setTxt("r-retry-title", isAr ? "تحدَّ نفسك مرة أخرى" : "Challenge yourself again");
+  setTxt("r-btn-retest-txt", isAr ? "إعادة الاختبار" : "Retest");
+  setTxt("r-lbl-speed", isAr ? "السرعة" : "Speed");
+  setTxt("r-lbl-acc", isAr ? "الدقة" : "Accuracy");
+  setTxt("r-chart-title", isAr ? "معدل السرعة خلال الاختبار" : "Speed rate during test");
+  setTxt("r-leg-actual", isAr ? "السرعة الفعلية" : "Actual Speed");
+  setTxt("r-leg-avg", isAr ? "السرعة المتوسطة" : "Average Speed");
+  setTxt("r-lbl-dur", isAr ? "مدة الاختبار" : "Duration");
+  setTxt("r-lbl-tot", isAr ? "عدد الأحرف الكلي" : "Total Characters");
+  setTxt("r-lbl-cor", isAr ? "الأحرف الصحيحة" : "Correct Characters");
+  setTxt("r-lbl-err", isAr ? "الأخطاء" : "Errors");
+  setTxt("r-lbl-cons", isAr ? "الالتزام" : "Consistency");
+  setTxt("r-lbl-next-goal", isAr ? "الهدف القادم" : "Next Goal");
+  setTxt("r-btn-replay-lbl", isAr ? "تحدَّ نفسك من جديد" : "Challenge yourself again");
+  setTxt("r-btn-copy-lbl", isAr ? "نسخ النتيجة" : "Copy Result");
+  setTxt("r-diag-title", isAr ? "الحروف الأكثر تعثراً (Mistake Keys):" : "Mistake Keys:");
+  setTxt("r-drill-lbl", isAr ? "تدريب الأخطاء" : "Drill Mistakes");
+
+  // Buttons titles & hints
+  var btnReplay = document.getElementById("r-btn-replay");
+  if (btnReplay) btnReplay.title = isAr ? "إعادة نفس النص (Tab)" : "Restart same test (Tab)";
+  var btnCopy = document.getElementById("r-btn-copy");
+  if (btnCopy) btnCopy.title = isAr ? "نسخ النتيجة للمشاركة" : "Copy result to share";
+
+  // 2. Metrics & Gauge
+  var rw = document.getElementById("rw");
+  var ra = document.getElementById("ra");
+  var rCons = document.getElementById("r-consistency");
+  var rCor = document.getElementById("r-cor-cnt");
+  var re = document.getElementById("re");
+  var rTot = document.getElementById("r-tot-cnt");
+  var rt = document.getElementById("rt");
+
+  if (rw) rw.textContent = r.wpm;
+  if (ra) ra.textContent = r.acc + "%";
+  if (rCons) rCons.textContent = (r.consistency || 90) + "%";
+  if (rCor) rCor.textContent = r.cor;
+  if (re) re.textContent = r.errs;
+  if (rTot) rTot.textContent = r.tot;
+  if (rt) rt.textContent = Math.round(r.dur) + "s";
+
+  // Circular gauge animation
+  var arc = document.getElementById("r-gauge-arc");
+  if (arc) {
+    var wpmRatio = Math.min(1, Math.max(0.05, r.wpm / 110));
+    arc.style.strokeDashoffset = 330 * (1 - wpmRatio);
+  }
+
+  // Trends comparison
+  var prevRuns = gR();
+  var wDiff = 4, aDiff = 5;
+  if (prevRuns.length > 1) {
+    var last = prevRuns[prevRuns.length - 2];
+    wDiff = r.wpm - last.wpm;
+    aDiff = r.acc - last.acc;
+  }
+  var wDiffEl = document.getElementById("r-wpm-diff");
+  if (wDiffEl) {
+    wDiffEl.textContent = (wDiff >= 0 ? "+" : "") + wDiff;
+    var wTrend = document.getElementById("r-wpm-trend");
+    if (wTrend) wTrend.className = wDiff < 0 ? "res-gauge-trend down" : "res-gauge-trend";
+  }
+  var aDiffEl = document.getElementById("r-acc-diff");
+  if (aDiffEl) aDiffEl.textContent = (aDiff >= 0 ? "+" : "") + aDiff + "%";
+
+  // Evaluation badge
+  var evalText = document.getElementById("r-eval-text");
+  if (evalText) {
+    if (r.wpm >= 85) evalText.textContent = isAr ? "أداء أسطوري! سرعة خارقة تفوق 90% 🏆" : "God tier speed! Top 10% 🏆";
+    else if (r.wpm >= 60) evalText.textContent = isAr ? "سرعة متقدمة ومنافسة قوية جداً! 🚀" : "Advanced competitive racer speed! 🚀";
+    else if (r.wpm >= 35) evalText.textContent = isAr ? "نتيجة ممتازة، بداية انطلاقة قوية! ⚡" : "Great result, solid foundation! ⚡";
+    else evalText.textContent = isAr ? "نتيجة جيدة، يمكنك أفضل! 🏆" : "Good result, you can do better! 🏆";
+  }
+
+  // Next Goal calculation
+  var nextTarget = Math.max(r.wpm + 1, Math.ceil((r.wpm + 1) / 5) * 5);
+  if (nextTarget === r.wpm) nextTarget = r.wpm + 5;
+  setTxt("r-next-target-wpm", nextTarget + " WPM");
+  setTxt("r-goal-target-num", nextTarget + " WPM");
+  setTxt("r-goal-ratio", r.wpm + " / " + nextTarget);
+  var goalPct = Math.min(100, Math.round((r.wpm / nextTarget) * 100));
+  var goalFill = document.getElementById("r-goal-bar-fill");
+  if (goalFill) goalFill.style.width = goalPct + "%";
+
+  // Dynamic SVG Chart
+  renderBarqChart(r);
+
+  // Diagnostics: Mistake Keys
+  var te = [];
+  for (var c in r.em) te.push([c, r.em[c]]);
+  te.sort(function (a, b) { return b[1] - a[1]; });
+  te = te.slice(0, 8);
+  var ec = document.getElementById("rerr");
+  var drillBtn = document.getElementById("r-drill-btn");
+  var mistWrap = document.getElementById("r-mistakes-wrap");
+  if (te.length && ec) {
+    if (mistWrap) mistWrap.style.display = "block";
+    var h = "";
+    for (var i = 0; i < te.length; i++) {
+      var ch = te[i][0] === " " ? "⎵" : te[i][0];
+      h += "<div class='barq-chip'><div class='ch2'>" + ch + "</div><div class='cn'>x" + te[i][1] + "</div></div>";
     }
+    ec.innerHTML = h;
+    if (drillBtn) drillBtn.style.display = "inline-flex";
+  } else {
+    if (mistWrap) mistWrap.style.display = "none";
+  }
 
-    // ── Modal control ─────────────────────────────────────────────
-    function openOnlineRace() {
-      document.getElementById('online-modal').classList.add('show');
-      var errEl = document.getElementById('om-err');
-      if (errEl) errEl.textContent = '';
-      omShowScreen('setup');
-      // Auto connect quietly in the background
-      if (!OM.socket || !OM.socket.connected) {
-        omConnect();
+  if (window.initAllVectorIcons) initAllVectorIcons();
+}
+
+// ── DYNAMIC PURE SVG SPEED CURVE CHART ─────────────────────────
+function renderBarqChart(r) {
+  var svg = document.getElementById("r-speed-chart");
+  var emptyMsg = document.getElementById("barq-chart-empty");
+  if (!svg) return;
+
+  var timeline = r.timeline || [];
+  if (timeline.length < 2) {
+    var durSec = Math.max(1, Math.round(r.dur));
+    timeline = [
+      { sec: 1, wpm: Math.round(r.wpm * 0.82), raw: Math.round(r.raw * 0.85), errs: 0 },
+      { sec: durSec, wpm: r.wpm, raw: r.raw, errs: r.errs }
+    ];
+  }
+  if (emptyMsg) emptyMsg.style.display = "none";
+
+  var W = 880, H = 230;
+  var padL = 48, padR = 32, padT = 32, padB = 34;
+  var plotW = W - padL - padR;
+  var plotH = H - padT - padB;
+
+  var maxVal = 30;
+  for (var i = 0; i < timeline.length; i++) {
+    if (timeline[i].wpm > maxVal) maxVal = timeline[i].wpm;
+    if (timeline[i].raw > maxVal) maxVal = timeline[i].raw;
+  }
+  var yMax = Math.ceil((maxVal + 6) / 10) * 10;
+  if (yMax < 30) yMax = 30;
+
+  var themeAccent = (getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#e8af47').trim();
+  var html = "";
+  html += '<defs>';
+  html += '<linearGradient id="barqAreaGrad" x1="0" y1="0" x2="0" y2="1">';
+  html += '<stop offset="0%" stop-color="' + themeAccent + '" stop-opacity="0.28"/>';
+  html += '<stop offset="100%" stop-color="' + themeAccent + '" stop-opacity="0"/>';
+  html += '</linearGradient>';
+  html += '<filter id="barqGlow" x="-20%" y="-20%" width="140%" height="140%">';
+  html += '<feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="' + themeAccent + '" flood-opacity="0.5"/>';
+  html += '</filter>';
+  html += '</defs>';
+
+  // Horizontal grid lines (0, 10, 20, 30...)
+  var numSteps = Math.min(5, Math.floor(yMax / 10));
+  for (var g = 0; g <= numSteps; g++) {
+    var stepVal = Math.round((g / numSteps) * yMax);
+    var yPos = padT + plotH - ((stepVal / yMax) * plotH);
+    html += '<line x1="' + padL + '" y1="' + yPos + '" x2="' + (padL + plotW) + '" y2="' + yPos + '" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>';
+    html += '<text x="' + (padL - 10) + '" y="' + (yPos + 4) + '" fill="#64748b" font-size="10" font-family="var(--fen)" text-anchor="end">' + stepVal + '</text>';
+  }
+
+  var totalSec = timeline[timeline.length - 1].sec || Math.max(1, Math.round(r.dur));
+  var pts = [];
+  for (var j = 0; j < timeline.length; j++) {
+    var item = timeline[j];
+    var x = padL + ((item.sec / totalSec) * plotW);
+    var y = padT + plotH - ((item.wpm / yMax) * plotH);
+    pts.push({ x: x, y: y, item: item });
+  }
+
+  // Smooth Curve path
+  var pathD = "M " + pts[0].x + " " + pts[0].y;
+  for (var k = 0; k < pts.length - 1; k++) {
+    var p0 = pts[k];
+    var p1 = pts[k + 1];
+    var mx = (p0.x + p1.x) / 2;
+    pathD += " C " + mx + " " + p0.y + ", " + mx + " " + p1.y + ", " + p1.x + " " + p1.y;
+  }
+
+  var areaD = pathD + " L " + pts[pts.length - 1].x + " " + (padT + plotH) + " L " + pts[0].x + " " + (padT + plotH) + " Z";
+  html += '<path d="' + areaD + '" fill="url(#barqAreaGrad)"/>';
+  html += '<path d="' + pathD + '" fill="none" stroke="' + themeAccent + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#barqGlow)"/>';
+
+  // Dashed blue average speed line
+  var yAvgPos = padT + plotH - ((r.wpm / yMax) * plotH);
+  html += '<line x1="' + padL + '" y1="' + yAvgPos + '" x2="' + (padL + plotW) + '" y2="' + yAvgPos + '" stroke="#38bdf8" stroke-dasharray="5,4" stroke-width="1.8"/>';
+
+  // Error markers: red ✕ marks
+  for (var m = 0; m < pts.length; m++) {
+    var pt = pts[m];
+    if (pt.item.errs > 0) {
+      var sz = 4.5;
+      html += '<g transform="translate(' + pt.x + ',' + pt.y + ')">';
+      html += '<line x1="-' + sz + '" y1="-' + sz + '" x2="' + sz + '" y2="' + sz + '" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round"/>';
+      html += '<line x1="-' + sz + '" y1="' + sz + '" x2="' + sz + '" y2="-' + sz + '" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round"/>';
+      html += '</g>';
+    }
+  }
+
+  // Peak / Pause highlight marker
+  if (pts.length > 2) {
+    var maxPt = pts[0];
+    for (var pi = 0; pi < pts.length; pi++) {
+      if (pts[pi].item.wpm > maxPt.item.wpm) maxPt = pts[pi];
+    }
+    if (maxPt.item.wpm > 0) {
+      html += '<line x1="' + maxPt.x + '" y1="' + padT + '" x2="' + maxPt.x + '" y2="' + (padT + plotH) + '" stroke="' + themeAccent + '" stroke-opacity="0.45" stroke-dasharray="3,3" stroke-width="1.2"/>';
+      html += '<circle cx="' + maxPt.x + '" cy="' + maxPt.y + '" r="5" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="2"/>';
+      var tipW = 80, tipH = 26;
+      var tipX = Math.max(padL, Math.min(padL + plotW - tipW, maxPt.x - tipW / 2));
+      var tipY = Math.max(padT, maxPt.y - 34);
+      html += '<rect x="' + tipX + '" y="' + tipY + '" width="' + tipW + '" height="' + tipH + '" rx="6" fill="#1e293b" stroke="' + themeAccent + '" stroke-opacity="0.5" stroke-width="1"/>';
+      html += '<text x="' + (tipX + tipW / 2) + '" y="' + (tipY + 17) + '" fill="#ffffff" font-size="11" font-weight="700" font-family="var(--fen)" text-anchor="middle">' + maxPt.item.wpm + ' WPM</text>';
+    }
+  }
+
+  // Final point dot
+  var lastPt = pts[pts.length - 1];
+  html += '<circle cx="' + lastPt.x + '" cy="' + lastPt.y + '" r="4.5" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="2"/>';
+
+  // X-Axis time intervals (e.g. 0:00, 0:05, 0:10, 0:15, 0:20, 0:24)
+  var numIntervals = Math.min(6, Math.max(3, totalSec));
+  for (var xi = 0; xi <= numIntervals; xi++) {
+    var sVal = Math.round((xi / numIntervals) * totalSec);
+    var xPos = padL + ((sVal / totalSec) * plotW);
+    var mTime = Math.floor(sVal / 60);
+    var sTime = sVal % 60;
+    var timeStr = mTime + ":" + (sTime < 10 ? "0" : "") + sTime;
+    html += '<text x="' + xPos + '" y="' + (H - 8) + '" fill="#64748b" font-size="10" font-family="var(--fen)" text-anchor="middle">' + timeStr + '</text>';
+  }
+  var isAr = (S.lang === "ar");
+  html += '<text x="' + (padL + plotW) + '" y="' + (padT + plotH + 16) + '" fill="#64748b" font-size="10" font-family="var(--far)" text-anchor="end">' + (isAr ? "الوقت" : "Time") + '</text>';
+
+  svg.innerHTML = html;
+}
+
+// ── RESULT ACTIONS & SHORTCUT HANDLERS ─────────────────────────
+function repeatCurrentTest() {
+  if (S.ti) clearInterval(S.ti);
+  S.idx = 0;
+  S.on = false;
+  S.fin = false;
+  S.left = S.dur;
+  S.ks = [];
+  S.ec = 0;
+  S.cor = 0;
+  S.t0 = 0;
+  S.tk = 0;
+  S._rendered = false;
+  S.ch = [];
+  for (var i = 0; i < S.text.length; i++) S.ch.push({ c: S.text[i], s: i === 0 ? "now" : "w" });
+
+  var _c = document.getElementById('caret');
+  if (_c) { _c.classList.add('blink'); _c.style.opacity = '1'; }
+
+  document.getElementById("xwpm").innerHTML = "&mdash;";
+  document.getElementById("xacc").innerHTML = "&mdash;";
+  document.getElementById("xerr").textContent = "0";
+  document.getElementById("timer").textContent = S.dur;
+  document.getElementById("timer").className = "num";
+  document.getElementById("hint").style.display = "block";
+  document.getElementById("tcard").className = "card";
+
+  var w = document.getElementById("words");
+  w.scrollTop = 0;
+  w.className = S.lang === "ar" ? "ar" : "";
+  renderChars();
+  updRing(S.dur, S.dur);
+  updateTargetKey();
+
+  document.getElementById("p-test").className = "page show";
+  document.getElementById("p-result").className = "page";
+  document.getElementById("inp").value = "";
+  document.getElementById("inp").focus();
+}
+
+function drillMissedKeys() {
+  if (!window._lastRes || !window._lastRes.em) return;
+  var isAr = (S.lang === "ar");
+  var em = window._lastRes.em;
+  var problemKeys = Object.keys(em);
+  if (!problemKeys.length) {
+    showToast(isAr ? "تنبيه" : "Notice", isAr ? "لا توجد أخطاء لتدريبها! أداؤك كان مثالياً" : "Zero errors! Your run was flawless", TM_ICONS.sparkle);
+    return;
+  }
+
+  var pool = POOLS[S.lang][S.mode] || POOLS[S.lang].common;
+  var allWords = [];
+  if (Array.isArray(pool)) {
+    for (var p = 0; p < pool.length; p++) {
+      var splitWords = pool[p].split(/\s+/);
+      for (var sw = 0; sw < splitWords.length; sw++) {
+        var cleanW = splitWords[sw].replace(/[.,!?:؛،()"-]/g, '').trim();
+        if (cleanW.length >= 2) allWords.push(cleanW);
       }
     }
-    function closeOnlineRace() {
-      document.getElementById('online-modal').classList.remove('show');
+  }
+
+  var matches = [];
+  for (var i = 0; i < allWords.length; i++) {
+    var word = allWords[i];
+    for (var k = 0; k < problemKeys.length; k++) {
+      if (word.indexOf(problemKeys[k]) >= 0) {
+        matches.push(word);
+        break;
+      }
     }
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeOnlineRace();
+  }
+
+  if (matches.length < 15) {
+    for (var j = 0; j < 30; j++) {
+      var pk = problemKeys[j % problemKeys.length];
+      matches.push(pk + pk + " " + pk);
+    }
+  }
+
+  matches.sort(function () { return Math.random() - 0.5; });
+  var drillText = matches.slice(0, 35).join(" ");
+
+  if (S.ti) clearInterval(S.ti);
+  S.text = drillText;
+  S.ch = [];
+  for (var c = 0; c < S.text.length; c++) S.ch.push({ c: S.text[c], s: c === 0 ? "now" : "w" });
+  S.idx = 0;
+  S.on = false;
+  S.fin = false;
+  S.left = S.dur;
+  S.ks = [];
+  S.ec = 0;
+  S.cor = 0;
+  S.t0 = 0;
+  S.tk = 0;
+  S._rendered = false;
+
+  var _c = document.getElementById('caret');
+  if (_c) { _c.classList.add('blink'); _c.style.opacity = '1'; }
+
+  document.getElementById("xwpm").innerHTML = "&mdash;";
+  document.getElementById("xacc").innerHTML = "&mdash;";
+  document.getElementById("xerr").textContent = "0";
+  document.getElementById("timer").textContent = S.dur;
+  document.getElementById("timer").className = "num";
+  document.getElementById("hint").style.display = "block";
+  document.getElementById("tcard").className = "card";
+
+  var w = document.getElementById("words");
+  w.scrollTop = 0;
+  w.className = S.lang === "ar" ? "ar" : "";
+  renderChars();
+  updRing(S.dur, S.dur);
+  updateTargetKey();
+
+  document.getElementById("p-test").className = "page show";
+  document.getElementById("p-result").className = "page";
+  document.getElementById("inp").value = "";
+  document.getElementById("inp").focus();
+
+  showToast(isAr ? "بدء التمرين المركز" : "Focused Drill Started", isAr ? ("تم تخصيص الكلمات للحروف: " + problemKeys.join(" ")) : ("Drill generated for problematic keys: " + problemKeys.join(" ")), TM_ICONS.target);
+}
+
+function showToast(title, msg, ico) {
+  var con = document.getElementById("toasts");
+  if (!con) return;
+  var d = document.createElement("div");
+  d.className = "toast2";
+  d.innerHTML = "<span style='font-size:22px;display:flex;align-items:center;color:var(--accent)'>" + (ico || TM_ICONS.bolt) + "</span><div><div style='font-size:11px;color:var(--accent);text-transform:uppercase;font-weight:700'>" + title + "</div><div style='font-size:13px;font-weight:600;color:var(--text)'>" + msg + "</div></div>";
+  con.appendChild(d);
+  setTimeout(function () {
+    d.style.opacity = "0";
+    d.style.transition = "opacity .3s";
+    setTimeout(function () { d.remove(); }, 300);
+  }, 3200);
+}
+
+function copyBarqResult() {
+  var isAr = (S.lang === "ar");
+  var w = document.getElementById("rw") ? document.getElementById("rw").textContent : "0";
+  var r = document.getElementById("rr") ? document.getElementById("rr").textContent : "0";
+  var a = document.getElementById("ra") ? document.getElementById("ra").textContent : "0%";
+  var c = document.getElementById("r-consistency") ? document.getElementById("r-consistency").textContent : "0%";
+  var t = document.getElementById("rt") ? document.getElementById("rt").textContent : "30s";
+  var tier = (window._lastRes && window._lastRes.tier) ? window._lastRes.tier.name : "";
+
+  var text = isAr ?
+    ("⚡ Barqtype // نتيجة السباق الخاطف\n" +
+      "━━━━━━━━━━━━━━━━━━━━━\n" +
+      "⚡ السرعة الصافية: " + w + " WPM (Raw: " + r + ")\n" +
+      "🎯 الدقة: " + a + " | الاتساق: " + c + "\n" +
+      "⏱ المدة: " + t + " | الفئة: " + tier + "\n" +
+      "━━━━━━━━━━━━━━━━━━━━━\n" +
+      "تحداني في سباقات Barqtype!") :
+    ("⚡ Barqtype // Lightning Typing Result\n" +
+      "━━━━━━━━━━━━━━━━━━━━━\n" +
+      "⚡ Net Speed: " + w + " WPM (Raw: " + r + ")\n" +
+      "🎯 Accuracy: " + a + " | Consistency: " + c + "\n" +
+      "⏱ Duration: " + t + " | Tier: " + tier + "\n" +
+      "━━━━━━━━━━━━━━━━━━━━━\n" +
+      "Challenge me on Barqtype!");
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () {
+      showToast(isAr ? "تم النسخ بنجاح" : "Copied Successfully", isAr ? "تم نسخ بطاقة نتيجتك إلى الحافظة" : "Result card copied to clipboard", TM_ICONS.check);
+    }).catch(function () {
+      showToast(isAr ? "تنبيه" : "Notice", isAr ? "تعذر النسخ التلقائي" : "Could not copy automatically", TM_ICONS.warning);
     });
-    var _onlineModalEl = document.getElementById('online-modal');
-    if (_onlineModalEl) {
-      _onlineModalEl.addEventListener('click', function (e) {
-        if (e.target === this) closeOnlineRace();
+  } else {
+    showToast(isAr ? "تم التحديد" : "Ready", isAr ? "تم تجهيز ملخص النتيجة" : "Result summary prepared", TM_ICONS.check);
+  }
+}
+
+
+/* UNIFIED SHARED INPUT ENGINE (DESKTOP + MOBILE) */
+var _lastMismatchToastTime = 0;
+
+function handleCharacterTyped(inputKey, isBackspace) {
+  if (S.fin) return;
+
+  if (isBackspace) {
+    if (S.idx > 0) {
+      playCorrectSound(false, true);
+      highlightPressedKey("Backspace", true);
+      S.idx--;
+      S.ch[S.idx].s = "now";
+      if (S.idx + 1 < S.ch.length) S.ch[S.idx + 1].s = "w";
+      renderChars();
+      updateTargetKey();
+    }
+    return;
+  }
+
+  if (!inputKey) return;
+  var ex = S.text[S.idx];
+  if (!ex) return;
+
+  // Language mismatch hint for mobile & desktop
+  if (S.lang === "ar" && /[a-zA-Z]/.test(inputKey)) {
+    var nowT = Date.now();
+    if (nowT - _lastMismatchToastTime > 6000) {
+      _lastMismatchToastTime = nowT;
+      showToast(
+        "تنبيه لغة الإدخال",
+        "تم اختيار اللغة العربية في التطبيق، يرجى تحويل لوحة المفاتيح إلى العربية ⌨️",
+        TM_ICONS.warning
+      );
+    }
+  }
+
+  var ok = matchChar(inputKey, ex);
+
+  if (ok) {
+    playCorrectSound(ex === " ");
+  } else {
+    playErrorSound();
+  }
+  highlightPressedKey(inputKey, ok);
+
+  // Start timer on first keystroke
+  if (!S.on && S.idx === 0) {
+    S.on = true;
+    S.t0 = performance.now();
+    S.tk = S.t0;
+    var hintEl = document.getElementById("hint");
+    if (hintEl) hintEl.style.display = "none";
+    var tcardEl = document.getElementById("tcard");
+    if (tcardEl) tcardEl.className = "card glow";
+    var _caret = document.getElementById('caret');
+    if (_caret) _caret.classList.remove('blink');
+    startTimer();
+  }
+
+  var now = performance.now();
+  var dur = S.tk > 0 ? (now - S.tk) : 0;
+  S.tk = now;
+  if (ok) S.cor++; else S.ec++;
+  S.ks.push({ ch: inputKey, ex: ex, ok: ok, dur: dur, t: (now - S.t0) });
+  S.ch[S.idx].s = ok ? "ok" : "bad";
+  S.idx++;
+  if (S.idx < S.ch.length) S.ch[S.idx].s = "now";
+
+  // Batch DOM stat updates via rAF
+  var _el2 = now - S.t0;
+  var _cor2 = S.cor;
+  var _ks_len = S.ks.length;
+  var _ec = S.ec;
+  requestAnimationFrame(function () {
+    var w = calcWPM(_cor2, _el2);
+    var a = calcAcc(_cor2, _ks_len);
+    var wEl = document.getElementById("xwpm");
+    var aEl = document.getElementById("xacc");
+    var eEl = document.getElementById("xerr");
+    if (wEl) { wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
+    if (aEl) { aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
+    if (eEl) { eEl.textContent = _ec; eEl.style.color = _ec > 0 ? "var(--err)" : "var(--text)"; }
+  });
+
+  renderChars();
+  updateTargetKey();
+
+  if (S.idx >= S.text.length) finishTest();
+}
+
+// 1. DESKTOP PHYSICAL KEYBOARD LISTENER
+document.addEventListener("keydown", function (e) {
+  if (e.target && e.target.id !== 'inp' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
+  var omModal = document.getElementById('online-modal');
+  if (omModal && omModal.classList.contains('show')) return;
+
+  var tp = document.getElementById("p-test");
+  var rp = document.getElementById("p-result");
+  if (tp.className.indexOf("show") < 0 && rp.className.indexOf("show") < 0) return;
+
+  // On Results Screen: Keyboard Shortcuts
+  if (rp.className.indexOf("show") >= 0) {
+    if (e.key === "Tab") { e.preventDefault(); repeatCurrentTest(); return; }
+    if (e.key === "Enter") { e.preventDefault(); initTest(); return; }
+    if (e.key === "Escape") { initTest(); return; }
+    if ((e.key === "d" || e.key === "D" || e.key === "ي") && !e.ctrlKey && !e.altKey) { drillMissedKeys(); return; }
+    if ((e.key === "c" || e.key === "C" || e.key === "ؤ") && !e.ctrlKey && !e.altKey) { copyBarqResult(); return; }
+    return;
+  }
+
+  if (e.key === "Tab") { e.preventDefault(); initTest(); return; }
+  if (e.key === "Escape") { initTest(); return; }
+  if (S.fin) return;
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+  if (e.key === "Backspace") {
+    e.preventDefault();
+    handleCharacterTyped("", true);
+    var _inp = document.getElementById("inp");
+    if (_inp) _inp.value = "";
+    return;
+  }
+
+  if (e.key.length === 1) {
+    e.preventDefault();
+    handleCharacterTyped(e.key, false);
+    var _inp = document.getElementById("inp");
+    if (_inp) _inp.value = "";
+  }
+});
+
+// 2. MOBILE NATIVE KEYBOARD PIPELINE (TOUCH, INPUT, COMPOSITION)
+(function initMobileInputSystem() {
+  var inp = document.getElementById("inp");
+  var tcard = document.getElementById("tcard");
+  if (!inp || !tcard) return;
+
+  function focusMobileInput(e) {
+    inp.focus({ preventScroll: true });
+    // On touch devices, slight delay ensures keyboard shows without viewport jump
+    setTimeout(function () { inp.focus({ preventScroll: true }); }, 50);
+  }
+
+  tcard.addEventListener("click", focusMobileInput);
+  tcard.addEventListener("touchend", focusMobileInput);
+
+  var isComposing = false;
+  inp.addEventListener("compositionstart", function () {
+    isComposing = true;
+  });
+  inp.addEventListener("compositionend", function (e) {
+    isComposing = false;
+    var data = e.data || "";
+    for (var i = 0; i < data.length; i++) {
+      handleCharacterTyped(data[i], false);
+    }
+    inp.value = "";
+  });
+
+  inp.addEventListener("beforeinput", function (e) {
+    if (e.inputType === "deleteContentBackward" || e.inputType === "deleteContentForward") {
+      e.preventDefault();
+      handleCharacterTyped("", true);
+      inp.value = "";
+    }
+  });
+
+  inp.addEventListener("input", function (e) {
+    if (isComposing) return;
+    if (e.inputType === "deleteContentBackward") {
+      inp.value = "";
+      return;
+    }
+    var val = inp.value;
+    if (val) {
+      for (var i = 0; i < val.length; i++) {
+        handleCharacterTyped(val[i], false);
+      }
+      inp.value = "";
+    }
+  });
+
+  // Keep active text centered when mobile keyboard opens
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", function () {
+      if (window.innerWidth <= 768) {
+        var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : null;
+        var wordsEl = document.getElementById("words");
+        if (curEl && wordsEl) {
+          var cardH = wordsEl.clientHeight;
+          var topPos = curEl.offsetTop;
+          if (topPos > cardH * 0.45) wordsEl.scrollTop = topPos - cardH * 0.25;
+        }
+        moveCaret();
+      }
+    });
+  }
+})();
+
+
+function startTimer() {
+  S.ti = setInterval(function () {
+    S.left--;
+    document.getElementById("timer").textContent = S.left;
+    if (S.left <= 5) document.getElementById("timer").className = "num red";
+    updRing(S.left, S.dur);
+    if (S.left <= 0) finishTest();
+  }, 1000);
+}
+
+// UI LOCALIZATION FOR NAV TABS AND LABELS
+function updateUILanguage(l) {
+  try {
+    var isAr = (l === "ar");
+    var el = function (id) { return document.getElementById(id); };
+
+    // 0. Page Document Title
+    document.title = isAr ? "Barqtype – سباق الكتابة الخاطف" : "Barqtype – Lightning Fast Typing Race";
+
+    // 1. Header Navigation Tabs
+    if (el("n-test")) el("n-test").textContent = isAr ? "تدريب" : "Practice";
+    if (el("n-stats")) el("n-stats").textContent = isAr ? "إحصاءات" : "Stats";
+    if (el("n-learn")) el("n-learn").textContent = isAr ? "تعلم" : "Learn";
+    if (el("n-race")) el("n-race").innerHTML = TM_ICONS.flag + ' ' + (isAr ? "سباق" : "Race");
+    if (el("n-online")) el("n-online").innerHTML = TM_ICONS.globe + ' ' + (isAr ? "شبكي" : "Online");
+    if (el("n-online-lbl")) el("n-online-lbl").textContent = isAr ? "شبكي" : "Online";
+
+    // 2. Mode Select Dropdown
+    var ms = el("msel");
+    if (ms) {
+      var curVal = ms.value;
+      if (isAr) {
+        ms.innerHTML = "<option value='common'>نصوص ثقافية</option><option value='medium'>مقالات وفكر</option><option value='quotes'>حكم واقتباسات</option><option value='code'>برمجة وتقنية</option>";
+      } else {
+        ms.innerHTML = "<option value='common'>common</option><option value='medium'>medium</option><option value='code'>code</option><option value='quotes'>quotes</option>";
+      }
+      ms.value = curVal;
+    }
+
+    // 3. Stats Bar Labels & Practice Elements
+    if (el("lbl-acc")) el("lbl-acc").textContent = isAr ? "دقة %" : "Accuracy %";
+    if (el("lbl-err")) el("lbl-err").textContent = isAr ? "أخطاء" : "Errors";
+    if (el("hint")) el("hint").textContent = isAr ? "ابدأ الكتابة للبدء • اضغط Tab للإعادة السريعة" : "Start typing to begin • Press Tab to restart";
+    if (el("gbtn-lbl")) el("gbtn-lbl").textContent = isAr ? "إعادة" : "Restart";
+    if (el("kb-toggle-lbl")) el("kb-toggle-lbl").textContent = _kbVisible ? (isAr ? "إخفاء الكيبورد" : "Hide Keyboard") : (isAr ? "إظهار الكيبورد" : "Show Keyboard");
+    if (el("hand-toggle-lbl")) el("hand-toggle-lbl").textContent = (typeof _handVisible !== 'undefined' && _handVisible) ? (isAr ? "إخفاء اليدين" : "Hide Hands") : (isAr ? "إظهار اليدين" : "Show Hands");
+    if (el("kb-next-lbl")) el("kb-next-lbl").textContent = isAr ? "الحرف التالي:" : "Next Key:";
+    if (el("kb-finger-text")) el("kb-finger-text").textContent = isAr ? "الإبهام" : "Thumbs";
+
+    // 4. Results Page Showcase
+    if (el("r-lbl-netwpm")) el("r-lbl-netwpm").textContent = isAr ? "السرعة الصافية" : "Net Speed";
+    if (el("r-lbl-acc")) el("r-lbl-acc").textContent = isAr ? "الدقة" : "Accuracy";
+    if (el("r-acc-sub")) el("r-acc-sub").textContent = isAr ? "ضربات متقنة" : "Precision Hits";
+    if (el("r-lbl-cons")) el("r-lbl-cons").textContent = isAr ? "الاتساق" : "Consistency";
+    if (el("r-cons-sub")) el("r-cons-sub").textContent = isAr ? "استقرار الإيقاع" : "Pacing Cadence";
+    if (el("r-lbl-keystrokes")) el("r-lbl-keystrokes").textContent = isAr ? "الضربات" : "Keystrokes";
+    if (el("r-lbl-dur")) el("r-lbl-dur").textContent = isAr ? "المدة الزمنية" : "Duration";
+    if (el("r-chart-title")) el("r-chart-title").textContent = isAr ? "منحنى التسارع ومواقع الأخطاء" : "Acceleration Curve & Error Points";
+    if (el("r-chart-sub")) el("r-chart-sub").textContent = isAr ? "تتبع حي لمعدل سرعة الكلمات في الدقيقة ثانية بثانية" : "Real-time WPM pace tracking second-by-second";
+    if (el("r-leg-wpm")) el("r-leg-wpm").textContent = isAr ? "السرعة (WPM)" : "Speed (WPM)";
+    if (el("r-leg-err")) el("r-leg-err").textContent = isAr ? "موقع الخطأ" : "Mistake Spot";
+    if (el("r-peak-lbl")) el("r-peak-lbl").textContent = isAr ? "القمة:" : "Peak:";
+    if (el("r-chart-empty-txt")) el("r-chart-empty-txt").textContent = isAr ? "بيانات الجولة قيد الحساب..." : "Calculating test metrics...";
+    if (el("r-diag-title")) el("r-diag-title").textContent = isAr ? "الحروف الأكثر تعثراً (Mistake Keys)" : "Problematic Keystrokes (Mistake Keys)";
+    if (el("r-drill-lbl")) el("r-drill-lbl").textContent = isAr ? "تدريب الأخطاء" : "Drill Mistakes";
+    if (el("r-coach-title")) el("r-coach-title").textContent = isAr ? "تحليل المدرب الذكي (Barq Coach)" : "Smart Coach Analysis (Barq Coach)";
+    if (el("r-btn-replay-lbl")) el("r-btn-replay-lbl").textContent = isAr ? "إعادة المحاولة" : "Try Again";
+    if (el("r-btn-replay")) el("r-btn-replay").title = isAr ? "إعادة نفس النص (Tab)" : "Restart same test (Tab)";
+    if (el("r-btn-next-lbl")) el("r-btn-next-lbl").textContent = isAr ? "نص جديد" : "New Test";
+    if (el("r-btn-next")) el("r-btn-next").title = isAr ? "نص جديد (Enter)" : "New test (Enter)";
+    if (el("r-btn-copy-lbl")) el("r-btn-copy-lbl").textContent = isAr ? "نسخ النتيجة" : "Copy Result";
+    if (el("r-btn-copy")) el("r-btn-copy").title = isAr ? "نسخ النتيجة للمشاركة" : "Copy result to share";
+    if (el("r-footer-hint")) el("r-footer-hint").innerHTML = isAr ? "<span>اضغط <kbd>Tab</kbd> للإعادة الفورية &bull; <kbd>Enter</kbd> لنص جديد &bull; <kbd>Esc</kbd> للعودة</span>" : "<span>Press <kbd>Tab</kbd> to retry &bull; <kbd>Enter</kbd> for new test &bull; <kbd>Esc</kbd> to return</span>";
+
+    // 5. Stats Page
+    if (el("semp-text")) el("semp-text").textContent = isAr ? "لا توجد إحصاءات بعد" : "No statistics recorded yet";
+    if (el("s-lbl-best")) el("s-lbl-best").textContent = isAr ? "أفضل" : "Best";
+    if (el("s-lbl-avg")) el("s-lbl-avg").textContent = isAr ? "متوسط" : "Average";
+    if (el("s-lbl-acc")) el("s-lbl-acc").textContent = isAr ? "دقة" : "Accuracy";
+    if (el("s-lbl-tests")) el("s-lbl-tests").textContent = isAr ? "اختبارات" : "Tests";
+    if (el("s-lbl-time")) el("s-lbl-time").textContent = isAr ? "وقت" : "Time";
+    if (el("s-title-wpm")) el("s-title-wpm").textContent = isAr ? "تطور السرعة" : "Speed Trend";
+    if (el("s-title-acc")) el("s-title-acc").textContent = isAr ? "تطور الدقة" : "Accuracy Trend";
+    if (el("s-lbl-old1")) el("s-lbl-old1").textContent = isAr ? "قديم" : "Oldest";
+    if (el("s-lbl-rec1")) el("s-lbl-rec1").textContent = isAr ? "حديث" : "Recent";
+    if (el("s-lbl-old2")) el("s-lbl-old2").textContent = isAr ? "قديم" : "Oldest";
+    if (el("s-lbl-rec2")) el("s-lbl-rec2").textContent = isAr ? "حديث" : "Recent";
+    if (el("s-title-hmap")) el("s-title-hmap").textContent = isAr ? "خريطة لوحة المفاتيح" : "Keyboard Heatmap";
+    if (el("s-hleg-exc")) el("s-hleg-exc").textContent = isAr ? "ممتاز" : "Excellent";
+    if (el("s-hleg-good")) el("s-hleg-good").textContent = isAr ? "جيد" : "Good";
+    if (el("s-hleg-avg")) el("s-hleg-avg").textContent = isAr ? "متوسط" : "Average";
+    if (el("s-hleg-poor")) el("s-hleg-poor").textContent = isAr ? "ضعيف" : "Poor";
+    if (el("s-title-ach")) el("s-title-ach").textContent = isAr ? "الإنجازات" : "Achievements";
+    if (el("s-title-rec")) el("s-title-rec").textContent = isAr ? "آخر الاختبارات" : "Recent Tests";
+
+    // 6. Learn Page
+    if (el("learn-title")) el("learn-title").textContent = isAr ? "مسار التعلم" : "Touch Typing Roadmap";
+    if (el("learn-sub")) el("learn-sub").textContent = isAr ? "اتبع الدروس بالترتيب لتبني أساساً قوياً" : "Follow lessons sequentially to build muscle memory";
+
+    // 7. Race Duel Page
+    if (el("race-title-txt")) el("race-title-txt").textContent = isAr ? "سباق السرعة" : "RACE DUEL";
+    if (el("race-title-sub")) el("race-title-sub").textContent = isAr ? "سباق تفاعلي على نفس الكيبورد" : "Interactive Duel on Same Keyboard";
+    if (el("rm-ghost-lbl")) el("rm-ghost-lbl").textContent = isAr ? "سباق التناوب (شبح المنافس)" : "1v1 Ghost Duel";
+    if (el("rm-online-lbl")) el("rm-online-lbl").textContent = isAr ? "سباق عن بعد" : "Remote Race";
+    if (el("rm-bot-lbl")) el("rm-bot-lbl").textContent = isAr ? "سباق ضد الروبوت" : "Race vs AI Bot";
+    if (el("rm-bot-cfg-lbl")) el("rm-bot-cfg-lbl").textContent = isAr ? "مستوى الروبوت:" : "Bot Level:";
+    if (el("r-card-hint")) el("r-card-hint").textContent = isAr ? "اكتب النص أعلاه بأقصى سرعة • اضغط Tab للإعادة" : "Type the text above as fast as possible • Press Tab to restart";
+    if (el("rp1-chip-acc")) el("rp1-chip-acc").textContent = isAr ? "دقة" : "Acc";
+    if (el("rp2-chip-acc")) el("rp2-chip-acc").textContent = isAr ? "دقة" : "Acc";
+    if (el("race-pod1-acc-lbl")) el("race-pod1-acc-lbl").textContent = isAr ? "دقة:" : "Acc:";
+    if (el("race-pod1-time-lbl")) el("race-pod1-time-lbl").textContent = isAr ? "وقت:" : "Time:";
+    if (el("race-pod2-acc-lbl")) el("race-pod2-acc-lbl").textContent = isAr ? "دقة:" : "Acc:";
+    if (el("race-pod2-time-lbl")) el("race-pod2-time-lbl").textContent = isAr ? "وقت:" : "Time:";
+    if (el("r-again-lbl")) el("r-again-lbl").textContent = isAr ? "سباق مجدداً" : "Race Again";
+    if (el("r-exit-lbl")) el("r-exit-lbl").textContent = isAr ? "الخروج إلى التدريب" : "Exit to Practice";
+
+    var botSel = el("rm-bot-level");
+    if (botSel) {
+      var curBotVal = botSel.value;
+      if (isAr) {
+        botSel.innerHTML = "<option value='35'>مبتدئ (35 WPM)</option><option value='65'>متوسط (65 WPM)</option><option value='95'>محترف (95 WPM)</option><option value='125'>خارق (125 WPM)</option>";
+      } else {
+        botSel.innerHTML = "<option value='35'>Beginner (35 WPM)</option><option value='65'>Medium (65 WPM)</option><option value='95'>Pro (95 WPM)</option><option value='125'>Beast (125 WPM)</option>";
+      }
+      botSel.value = curBotVal;
+    }
+
+    // 8. Online Multiplayer Modal
+    if (el("om-header-title")) el("om-header-title").textContent = isAr ? "السباق عبر الشبكة" : "Online Multiplayer Race";
+    if (el("om-gear-btn")) el("om-gear-btn").title = isAr ? "إعدادات الخادم" : "Server Settings";
+    if (el("om-settings-hint")) el("om-settings-hint").textContent = isAr ? "عنوان خادم السباق (اتركه فارغاً للاتصال التلقائي):" : "Race Server URL (Leave blank for auto-connect):";
+    var customSrvInp = el("om-custom-srv-inp");
+    if (customSrvInp) customSrvInp.placeholder = isAr ? "تلقائي: http://localhost:3001" : "Auto: http://localhost:3001";
+    if (el("om-tab-create-lbl")) el("om-tab-create-lbl").textContent = isAr ? "إنشاء غرفة" : "Create Room";
+    if (el("om-tab-join-lbl")) el("om-tab-join-lbl").textContent = isAr ? "الانضمام برمز" : "Join by Code";
+    if (el("om-name-lbl-c")) el("om-name-lbl-c").textContent = isAr ? "اسمك في السباق" : "Your Display Name";
+    if (el("om-name-c")) el("om-name-c").placeholder = isAr ? "اكتب اسمك هنا..." : "Enter your name...";
+    if (el("om-dur-lbl-c")) el("om-dur-lbl-c").textContent = isAr ? "مدة السباق:" : "Race Duration:";
+    if (el("om-dur-full-c")) el("om-dur-full-c").textContent = isAr ? "كامل (Full)" : "Full Text";
+    if (el("om-create-lbl")) el("om-create-lbl").textContent = isAr ? "إنشاء غرفة جديدة" : "Create New Room";
+    if (el("om-name-lbl-j")) el("om-name-lbl-j").textContent = isAr ? "اسمك في السباق" : "Your Display Name";
+    if (el("om-name-j")) el("om-name-j").placeholder = isAr ? "اكتب اسمك هنا..." : "Enter your name...";
+    if (el("om-code-lbl")) el("om-code-lbl").textContent = isAr ? "رمز الغرفة (4 أحرف)" : "Room Code (4 Letters)";
+    if (el("om-join-lbl")) el("om-join-lbl").textContent = isAr ? "الانضمام للسباق" : "Join Race";
+    if (el("om-code-share-lbl")) el("om-code-share-lbl").textContent = isAr ? "شارك هذا الرمز مع منافسك" : "Share this code with your rival";
+    if (el("om-copy-lbl")) el("om-copy-lbl").textContent = isAr ? "نسخ الرمز" : "Copy Code";
+    if (el("om-dur-lbl-lobby")) el("om-dur-lbl-lobby").textContent = isAr ? "مدة السباق:" : "Race Duration:";
+    if (el("om-dur-full-lobby")) el("om-dur-full-lobby").textContent = isAr ? "كامل (Full)" : "Full Text";
+    if (el("om-waiting-lbl")) el("om-waiting-lbl").textContent = isAr ? "في انتظار الانضمام" : "Waiting for opponent...";
+    if (el("om-start-lbl")) el("om-start-lbl").textContent = isAr ? "ابدأ السباق!" : "Start Race Now!";
+    if (el("om-leave-lbl")) el("om-leave-lbl").textContent = isAr ? "← مغادرة الغرفة" : "← Leave Room";
+    if (el("om-cd-lbl")) el("om-cd-lbl").textContent = isAr ? "استعد للانطلاق!" : "Get Ready!";
+    if (el("om-race-hint")) el("om-race-hint").textContent = isAr ? "ابدأ بالكتابة فوراً • يمكنك استخدام زر Backspace للتصحيح" : "Start typing immediately • Press Backspace to correct mistakes";
+
+    var myName = (typeof OM !== 'undefined' && OM && OM.myName) ? OM.myName : '';
+    var oppName = (typeof OM !== 'undefined' && OM && OM.oppName) ? OM.oppName : '';
+    var isHost = (typeof OM !== 'undefined' && OM && OM.isHost);
+    if (el("om-my-name-lbl")) el("om-my-name-lbl").textContent = myName || (isAr ? "أنت" : "You");
+    if (el("om-opp-name-lbl")) el("om-opp-name-lbl").textContent = oppName || (isAr ? "المنافس" : "Opponent");
+    if (el("om-race-timer-lbl")) el("om-race-timer-lbl").textContent = isAr ? "الوقت" : "Time";
+    if (el("om-again-lbl")) el("om-again-lbl").textContent = isAr ? (isHost ? "سباق مجدداً (إعادة البدء)" : "طلب جولة ثانية (انتقام)") : (isHost ? "Rematch (Start Lobby)" : "Request Rematch");
+    if (el("om-share-lbl")) el("om-share-lbl").textContent = isAr ? "مشاركة النتيجة" : "Share Result";
+    if (el("om-newroom-lbl")) el("om-newroom-lbl").textContent = isAr ? "غرفة جديدة" : "New Room";
+    if (el("om-prole-p1")) if (el("om-prole-p1").getAttribute("data-host") === "true") el("om-prole-p1").innerHTML = (isAr ? "المضيف " : "Host ") + TM_ICONS.crown;
+
+    // 9. Footer Text
+    var footerEl = el("app-footer");
+    if (footerEl) {
+      footerEl.innerHTML = isAr ?
+        "<span>Barqtype &bull; تم الإنشاء والتطوير بواسطة المبرمج   الفلوس</span>" :
+        "<span>Barqtype &bull; Created &amp; Developed by Eng. الفلوس</span>";
+    }
+
+    // 10. Re-render active tab content if visible
+    var resPage = el("p-result");
+    if (resPage && resPage.classList.contains("show") && window._lastRes) {
+      showResult(window._lastRes);
+    }
+    var statsPage = el("p-stats");
+    if (statsPage && statsPage.classList.contains("show")) {
+      renderStats();
+    }
+    var learnPage = el("p-learn");
+    if (learnPage && learnPage.classList.contains("show")) {
+      renderLearn();
+    }
+    var racePage = el("p-race");
+    if (racePage && racePage.classList.contains("show")) {
+      var rWords = el("r-words");
+      if (rWords) rWords.className = isAr ? "race-words ar" : "race-words";
+      renderRaceWords();
+    }
+
+    initAllVectorIcons();
+  } catch (err) {
+    console.error("updateUILanguage error:", err);
+  }
+}
+
+// CONTROL FUNCTIONS
+function setLang(l) {
+  S.lang = l;
+  document.documentElement.lang = l;
+  document.documentElement.dir = (l === "ar" ? "rtl" : "ltr");
+  document.getElementById("l-en").className = "pb" + (l === "en" ? " on" : "");
+  document.getElementById("l-ar").className = "pb" + (l === "ar" ? " on" : "");
+  pS({ lang: l, dur: S.dur, mode: S.mode });
+  updateUILanguage(l);
+  buildKeyboard();
+  setTimeout(function () { if (window.initHandsOverlay) initHandsOverlay(); }, 60);
+
+  var curTab = "test";
+  var tabs = ["test", "stats", "learn", "race"];
+  for (var i = 0; i < tabs.length; i++) {
+    var nb = document.getElementById("n-" + tabs[i]);
+    if (nb && nb.classList.contains("on")) curTab = tabs[i];
+  }
+  showTab(curTab);
+}
+
+function setDur(d) {
+  S.dur = d;
+  document.getElementById("d-15").className = "pb" + (d === 15 ? " on" : "");
+  document.getElementById("d-30").className = "pb" + (d === 30 ? " on" : "");
+  document.getElementById("d-60").className = "pb" + (d === 60 ? " on" : "");
+  pS({ lang: S.lang, dur: d, mode: S.mode });
+  initTest();
+}
+
+function setMode(m) {
+  S.mode = m;
+  pS({ lang: S.lang, dur: S.dur, mode: m });
+  initTest();
+}
+
+function showTab(t) {
+  var tabs = ["test", "stats", "learn", "race"];
+  for (var i = 0; i < tabs.length; i++) {
+    var nb = document.getElementById("n-" + tabs[i]);
+    if (nb) nb.className = "nb" + (tabs[i] === t ? " on" : "");
+    var pg = document.getElementById("p-" + tabs[i]);
+    if (pg) pg.className = "page" + (tabs[i] === t ? " show" : "");
+  }
+  document.getElementById("p-result").className = "page";
+  if (t === "test") initTest();
+  if (t === "stats") renderStats();
+  if (t === "learn") { window.location.href = "learn.html"; return; }
+  if (t === "race") initRace();
+}
+
+// STATS RENDERING
+function renderStats() {
+  var rs = gR();
+  var con = document.getElementById("scon");
+  var emp = document.getElementById("semp");
+  if (!rs.length) { emp.style.display = "block"; con.style.display = "none"; return; }
+  emp.style.display = "none"; con.style.display = "block";
+
+  var best = 0, sum = 0, sumA = 0;
+  for (var i = 0; i < rs.length; i++) {
+    if (rs[i].wpm > best) best = rs[i].wpm;
+    sum += rs[i].wpm;
+    sumA += rs[i].acc;
+  }
+  var avg = Math.round(sum / rs.length);
+  var avgA = Math.round(sumA / rs.length);
+  var tt = 0;
+  for (var j = 0; j < rs.length; j++) tt += rs[j].dur;
+
+  document.getElementById("sb").textContent = best;
+  document.getElementById("sb").style.color = "var(--accent)";
+  document.getElementById("sa").textContent = avg;
+  document.getElementById("sac").textContent = avgA + "%";
+  document.getElementById("st").textContent = rs.length;
+  document.getElementById("stm").textContent = tt < 3600 ? Math.round(tt / 60) + "m" : (tt / 3600).toFixed(1) + "h";
+
+  var l20 = rs.slice(0, 20).reverse();
+  drawChart("cwpm", l20.map(function (r) { return r.wpm; }), "var(--accent)");
+  drawChart("cacc", l20.map(function (r) { return r.acc }), "var(--ok)");
+
+  var ge = {}, gt = {};
+  for (var k = 0; k < rs.length; k++) {
+    var r = rs[k];
+    if (r.em) for (var c in r.em) ge[c] = (ge[c] || 0) + r.em[c];
+    if (r.tm) for (var c2 in r.tm) {
+      if (!gt[c2]) gt[c2] = [];
+      for (var m = 0; m < r.tm[c2].length; m++) gt[c2].push(r.tm[c2][m]);
+    }
+  }
+  renderHeatmap(ge, gt);
+  renderAch();
+
+  var rl = document.getElementById("rlist");
+  var rh = "";
+  var sl = rs.slice(0, 10);
+  for (var n = 0; n < sl.length; n++) {
+    var d = new Date(sl[n].ts);
+    var ds = d.getDate() + "/" + (d.getMonth() + 1) + " " + d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
+    var acl = sl[n].acc >= 95 ? "var(--ok)" : sl[n].acc >= 85 ? "var(--accent)" : "var(--err)";
+    rh += "<div class='recrow'><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + ds + "</span><span style='font-family:monospace;font-weight:700;color:var(--accent)'>" + sl[n].wpm + " WPM</span><span style='font-family:monospace;color:" + acl + "'>" + sl[n].acc + "%</span><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + Math.round(sl[n].dur) + "s</span><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + (sl[n].lang || "en").toUpperCase() + "</span></div>";
+  }
+  rl.innerHTML = rh;
+}
+
+function drawChart(id, data, color) {
+  var svg = document.getElementById(id);
+  if (!data || data.length < 2) { svg.innerHTML = ""; return; }
+  var W = 300, H = 80;
+  var max = data[0], min = data[0];
+  for (var i = 1; i < data.length; i++) {
+    if (data[i] > max) max = data[i];
+    if (data[i] < min) min = data[i];
+  }
+  var range = max - min || 1;
+  var pts = "";
+  for (var j = 0; j < data.length; j++) {
+    var x = (j / (data.length - 1)) * W;
+    var y = H - ((data[j] - min) / range) * (H - 10) - 5;
+    pts += x + "," + y + " ";
+  }
+  svg.innerHTML = "<defs><linearGradient id='g" + id + "' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='" + color + "' stop-opacity='.3'/><stop offset='100%' stop-color='" + color + "' stop-opacity='0'/></linearGradient></defs><polygon points='0," + H + " " + pts + W + "," + H + "' fill='url(#g" + id + ")'/><polyline points='" + pts + "' fill='none' stroke='" + color + "' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>";
+}
+
+function mastery(e, ts) {
+  var t = ts.length;
+  if (!t && !e) return 50;
+  var avg = 0;
+  if (t) {
+    var s = 0;
+    for (var i = 0; i < t; i++) s += ts[i];
+    avg = s / t;
+  } else avg = 500;
+  var sp = Math.max(0, Math.min(100, 100 - (avg - 100) / 4));
+  var er = e / (t + e + 1);
+  return Math.round(sp * .4 + (1 - er) * 100 * .6);
+}
+
+function renderHeatmap(em, tm) {
+  var w = document.getElementById("hmap");
+  if (!w) return;
+  var isAr = (S.lang === "ar");
+  var h = "";
+  for (var ri = 0; ri < KR.length; ri++) {
+    h += "<div class='hmrow' style='padding-left:" + (ri * 14) + "px'>";
+    for (var ci = 0; ci < KR[ri].length; ci++) {
+      var k = KR[ri][ci];
+      var e = em[k] || 0;
+      var ts = tm[k] || [];
+      var m = mastery(e, ts);
+      var has = (e > 0 || ts.length > 0);
+      var bg, bd;
+      if (m >= 80) { bg = "rgba(76,175,125,.4)"; bd = "rgba(76,175,125,.6)"; }
+      else if (m >= 60) { bg = "rgba(226,183,20,.35)"; bd = "rgba(226,183,20,.6)"; }
+      else if (m >= 40) { bg = "rgba(229,146,86,.45)"; bd = "rgba(229,146,86,.7)"; }
+      else { bg = "rgba(229,86,86,.5)"; bd = "rgba(229,86,86,.7)"; }
+      var sty = has ? "background:" + bg + ";border-color:" + bd : "";
+      var avg2 = 0;
+      if (ts.length) {
+        var s2 = 0;
+        for (var z = 0; z < ts.length; z++) s2 += ts[z];
+        avg2 = Math.round(s2 / ts.length);
+      }
+      var fn = FM[k] ? (isAr ? FN[FM[k]] : (FINGER_DATA[FM[k]] ? FINGER_DATA[FM[k]].en : FN[FM[k]])) : "";
+      var tip2 = isAr ? ("إتقان: " + m + "%\nأخطاء: " + e) : ("Mastery: " + m + "%\nErrors: " + e);
+      if (avg2) tip2 += isAr ? ("\nمتوسط: " + avg2 + "ms") : ("\nAvg: " + avg2 + "ms");
+      if (fn) tip2 += "\n" + fn;
+      h += "<div class='hmk' style='" + sty + "' title='" + tip2 + "'>" + k + "</div>";
+    }
+    h += "</div>";
+  }
+  w.innerHTML = h;
+}
+
+function renderAch() {
+  var ul = gA();
+  var g = document.getElementById("achg");
+  if (!g) return;
+  var h = "";
+  for (var i = 0; i < ACHS.length; i++) {
+    var a = ACHS[i];
+    var trans = (ACHS_I18N[S.lang] && ACHS_I18N[S.lang][a.id]) ? ACHS_I18N[S.lang][a.id] : { n: a.n, d: a.d };
+    var u = null;
+    for (var j = 0; j < ul.length; j++) {
+      if (ul[j].id === a.id) { u = ul[j]; break; }
+    }
+    h += "<div class='ach" + (u ? " got" : "") + "'><div class='ico'>" + a.ic + "</div><div class='nm'>" + trans.n + "</div><div class='ds'>" + trans.d + "</div></div>";
+  }
+  g.innerHTML = h;
+}
+
+function chkAch() {
+  var rs = gR();
+  var ul = gA();
+  var nu = [];
+  var best = 0;
+  for (var i = 0; i < rs.length; i++) if (rs[i].wpm > best) best = rs[i].wpm;
+  var cks = [
+    { id: "ft", c: rs.length >= 1 },
+    { id: "w50", c: best >= 50 },
+    { id: "w80", c: best >= 80 },
+    { id: "a100", c: false },
+    { id: "t10", c: rs.length >= 10 }
+  ];
+  for (var j = 0; j < rs.length; j++) if (rs[j].acc === 100) cks[3].c = true;
+  for (var k = 0; k < cks.length; k++) {
+    if (cks[k].c) {
+      var found = false;
+      for (var m = 0; m < ul.length; m++) if (ul[m].id === cks[k].id) found = true;
+      if (!found) {
+        ul.push({ id: cks[k].id, date: new Date().toISOString() });
+        nu.push(cks[k].id);
+      }
+    }
+  }
+  if (nu.length) {
+    pA(ul);
+    for (var n = 0; n < nu.length; n++) showAchToast(nu[n]);
+  }
+}
+
+function showAchToast(id) {
+  var a = null;
+  for (var i = 0; i < ACHS.length; i++) if (ACHS[i].id === id) a = ACHS[i];
+  if (!a) return;
+  var isAr = (S.lang === "ar");
+  var trans = (ACHS_I18N[S.lang] && ACHS_I18N[S.lang][a.id]) ? ACHS_I18N[S.lang][a.id] : { n: a.n, d: a.d };
+  var con = document.getElementById("toasts");
+  var d = document.createElement("div");
+  d.className = "toast2";
+  d.innerHTML = "<span style='font-size:28px'>" + a.ic + "</span><div><div style='font-size:11px;color:var(--accent);text-transform:uppercase'>" + (isAr ? "إنجاز جديد!" : "New Achievement!") + "</div><div style='font-size:14px;font-weight:600'>" + trans.n + "</div><div style='font-size:12px;color:var(--sub)'>" + trans.d + "</div></div>";
+  con.appendChild(d);
+  setTimeout(function () {
+    d.style.opacity = "0";
+    d.style.transition = "opacity .4s";
+    setTimeout(function () { d.remove(); }, 400);
+  }, 4000);
+}
+
+function renderLearn() {
+  var g = document.getElementById("lgrid");
+  if (!g) return;
+  var isAr = (S.lang === "ar");
+  var h = "";
+  var lvs = [1, 2, 3, 4, 5];
+  for (var li = 0; li < lvs.length; li++) {
+    var lv = lvs[li];
+    var ls = [];
+    for (var j = 0; j < LESSONS.length; j++) if (LESSONS[j].lv === lv) ls.push(LESSONS[j]);
+    if (!ls.length) continue;
+    var lvlTxt = isAr ? ("المستوى " + lv) : ("Level " + lv);
+    h += "<div class='lvs'><div class='lvh'><div class='lvb" + (lv === 1 ? " g" : "") + "'>" + lv + "</div><span class='lvl'>" + lvlTxt + "</span><div class='lvline'></div></div><div class='lgrid'>";
+    for (var k = 0; k < ls.length; k++) {
+      var l = ls[k];
+      var trans = (LESSONS_I18N[S.lang] && LESSONS_I18N[S.lang][l.id]) ? LESSONS_I18N[S.lang][l.id] : { t: l.t, d: l.d };
+      var ksh = "";
+      for (var m = 0; m < Math.min(l.ks.length, 6); m++) ksh += "<span>" + l.ks[m] + "</span>";
+      h += "<div class='lc'><div class='ico'>" + l.ic + "</div><div><div class='tt'>" + trans.t + "</div><div class='ds'>" + trans.d + "</div>" + (l.ks.length ? "<div class='ks'>" + ksh + "</div>" : "") + "</div></div>";
+    }
+    h += "</div></div>";
+  }
+  g.innerHTML = h;
+}
+
+// ==============================================================
+// 7. RACE MODE ENGINE (GHOST DUEL + AI BOT SYSTEM)
+// ==============================================================
+var RACE = {
+  modeType: "ghost", // "ghost" or "bot"
+  botSpeed: 65,      // WPM
+  turn: 1,           // 1 = Player 1, 2 = Player 2 (Ghost race)
+  text: "",
+  p1: { idx: 0, ks: [], t0: 0, on: false, fin: false, wpm: 0, acc: 100, finTime: 0 },
+  p2: { idx: 0, ks: [], t0: 0, on: false, fin: false, wpm: 0, acc: 100, finTime: 0 },
+  ch: [],
+  ghostTimeline: [], // [{ t: ms, pct: %, wpm: N, acc: N }] recorded from Player 1
+  ghostInterval: null,
+  botInterval: null,
+  botRaf: null,
+  timerInterval: null,
+  elapsed: 0,
+  started: false,
+  done: false
+};
+
+function setRaceModeType(type) {
+  RACE.modeType = type;
+  document.getElementById("rm-ghost-btn").className = "rm-pill" + (type === "ghost" ? " on" : "");
+  document.getElementById("rm-bot-btn").className = "rm-pill" + (type === "bot" ? " on" : "");
+  document.getElementById("rm-bot-config").style.display = (type === "bot" ? "flex" : "none");
+  initRace();
+}
+
+function setBotSpeed(spd) {
+  RACE.botSpeed = parseInt(spd, 10) || 65;
+  initRace();
+}
+
+function genRaceText() {
+  if (S.lang === "ar") {
+    var pool = POOLS.ar.common;
+    var idx = getNonRepeatingArIndex("race", pool.length);
+    return pool[idx];
+  }
+  var p = POOLS.en["common"];
+  var w = [];
+  for (var i = 0; i < 50; i++) w.push(p[Math.floor(Math.random() * p.length)]);
+  return w.join(" ");
+}
+
+function initRace() {
+  if (RACE.timerInterval) clearInterval(RACE.timerInterval);
+  if (RACE.ghostInterval) clearInterval(RACE.ghostInterval);
+  if (RACE.botRaf) { cancelAnimationFrame(RACE.botRaf); RACE.botRaf = null; }
+  if (RACE.botInterval) clearInterval(RACE.botInterval); // legacy safety
+
+  RACE.turn = 1;
+  RACE.text = genRaceText();
+  RACE.done = false;
+  RACE.started = false;
+  RACE.elapsed = 0;
+  RACE.ghostTimeline = [];
+
+  RACE.p1 = { idx: 0, ks: [], t0: 0, on: false, fin: false, wpm: 0, acc: 100, finTime: 0 };
+  RACE.p2 = { idx: 0, ks: [], t0: 0, on: false, fin: false, wpm: 0, acc: 100, finTime: 0 };
+
+  RACE.ch = [];
+  for (var i = 0; i < RACE.text.length; i++) RACE.ch.push({ c: RACE.text[i], s: i === 0 ? "now" : "w" });
+
+  var isAr = (S.lang === "ar");
+
+  // Reset Track UI
+  document.getElementById("race-result").className = "";
+  document.getElementById("rbar1").style.width = "0%";
+  document.getElementById("rbar2").style.width = "0%";
+  updateCarPosition("rcar1", 0);
+  updateCarPosition("rcar2", 0);
+  document.getElementById("rp1-wpm").textContent = "—";
+  document.getElementById("rp1-acc").textContent = "—";
+  document.getElementById("rp2-wpm").textContent = "—";
+  document.getElementById("rp2-acc").textContent = "—";
+  document.getElementById("rp1-pct").textContent = "0%";
+  document.getElementById("rp2-pct").textContent = "0%";
+  document.getElementById("race-timer").textContent = "—";
+
+  if (RACE.modeType === "ghost") {
+    document.getElementById("rp1-name").textContent = isAr ? "اللاعب 1 (أنت)" : "Player 1 (You)";
+    document.getElementById("rp2-name").textContent = isAr ? "اللاعب 2 (المنافس)" : "Player 2 (Opponent)";
+    document.getElementById("rp2-avatar").textContent = "2";
+    document.getElementById("rp2-avatar").className = "race-player-avatar race-p2-avatar";
+    document.getElementById("rp1-hint").textContent = isAr ? "ابدأ الكتابة للتسجيل" : "Type to record run";
+    document.getElementById("rp2-hint").textContent = isAr ? "في انتظار دوره" : "Waiting for turn";
+
+    // Card banner
+    document.getElementById("r-main-card").className = "race-main-card glow-p1";
+    document.getElementById("r-turn-ico").innerHTML = TM_ICONS.car1;
+    document.getElementById("r-turn-txt").textContent = isAr ? "الجولة 1: دور اللاعب 1 — اكتب الآن لتسجيل مسار سيارتك!" : "Round 1: Player 1 Turn — Type to record your ghost car!";
+    document.getElementById("r-turn-sub").textContent = isAr ? "اضغط أي حرف للانطلاق" : "Press any key to start";
+  } else {
+    // Bot mode
+    document.getElementById("rp1-name").textContent = isAr ? "أنت (السيارة الصفراء)" : "You (Yellow Car)";
+    document.getElementById("rp2-name").textContent = (isAr ? "الروبوت الذكي (" : "AI Bot (") + RACE.botSpeed + " WPM)";
+    document.getElementById("rp2-avatar").innerHTML = TM_ICONS.robot;
+    document.getElementById("rp2-avatar").className = "race-player-avatar race-p2-avatar";
+    document.getElementById("rp1-hint").textContent = isAr ? "انطلق وتجاوز الروبوت" : "Beat the bot!";
+    document.getElementById("rp2-hint").textContent = isAr ? "جاهز للانطلاق" : "Ready to race";
+
+    document.getElementById("r-main-card").className = "race-main-card glow-p1";
+    document.getElementById("r-turn-ico").innerHTML = TM_ICONS.robot;
+    document.getElementById("r-turn-txt").textContent = isAr ? "تحدي الروبوت: اكتب وتغلب على سيارة الذكاء الاصطناعي!" : "Bot Duel: Beat the AI car to the finish line!";
+    document.getElementById("r-turn-sub").textContent = isAr ? "انطلق فوراً بالطباعة" : "Start typing to race";
+  }
+
+  var rw = document.getElementById("r-words");
+  rw.className = isAr ? "race-words ar" : "race-words";
+  rw.scrollTop = 0;
+  renderRaceWords();
+
+  document.getElementById("r-inp").value = "";
+  document.getElementById("r-inp").focus();
+}
+
+function updateCarPosition(carId, pct) {
+  var car = document.getElementById(carId);
+  var track = document.getElementById(carId === 'rcar1' ? 'rtrack1' : 'rtrack2');
+  if (!car || !track) return;
+  var trackW = track.clientWidth;
+  var carW = 30;
+  var flagW = 38;
+  var available = trackW - flagW - carW - 6;
+  var pos = Math.max(2, Math.min(available, (pct / 100) * available));
+  // Use transform for GPU-composited animation (no layout reflow)
+  car.style.transform = 'translateX(' + pos + 'px)';
+}
+
+function renderRaceWords() {
+  var words = [];
+  var curWord = [];
+  for (var i = 0; i < RACE.ch.length; i++) {
+    var o = RACE.ch[i];
+    if (o.c === " ") {
+      if (curWord.length > 0) { words.push('<span class="word">' + curWord.join("") + '</span>'); curWord = []; }
+      var cls = "c sp " + o.s;
+      words.push('<span class="' + cls + '">&nbsp;</span>');
+    } else {
+      var cls2 = "c " + o.s;
+      curWord.push('<span class="' + cls2 + '">' + o.c + '</span>');
+    }
+  }
+  if (curWord.length > 0) words.push('<span class="word">' + curWord.join("") + '</span>');
+  var el = document.getElementById("r-words");
+  el.innerHTML = words.join("");
+
+  // Smooth scroll
+  var cur = el.querySelector(".c.now");
+  if (cur) {
+    var h = el.clientHeight;
+    var top = cur.offsetTop;
+    if (top > h * 0.55) el.scrollTop = top - h * 0.28;
+    else el.scrollTop = 0;
+  }
+}
+
+function startRaceTimer() {
+  var t0 = performance.now();
+  RACE.timerInterval = setInterval(function () {
+    RACE.elapsed = Math.round((performance.now() - t0) / 1000);
+    document.getElementById("race-timer").textContent = RACE.elapsed + "s";
+  }, 500);
+}
+
+function calcRaceStats(player) {
+  var cor = 0;
+  for (var i = 0; i < player.ks.length; i++) if (player.ks[i].ok) cor++;
+  var errs = player.ks.length - cor;
+  var el = player.t0 > 0 ? (performance.now() - player.t0) : 1;
+  var minutes = el / 60000;
+  player.wpm = minutes > 0 ? Math.max(0, Math.round(((cor - errs) / 5) / minutes)) : 0;
+  player.acc = calcAcc(cor, player.ks.length);
+  return { wpm: player.wpm, acc: player.acc };
+}
+
+function updateRaceUI(playerNum, pct, wpm, acc) {
+  var barId = "rbar" + playerNum;
+  var carId = "rcar" + playerNum;
+  var wpmId = "rp" + playerNum + "-wpm";
+  var accId = "rp" + playerNum + "-acc";
+  var pctId = "rp" + playerNum + "-pct";
+
+  var barPct = Math.min(pct / RACE.text.length * 100, 93);
+  document.getElementById(barId).style.width = barPct + "%";
+  updateCarPosition(carId, barPct);
+  document.getElementById(wpmId).textContent = wpm > 0 ? wpm : "—";
+  document.getElementById(accId).textContent = acc > 0 ? acc + "%" : "—";
+  document.getElementById(pctId).textContent = Math.round(barPct) + "%";
+}
+
+// Start AI Bot car movement (rAF-based for silky smooth 60fps animation)
+function startAIBot() {
+  var botCharsPerSec = (RACE.botSpeed * 5) / 60;
+  var botT0 = performance.now();
+  var totalChars = RACE.text.length;
+  var finished = false;
+
+  function botFrame(now) {
+    if (RACE.done || finished) return;
+    var el = (now - botT0) / 1000;
+    var botIdx = Math.min(totalChars, Math.floor(el * botCharsPerSec));
+    var pct = Math.min(botIdx / totalChars * 100, 93);
+
+    document.getElementById('rbar2').style.width = pct + '%';
+    updateCarPosition('rcar2', pct);
+    document.getElementById('rp2-wpm').textContent = RACE.botSpeed;
+    document.getElementById('rp2-acc').textContent = '98%';
+    document.getElementById('rp2-pct').textContent = Math.round(pct) + '%';
+
+    if (botIdx >= totalChars) {
+      finished = true;
+      document.getElementById('rbar2').style.width = '100%';
+      updateCarPosition('rcar2', 100);
+      document.getElementById('rp2-pct').textContent = '100%';
+      document.getElementById('rp2-hint').textContent = S.lang === 'ar' ? 'وصل الروبوت!' : 'Bot Finished!';
+      RACE.p2.fin = true;
+      RACE.p2.finTime = Math.round(el * 10) / 10;
+      RACE.p2.wpm = RACE.botSpeed;
+      RACE.p2.acc = 98;
+      if (RACE.p1.fin) showRaceResult();
+      return;
+    }
+    RACE.botRaf = requestAnimationFrame(botFrame);
+  }
+  RACE.botRaf = requestAnimationFrame(botFrame);
+}
+
+// Start Player 1 Ghost Replay during Player 2's turn
+function startGhostReplay() {
+  var t0 = performance.now();
+  var timeline = RACE.ghostTimeline;
+  if (!timeline || !timeline.length) return;
+
+  var currentTlIdx = 0;
+  RACE.ghostInterval = setInterval(function () {
+    if (RACE.done) { clearInterval(RACE.ghostInterval); return; }
+    var el = performance.now() - t0;
+
+    while (currentTlIdx < timeline.length - 1 && timeline[currentTlIdx + 1].t <= el) {
+      currentTlIdx++;
+    }
+    var pt = timeline[currentTlIdx];
+    if (pt) {
+      var barPct = Math.min(pt.idx / RACE.text.length * 100, 93);
+      document.getElementById("rbar1").style.width = barPct + "%";
+      updateCarPosition("rcar1", barPct);
+      document.getElementById("rp1-wpm").textContent = pt.wpm;
+      document.getElementById("rp1-acc").textContent = pt.acc + "%";
+      document.getElementById("rp1-pct").textContent = Math.round(barPct) + "%";
+    }
+
+    if (currentTlIdx >= timeline.length - 1) {
+      clearInterval(RACE.ghostInterval);
+      document.getElementById("rbar1").style.width = "100%";
+      updateCarPosition("rcar1", 100);
+      document.getElementById("rp1-pct").textContent = "100%";
+    }
+  }, 100);
+}
+
+function handleRaceKey(e) {
+  if (RACE.done) return;
+  var isAr = (S.lang === "ar");
+
+  // Determine current active player
+  var curPlayer = (RACE.modeType === "ghost" && RACE.turn === 2) ? RACE.p2 : RACE.p1;
+  var curPlayerNum = (RACE.modeType === "ghost" && RACE.turn === 2) ? 2 : 1;
+
+  if (curPlayer.fin) return;
+
+  if (e.key === "Backspace") {
+    e.preventDefault();
+    if (curPlayer.idx > 0) {
+      curPlayer.idx--;
+      RACE.ch[curPlayer.idx].s = "now";
+      if (curPlayer.idx + 1 < RACE.ch.length) RACE.ch[curPlayer.idx + 1].s = "w";
+      renderRaceWords();
+      playCorrectSound(false, true);
+    }
+    return;
+  }
+
+  if (e.key.length !== 1) return;
+  var ex = RACE.text[curPlayer.idx];
+  if (!ex) return;
+
+  var ok = matchChar(e.key, ex);
+
+  // Player starts typing
+  if (!curPlayer.on) {
+    curPlayer.on = true;
+    curPlayer.t0 = performance.now();
+
+    if (!RACE.started) {
+      RACE.started = true;
+      startRaceTimer();
+    }
+
+    if (RACE.modeType === "bot") {
+      startAIBot();
+      document.getElementById("rp1-hint").textContent = isAr ? "تكتب الآن..." : "Typing now...";
+    } else {
+      if (RACE.turn === 1) {
+        document.getElementById("rp1-hint").textContent = isAr ? "تسجيل الجولة 1..." : "Recording P1...";
+      } else {
+        document.getElementById("rp2-hint").textContent = isAr ? "تتحدى الشبح الآن!" : "Challenging Ghost!";
+        startGhostReplay();
+      }
+    }
+  }
+
+  curPlayer.ks.push({ ch: e.key, ex: ex, ok: ok });
+  RACE.ch[curPlayer.idx].s = ok ? "ok" : "bad";
+  curPlayer.idx++;
+  if (curPlayer.idx < RACE.ch.length) RACE.ch[curPlayer.idx].s = "now";
+
+  if (ok) playCorrectSound(ex === " "); else playErrorSound();
+
+  var stats = calcRaceStats(curPlayer);
+  updateRaceUI(curPlayerNum, curPlayer.idx, stats.wpm, stats.acc);
+
+  // If Player 1 in ghost mode, record point to ghost timeline
+  if (RACE.modeType === "ghost" && RACE.turn === 1) {
+    RACE.ghostTimeline.push({
+      t: performance.now() - curPlayer.t0,
+      idx: curPlayer.idx,
+      wpm: stats.wpm,
+      acc: stats.acc
+    });
+  }
+
+  renderRaceWords();
+
+  // Check finish
+  if (curPlayer.idx >= RACE.text.length) {
+    finishPlayerRun(curPlayerNum, curPlayer);
+  }
+}
+
+function finishPlayerRun(playerNum, player) {
+  player.fin = true;
+  var isAr = (S.lang === "ar");
+  var el = (performance.now() - player.t0) / 1000;
+  player.finTime = Math.round(el * 10) / 10;
+  var cor = 0;
+  for (var i = 0; i < player.ks.length; i++) if (player.ks[i].ok) cor++;
+  player.wpm = calcWPM(cor, el * 1000);
+  player.acc = calcAcc(cor, player.ks.length);
+
+  document.getElementById("rbar" + playerNum).style.width = "100%";
+  updateCarPosition("rcar" + playerNum, 100);
+  document.getElementById("rp" + playerNum + "-pct").textContent = "100%";
+  document.getElementById("rp" + playerNum + "-hint").textContent = isAr ? "انتهى السباق!" : "Finished!";
+  playCorrectSound(true);
+
+  if (RACE.modeType === "bot") {
+    showRaceResult();
+  } else if (RACE.modeType === "ghost") {
+    if (RACE.turn === 1) {
+      // Transition to Player 2
+      RACE.turn = 2;
+      startRaceCountdown(function () {
+        // Reset text for Player 2
+        RACE.ch = [];
+        for (var i = 0; i < RACE.text.length; i++) RACE.ch.push({ c: RACE.text[i], s: i === 0 ? "now" : "w" });
+        renderRaceWords();
+
+        // Reset track 1 back to 0 for replay
+        document.getElementById("rbar1").style.width = "0%";
+        updateCarPosition("rcar1", 0);
+        document.getElementById("rp1-pct").textContent = "0%";
+        document.getElementById("rp1-hint").textContent = isAr ? "سيارة الشبح جاهزة" : "Ghost car ready";
+
+        // Card banner for Player 2
+        document.getElementById("r-main-card").className = "race-main-card glow-p2";
+        document.getElementById("r-turn-ico").innerHTML = TM_ICONS.car2;
+        document.getElementById("r-turn-txt").textContent = isAr ?
+          ("الجولة 2: دور اللاعب 2 — انطلق وتغلب على شبح اللاعب 1 (" + RACE.p1.wpm + " WPM)!") :
+          ("Round 2: Player 2 Turn — Beat Player 1 Ghost (" + RACE.p1.wpm + " WPM)!");
+        document.getElementById("r-turn-sub").textContent = isAr ? "انطلق فوراً بالطباعة" : "Start typing to race";
+
+        document.getElementById("r-inp").value = "";
+        document.getElementById("r-inp").focus();
       });
+    } else {
+      // Both done
+      showRaceResult();
     }
+  }
+}
 
-    // ── Screen management ─────────────────────────────────────────
-    function omShowScreen(name) {
-      document.querySelectorAll('.om-screen').forEach(function (s) { s.classList.remove('active'); });
-      var target = document.getElementById('om-screen-' + name);
-      if (target) target.classList.add('active');
+function showRaceResult() {
+  if (RACE.timerInterval) clearInterval(RACE.timerInterval);
+  if (RACE.ghostInterval) clearInterval(RACE.ghostInterval);
+  if (RACE.botRaf) { cancelAnimationFrame(RACE.botRaf); RACE.botRaf = null; }
+  if (RACE.botInterval) clearInterval(RACE.botInterval); // legacy safety
+  RACE.done = true;
+
+  var isAr = (S.lang === "ar");
+  var p1Wins = false;
+
+  var p1Acc = RACE.p1.acc || 0;
+  var p2Acc = RACE.p2.acc || 0;
+  var p1Net = RACE.p1.wpm || 0;
+  var p2Net = RACE.p2.wpm || 0;
+  var p1Qual = p1Acc >= 60;
+  var p2Qual = p2Acc >= 60;
+
+  if (p1Qual && !p2Qual) {
+    p1Wins = true;
+  } else if (!p1Qual && p2Qual) {
+    p1Wins = false;
+  } else if (RACE.p1.fin && RACE.p2.fin) {
+    p1Wins = p1Net !== p2Net ? p1Net > p2Net : RACE.p1.finTime <= RACE.p2.finTime;
+  } else if (RACE.p1.fin && !RACE.p2.fin) {
+    p1Wins = p1Qual;
+  } else if (!RACE.p1.fin && RACE.p2.fin) {
+    p1Wins = !p2Qual;
+  } else {
+    p1Wins = p1Net >= p2Net;
+  }
+
+  var winnerName = "";
+  if (RACE.modeType === "bot") {
+    winnerName = p1Wins ? (isAr ? "أنت (الإنسان)" : "You (Human)") : (isAr ? "الروبوت الذكي" : "AI Bot");
+  } else {
+    winnerName = p1Wins ? (isAr ? "اللاعب 1" : "Player 1") : (isAr ? "اللاعب 2" : "Player 2");
+  }
+
+  document.getElementById("race-winner-badge").innerHTML = p1Wins ? TM_ICONS.medalGold : TM_ICONS.trophy;
+  document.getElementById("race-winner-title").textContent = winnerName + (isAr ? " يفوز بالسباق!" : " Wins the Race!");
+  document.getElementById("race-winner-sub").textContent = isAr ? "انتهى التحدي — منصة التتويج والنتائج" : "Challenge Complete — Final Podium";
+
+  var pod1 = document.getElementById("race-pod1");
+  var pod2 = document.getElementById("race-pod2");
+
+  if (p1Wins) {
+    pod1.className = "race-podium-card gold";
+    pod2.className = "race-podium-card silver";
+    pod1.querySelector(".race-podium-medal").innerHTML = TM_ICONS.medalGold;
+    pod2.querySelector(".race-podium-medal").innerHTML = TM_ICONS.medalSilver;
+  } else {
+    pod1.className = "race-podium-card silver";
+    pod2.className = "race-podium-card gold";
+    pod1.querySelector(".race-podium-medal").innerHTML = TM_ICONS.medalSilver;
+    pod2.querySelector(".race-podium-medal").innerHTML = TM_ICONS.medalGold;
+  }
+
+  var p1Label = (RACE.modeType === "bot") ? (isAr ? "أنت" : "You") : (isAr ? "اللاعب 1" : "Player 1");
+  var p2Label = (RACE.modeType === "bot") ? (isAr ? "الروبوت" : "AI Bot") : (isAr ? "اللاعب 2" : "Player 2");
+
+  document.getElementById("race-pod1-name").textContent = p1Label;
+  document.getElementById("race-pod1-wpm").textContent = RACE.p1.fin ? RACE.p1.wpm : "—";
+  document.getElementById("race-pod1-acc").textContent = RACE.p1.fin ? RACE.p1.acc + "%" : "—";
+  document.getElementById("race-pod1-time").textContent = RACE.p1.fin ? RACE.p1.finTime + "s" : "DNF";
+
+  document.getElementById("race-pod2-name").textContent = p2Label;
+  document.getElementById("race-pod2-wpm").textContent = RACE.p2.fin ? RACE.p2.wpm : "—";
+  document.getElementById("race-pod2-acc").textContent = RACE.p2.fin ? RACE.p2.acc + "%" : "—";
+  document.getElementById("race-pod2-time").textContent = RACE.p2.fin ? RACE.p2.finTime + "s" : "DNF";
+
+  document.getElementById("race-result").className = "show";
+
+  // Toast
+  var toastEl = document.createElement("div");
+  toastEl.className = "toast2";
+  var winWpm = p1Wins ? RACE.p1.wpm : RACE.p2.wpm;
+  toastEl.innerHTML = "<span style='display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center'>" + TM_ICONS.trophy + "</span><div><div style='font-size:11px;color:var(--accent);text-transform:uppercase'>" + (isAr ? "مبروك الفوز!" : "Race Winner!") + "</div><div style='font-size:14px;font-weight:600'>" + winnerName + " (" + winWpm + " WPM)</div></div>";
+  document.getElementById("toasts").appendChild(toastEl);
+  setTimeout(function () { toastEl.style.opacity = "0"; toastEl.style.transition = "opacity .4s"; setTimeout(function () { toastEl.remove(); }, 400); }, 5000);
+}
+
+function startRaceCountdown(cb) {
+  var cd = document.getElementById("race-countdown");
+  var display = document.getElementById("race-cd-display");
+  cd.className = "";
+  var n = 3;
+  display.className = "cd-number";
+  display.textContent = n;
+
+  var interval = setInterval(function () {
+    n--;
+    if (n > 0) {
+      display.textContent = n;
+      display.className = "";
+      void display.offsetWidth;
+      display.className = "cd-number";
+    } else if (n === 0) {
+      display.textContent = (S.lang === "ar" ? "انطلق!" : "GO!");
+      display.className = "";
+      void display.offsetWidth;
+      display.className = "cd-go";
+    } else {
+      clearInterval(interval);
+      cd.className = "hidden";
+      if (cb) cb();
     }
+  }, 750);
+}
 
-    // ── Tab switch (create / join) ────────────────────────────────
-    function omSwitchTab(t) {
-      var isCreate = t === 'create';
-      document.getElementById('om-tab-create').classList.toggle('on', isCreate);
-      document.getElementById('om-tab-join').classList.toggle('on', !isCreate);
-      document.getElementById('om-panel-create').style.display = isCreate ? '' : 'none';
-      document.getElementById('om-panel-join').style.display = isCreate ? 'none' : '';
-      document.getElementById('om-err').textContent = '';
+// Global Race keydown listener
+document.addEventListener("keydown", function (e) {
+  if (e.target && e.target.id !== 'r-inp' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
+  var omModal = document.getElementById('online-modal');
+  if (omModal && omModal.classList.contains('show')) return;
+
+  var racePage = document.getElementById("p-race");
+  if (!racePage || racePage.className.indexOf("show") < 0) return;
+  if (RACE.done) return;
+
+  if (e.key === "Tab" && !e.ctrlKey) {
+    e.preventDefault();
+    initRace();
+    return;
+  }
+  if (e.key === "Escape") {
+    e.preventDefault();
+    initRace();
+    return;
+  }
+
+  handleRaceKey(e);
+});
+
+// Initialize state and app
+var sv = gS();
+if (sv.lang) S.lang = sv.lang;
+if (sv.dur) S.dur = sv.dur;
+if (sv.mode) S.mode = sv.mode;
+
+if (sv.lang === "ar") {
+  document.getElementById("l-en").className = "pb";
+  document.getElementById("l-ar").className = "pb on";
+  document.documentElement.lang = "ar";
+  document.documentElement.dir = "rtl";
+} else {
+  document.getElementById("l-en").className = "pb on";
+  document.getElementById("l-ar").className = "pb";
+  document.documentElement.lang = "en";
+  document.documentElement.dir = "ltr";
+}
+if (sv.dur) {
+  document.getElementById("d-15").className = "pb" + (sv.dur === 15 ? " on" : "");
+  document.getElementById("d-30").className = "pb" + (sv.dur === 30 ? " on" : "");
+  document.getElementById("d-60").className = "pb" + (sv.dur === 60 ? " on" : "");
+}
+if (sv.mode) document.getElementById("msel").value = sv.mode;
+
+try { updateUILanguage(S.lang); } catch (e) { console.error('Error in updateUILanguage:', e); }
+try { buildKeyboard(); } catch (e) { console.error('Error in buildKeyboard:', e); }
+try { initTest(); } catch (e) { console.error('Error in initTest:', e); }
+
+// ══════════════════════════════════════════════════════════════
+// ONLINE RACE MODULE  (Socket.io)
+// ══════════════════════════════════════════════════════════════
+// Note: OM state object is defined at top-level state alongside S
+
+// ── Duration selector ─────────────────────────────────────────
+function omSelectDuration(dur) {
+  OM.raceDuration = parseInt(dur);
+  document.querySelectorAll('#om-panel-create .om-dur-pill').forEach(function (b) {
+    b.classList.toggle('on', parseInt(b.dataset.dur) === OM.raceDuration);
+  });
+}
+
+function omChangeLobbyDuration(dur) {
+  if (!OM.isHost) return;
+  OM.raceDuration = parseInt(dur);
+  document.querySelectorAll('#om-dur-pills-lobby .om-dur-pill').forEach(function (b) {
+    b.classList.toggle('on', parseInt(b.dataset.dur) === OM.raceDuration);
+  });
+  if (OM.socket && OM.roomCode) {
+    OM.socket.emit('set_duration', { code: OM.roomCode, duration: OM.raceDuration });
+  }
+}
+
+// ── Server URL Configuration ──────────────────────────────────
+// Automatically determine server URL:
+// 1. If custom URL stored in localStorage, use it
+// 2. If running locally (localhost, 127.0.0.1, or file://), connect to http://localhost:3001
+// 3. If in production (deployed on Render, Railway, etc.), connect to window.location.origin
+var OM_SERVER_URL = (function () {
+  if (typeof window !== 'undefined' && window.location) {
+    var host = (window.location.hostname || '').toLowerCase();
+    var proto = window.location.protocol || '';
+    if (proto === 'file:' || host === 'localhost' || host === '127.0.0.1' || host === '') {
+      return 'http://localhost:3001';
     }
+    return window.location.origin;
+  }
+  return 'http://localhost:3001';
+})();
 
-    // ── Connect to server ─────────────────────────────────────────
-    var _omEventsBound = false;
-    function omConnect(cb) {
-      if (OM.socket && OM.socket.connected) {
+function omGetServerUrl() {
+  var custom = localStorage.getItem('tm_server_url');
+  if (custom && custom.trim()) return custom.trim().replace(/\/$/, '');
+  return OM_SERVER_URL;
+}
+
+function omToggleSettings() {
+  var d = document.getElementById('om-settings-drawer');
+  if (!d) return;
+  var isHidden = d.style.display === 'none' || !d.style.display;
+  d.style.display = isHidden ? 'block' : 'none';
+  if (isHidden) {
+    var inp = document.getElementById('om-custom-srv-inp');
+    if (inp) inp.value = localStorage.getItem('tm_server_url') || '';
+  }
+}
+
+function omSaveCustomServer() {
+  var inp = document.getElementById('om-custom-srv-inp');
+  var val = (inp ? inp.value.trim() : '').replace(/\/$/, '');
+  if (val) {
+    localStorage.setItem('tm_server_url', val);
+  } else {
+    localStorage.removeItem('tm_server_url');
+  }
+  var d = document.getElementById('om-settings-drawer');
+  if (d) d.style.display = 'none';
+  omShowToast(S.lang === 'ar' ? 'تم حفظ إعدادات الخادم' : 'Server settings saved');
+  if (OM.socket) {
+    OM.socket.disconnect();
+  }
+  omConnect();
+}
+
+// ── Status dot indicator ──────────────────────────────────────
+function omSetConnStatus(state, msg) {
+  var dot = document.getElementById('om-conn-dot');
+  var nOnline = document.getElementById('rm-online-btn') || document.getElementById('n-online');
+  if (!dot) return;
+  if (state === 'connected') {
+    dot.style.background = '#10b981';
+    dot.style.boxShadow = '0 0 8px rgba(16,185,129,0.8)';
+    dot.title = S.lang === 'ar' ? 'متصل بالخادم' : 'Connected to server';
+    if (nOnline) nOnline.classList.add('connected');
+  } else if (state === 'connecting') {
+    dot.style.background = '#f59e0b';
+    dot.style.boxShadow = '0 0 6px rgba(245,158,11,0.6)';
+    dot.title = S.lang === 'ar' ? 'جارِ الاتصال...' : 'Connecting...';
+  } else if (state === 'err') {
+    dot.style.background = '#ef4444';
+    dot.style.boxShadow = '0 0 6px rgba(239,68,68,0.6)';
+    dot.title = msg || (S.lang === 'ar' ? 'غير متصل بالخادم' : 'Disconnected');
+    if (nOnline) nOnline.classList.remove('connected');
+  } else {
+    dot.style.background = '#4b5563';
+    dot.style.boxShadow = 'none';
+    dot.title = S.lang === 'ar' ? 'غير متصل' : 'Disconnected';
+    if (nOnline) nOnline.classList.remove('connected');
+  }
+}
+
+// ── Socket.io CDN loader ──────────────────────────────────────
+function loadSocketIO(cb) {
+  if (typeof io !== 'undefined') { cb(); return; }
+  var s = document.createElement('script');
+  s.src = 'https://cdn.socket.io/4.7.5/socket.io.min.js';
+  s.onload = cb;
+  s.onerror = function () {
+    omSetConnStatus('err', 'Failed to load socket client');
+  };
+  document.head.appendChild(s);
+}
+
+// ── Modal control ─────────────────────────────────────────────
+function openOnlineRace() {
+  document.getElementById('online-modal').classList.add('show');
+  var errEl = document.getElementById('om-err');
+  if (errEl) errEl.textContent = '';
+  omShowScreen('setup');
+  // Auto connect quietly in the background
+  if (!OM.socket || !OM.socket.connected) {
+    omConnect();
+  }
+}
+function closeOnlineRace() {
+  document.getElementById('online-modal').classList.remove('show');
+}
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') closeOnlineRace();
+});
+var _onlineModalEl = document.getElementById('online-modal');
+if (_onlineModalEl) {
+  _onlineModalEl.addEventListener('click', function (e) {
+    if (e.target === this) closeOnlineRace();
+  });
+}
+
+// ── Screen management ─────────────────────────────────────────
+function omShowScreen(name) {
+  document.querySelectorAll('.om-screen').forEach(function (s) { s.classList.remove('active'); });
+  var target = document.getElementById('om-screen-' + name);
+  if (target) target.classList.add('active');
+}
+
+// ── Tab switch (create / join) ────────────────────────────────
+function omSwitchTab(t) {
+  var isCreate = t === 'create';
+  document.getElementById('om-tab-create').classList.toggle('on', isCreate);
+  document.getElementById('om-tab-join').classList.toggle('on', !isCreate);
+  document.getElementById('om-panel-create').style.display = isCreate ? '' : 'none';
+  document.getElementById('om-panel-join').style.display = isCreate ? 'none' : '';
+  document.getElementById('om-err').textContent = '';
+}
+
+// ── Connect to server ─────────────────────────────────────────
+var _omEventsBound = false;
+function omConnect(cb) {
+  if (OM.socket && OM.socket.connected) {
+    omSetConnStatus('connected');
+    if (cb) cb();
+    return;
+  }
+
+  var url = omGetServerUrl();
+  omSetConnStatus('connecting');
+
+  loadSocketIO(function () {
+    if (OM.socket) {
+      if (OM.socket.connected) {
         omSetConnStatus('connected');
         if (cb) cb();
         return;
       }
-
-      var url = omGetServerUrl();
-      omSetConnStatus('connecting');
-
-      loadSocketIO(function () {
-        if (OM.socket) {
-          if (OM.socket.connected) {
-            omSetConnStatus('connected');
-            if (cb) cb();
-            return;
-          }
-          OM.socket.disconnect();
-        }
-
-        try {
-          OM.socket = io(url, {
-            transports: ['websocket', 'polling'],
-            timeout: 10000,
-            reconnectionAttempts: 5
-          });
-        } catch (e) {
-          omSetConnStatus('err', e.message);
-          if (cb) {
-            var errEl = document.getElementById('om-err');
-            if (errEl) errEl.textContent = S.lang === 'ar' ? 'تعذر الاتصال بالخادم' : 'Failed to connect to server';
-          }
-          return;
-        }
-
-        OM.socket.on('connect', function () {
-          OM.myId = OM.socket.id;
-          omSetConnStatus('connected');
-          var errEl = document.getElementById('om-err');
-          if (errEl && errEl.dataset.isConnWait) {
-            errEl.textContent = '';
-            delete errEl.dataset.isConnWait;
-          }
-          if (cb) cb();
-        });
-
-        OM.socket.on('connect_error', function () {
-          omSetConnStatus('err');
-          var errEl = document.getElementById('om-err');
-          if (errEl && errEl.dataset.isConnWait) {
-            errEl.textContent = S.lang === 'ar' ? 'تعذر الاتصال بالخادم. يرجى التأكد من تشغيل الخادم' : 'Could not connect to server. Please ensure server is running.';
-          }
-        });
-
-        OM.socket.on('disconnect', function () {
-          omSetConnStatus('disconnected');
-        });
-
-        // Register server events
-        if (!_omEventsBound) {
-          _omEventsBound = true;
-          OM.socket.on('room_created', function (d) {
-            OM.roomCode = d.code;
-            OM.isHost = true;
-            omShowLobby(d.roomState);
-          });
-          OM.socket.on('room_joined', function (d) {
-            OM.roomCode = d.code;
-            OM.isHost = false;
-            omShowLobby(d.roomState);
-          });
-          OM.socket.on('join_error', function (d) {
-            var msgs = {
-              room_not_found: S.lang === 'ar' ? 'الغرفة غير موجودة، تأكد من الرمز' : 'Room not found, check the code',
-              race_already_started: S.lang === 'ar' ? 'السباق بدأ بالفعل' : 'Race already started',
-              room_full: S.lang === 'ar' ? 'الغرفة ممتلئة' : 'Room is full',
-              already_in_room: S.lang === 'ar' ? 'أنت بالفعل في غرفة' : 'Already in a room'
-            };
-            var errEl = document.getElementById('om-err');
-            if (errEl) errEl.textContent = msgs[d.message] || d.message;
-          });
-          OM.socket.on('room_state', function (d) {
-            omUpdateLobby(d);
-          });
-          OM.socket.on('player_left', function (d) {
-            if (d.newHostId === OM.myId) OM.isHost = true;
-            omUpdateLobby({ players: [], hostId: OM.myId, state: 'waiting', code: OM.roomCode });
-            omShowToast(S.lang === 'ar' ? (d.name + ' غادر السباق') : (d.name + ' left the race'));
-          });
-          OM.socket.on('countdown_start', function (d) {
-            OM.raceText = d.text;
-            if (typeof d.duration !== 'undefined') OM.raceDuration = parseInt(d.duration);
-            if (d.lang) OM.raceLang = d.lang;
-            omShowScreen('countdown');
-          });
-          OM.socket.on('countdown_tick', function (d) {
-            var el = document.getElementById('om-cd-num');
-            if (!el) return;
-            if (d.count > 0) {
-              el.textContent = d.count;
-              el.style.color = '#38bdf8';
-            } else {
-              el.textContent = S.lang === 'ar' ? 'انطلق!' : 'GO!';
-              el.style.color = '#4ade80';
-              el.style.textShadow = '0 0 40px rgba(74,222,128,0.7)';
-            }
-          });
-          OM.socket.on('race_go', function (d) {
-            OM.raceStartTime = d.startTime;
-            if (typeof d.duration !== 'undefined') OM.raceDuration = parseInt(d.duration);
-            if (d.lang) OM.raceLang = d.lang;
-            omStartRaceScreen();
-          });
-          OM.socket.on('opponent_progress', function (d) {
-            var fill = document.getElementById('om-opp-fill');
-            var badge = document.getElementById('om-opp-wpm-badge');
-            var pct = document.getElementById('om-opp-pct-badge');
-            if (fill) fill.style.width = d.progress + '%';
-            if (badge) badge.textContent = d.wpm + ' WPM';
-            if (pct) pct.textContent = d.progress + '%';
-          });
-          OM.socket.on('opponent_finished', function (d) {
-            var oppName = d.name || OM.oppName || (S.lang === 'ar' ? 'المنافس' : 'Opponent');
-            omShowToast(oppName + (S.lang === 'ar' ? ' أنهى السباق! ' : ' finished! ') + d.wpm + ' WPM');
-          });
-          OM.socket.on('race_grace_period', function (d) {
-            var alertEl = document.getElementById('om-grace-alert');
-            if (alertEl) {
-              alertEl.style.display = 'block';
-              alertEl.innerHTML = TM_ICONS.warning + ' ' + (S.lang === 'ar' ?
-                ('المنافس (' + (d.finisher || 'الخصم') + ') وصل لخط النهاية! متبقي 5 ثوانٍ لإنهاء ما تستطيع!') :
-                ('Opponent (' + (d.finisher || 'Opponent') + ') finished! 5s remaining!'));
-            }
-          });
-          OM.socket.on('room_reset_lobby', function (d) {
-            omShowLobby(d.roomState);
-            var alertEl = document.getElementById('om-grace-alert');
-            if (alertEl) alertEl.style.display = 'none';
-            document.getElementById('om-my-fill').style.width = '0%';
-            document.getElementById('om-my-pct-badge').textContent = '0%';
-            document.getElementById('om-my-wpm-badge').textContent = '0 WPM';
-            document.getElementById('om-opp-fill').style.width = '0%';
-            document.getElementById('om-opp-pct-badge').textContent = '0%';
-            document.getElementById('om-opp-wpm-badge').textContent = '0 WPM';
-            omShowToast(S.lang === 'ar' ? 'تمت العودة للغرفة لسباق جديد!' : 'Returned to lobby for a rematch!');
-          });
-          OM.socket.on('race_results', function (d) {
-            omShowResults(d);
-          });
-          OM.socket.on('error_msg', function (d) {
-            omShowToast(d.message, true);
-          });
-        }
-      });
+      OM.socket.disconnect();
     }
 
-    // ── Create room ───────────────────────────────────────────────
-    function omCreateRoom() {
+    try {
+      OM.socket = io(url, {
+        transports: ['websocket', 'polling'],
+        timeout: 10000,
+        reconnectionAttempts: 5
+      });
+    } catch (e) {
+      omSetConnStatus('err', e.message);
+      if (cb) {
+        var errEl = document.getElementById('om-err');
+        if (errEl) errEl.textContent = S.lang === 'ar' ? 'تعذر الاتصال بالخادم' : 'Failed to connect to server';
+      }
+      return;
+    }
+
+    OM.socket.on('connect', function () {
+      OM.myId = OM.socket.id;
+      omSetConnStatus('connected');
       var errEl = document.getElementById('om-err');
-      if (errEl) errEl.textContent = '';
-      OM.myName = document.getElementById('om-name-c').value.trim() || (S.lang === 'ar' ? 'لاعب 1' : 'Player 1');
-
-      if (!OM.socket || !OM.socket.connected) {
-        if (errEl) {
-          errEl.textContent = S.lang === 'ar' ? 'جارِ الاتصال بالخادم...' : 'Connecting to server...';
-          errEl.dataset.isConnWait = '1';
-        }
-        omConnect(function () {
-          OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration });
-        });
-      } else {
-        OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration });
+      if (errEl && errEl.dataset.isConnWait) {
+        errEl.textContent = '';
+        delete errEl.dataset.isConnWait;
       }
-    }
+      if (cb) cb();
+    });
 
-    // ── Join room ─────────────────────────────────────────────────
-    function omJoinRoom() {
+    OM.socket.on('connect_error', function () {
+      omSetConnStatus('err');
       var errEl = document.getElementById('om-err');
-      if (errEl) errEl.textContent = '';
-      var code = document.getElementById('om-code-inp').value.trim().toUpperCase();
-      if (code.length !== 4) {
-        if (errEl) errEl.textContent = S.lang === 'ar' ? 'الرمز يجب أن يكون 4 أحرف' : 'Code must be 4 characters';
-        return;
-      }
-      OM.myName = document.getElementById('om-name-j').value.trim() || (S.lang === 'ar' ? 'لاعب 2' : 'Player 2');
-
-      if (!OM.socket || !OM.socket.connected) {
-        if (errEl) {
-          errEl.textContent = S.lang === 'ar' ? 'جارِ الاتصال بالخادم...' : 'Connecting to server...';
-          errEl.dataset.isConnWait = '1';
-        }
-        omConnect(function () {
-          OM.socket.emit('join_room', { code: code, name: OM.myName });
-        });
-      } else {
-        OM.socket.emit('join_room', { code: code, name: OM.myName });
-      }
-    }
-
-    // ── Show lobby ────────────────────────────────────────────────
-    function omShowLobby(state) {
-      omShowScreen('lobby');
-      document.getElementById('om-lobby-code-display').textContent = OM.roomCode;
-      omUpdateLobby(state);
-    }
-
-    function omUpdateLobby(state) {
-      var players = state.players || [];
-      var myData = null, oppData = null;
-      players.forEach(function (p) {
-        if (p.id === OM.myId || (OM.myId === null && p.isHost)) myData = p;
-        else oppData = p;
-      });
-      if (!myData && players.length > 0) myData = players[0];
-      if (players.length > 1 && !oppData) oppData = players[1];
-
-      // Update my slot
-      if (myData) {
-        document.getElementById('om-pname-p1').textContent = myData.name;
-        document.getElementById('om-prole-p1').innerHTML = myData.isHost ? ((S.lang === 'ar' ? 'المضيف ' : 'Host ') + TM_ICONS.crown) : (S.lang === 'ar' ? 'لاعب' : 'Player');
-      }
-
-      // Update opponent slot
-      var slot2 = document.getElementById('om-slot-p2');
-      var av2 = document.getElementById('om-av-p2');
-      if (oppData) {
-        OM.oppName = oppData.name;
-        OM.oppId = oppData.id;
-        document.getElementById('om-pname-p2').textContent = oppData.name;
-        document.getElementById('om-prole-p2').innerHTML = oppData.isHost ? ((S.lang === 'ar' ? 'المضيف ' : 'Host ') + TM_ICONS.crown) : (S.lang === 'ar' ? 'لاعب' : 'Player');
-        slot2.className = 'om-player-slot filled p2';
-        av2.className = 'om-player-avatar om-pa-p2';
-        av2.textContent = '2';
-        document.getElementById('om-waiting-pulse').style.display = 'none';
-        // Show start button only for host
-        if (OM.isHost) {
-          document.getElementById('om-start-btn').style.display = '';
-        }
-      } else {
-        document.getElementById('om-pname-p2').textContent = S.lang === 'ar' ? 'في انتظار المنافس...' : 'Waiting for opponent...';
-        document.getElementById('om-prole-p2').textContent = '—';
-        slot2.className = 'om-player-slot';
-        av2.className = 'om-player-avatar om-pa-empty';
-        av2.textContent = '?';
-        document.getElementById('om-waiting-pulse').style.display = '';
-        document.getElementById('om-start-btn').style.display = 'none';
-      }
-
-      // Sync duration pills in lobby
-      if (typeof state.duration !== 'undefined') {
-        OM.raceDuration = parseInt(state.duration);
-        document.querySelectorAll('#om-dur-pills-lobby .om-dur-pill').forEach(function (b) {
-          b.classList.toggle('on', parseInt(b.dataset.dur) === OM.raceDuration);
-        });
-      }
-
-      // Update name labels in race screen
-      document.getElementById('om-my-name-lbl').textContent = OM.myName;
-      document.getElementById('om-opp-name-lbl').textContent = OM.oppName || (S.lang === 'ar' ? 'المنافس' : 'Opponent');
-    }
-
-    // ── Start race (host only) ────────────────────────────────────
-    function omStartRace() {
-      if (!OM.socket || !OM.roomCode) return;
-      OM.socket.emit('start_race', { code: OM.roomCode });
-    }
-
-    // ── Leave room ────────────────────────────────────────────────
-    function omLeaveRoom() {
-      if (OM.socket && OM.roomCode) {
-        OM.socket.emit('leave_room', { code: OM.roomCode });
-      }
-      OM.roomCode = null;
-      OM.isHost = false;
-      omShowScreen('setup');
-    }
-
-    // ── Copy code to clipboard ────────────────────────────────────
-    function omCopyCode() {
-      navigator.clipboard.writeText(OM.roomCode).then(function () {
-        var btn = document.getElementById('om-copy-btn');
-        var lbl = document.getElementById('om-copy-lbl');
-        lbl.textContent = S.lang === 'ar' ? 'تم النسخ! ✓' : 'Copied! ✓';
-        btn.style.background = 'rgba(74,222,128,0.2)';
-        btn.style.borderColor = 'rgba(74,222,128,0.5)';
-        btn.style.color = '#4ade80';
-        setTimeout(function () {
-          lbl.textContent = S.lang === 'ar' ? 'نسخ الرمز' : 'Copy code';
-          btn.style.background = '';
-          btn.style.borderColor = '';
-          btn.style.color = '';
-        }, 2000);
-      });
-    }
-
-    // ── Auto scroll active word ───────────────────────────────────
-    function omScrollToActive() {
-      var el = OM.omChars[OM.omIdx];
-      var box = document.getElementById('om-words');
-      if (!el || !box) return;
-      var top = el.offsetTop - box.offsetTop;
-      if (top > 70) {
-        box.scrollTop = top - 45;
-      } else {
-        box.scrollTop = 0;
-      }
-    }
-
-    // ── Start race screen ─────────────────────────────────────────
-    function omStartRaceScreen() {
-      omShowScreen('race');
-      OM.omIdx = 0;
-      OM.omErrors = 0;
-      OM.omTotalTyped = 0;
-      OM.omDone = false;
-
-      // Reset tracks and badges
-      document.getElementById('om-my-fill').style.width = '0%';
-      document.getElementById('om-opp-fill').style.width = '0%';
-      document.getElementById('om-my-wpm-badge').textContent = '0 WPM';
-      document.getElementById('om-opp-wpm-badge').textContent = '0 WPM';
-      document.getElementById('om-my-pct-badge').textContent = '0%';
-      document.getElementById('om-opp-pct-badge').textContent = '0%';
-
-      // Build text with robust Arabic font and RTL detection
-      var isAr = (OM.raceLang === 'ar') || /[\u0600-\u06FF]/.test(OM.raceText) || (S.lang === 'ar');
-      var wordsEl = document.getElementById('om-words');
-      wordsEl.innerHTML = '';
-      wordsEl.scrollTop = 0;
-      if (isAr) {
-        wordsEl.className = 'ar';
-        wordsEl.setAttribute('dir', 'rtl');
-        wordsEl.style.direction = 'rtl';
-        wordsEl.style.textAlign = 'right';
-        wordsEl.style.fontFamily = "var(--far), 'Cairo', sans-serif";
-        wordsEl.style.letterSpacing = 'normal';
-        wordsEl.style.wordSpacing = 'normal';
-      } else {
-        wordsEl.className = '';
-        wordsEl.setAttribute('dir', 'ltr');
-        wordsEl.style.direction = 'ltr';
-        wordsEl.style.textAlign = 'left';
-        wordsEl.style.fontFamily = "var(--fen), 'Roboto Mono', monospace";
-      }
-      OM.omChars = [];
-      var words = OM.raceText.split(' ');
-      words.forEach(function (word, wi) {
-        var wDiv = document.createElement('span');
-        wDiv.className = 'word';
-        word.split('').forEach(function (ch) {
-          var s = document.createElement('span');
-          s.className = 'c';
-          s.textContent = ch;
-          OM.omChars.push(s);
-          wDiv.appendChild(s);
-        });
-        if (wi < words.length - 1) {
-          var sp = document.createElement('span');
-          sp.className = 'c sp';
-          sp.textContent = ' ';
-          OM.omChars.push(sp);
-          wDiv.appendChild(sp);
-        }
-        wordsEl.appendChild(wDiv);
-      });
-      if (OM.omChars.length > 0) OM.omChars[0].classList.add('now');
-
-      // Focus input
-      var inp = document.getElementById('om-inp');
-      inp.value = '';
-      inp.focus();
-
-      // Race timer setup
-      if (OM.raceTimer) clearInterval(OM.raceTimer);
-      var timerEl = document.getElementById('om-race-timer');
-      var timerLbl = document.getElementById('om-race-timer-lbl');
-
-      if (OM.raceDuration > 0) {
-        timerEl.textContent = OM.raceDuration;
-        timerEl.className = 'om-big-timer';
-        timerLbl.textContent = S.lang === 'ar' ? 'الوقت المتبقي' : 'Time Left';
-
-        OM.raceTimer = setInterval(function () {
-          var elapsed = Math.floor((Date.now() - OM.raceStartTime) / 1000);
-          var remaining = Math.max(0, OM.raceDuration - elapsed);
-          timerEl.textContent = remaining;
-
-          if (remaining <= 5) {
-            timerEl.className = 'om-big-timer danger';
-          } else {
-            timerEl.className = 'om-big-timer';
-          }
-
-          if (remaining <= 0) {
-            clearInterval(OM.raceTimer);
-            omTimeUp();
-          }
-        }, 500);
-      } else {
-        timerEl.textContent = '0s';
-        timerEl.className = 'om-big-timer';
-        timerLbl.textContent = S.lang === 'ar' ? 'الوقت' : 'Time';
-
-        OM.raceTimer = setInterval(function () {
-          var elapsed = Math.floor((Date.now() - OM.raceStartTime) / 1000);
-          timerEl.textContent = elapsed + 's';
-        }, 500);
-      }
-
-      // Progress sender interval (every 300ms)
-      if (OM.progressInterval) clearInterval(OM.progressInterval);
-      OM.progressInterval = setInterval(function () {
-        if (OM.omDone) { clearInterval(OM.progressInterval); return; }
-        var progress = OM.omChars.length > 0 ? Math.min(100, Math.round((OM.omIdx / OM.omChars.length) * 100)) : 0;
-        var elapsed = (Date.now() - OM.raceStartTime) / 60000;
-        var correctChars = Math.max(0, OM.omTotalTyped - OM.omErrors);
-        var acc = OM.omTotalTyped > 0 ? Math.max(0, Math.round((correctChars / OM.omTotalTyped) * 100)) : 100;
-        // Net WPM (السرعة الصافية المعتمدة دولياً): Correct words per minute minus uncorrected errors penalty
-        var netWpm = elapsed > 0 ? Math.max(0, Math.round(((correctChars - OM.omErrors) / 5) / elapsed)) : 0;
-
-        // Update my bar
-        document.getElementById('om-my-fill').style.width = progress + '%';
-        document.getElementById('om-my-pct-badge').textContent = progress + '%';
-        document.getElementById('om-my-wpm-badge').textContent = netWpm + ' WPM';
-        // Emit to server
-        OM.socket.emit('progress_update', { code: OM.roomCode, progress: progress, wpm: netWpm, acc: acc });
-      }, 300);
-    }
-
-    // ── Time up handler ───────────────────────────────────────────
-    function omTimeUp() {
-      if (OM.omDone) return;
-      OM.omDone = true;
-      clearInterval(OM.raceTimer);
-      clearInterval(OM.progressInterval);
-
-      var elapsed = (Date.now() - OM.raceStartTime) / 60000;
-      var correctChars = Math.max(0, OM.omTotalTyped - OM.omErrors);
-      var acc = OM.omTotalTyped > 0 ? Math.max(0, Math.round((correctChars / OM.omTotalTyped) * 100)) : 100;
-      var netWpm = elapsed > 0 ? Math.max(0, Math.round(((correctChars - OM.omErrors) / 5) / elapsed)) : 0;
-      var progress = OM.omChars.length > 0 ? Math.min(100, Math.round((OM.omIdx / OM.omChars.length) * 100)) : 0;
-
-      OM.socket.emit('time_up', {
-        code: OM.roomCode,
-        wpm: netWpm,
-        acc: acc,
-        progress: progress
-      });
-    }
-
-    // ── Race finish handler ───────────────────────────────────────
-    function omRaceFinish() {
-      if (OM.omDone) return;
-      OM.omDone = true;
-      clearInterval(OM.raceTimer);
-      clearInterval(OM.progressInterval);
-
-      var finTime = parseFloat(((Date.now() - OM.raceStartTime) / 1000).toFixed(1));
-      var elapsed = finTime / 60;
-      var correctChars = Math.max(0, OM.omTotalTyped - OM.omErrors);
-      var acc = OM.omTotalTyped > 0 ? Math.max(0, Math.round((correctChars / OM.omTotalTyped) * 100)) : 100;
-      var netWpm = elapsed > 0 ? Math.max(0, Math.round(((correctChars - OM.omErrors) / 5) / elapsed)) : 0;
-
-      document.getElementById('om-my-fill').style.width = '100%';
-      document.getElementById('om-my-pct-badge').textContent = '100%';
-      document.getElementById('om-my-wpm-badge').textContent = netWpm + ' WPM';
-
-      OM.socket.emit('race_finished', { code: OM.roomCode, wpm: netWpm, acc: acc, finTime: finTime });
-    }
-
-    // ── Online race global keydown listener (Backspace & Typing) ──
-    window.addEventListener('keydown', function (e) {
-      if (e.target && e.target.id !== 'om-inp' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
-      var raceScreen = document.getElementById('om-screen-race');
-      if (!raceScreen || !raceScreen.classList.contains('active')) return;
-      if (OM.omDone || !OM.raceText) return;
-
-      // Handle Backspace
-      if (e.key === 'Backspace') {
-        e.preventDefault();
-        if (OM.omIdx > 0) {
-          if (OM.omIdx < OM.omChars.length) {
-            OM.omChars[OM.omIdx].classList.remove('now');
-          }
-          OM.omIdx--;
-          var prev = OM.omChars[OM.omIdx];
-          if (prev.classList.contains('bad')) {
-            OM.omErrors = Math.max(0, OM.omErrors - 1);
-          }
-          prev.className = 'c now' + (prev.classList.contains('sp') ? ' sp' : '');
-          omScrollToActive();
-          playCorrectSound(false, true);
-        }
-        return;
-      }
-
-      // Handle standard typing characters
-      if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
-        e.preventDefault();
-        var expected = OM.omChars[OM.omIdx];
-        if (!expected) return;
-
-        OM.omTotalTyped++;
-        var charTyped = e.key;
-        var expectedChar = expected.textContent;
-
-        var ok = matchChar(charTyped, expectedChar);
-        if (ok) {
-          expected.className = 'c ok' + (expected.classList.contains('sp') ? ' sp' : '');
-          playCorrectSound(expectedChar === ' ');
-        } else {
-          expected.className = 'c bad' + (expected.classList.contains('sp') ? ' sp' : '');
-          OM.omErrors++;
-          playErrorSound();
-        }
-
-        OM.omIdx++;
-        if (OM.omIdx < OM.omChars.length) {
-          OM.omChars[OM.omIdx].classList.add('now');
-          omScrollToActive();
-        } else {
-          omRaceFinish();
-        }
+      if (errEl && errEl.dataset.isConnWait) {
+        errEl.textContent = S.lang === 'ar' ? 'تعذر الاتصال بالخادم. يرجى التأكد من تشغيل الخادم' : 'Could not connect to server. Please ensure server is running.';
       }
     });
 
-    // ── Canvas Confetti Particle System ───────────────────────────
-    var _omConfettiAnimId = null;
-    function launchVictoryConfetti() {
-      var canvas = document.getElementById('om-confetti-canvas');
-      if (!canvas) return;
-      var parent = canvas.parentElement;
-      canvas.width = parent.clientWidth || 800;
-      canvas.height = parent.clientHeight || 500;
-      var ctx = canvas.getContext('2d');
-      if (!ctx) return;
+    OM.socket.on('disconnect', function () {
+      omSetConnStatus('disconnected');
+    });
 
-      if (_omConfettiAnimId) cancelAnimationFrame(_omConfettiAnimId);
-
-      var colors = ['#ffd700', '#f59e0b', '#38bdf8', '#22c55e', '#ec4899', '#a855f7', '#ffffff'];
-      var particles = [];
-      var total = 140;
-
-      for (var i = 0; i < total; i++) {
-        particles.push({
-          x: canvas.width / 2 + (Math.random() * 200 - 100),
-          y: canvas.height * 0.35 + (Math.random() * 60 - 30),
-          vx: (Math.random() - 0.5) * 16,
-          vy: (Math.random() * -12) - 4,
-          size: Math.random() * 8 + 4,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          rot: Math.random() * 360,
-          vRot: (Math.random() - 0.5) * 12,
-          opacity: 1,
-          shape: Math.random() > 0.3 ? 'rect' : 'circle'
-        });
-      }
-
-      var start = performance.now();
-      function loop(now) {
-        var elapsed = (now - start) / 1000;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        var alive = 0;
-
-        for (var i = 0; i < particles.length; i++) {
-          var p = particles[i];
-          p.x += p.vx;
-          p.y += p.vy;
-          p.vy += 0.35;
-          p.vx *= 0.985;
-          p.rot += p.vRot;
-
-          if (elapsed > 2.5) {
-            p.opacity -= 0.02;
-          }
-
-          if (p.opacity > 0 && p.y < canvas.height + 20) {
-            alive++;
-            ctx.save();
-            ctx.translate(p.x, p.y);
-            ctx.rotate((p.rot * Math.PI) / 180);
-            ctx.globalAlpha = Math.max(0, p.opacity);
-            ctx.fillStyle = p.color;
-
-            if (p.shape === 'rect') {
-              ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
-            } else {
-              ctx.beginPath();
-              ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-              ctx.fill();
-            }
-            ctx.restore();
-          }
-        }
-
-        if (alive > 0 && elapsed < 4.5) {
-          _omConfettiAnimId = requestAnimationFrame(loop);
-        } else {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
-      }
-      _omConfettiAnimId = requestAnimationFrame(loop);
-    }
-
-    // ── Web Audio Victory Sound Fanfare ───────────────────────────
-    function playVictoryFanfare(isWinner) {
-      try {
-        if (typeof _initAudio === 'function') _initAudio();
-        if (!_actx) return;
-        if (_actx.state === 'suspended') _actx.resume();
-
-        var now = _actx.currentTime;
-        if (isWinner) {
-          // 4 triumphant fanfare chords: C5, E5, G5, C6
-          var notes = [523.25, 659.25, 783.99, 1046.50];
-          notes.forEach(function (freq, idx) {
-            var osc = _actx.createOscillator();
-            var gain = _actx.createGain();
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(freq, now + idx * 0.12);
-            gain.gain.setValueAtTime(0, now + idx * 0.12);
-            gain.gain.linearRampToValueAtTime(0.28, now + idx * 0.12 + 0.04);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + (idx === 3 ? 0.95 : 0.45));
-            osc.connect(gain);
-            gain.connect(_masterGain || _actx.destination);
-            osc.start(now + idx * 0.12);
-            osc.stop(now + idx * 0.12 + 1.1);
-          });
-        } else {
-          // 3 pleasant melody notes for good game
-          var notes2 = [392.00, 523.25, 659.25];
-          notes2.forEach(function (freq, idx) {
-            var osc = _actx.createOscillator();
-            var gain = _actx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, now + idx * 0.14);
-            gain.gain.setValueAtTime(0, now + idx * 0.14);
-            gain.gain.linearRampToValueAtTime(0.22, now + idx * 0.14 + 0.04);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.14 + 0.6);
-            osc.connect(gain);
-            gain.connect(_masterGain || _actx.destination);
-            osc.start(now + idx * 0.14);
-            osc.stop(now + idx * 0.14 + 0.75);
-          });
-        }
-      } catch (e) { }
-    }
-
-    // ── Show results ──────────────────────────────────────────────
-    var _lastRaceResults = null;
-    function omShowResults(data) {
-      clearInterval(OM.raceTimer);
-      clearInterval(OM.progressInterval);
-      OM.omDone = true;
-      _lastRaceResults = data;
-
-      var alertEl = document.getElementById('om-grace-alert');
-      if (alertEl) alertEl.style.display = 'none';
-
-      omShowScreen('results');
-      var players = data.players || [];
-      var winner = data.winner || players[0];
-      var amIWinner = winner && winner.id === OM.myId;
-      var isAr = S.lang === 'ar';
-
-      // Champion banner & header
-      var champPill = document.getElementById('om-champ-pill');
-      var champNameEl = document.getElementById('om-champ-name');
-      var champMsg = document.getElementById('om-champ-msg');
-
-      if (winner) {
-        var winnerIsMe = winner.id === OM.myId;
-        if (champPill) {
-          champPill.innerHTML = winnerIsMe ?
-            (TM_ICONS.crown + ' ' + (isAr ? 'أنت البطل الفائز • VICTORY!' : 'YOU WON • VICTORY!')) :
-            (TM_ICONS.crown + ' ' + (isAr ? 'بطل السباق الفائز • CHAMPION' : 'RACE CHAMPION'));
-        }
-        if (champNameEl) {
-          champNameEl.textContent = winner.name + (winnerIsMe ? (isAr ? ' (أنت)' : ' (You)') : '');
-        }
-        if (champMsg) {
-          champMsg.className = 'om-champ-submsg ' + (winnerIsMe ? 'win' : 'lose');
-          champMsg.innerHTML = winnerIsMe ?
-            (TM_ICONS.sparkle + ' ' + (isAr ? 'مبروك الفوز الساحق يا بطل! أداء استثنائي وتفوق في سرعة الطباعة!' : 'Outstanding victory! Exceptional typing speed and accuracy!')) :
-            (TM_ICONS.swords + ' ' + (isAr ? ('منافسة بطولية نارية! فاز ' + winner.name + ' بالمركز الأول، حظاً أوفر في جولة الانتقام!') : ('Epic match! ' + winner.name + ' took 1st place! Challenge them to a rematch!')));
-        }
-      }
-
-      // Differential bar
-      var diffBar = document.getElementById('om-diff-bar');
-      var diffText = document.getElementById('om-diff-text');
-      var diffIco = document.getElementById('om-diff-ico');
-      if (players.length >= 2) {
-        var p1 = players[0];
-        var p2 = players[1];
-        var diffWpm = Math.abs((p1.wpm || 0) - (p2.wpm || 0));
-        if (diffBar && diffText) {
-          diffBar.style.display = 'flex';
-          if (diffIco) diffIco.innerHTML = TM_ICONS.bolt;
-          diffText.innerHTML = isAr ?
-            ('فارق السرعة الصافية بين المتنافسين: <span class="om-diff-badge">+' + diffWpm + ' WPM</span> لصالح ' + p1.name) :
-            ('Net Speed Differential: <span class="om-diff-badge">+' + diffWpm + ' WPM</span> for ' + p1.name);
-        }
-      } else if (diffBar) {
-        diffBar.style.display = 'none';
-      }
-
-      // Ensure trophy hero icon is loaded
-      var heroTrophy = document.getElementById('om-trophy-hero');
-      if (heroTrophy) heroTrophy.innerHTML = TM_ICONS.trophy;
-
-      // Build esports cards
-      var podEl = document.getElementById('om-podium');
-      podEl.innerHTML = '';
-      players.forEach(function (p, i) {
-        var isWinner = winner && p.id === winner.id;
-        var isMe = p.id === OM.myId;
-        var isLowAcc = (p.acc || 0) < 60;
-        var rankLabel = isWinner ?
-          (TM_ICONS.medalGold + ' ' + (isAr ? 'المركز الأول' : '1st Place')) :
-          (TM_ICONS.medalSilver + ' ' + (isAr ? 'المركز الثاني' : '2nd Place'));
-        var timeTxt = p.finTime ? (p.finTime + (isAr ? ' ثانية' : 's')) : (isAr ? 'انتهاء الوقت' : 'Time up');
-
-        var card = document.createElement('div');
-        card.className = 'om-podium-card ' + (isWinner ? 'winner' : 'loser');
-        card.innerHTML =
-          '<div class="om-pod-header">' +
-          '<div class="om-pod-medal-badge">' + (isWinner ? TM_ICONS.crown : TM_ICONS.medalSilver) + '</div>' +
-          '<div class="om-pod-rank-lbl">' + rankLabel + '</div>' +
-          '</div>' +
-          '<div class="om-pod-avatar">' + (isWinner ? TM_ICONS.trophy : TM_ICONS.bolt) + '</div>' +
-          '<div class="om-pod-name">' +
-          p.name + (isMe ? '<span class="you-badge">' + (isAr ? 'أنت' : 'You') + '</span>' : '') +
-          '</div>' +
-          '<div class="om-pod-big-wpm">' + (p.wpm || 0) + '</div>' +
-          '<div class="om-pod-wpm-sub">' + (isAr ? 'السرعة الصافية (Net WPM)' : 'Net WPM') + '</div>' +
-          '<div class="om-pod-stats-grid">' +
-          '<div class="om-pod-s-item">' +
-          '<div class="om-pod-s-val">' + (p.acc || 0) + '%</div>' +
-          '<div class="om-pod-s-lbl">' + (isAr ? 'الدقة' : 'Accuracy') + '</div>' +
-          (isLowAcc ? ('<div style="font-size:10px;color:var(--err);font-weight:700;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:3px">' + TM_ICONS.warning + ' ' + (isAr ? 'دقة منخفضة' : 'Low Accuracy') + '</div>') : '') +
-          '</div>' +
-          '<div class="om-pod-s-item">' +
-          '<div class="om-pod-s-val">' + (p.progress || 0) + '%</div>' +
-          '<div class="om-pod-s-lbl">' + (isAr ? 'الإنجاز' : 'Progress') + '</div>' +
-          '</div>' +
-          '<div class="om-pod-s-item" style="grid-column:span 2;margin-top:2px">' +
-          '<div class="om-pod-s-val" style="color:var(--sub)">' + timeTxt + '</div>' +
-          '<div class="om-pod-s-lbl">' + (isAr ? 'الوقت المستغرق' : 'Elapsed Time') + '</div>' +
-          '</div>' +
-          '</div>';
-        podEl.appendChild(card);
+    // Register server events
+    if (!_omEventsBound) {
+      _omEventsBound = true;
+      OM.socket.on('room_created', function (d) {
+        OM.roomCode = d.code;
+        OM.isHost = true;
+        omShowLobby(d.roomState);
       });
-
-      // Rematch button label based on host/guest
-      var againBtn = document.getElementById('om-again-btn');
-      var againLbl = document.getElementById('om-again-lbl');
-      var againIco = document.getElementById('om-again-ico');
-      if (againBtn && againLbl) {
-        againBtn.style.display = 'flex';
-        if (againIco) againIco.innerHTML = OM.isHost ? TM_ICONS.refresh : TM_ICONS.swords;
-        againLbl.textContent = OM.isHost ?
-          (isAr ? 'سباق مجدداً (إعادة البدء)' : 'Rematch (Start Lobby)') :
-          (isAr ? 'طلب جولة ثانية (انتقام)' : 'Request Rematch');
-      }
-
-      // Trigger celebration effects
-      launchVictoryConfetti();
-      playVictoryFanfare(amIWinner);
-    }
-
-    // ── Rematch (Play Again) ──────────────────────────────────────
-    function omPlayAgain() {
-      if (!OM.socket || !OM.roomCode) return;
-      OM.socket.emit('play_again', { code: OM.roomCode });
-    }
-
-    // ── Share results summary ─────────────────────────────────────
-    function omShareResults() {
-      if (!_lastRaceResults || !_lastRaceResults.players) return;
-      var isAr = S.lang === 'ar';
-      var winner = _lastRaceResults.winner;
-      var myData = null;
-      _lastRaceResults.players.forEach(function (p) { if (p.id === OM.myId) myData = p; });
-      var me = myData || _lastRaceResults.players[0];
-
-      var text = isAr ?
-        ('نتيجة سباق Barqtype:\n' +
-          'الفائز: ' + (winner ? winner.name : '—') + ' (' + (winner ? winner.wpm : 0) + ' WPM)\n' +
-          'سرعتي: ' + (me ? me.wpm : 0) + ' WPM | الدقة: ' + (me ? me.acc : 100) + '%\n' +
-          'تحداني الآن في Barqtype! ⚡') :
-        ('Barqtype Race Result:\n' +
-          'Winner: ' + (winner ? winner.name : '—') + ' (' + (winner ? winner.wpm : 0) + ' WPM)\n' +
-          'My Speed: ' + (me ? me.wpm : 0) + ' WPM | Accuracy: ' + (me ? me.acc : 100) + '%\n' +
-          'Challenge me on Barqtype! ⚡');
-
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(function () {
-          omShowToast(isAr ? 'تم نسخ ملخص النتيجة للحافظة!' : 'Results copied to clipboard!');
-        });
-      }
-    }
-
-    // ── Go back to setup ──────────────────────────────────────────
-    function omGoSetup() {
-      if (OM.socket && OM.roomCode) {
-        OM.socket.emit('leave_room', { code: OM.roomCode });
-        OM.roomCode = null;
+      OM.socket.on('room_joined', function (d) {
+        OM.roomCode = d.code;
         OM.isHost = false;
-      }
-      omShowScreen('setup');
+        omShowLobby(d.roomState);
+      });
+      OM.socket.on('join_error', function (d) {
+        var msgs = {
+          room_not_found: S.lang === 'ar' ? 'الغرفة غير موجودة، تأكد من الرمز' : 'Room not found, check the code',
+          race_already_started: S.lang === 'ar' ? 'السباق بدأ بالفعل' : 'Race already started',
+          room_full: S.lang === 'ar' ? 'الغرفة ممتلئة' : 'Room is full',
+          already_in_room: S.lang === 'ar' ? 'أنت بالفعل في غرفة' : 'Already in a room'
+        };
+        var errEl = document.getElementById('om-err');
+        if (errEl) errEl.textContent = msgs[d.message] || d.message;
+      });
+      OM.socket.on('room_state', function (d) {
+        omUpdateLobby(d);
+      });
+      OM.socket.on('player_left', function (d) {
+        if (d.newHostId === OM.myId) OM.isHost = true;
+        omUpdateLobby({ players: [], hostId: OM.myId, state: 'waiting', code: OM.roomCode });
+        omShowToast(S.lang === 'ar' ? (d.name + ' غادر السباق') : (d.name + ' left the race'));
+      });
+      OM.socket.on('countdown_start', function (d) {
+        OM.raceText = d.text;
+        if (typeof d.duration !== 'undefined') OM.raceDuration = parseInt(d.duration);
+        if (d.lang) OM.raceLang = d.lang;
+        omShowScreen('countdown');
+      });
+      OM.socket.on('countdown_tick', function (d) {
+        var el = document.getElementById('om-cd-num');
+        if (!el) return;
+        if (d.count > 0) {
+          el.textContent = d.count;
+          el.style.color = '#38bdf8';
+        } else {
+          el.textContent = S.lang === 'ar' ? 'انطلق!' : 'GO!';
+          el.style.color = '#4ade80';
+          el.style.textShadow = '0 0 40px rgba(74,222,128,0.7)';
+        }
+      });
+      OM.socket.on('race_go', function (d) {
+        OM.raceStartTime = d.startTime;
+        if (typeof d.duration !== 'undefined') OM.raceDuration = parseInt(d.duration);
+        if (d.lang) OM.raceLang = d.lang;
+        omStartRaceScreen();
+      });
+      OM.socket.on('opponent_progress', function (d) {
+        var fill = document.getElementById('om-opp-fill');
+        var badge = document.getElementById('om-opp-wpm-badge');
+        var pct = document.getElementById('om-opp-pct-badge');
+        if (fill) fill.style.width = d.progress + '%';
+        if (badge) badge.textContent = d.wpm + ' WPM';
+        if (pct) pct.textContent = d.progress + '%';
+      });
+      OM.socket.on('opponent_finished', function (d) {
+        var oppName = d.name || OM.oppName || (S.lang === 'ar' ? 'المنافس' : 'Opponent');
+        omShowToast(oppName + (S.lang === 'ar' ? ' أنهى السباق! ' : ' finished! ') + d.wpm + ' WPM');
+      });
+      OM.socket.on('race_grace_period', function (d) {
+        var alertEl = document.getElementById('om-grace-alert');
+        if (alertEl) {
+          alertEl.style.display = 'block';
+          alertEl.innerHTML = TM_ICONS.warning + ' ' + (S.lang === 'ar' ?
+            ('المنافس (' + (d.finisher || 'الخصم') + ') وصل لخط النهاية! متبقي 5 ثوانٍ لإنهاء ما تستطيع!') :
+            ('Opponent (' + (d.finisher || 'Opponent') + ') finished! 5s remaining!'));
+        }
+      });
+      OM.socket.on('room_reset_lobby', function (d) {
+        omShowLobby(d.roomState);
+        var alertEl = document.getElementById('om-grace-alert');
+        if (alertEl) alertEl.style.display = 'none';
+        document.getElementById('om-my-fill').style.width = '0%';
+        document.getElementById('om-my-pct-badge').textContent = '0%';
+        document.getElementById('om-my-wpm-badge').textContent = '0 WPM';
+        document.getElementById('om-opp-fill').style.width = '0%';
+        document.getElementById('om-opp-pct-badge').textContent = '0%';
+        document.getElementById('om-opp-wpm-badge').textContent = '0 WPM';
+        omShowToast(S.lang === 'ar' ? 'تمت العودة للغرفة لسباق جديد!' : 'Returned to lobby for a rematch!');
+      });
+      OM.socket.on('race_results', function (d) {
+        omShowResults(d);
+      });
+      OM.socket.on('error_msg', function (d) {
+        omShowToast(d.message, true);
+      });
     }
+  });
+}
 
-    // ── Toast helper ──────────────────────────────────────────────
-    function omShowToast(msg, isErr) {
-      var t = document.createElement('div');
-      t.className = 'toast2';
-      t.style.borderColor = isErr ? 'var(--err)' : 'var(--accent)';
-      t.textContent = msg;
-      document.getElementById('toasts').appendChild(t);
-      setTimeout(function () {
-        t.style.opacity = '0';
-        t.style.transition = 'opacity .4s';
-        setTimeout(function () { t.remove(); }, 400);
-      }, 4000);
+// ── Create room ───────────────────────────────────────────────
+function omCreateRoom() {
+  var errEl = document.getElementById('om-err');
+  if (errEl) errEl.textContent = '';
+  OM.myName = document.getElementById('om-name-c').value.trim() || (S.lang === 'ar' ? 'لاعب 1' : 'Player 1');
+
+  if (!OM.socket || !OM.socket.connected) {
+    if (errEl) {
+      errEl.textContent = S.lang === 'ar' ? 'جارِ الاتصال بالخادم...' : 'Connecting to server...';
+      errEl.dataset.isConnWait = '1';
     }
-
-    // Note: Online race UI elements and vector icons are localized natively within updateUILanguage()
-    // ══════════════════════════════════════════════════════════════
-    // END ONLINE RACE MODULE
-    // ══════════════════════════════════════════════════════════════
-    window.addEventListener('load', function () {
-      var h = window.location.hash;
-      if (h === '#stats') showTab('stats');
-      else if (h === '#race') showTab('race');
-      else if (h === '#online') {
-        showTab('race');
-        setTimeout(function () { if (window.openOnlineRace) openOnlineRace(); }, 200);
-      }
+    omConnect(function () {
+      OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration });
     });
+  } else {
+    OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration });
+  }
+}
+
+// ── Join room ─────────────────────────────────────────────────
+function omJoinRoom() {
+  var errEl = document.getElementById('om-err');
+  if (errEl) errEl.textContent = '';
+  var code = document.getElementById('om-code-inp').value.trim().toUpperCase();
+  if (code.length !== 4) {
+    if (errEl) errEl.textContent = S.lang === 'ar' ? 'الرمز يجب أن يكون 4 أحرف' : 'Code must be 4 characters';
+    return;
+  }
+  OM.myName = document.getElementById('om-name-j').value.trim() || (S.lang === 'ar' ? 'لاعب 2' : 'Player 2');
+
+  if (!OM.socket || !OM.socket.connected) {
+    if (errEl) {
+      errEl.textContent = S.lang === 'ar' ? 'جارِ الاتصال بالخادم...' : 'Connecting to server...';
+      errEl.dataset.isConnWait = '1';
+    }
+    omConnect(function () {
+      OM.socket.emit('join_room', { code: code, name: OM.myName });
+    });
+  } else {
+    OM.socket.emit('join_room', { code: code, name: OM.myName });
+  }
+}
+
+// ── Show lobby ────────────────────────────────────────────────
+function omShowLobby(state) {
+  omShowScreen('lobby');
+  document.getElementById('om-lobby-code-display').textContent = OM.roomCode;
+  omUpdateLobby(state);
+}
+
+function omUpdateLobby(state) {
+  var players = state.players || [];
+  var myData = null, oppData = null;
+  players.forEach(function (p) {
+    if (p.id === OM.myId || (OM.myId === null && p.isHost)) myData = p;
+    else oppData = p;
+  });
+  if (!myData && players.length > 0) myData = players[0];
+  if (players.length > 1 && !oppData) oppData = players[1];
+
+  // Update my slot
+  if (myData) {
+    document.getElementById('om-pname-p1').textContent = myData.name;
+    document.getElementById('om-prole-p1').innerHTML = myData.isHost ? ((S.lang === 'ar' ? 'المضيف ' : 'Host ') + TM_ICONS.crown) : (S.lang === 'ar' ? 'لاعب' : 'Player');
+  }
+
+  // Update opponent slot
+  var slot2 = document.getElementById('om-slot-p2');
+  var av2 = document.getElementById('om-av-p2');
+  if (oppData) {
+    OM.oppName = oppData.name;
+    OM.oppId = oppData.id;
+    document.getElementById('om-pname-p2').textContent = oppData.name;
+    document.getElementById('om-prole-p2').innerHTML = oppData.isHost ? ((S.lang === 'ar' ? 'المضيف ' : 'Host ') + TM_ICONS.crown) : (S.lang === 'ar' ? 'لاعب' : 'Player');
+    slot2.className = 'om-player-slot filled p2';
+    av2.className = 'om-player-avatar om-pa-p2';
+    av2.textContent = '2';
+    document.getElementById('om-waiting-pulse').style.display = 'none';
+    // Show start button only for host
+    if (OM.isHost) {
+      document.getElementById('om-start-btn').style.display = '';
+    }
+  } else {
+    document.getElementById('om-pname-p2').textContent = S.lang === 'ar' ? 'في انتظار المنافس...' : 'Waiting for opponent...';
+    document.getElementById('om-prole-p2').textContent = '—';
+    slot2.className = 'om-player-slot';
+    av2.className = 'om-player-avatar om-pa-empty';
+    av2.textContent = '?';
+    document.getElementById('om-waiting-pulse').style.display = '';
+    document.getElementById('om-start-btn').style.display = 'none';
+  }
+
+  // Sync duration pills in lobby
+  if (typeof state.duration !== 'undefined') {
+    OM.raceDuration = parseInt(state.duration);
+    document.querySelectorAll('#om-dur-pills-lobby .om-dur-pill').forEach(function (b) {
+      b.classList.toggle('on', parseInt(b.dataset.dur) === OM.raceDuration);
+    });
+  }
+
+  // Update name labels in race screen
+  document.getElementById('om-my-name-lbl').textContent = OM.myName;
+  document.getElementById('om-opp-name-lbl').textContent = OM.oppName || (S.lang === 'ar' ? 'المنافس' : 'Opponent');
+}
+
+// ── Start race (host only) ────────────────────────────────────
+function omStartRace() {
+  if (!OM.socket || !OM.roomCode) return;
+  OM.socket.emit('start_race', { code: OM.roomCode });
+}
+
+// ── Leave room ────────────────────────────────────────────────
+function omLeaveRoom() {
+  if (OM.socket && OM.roomCode) {
+    OM.socket.emit('leave_room', { code: OM.roomCode });
+  }
+  OM.roomCode = null;
+  OM.isHost = false;
+  omShowScreen('setup');
+}
+
+// ── Copy code to clipboard ────────────────────────────────────
+function omCopyCode() {
+  navigator.clipboard.writeText(OM.roomCode).then(function () {
+    var btn = document.getElementById('om-copy-btn');
+    var lbl = document.getElementById('om-copy-lbl');
+    lbl.textContent = S.lang === 'ar' ? 'تم النسخ! ✓' : 'Copied! ✓';
+    btn.style.background = 'rgba(74,222,128,0.2)';
+    btn.style.borderColor = 'rgba(74,222,128,0.5)';
+    btn.style.color = '#4ade80';
+    setTimeout(function () {
+      lbl.textContent = S.lang === 'ar' ? 'نسخ الرمز' : 'Copy code';
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 2000);
+  });
+}
+
+// ── Auto scroll active word ───────────────────────────────────
+function omScrollToActive() {
+  var el = OM.omChars[OM.omIdx];
+  var box = document.getElementById('om-words');
+  if (!el || !box) return;
+  var top = el.offsetTop - box.offsetTop;
+  if (top > 70) {
+    box.scrollTop = top - 45;
+  } else {
+    box.scrollTop = 0;
+  }
+}
+
+// ── Start race screen ─────────────────────────────────────────
+function omStartRaceScreen() {
+  omShowScreen('race');
+  OM.omIdx = 0;
+  OM.omErrors = 0;
+  OM.omTotalTyped = 0;
+  OM.omDone = false;
+
+  // Reset tracks and badges
+  document.getElementById('om-my-fill').style.width = '0%';
+  document.getElementById('om-opp-fill').style.width = '0%';
+  document.getElementById('om-my-wpm-badge').textContent = '0 WPM';
+  document.getElementById('om-opp-wpm-badge').textContent = '0 WPM';
+  document.getElementById('om-my-pct-badge').textContent = '0%';
+  document.getElementById('om-opp-pct-badge').textContent = '0%';
+
+  // Build text with robust Arabic font and RTL detection
+  var isAr = (OM.raceLang === 'ar') || /[\u0600-\u06FF]/.test(OM.raceText) || (S.lang === 'ar');
+  var wordsEl = document.getElementById('om-words');
+  wordsEl.innerHTML = '';
+  wordsEl.scrollTop = 0;
+  if (isAr) {
+    wordsEl.className = 'ar';
+    wordsEl.setAttribute('dir', 'rtl');
+    wordsEl.style.direction = 'rtl';
+    wordsEl.style.textAlign = 'right';
+    wordsEl.style.fontFamily = "var(--far), 'Cairo', sans-serif";
+    wordsEl.style.letterSpacing = 'normal';
+    wordsEl.style.wordSpacing = 'normal';
+  } else {
+    wordsEl.className = '';
+    wordsEl.setAttribute('dir', 'ltr');
+    wordsEl.style.direction = 'ltr';
+    wordsEl.style.textAlign = 'left';
+    wordsEl.style.fontFamily = "var(--fen), 'Roboto Mono', monospace";
+  }
+  OM.omChars = [];
+  var words = OM.raceText.split(' ');
+  words.forEach(function (word, wi) {
+    var wDiv = document.createElement('span');
+    wDiv.className = 'word';
+    word.split('').forEach(function (ch) {
+      var s = document.createElement('span');
+      s.className = 'c';
+      s.textContent = ch;
+      OM.omChars.push(s);
+      wDiv.appendChild(s);
+    });
+    if (wi < words.length - 1) {
+      var sp = document.createElement('span');
+      sp.className = 'c sp';
+      sp.textContent = ' ';
+      OM.omChars.push(sp);
+      wDiv.appendChild(sp);
+    }
+    wordsEl.appendChild(wDiv);
+  });
+  if (OM.omChars.length > 0) OM.omChars[0].classList.add('now');
+
+  // Focus input
+  var inp = document.getElementById('om-inp');
+  inp.value = '';
+  inp.focus();
+
+  // Race timer setup
+  if (OM.raceTimer) clearInterval(OM.raceTimer);
+  var timerEl = document.getElementById('om-race-timer');
+  var timerLbl = document.getElementById('om-race-timer-lbl');
+
+  if (OM.raceDuration > 0) {
+    timerEl.textContent = OM.raceDuration;
+    timerEl.className = 'om-big-timer';
+    timerLbl.textContent = S.lang === 'ar' ? 'الوقت المتبقي' : 'Time Left';
+
+    OM.raceTimer = setInterval(function () {
+      var elapsed = Math.floor((Date.now() - OM.raceStartTime) / 1000);
+      var remaining = Math.max(0, OM.raceDuration - elapsed);
+      timerEl.textContent = remaining;
+
+      if (remaining <= 5) {
+        timerEl.className = 'om-big-timer danger';
+      } else {
+        timerEl.className = 'om-big-timer';
+      }
+
+      if (remaining <= 0) {
+        clearInterval(OM.raceTimer);
+        omTimeUp();
+      }
+    }, 500);
+  } else {
+    timerEl.textContent = '0s';
+    timerEl.className = 'om-big-timer';
+    timerLbl.textContent = S.lang === 'ar' ? 'الوقت' : 'Time';
+
+    OM.raceTimer = setInterval(function () {
+      var elapsed = Math.floor((Date.now() - OM.raceStartTime) / 1000);
+      timerEl.textContent = elapsed + 's';
+    }, 500);
+  }
+
+  // Progress sender interval (every 300ms)
+  if (OM.progressInterval) clearInterval(OM.progressInterval);
+  OM.progressInterval = setInterval(function () {
+    if (OM.omDone) { clearInterval(OM.progressInterval); return; }
+    var progress = OM.omChars.length > 0 ? Math.min(100, Math.round((OM.omIdx / OM.omChars.length) * 100)) : 0;
+    var elapsed = (Date.now() - OM.raceStartTime) / 60000;
+    var correctChars = Math.max(0, OM.omTotalTyped - OM.omErrors);
+    var acc = OM.omTotalTyped > 0 ? Math.max(0, Math.round((correctChars / OM.omTotalTyped) * 100)) : 100;
+    // Net WPM (السرعة الصافية المعتمدة دولياً): Correct words per minute minus uncorrected errors penalty
+    var netWpm = elapsed > 0 ? Math.max(0, Math.round(((correctChars - OM.omErrors) / 5) / elapsed)) : 0;
+
+    // Update my bar
+    document.getElementById('om-my-fill').style.width = progress + '%';
+    document.getElementById('om-my-pct-badge').textContent = progress + '%';
+    document.getElementById('om-my-wpm-badge').textContent = netWpm + ' WPM';
+    // Emit to server
+    OM.socket.emit('progress_update', { code: OM.roomCode, progress: progress, wpm: netWpm, acc: acc });
+  }, 300);
+}
+
+// ── Time up handler ───────────────────────────────────────────
+function omTimeUp() {
+  if (OM.omDone) return;
+  OM.omDone = true;
+  clearInterval(OM.raceTimer);
+  clearInterval(OM.progressInterval);
+
+  var elapsed = (Date.now() - OM.raceStartTime) / 60000;
+  var correctChars = Math.max(0, OM.omTotalTyped - OM.omErrors);
+  var acc = OM.omTotalTyped > 0 ? Math.max(0, Math.round((correctChars / OM.omTotalTyped) * 100)) : 100;
+  var netWpm = elapsed > 0 ? Math.max(0, Math.round(((correctChars - OM.omErrors) / 5) / elapsed)) : 0;
+  var progress = OM.omChars.length > 0 ? Math.min(100, Math.round((OM.omIdx / OM.omChars.length) * 100)) : 0;
+
+  OM.socket.emit('time_up', {
+    code: OM.roomCode,
+    wpm: netWpm,
+    acc: acc,
+    progress: progress
+  });
+}
+
+// ── Race finish handler ───────────────────────────────────────
+function omRaceFinish() {
+  if (OM.omDone) return;
+  OM.omDone = true;
+  clearInterval(OM.raceTimer);
+  clearInterval(OM.progressInterval);
+
+  var finTime = parseFloat(((Date.now() - OM.raceStartTime) / 1000).toFixed(1));
+  var elapsed = finTime / 60;
+  var correctChars = Math.max(0, OM.omTotalTyped - OM.omErrors);
+  var acc = OM.omTotalTyped > 0 ? Math.max(0, Math.round((correctChars / OM.omTotalTyped) * 100)) : 100;
+  var netWpm = elapsed > 0 ? Math.max(0, Math.round(((correctChars - OM.omErrors) / 5) / elapsed)) : 0;
+
+  document.getElementById('om-my-fill').style.width = '100%';
+  document.getElementById('om-my-pct-badge').textContent = '100%';
+  document.getElementById('om-my-wpm-badge').textContent = netWpm + ' WPM';
+
+  OM.socket.emit('race_finished', { code: OM.roomCode, wpm: netWpm, acc: acc, finTime: finTime });
+}
+
+// ── Online race global keydown listener (Backspace & Typing) ──
+window.addEventListener('keydown', function (e) {
+  if (e.target && e.target.id !== 'om-inp' && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) return;
+  var raceScreen = document.getElementById('om-screen-race');
+  if (!raceScreen || !raceScreen.classList.contains('active')) return;
+  if (OM.omDone || !OM.raceText) return;
+
+  // Handle Backspace
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    if (OM.omIdx > 0) {
+      if (OM.omIdx < OM.omChars.length) {
+        OM.omChars[OM.omIdx].classList.remove('now');
+      }
+      OM.omIdx--;
+      var prev = OM.omChars[OM.omIdx];
+      if (prev.classList.contains('bad')) {
+        OM.omErrors = Math.max(0, OM.omErrors - 1);
+      }
+      prev.className = 'c now' + (prev.classList.contains('sp') ? ' sp' : '');
+      omScrollToActive();
+      playCorrectSound(false, true);
+    }
+    return;
+  }
+
+  // Handle standard typing characters
+  if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
+    e.preventDefault();
+    var expected = OM.omChars[OM.omIdx];
+    if (!expected) return;
+
+    OM.omTotalTyped++;
+    var charTyped = e.key;
+    var expectedChar = expected.textContent;
+
+    var ok = matchChar(charTyped, expectedChar);
+    if (ok) {
+      expected.className = 'c ok' + (expected.classList.contains('sp') ? ' sp' : '');
+      playCorrectSound(expectedChar === ' ');
+    } else {
+      expected.className = 'c bad' + (expected.classList.contains('sp') ? ' sp' : '');
+      OM.omErrors++;
+      playErrorSound();
+    }
+
+    OM.omIdx++;
+    if (OM.omIdx < OM.omChars.length) {
+      OM.omChars[OM.omIdx].classList.add('now');
+      omScrollToActive();
+    } else {
+      omRaceFinish();
+    }
+  }
+});
+
+// ── Canvas Confetti Particle System ───────────────────────────
+var _omConfettiAnimId = null;
+function launchVictoryConfetti() {
+  var canvas = document.getElementById('om-confetti-canvas');
+  if (!canvas) return;
+  var parent = canvas.parentElement;
+  canvas.width = parent.clientWidth || 800;
+  canvas.height = parent.clientHeight || 500;
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  if (_omConfettiAnimId) cancelAnimationFrame(_omConfettiAnimId);
+
+  var colors = ['#ffd700', '#f59e0b', '#38bdf8', '#22c55e', '#ec4899', '#a855f7', '#ffffff'];
+  var particles = [];
+  var total = 140;
+
+  for (var i = 0; i < total; i++) {
+    particles.push({
+      x: canvas.width / 2 + (Math.random() * 200 - 100),
+      y: canvas.height * 0.35 + (Math.random() * 60 - 30),
+      vx: (Math.random() - 0.5) * 16,
+      vy: (Math.random() * -12) - 4,
+      size: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * 360,
+      vRot: (Math.random() - 0.5) * 12,
+      opacity: 1,
+      shape: Math.random() > 0.3 ? 'rect' : 'circle'
+    });
+  }
+
+  var start = performance.now();
+  function loop(now) {
+    var elapsed = (now - start) / 1000;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var alive = 0;
+
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.35;
+      p.vx *= 0.985;
+      p.rot += p.vRot;
+
+      if (elapsed > 2.5) {
+        p.opacity -= 0.02;
+      }
+
+      if (p.opacity > 0 && p.y < canvas.height + 20) {
+        alive++;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rot * Math.PI) / 180);
+        ctx.globalAlpha = Math.max(0, p.opacity);
+        ctx.fillStyle = p.color;
+
+        if (p.shape === 'rect') {
+          ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    if (alive > 0 && elapsed < 4.5) {
+      _omConfettiAnimId = requestAnimationFrame(loop);
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+  _omConfettiAnimId = requestAnimationFrame(loop);
+}
+
+// ── Web Audio Victory Sound Fanfare ───────────────────────────
+function playVictoryFanfare(isWinner) {
+  try {
+    if (typeof _initAudio === 'function') _initAudio();
+    if (!_actx) return;
+    if (_actx.state === 'suspended') _actx.resume();
+
+    var now = _actx.currentTime;
+    if (isWinner) {
+      // 4 triumphant fanfare chords: C5, E5, G5, C6
+      var notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach(function (freq, idx) {
+        var osc = _actx.createOscillator();
+        var gain = _actx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.12);
+        gain.gain.setValueAtTime(0, now + idx * 0.12);
+        gain.gain.linearRampToValueAtTime(0.28, now + idx * 0.12 + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + (idx === 3 ? 0.95 : 0.45));
+        osc.connect(gain);
+        gain.connect(_masterGain || _actx.destination);
+        osc.start(now + idx * 0.12);
+        osc.stop(now + idx * 0.12 + 1.1);
+      });
+    } else {
+      // 3 pleasant melody notes for good game
+      var notes2 = [392.00, 523.25, 659.25];
+      notes2.forEach(function (freq, idx) {
+        var osc = _actx.createOscillator();
+        var gain = _actx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.14);
+        gain.gain.setValueAtTime(0, now + idx * 0.14);
+        gain.gain.linearRampToValueAtTime(0.22, now + idx * 0.14 + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.14 + 0.6);
+        osc.connect(gain);
+        gain.connect(_masterGain || _actx.destination);
+        osc.start(now + idx * 0.14);
+        osc.stop(now + idx * 0.14 + 0.75);
+      });
+    }
+  } catch (e) { }
+}
+
+// ── Show results ──────────────────────────────────────────────
+var _lastRaceResults = null;
+function omShowResults(data) {
+  clearInterval(OM.raceTimer);
+  clearInterval(OM.progressInterval);
+  OM.omDone = true;
+  _lastRaceResults = data;
+
+  var alertEl = document.getElementById('om-grace-alert');
+  if (alertEl) alertEl.style.display = 'none';
+
+  omShowScreen('results');
+  var players = data.players || [];
+  var winner = data.winner || players[0];
+  var amIWinner = winner && winner.id === OM.myId;
+  var isAr = S.lang === 'ar';
+
+  // Champion banner & header
+  var champPill = document.getElementById('om-champ-pill');
+  var champNameEl = document.getElementById('om-champ-name');
+  var champMsg = document.getElementById('om-champ-msg');
+
+  if (winner) {
+    var winnerIsMe = winner.id === OM.myId;
+    if (champPill) {
+      champPill.innerHTML = winnerIsMe ?
+        (TM_ICONS.crown + ' ' + (isAr ? 'أنت البطل الفائز • VICTORY!' : 'YOU WON • VICTORY!')) :
+        (TM_ICONS.crown + ' ' + (isAr ? 'بطل السباق الفائز • CHAMPION' : 'RACE CHAMPION'));
+    }
+    if (champNameEl) {
+      champNameEl.textContent = winner.name + (winnerIsMe ? (isAr ? ' (أنت)' : ' (You)') : '');
+    }
+    if (champMsg) {
+      champMsg.className = 'om-champ-submsg ' + (winnerIsMe ? 'win' : 'lose');
+      champMsg.innerHTML = winnerIsMe ?
+        (TM_ICONS.sparkle + ' ' + (isAr ? 'مبروك الفوز الساحق يا بطل! أداء استثنائي وتفوق في سرعة الطباعة!' : 'Outstanding victory! Exceptional typing speed and accuracy!')) :
+        (TM_ICONS.swords + ' ' + (isAr ? ('منافسة بطولية نارية! فاز ' + winner.name + ' بالمركز الأول، حظاً أوفر في جولة الانتقام!') : ('Epic match! ' + winner.name + ' took 1st place! Challenge them to a rematch!')));
+    }
+  }
+
+  // Differential bar
+  var diffBar = document.getElementById('om-diff-bar');
+  var diffText = document.getElementById('om-diff-text');
+  var diffIco = document.getElementById('om-diff-ico');
+  if (players.length >= 2) {
+    var p1 = players[0];
+    var p2 = players[1];
+    var diffWpm = Math.abs((p1.wpm || 0) - (p2.wpm || 0));
+    if (diffBar && diffText) {
+      diffBar.style.display = 'flex';
+      if (diffIco) diffIco.innerHTML = TM_ICONS.bolt;
+      diffText.innerHTML = isAr ?
+        ('فارق السرعة الصافية بين المتنافسين: <span class="om-diff-badge">+' + diffWpm + ' WPM</span> لصالح ' + p1.name) :
+        ('Net Speed Differential: <span class="om-diff-badge">+' + diffWpm + ' WPM</span> for ' + p1.name);
+    }
+  } else if (diffBar) {
+    diffBar.style.display = 'none';
+  }
+
+  // Ensure trophy hero icon is loaded
+  var heroTrophy = document.getElementById('om-trophy-hero');
+  if (heroTrophy) heroTrophy.innerHTML = TM_ICONS.trophy;
+
+  // Build esports cards
+  var podEl = document.getElementById('om-podium');
+  podEl.innerHTML = '';
+  players.forEach(function (p, i) {
+    var isWinner = winner && p.id === winner.id;
+    var isMe = p.id === OM.myId;
+    var isLowAcc = (p.acc || 0) < 60;
+    var rankLabel = isWinner ?
+      (TM_ICONS.medalGold + ' ' + (isAr ? 'المركز الأول' : '1st Place')) :
+      (TM_ICONS.medalSilver + ' ' + (isAr ? 'المركز الثاني' : '2nd Place'));
+    var timeTxt = p.finTime ? (p.finTime + (isAr ? ' ثانية' : 's')) : (isAr ? 'انتهاء الوقت' : 'Time up');
+
+    var card = document.createElement('div');
+    card.className = 'om-podium-card ' + (isWinner ? 'winner' : 'loser');
+    card.innerHTML =
+      '<div class="om-pod-header">' +
+      '<div class="om-pod-medal-badge">' + (isWinner ? TM_ICONS.crown : TM_ICONS.medalSilver) + '</div>' +
+      '<div class="om-pod-rank-lbl">' + rankLabel + '</div>' +
+      '</div>' +
+      '<div class="om-pod-avatar">' + (isWinner ? TM_ICONS.trophy : TM_ICONS.bolt) + '</div>' +
+      '<div class="om-pod-name">' +
+      p.name + (isMe ? '<span class="you-badge">' + (isAr ? 'أنت' : 'You') + '</span>' : '') +
+      '</div>' +
+      '<div class="om-pod-big-wpm">' + (p.wpm || 0) + '</div>' +
+      '<div class="om-pod-wpm-sub">' + (isAr ? 'السرعة الصافية (Net WPM)' : 'Net WPM') + '</div>' +
+      '<div class="om-pod-stats-grid">' +
+      '<div class="om-pod-s-item">' +
+      '<div class="om-pod-s-val">' + (p.acc || 0) + '%</div>' +
+      '<div class="om-pod-s-lbl">' + (isAr ? 'الدقة' : 'Accuracy') + '</div>' +
+      (isLowAcc ? ('<div style="font-size:10px;color:var(--err);font-weight:700;margin-top:2px;display:flex;align-items:center;justify-content:center;gap:3px">' + TM_ICONS.warning + ' ' + (isAr ? 'دقة منخفضة' : 'Low Accuracy') + '</div>') : '') +
+      '</div>' +
+      '<div class="om-pod-s-item">' +
+      '<div class="om-pod-s-val">' + (p.progress || 0) + '%</div>' +
+      '<div class="om-pod-s-lbl">' + (isAr ? 'الإنجاز' : 'Progress') + '</div>' +
+      '</div>' +
+      '<div class="om-pod-s-item" style="grid-column:span 2;margin-top:2px">' +
+      '<div class="om-pod-s-val" style="color:var(--sub)">' + timeTxt + '</div>' +
+      '<div class="om-pod-s-lbl">' + (isAr ? 'الوقت المستغرق' : 'Elapsed Time') + '</div>' +
+      '</div>' +
+      '</div>';
+    podEl.appendChild(card);
+  });
+
+  // Rematch button label based on host/guest
+  var againBtn = document.getElementById('om-again-btn');
+  var againLbl = document.getElementById('om-again-lbl');
+  var againIco = document.getElementById('om-again-ico');
+  if (againBtn && againLbl) {
+    againBtn.style.display = 'flex';
+    if (againIco) againIco.innerHTML = OM.isHost ? TM_ICONS.refresh : TM_ICONS.swords;
+    againLbl.textContent = OM.isHost ?
+      (isAr ? 'سباق مجدداً (إعادة البدء)' : 'Rematch (Start Lobby)') :
+      (isAr ? 'طلب جولة ثانية (انتقام)' : 'Request Rematch');
+  }
+
+  // Trigger celebration effects
+  launchVictoryConfetti();
+  playVictoryFanfare(amIWinner);
+}
+
+// ── Rematch (Play Again) ──────────────────────────────────────
+function omPlayAgain() {
+  if (!OM.socket || !OM.roomCode) return;
+  OM.socket.emit('play_again', { code: OM.roomCode });
+}
+
+// ── Share results summary ─────────────────────────────────────
+function omShareResults() {
+  if (!_lastRaceResults || !_lastRaceResults.players) return;
+  var isAr = S.lang === 'ar';
+  var winner = _lastRaceResults.winner;
+  var myData = null;
+  _lastRaceResults.players.forEach(function (p) { if (p.id === OM.myId) myData = p; });
+  var me = myData || _lastRaceResults.players[0];
+
+  var text = isAr ?
+    ('نتيجة سباق Barqtype:\n' +
+      'الفائز: ' + (winner ? winner.name : '—') + ' (' + (winner ? winner.wpm : 0) + ' WPM)\n' +
+      'سرعتي: ' + (me ? me.wpm : 0) + ' WPM | الدقة: ' + (me ? me.acc : 100) + '%\n' +
+      'تحداني الآن في Barqtype! ⚡') :
+    ('Barqtype Race Result:\n' +
+      'Winner: ' + (winner ? winner.name : '—') + ' (' + (winner ? winner.wpm : 0) + ' WPM)\n' +
+      'My Speed: ' + (me ? me.wpm : 0) + ' WPM | Accuracy: ' + (me ? me.acc : 100) + '%\n' +
+      'Challenge me on Barqtype! ⚡');
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function () {
+      omShowToast(isAr ? 'تم نسخ ملخص النتيجة للحافظة!' : 'Results copied to clipboard!');
+    });
+  }
+}
+
+// ── Go back to setup ──────────────────────────────────────────
+function omGoSetup() {
+  if (OM.socket && OM.roomCode) {
+    OM.socket.emit('leave_room', { code: OM.roomCode });
+    OM.roomCode = null;
+    OM.isHost = false;
+  }
+  omShowScreen('setup');
+}
+
+// ── Toast helper ──────────────────────────────────────────────
+function omShowToast(msg, isErr) {
+  var t = document.createElement('div');
+  t.className = 'toast2';
+  t.style.borderColor = isErr ? 'var(--err)' : 'var(--accent)';
+  t.textContent = msg;
+  document.getElementById('toasts').appendChild(t);
+  setTimeout(function () {
+    t.style.opacity = '0';
+    t.style.transition = 'opacity .4s';
+    setTimeout(function () { t.remove(); }, 400);
+  }, 4000);
+}
+
+// Note: Online race UI elements and vector icons are localized natively within updateUILanguage()
+// ══════════════════════════════════════════════════════════════
+// END ONLINE RACE MODULE
+// ══════════════════════════════════════════════════════════════
+window.addEventListener('load', function () {
+  var h = window.location.hash;
+  if (h === '#stats') showTab('stats');
+  else if (h === '#race') showTab('race');
+  else if (h === '#online') {
+    showTab('race');
+    setTimeout(function () { if (window.openOnlineRace) openOnlineRace(); }, 200);
+  }
+});

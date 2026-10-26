@@ -445,20 +445,20 @@ var KB_ROWS = [
 ];
 
 var QWERTY_TO_AR = {
-  "`":"ذ", "~":"ّ", "1":"1", "!":"!", "2":"2", "@":"@", "3":"3", "#":"#",
-  "4":"4", "$":"$", "5":"5", "%":"%", "6":"6", "^":"^", "7":"7", "&":"&",
-  "8":"8", "*":"*", "9":"9", "(":"(", "0":"0", ")":")", "-":"-", "_":"_",
-  "=":"=", "+":"+",
-  "q":"ض", "Q":"َ", "w":"ص", "W":"ً", "e":"ث", "E":"ُ", "r":"ق", "R":"ٌ",
-  "t":"ف", "T":"لإ", "y":"غ", "Y":"إ", "u":"ع", "U":"‘", "i":"ه", "I":"÷",
-  "o":"خ", "O":"×", "p":"ح", "P":"؛", "[":"ج", "{":"<", "]":"د", "}":">",
-  "\\":"\\", "|":"|",
-  "a":"ش", "A":"ِ", "s":"س", "S":"ٍ", "d":"ي", "D":"]", "f":"ب", "F":"[",
-  "g":"ل", "G":"لأ", "h":"ا", "H":"أ", "j":"ت", "J":"ـ", "k":"ن", "K":"،",
-  "l":"م", "L":"/", ";":"ك", ":":":", "'":"ط", "\"": "\"",
-  "z":"ئ", "Z":"~", "x":"ء", "X":"ْ", "c":"ؤ", "C":"}", "v":"ر", "V":"{",
-  "b":"لا", "B":"لآ", "n":"ى", "N":"آ", "m":"ة", "M":"’", ",":"و", "<":",",
-  ".":"ز", ">":".", "/":"ظ", "?":"؟", " ":" "
+  "`": "ذ", "~": "ّ", "1": "1", "!": "!", "2": "2", "@": "@", "3": "3", "#": "#",
+  "4": "4", "$": "$", "5": "5", "%": "%", "6": "6", "^": "^", "7": "7", "&": "&",
+  "8": "8", "*": "*", "9": "9", "(": "(", "0": "0", ")": ")", "-": "-", "_": "_",
+  "=": "=", "+": "+",
+  "q": "ض", "Q": "َ", "w": "ص", "W": "ً", "e": "ث", "E": "ُ", "r": "ق", "R": "ٌ",
+  "t": "ف", "T": "لإ", "y": "غ", "Y": "إ", "u": "ع", "U": "‘", "i": "ه", "I": "÷",
+  "o": "خ", "O": "×", "p": "ح", "P": "؛", "[": "ج", "{": "<", "]": "د", "}": ">",
+  "\\": "\\", "|": "|",
+  "a": "ش", "A": "ِ", "s": "س", "S": "ٍ", "d": "ي", "D": "]", "f": "ب", "F": "[",
+  "g": "ل", "G": "لأ", "h": "ا", "H": "أ", "j": "ت", "J": "ـ", "k": "ن", "K": "،",
+  "l": "م", "L": "/", ";": "ك", ":": ":", "'": "ط", "\"": "\"",
+  "z": "ئ", "Z": "~", "x": "ء", "X": "ْ", "c": "ؤ", "C": "}", "v": "ر", "V": "{",
+  "b": "لا", "B": "لآ", "n": "ى", "N": "آ", "m": "ة", "M": "’", ",": "و", "<": ",",
+  ".": "ز", ">": ".", "/": "ظ", "?": "؟", " ": " "
 };
 
 function normalizeArabic(c) {
@@ -574,7 +574,7 @@ function initAudio() {
     _spaceSound = _synthSpaceSound(_actx);
     _backspaceSound = _synthRGSound(_actx, 2, false, true);
     _errSound = _synthErrSound(_actx);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 function _synthRGSound(actx, variant, isSpace, isBackspace) {
@@ -605,7 +605,7 @@ function _synthRGSound(actx, variant, isSpace, isBackspace) {
       a1: (-2 * Math.cos(w)) / a0,
       a2: (1 - alpha) / a0,
       x1: 0, x2: 0, y1: 0, y2: 0,
-      tick: function(x) {
+      tick: function (x) {
         var y = this.b0 * (x - this.x2) - this.a1 * this.y1 - this.a2 * this.y2;
         this.x2 = this.x1;
         this.x1 = x;
@@ -713,7 +713,7 @@ function playKeySound(isSpace, isBackspace) {
     src.connect(gain);
     gain.connect(_actx.destination);
     src.start(0);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 function playErrSound() {
@@ -727,7 +727,7 @@ function playErrSound() {
     src.connect(gain);
     gain.connect(_actx.destination);
     src.start(0);
-  } catch (e) {}
+  } catch (e) { }
 }
 
 function toggleSound() {
@@ -811,8 +811,8 @@ function setLanguage(lang) {
   var footerEl = document.getElementById("learn-footer");
   if (footerEl) {
     footerEl.innerHTML = isAr
-      ? "Barqtype Learn &bull; تم الإنشاء والتطوير بواسطة المبرمج انس  Asem Alselme"
-      : "Barqtype Learn &bull; Created &amp; Developed by Eng. Asem Alselme";
+      ? "Barqtype Learn &bull; تم الإنشاء والتطوير بواسطة المبرمج   الفلوس"
+      : "Barqtype Learn &bull; Created &amp; Developed by Eng. الفلوس";
   }
 
   buildKeyboard();
@@ -872,7 +872,7 @@ function renderStagesGrid() {
 
     var card = document.createElement("div");
     card.className = "stage-card" + (isCompleted ? " completed" : "");
-    card.onclick = (function(sId){ return function(){ showStageLessonsView(sId); }; })(stage.id);
+    card.onclick = (function (sId) { return function () { showStageLessonsView(sId); }; })(stage.id);
 
     var statusHtml = "";
     if (isCompleted) {
@@ -885,16 +885,16 @@ function renderStagesGrid() {
 
     card.innerHTML =
       '<div class="stage-card-header">' +
-        '<div class="stage-badge-num">' + stage.num + '</div>' +
-        statusHtml +
+      '<div class="stage-badge-num">' + stage.num + '</div>' +
+      statusHtml +
       '</div>' +
       '<div class="stage-card-body">' +
-        '<h3>' + stage.title + '</h3>' +
-        '<p>' + stage.desc + '</p>' +
+      '<h3>' + stage.title + '</h3>' +
+      '<p>' + stage.desc + '</p>' +
       '</div>' +
       '<div class="stage-card-footer">' +
-        '<span class="stage-lessons-count">📚 3 ' + (CURRENT_LANG === "ar" ? "دروس منهجية" : "Lessons") + '</span>' +
-        '<button class="stage-action-btn">' + (isStarted ? (CURRENT_LANG === "ar" ? "متابعة" : "Continue") : (CURRENT_LANG === "ar" ? "بدء المرحلة" : "Start Stage")) + '</button>' +
+      '<span class="stage-lessons-count">📚 3 ' + (CURRENT_LANG === "ar" ? "دروس منهجية" : "Lessons") + '</span>' +
+      '<button class="stage-action-btn">' + (isStarted ? (CURRENT_LANG === "ar" ? "متابعة" : "Continue") : (CURRENT_LANG === "ar" ? "بدء المرحلة" : "Start Stage")) + '</button>' +
       '</div>';
 
     container.appendChild(card);
@@ -932,7 +932,7 @@ function renderStageLessons(stageId) {
 
     var row = document.createElement("div");
     row.className = "lesson-row-card" + (isDone ? " done" : "");
-    row.onclick = (function(les){ return function(){ showActiveLessonView(les); }; })(lesson);
+    row.onclick = (function (les) { return function () { showActiveLessonView(les); }; })(lesson);
 
     var keysChips = "";
     for (var m = 0; m < Math.min(lesson.keys.length, 6); m++) {
@@ -941,20 +941,20 @@ function renderStageLessons(stageId) {
 
     row.innerHTML =
       '<div class="lesson-row-main">' +
-        '<div class="lesson-num-badge">' + (k + 1) + '</div>' +
-        '<div class="lesson-row-texts">' +
-          '<h4>' + lesson.title + '</h4>' +
-          '<p>' + lesson.desc + '</p>' +
-          '<div class="lesson-keys-preview">' + keysChips + '</div>' +
-        '</div>' +
+      '<div class="lesson-num-badge">' + (k + 1) + '</div>' +
+      '<div class="lesson-row-texts">' +
+      '<h4>' + lesson.title + '</h4>' +
+      '<p>' + lesson.desc + '</p>' +
+      '<div class="lesson-keys-preview">' + keysChips + '</div>' +
+      '</div>' +
       '</div>' +
       '<div class="lesson-row-stats">' +
-        (isDone ? (
-          '<div class="stat-pill"><span class="val">' + bestWpm + '</span><span class="lbl">WPM</span></div>' +
-          '<div class="stat-pill"><span class="val">' + bestAcc + '%</span><span class="lbl">' + (CURRENT_LANG === "ar" ? "دقة" : "Acc") + '</span></div>' +
-          '<div class="stars-display">' + starsStr + '</div>'
-        ) : '') +
-        '<button class="btn-start-lesson">' + (isDone ? (CURRENT_LANG === "ar" ? "إعادة" : "Practice") : (CURRENT_LANG === "ar" ? "بدء الدرس" : "Start")) + '</button>' +
+      (isDone ? (
+        '<div class="stat-pill"><span class="val">' + bestWpm + '</span><span class="lbl">WPM</span></div>' +
+        '<div class="stat-pill"><span class="val">' + bestAcc + '%</span><span class="lbl">' + (CURRENT_LANG === "ar" ? "دقة" : "Acc") + '</span></div>' +
+        '<div class="stars-display">' + starsStr + '</div>'
+      ) : '') +
+      '<button class="btn-start-lesson">' + (isDone ? (CURRENT_LANG === "ar" ? "إعادة" : "Practice") : (CURRENT_LANG === "ar" ? "بدء الدرس" : "Start")) + '</button>' +
       '</div>';
 
     list.appendChild(row);
@@ -1107,10 +1107,10 @@ function animateHandTap(ok) {
   void svg.offsetWidth;
   if (ok) {
     svg.classList.add("hf-pressed");
-    setTimeout(function(){ if (svg) svg.classList.remove("hf-pressed"); }, 120);
+    setTimeout(function () { if (svg) svg.classList.remove("hf-pressed"); }, 120);
   } else {
     svg.classList.add("hf-error");
-    setTimeout(function(){ if (svg) svg.classList.remove("hf-error"); }, 200);
+    setTimeout(function () { if (svg) svg.classList.remove("hf-error"); }, 200);
   }
 }
 
@@ -1250,7 +1250,7 @@ function handleLessonCharTyped(typedChar, isBackspace) {
 }
 
 // 1. DESKTOP PHYSICAL KEYBOARD LISTENER
-window.addEventListener("keydown", function(e) {
+window.addEventListener("keydown", function (e) {
   if (!LESSON_STATE.active) return;
   if (e.ctrlKey || e.metaKey || e.altKey) return;
 
@@ -1299,15 +1299,15 @@ window.addEventListener("keydown", function(e) {
 
   function focusInp() {
     inp.focus({ preventScroll: true });
-    setTimeout(function() { inp.focus({ preventScroll: true }); }, 40);
+    setTimeout(function () { inp.focus({ preventScroll: true }); }, 40);
   }
 
   box.addEventListener("click", focusInp);
   box.addEventListener("touchend", focusInp);
 
   var isComposing = false;
-  inp.addEventListener("compositionstart", function() { isComposing = true; });
-  inp.addEventListener("compositionend", function(e) {
+  inp.addEventListener("compositionstart", function () { isComposing = true; });
+  inp.addEventListener("compositionend", function (e) {
     isComposing = false;
     var data = e.data || "";
     for (var i = 0; i < data.length; i++) {
@@ -1316,7 +1316,7 @@ window.addEventListener("keydown", function(e) {
     inp.value = "";
   });
 
-  inp.addEventListener("beforeinput", function(e) {
+  inp.addEventListener("beforeinput", function (e) {
     if (e.inputType === "deleteContentBackward" || e.inputType === "deleteContentForward") {
       e.preventDefault();
       handleLessonCharTyped("", true);
@@ -1324,7 +1324,7 @@ window.addEventListener("keydown", function(e) {
     }
   });
 
-  inp.addEventListener("input", function(e) {
+  inp.addEventListener("input", function (e) {
     if (isComposing) return;
     if (e.inputType === "deleteContentBackward") {
       inp.value = "";
@@ -1421,7 +1421,7 @@ function goToNextLesson() {
 // ==============================================================
 // 9. INITIALIZATION
 // ==============================================================
-window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("DOMContentLoaded", function () {
   loadProgress();
   buildKeyboard();
   setLanguage("ar");
