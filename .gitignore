@@ -26,3 +26,6 @@ telegram_config.json
 .env
 .env.local
 *.secret.json
+*.db
+*.db-wal
+*.db-shm

@@ -117,7 +117,7 @@
 
   // ── LANGUAGE & DIFFICULTY ──
   function setDictLang(l) {
-    lang = l;
+    lang = l; try { localStorage.setItem("barqtype_lang", l); const ts2 = JSON.parse(localStorage.getItem("ts2") || "{}"); ts2.lang = l; localStorage.setItem("ts2", JSON.stringify(ts2)); } catch(e){}
     document.getElementById('dict-lang-en').classList.toggle('on', l === 'en');
     document.getElementById('dict-lang-ar').classList.toggle('on', l === 'ar');
     inputField.dir = l === 'ar' ? 'rtl' : 'ltr';
@@ -139,7 +139,7 @@
 
   function updateLabels() {
     const isAr = lang === 'ar';
-    speakerHint.textContent = isAr
+    const nTest = $('txt-dict-test'); if (nTest) nTest.textContent = isAr ? 'تدريب' : 'Practice'; const nStats = $('txt-dict-stats'); if (nStats) nStats.textContent = isAr ? 'إحصاءات' : 'Stats'; const nLearn = $('txt-dict-learn'); if (nLearn) nLearn.textContent = isAr ? 'تعلم' : 'Learn'; const nDict = $('txt-dict-dictation'); if (nDict) nDict.textContent = isAr ? 'إملاء' : 'Dictation'; const nRace = $('txt-dict-race'); if (nRace) nRace.textContent = isAr ? 'سباق' : 'Race'; speakerHint.textContent = isAr
       ? 'Enter = تحقق  ·  Space = أعد السماع  ·  Tab = تخطي'
       : 'Enter = Check  ·  Space = Replay  ·  Tab = Skip';
   }
@@ -239,23 +239,24 @@
   const audioCache = new Map();
 
   function getAudioUrls(word, targetLang) {
-    const q = encodeURIComponent(word.trim());
+    const clean = word.trim();
+    const q = encodeURIComponent(clean);
+    const apiServer = (typeof window !== 'undefined' && window.BarqAPI && window.BarqAPI.getServerUrl)
+      ? window.BarqAPI.getServerUrl()
+      : ((typeof window !== 'undefined' && window.location && window.location.origin && window.location.origin !== 'null' && !window.location.protocol.startsWith('file')) ? window.location.origin : 'http://localhost:3001');
+    const localUrl = `${apiServer}/audio/dictation/${targetLang}/${difficulty}/${q}.mp3`;
+
     if (targetLang === 'ar') {
       return [
-        // 1) StreamElements Amazon Polly Zeina (high-fidelity Arabic female voice)
+        localUrl, // 1) المصدر المحلي فائق السرعة وبدون إنترنت خارجي
         `https://api.streamelements.com/kappa/v2/speech?voice=Zeina&text=${q}`,
-        // 2) StreamElements Amazon Polly Tariq (high-fidelity Arabic male voice)
-        `https://api.streamelements.com/kappa/v2/speech?voice=Tariq&text=${q}`,
-        // 3) Google Translate TTS
         `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ar&q=${q}`
       ];
     } else {
       return [
-        // 1) Youdao Studio Native Dictionary recording (instant <100ms CDN, crystal clear human pronunciation)
+        localUrl, // 1) المصدر المحلي فائق السرعة وبدون إنترنت خارجي
         `https://dict.youdao.com/dictvoice?audio=${q}&type=2`,
-        // 2) StreamElements Amazon Polly Joanna (studio-quality American voice)
         `https://api.streamelements.com/kappa/v2/speech?voice=Joanna&text=${q}`,
-        // 3) Google Translate TTS
         `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=${q}`
       ];
     }
@@ -421,7 +422,7 @@
   function showArabicVoiceNotice() {
     const notice = document.getElementById('dict-audio-notice');
     if (!notice) return;
-    notice.innerHTML = `<span>💡 لتشغيل الصوت العربي في وضع أوفلاين: يمكنك تثبيت حزمة الصوت العربي من إعدادات ويندوز (Settings → Speech)، أو الاتصال بالإنترنت للاستماع للصوت عالي الدقة.</span>`;
+    notice.innerHTML = `<span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg> لتشغيل الصوت العربي في وضع أوفلاين: يمكنك تثبيت حزمة الصوت العربي من إعدادات ويندوز (Settings → Speech)، أو الاتصال بالإنترنت للاستماع للصوت عالي الدقة.</span>`;
     notice.classList.remove('hidden');
     setTimeout(() => {
       notice.classList.add('hidden');
@@ -658,12 +659,33 @@
     const isNewBest = score > prevBest;
     if (isNewBest) localStorage.setItem(bestKey, score);
 
-    // Title
-    let emoji, title;
-    if (pct >= 90) { emoji = '🏆'; title = lang === 'ar' ? 'ممتاز!' : 'Excellent!'; }
-    else if (pct >= 70) { emoji = '🌟'; title = lang === 'ar' ? 'أداء رائع!' : 'Great job!'; }
-    else if (pct >= 50) { emoji = '💪'; title = lang === 'ar' ? 'جيد، واصل!' : 'Good, keep going!'; }
-    else { emoji = '📝'; title = lang === 'ar' ? 'حاول مرة أخرى' : 'Try again'; }
+    // Sync result with Barq API if user is authenticated
+    if (window.BarqAPI && window.BarqAPI.saveDictationResult) {
+      const wrongList = results.filter(r => !r.correct).map(r => ({ word: r.word, userAnswer: r.userAnswer }));
+      window.BarqAPI.saveDictationResult({
+        lang: lang,
+        difficulty: difficulty,
+        score: score,
+        accuracy: pct,
+        wrong_words: wrongList
+      });
+    }
+
+    // Title & Vector Icon
+    let iconSvg, title;
+    if (pct >= 90) {
+      iconSvg = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1 .45-1 1v1h12v-1c0-.55-.45-1-1-1h-2c-.55 0-1-.45-1-1v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>';
+      title = lang === 'ar' ? 'ممتاز!' : 'Excellent!';
+    } else if (pct >= 70) {
+      iconSvg = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+      title = lang === 'ar' ? 'أداء رائع!' : 'Great job!';
+    } else if (pct >= 50) {
+      iconSvg = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+      title = lang === 'ar' ? 'جيد، واصل!' : 'Good, keep going!';
+    } else {
+      iconSvg = '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>';
+      title = lang === 'ar' ? 'حاول مرة أخرى' : 'Try again';
+    }
 
     const subtitle = lang === 'ar'
       ? `أجبت على ${correctCount} من ${roundSize} كلمات بشكل صحيح`
@@ -691,7 +713,7 @@
 
     const bestVal = Math.max(score, prevBest);
     const newBestBadge = isNewBest
-      ? `<span class="best-score-badge">${lang === 'ar' ? '🎉 رقم قياسي جديد!' : '🎉 New record!'}</span>`
+      ? `<span class="best-score-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-inline-end:3px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> ${lang === 'ar' ? 'رقم قياسي جديد!' : 'New record!'}</span>`
       : '';
 
     const retryLabel = lang === 'ar' ? 'إعادة المحاولة' : 'Try Again';
@@ -702,7 +724,7 @@
 
     resultsArea.innerHTML = `
       <div class="result-header">
-        <div class="result-emoji">${emoji}</div>
+        <div class="result-emoji">${iconSvg}</div>
         <div class="result-title">${title}</div>
         <div class="result-subtitle">${subtitle}</div>
         ${newBestBadge}
@@ -802,7 +824,7 @@
 
   // ── INIT ──
   function init() {
-    setDictLang('ar');
+    let savedLang = 'ar'; try { savedLang = localStorage.getItem('barqtype_lang') || JSON.parse(localStorage.getItem('ts2') || '{}').lang || 'ar'; } catch(e){} setDictLang(savedLang);
     setDictDifficulty('easy');
     updateLabels();
     startNewRound();

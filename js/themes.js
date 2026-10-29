@@ -1,6 +1,9 @@
 // ==============================================================
 // BARQTYPE THEMES MANAGER — DIRECT INSTANT DUAL-THEME ENGINE
 // (STRICTLY VECTOR SVG ICONS — ZERO CASUAL EMOJIS)
+// Modes:
+// 1. "gold"  : Barq Gold (الهوية الأصلية - Dark Petrol & Gold)
+// 2. "light" : Light Mode (الوضع الفاتح - Clean Daylight Minimal)
 // ==============================================================
 
 (function () {
@@ -8,37 +11,39 @@
   var ICONS = {
     palette: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 .93 0 1.69-.75 1.69-1.69 0-.44-.18-.84-.44-1.13-.29-.29-.44-.65-.44-1.12 0-.93.76-1.69 1.69-1.69h2c3.04 0 5.5-2.46 5.5-5.5C21.5 6.48 17.02 2 12 2z"/><circle cx="7.5" cy="11.5" r="1.5" fill="currentColor"/><circle cx="9.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="14.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="11.5" r="1.5" fill="currentColor"/></svg>',
     bolt: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" fill-opacity="0.3"></polygon></svg>',
-    contrast: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a10 10 0 0 1 0 20z" fill="currentColor"></path></svg>'
+    sun: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle"><circle cx="12" cy="12" r="4" fill="currentColor" fill-opacity="0.3"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>'
   };
 
   var BARQ_THEMES = [
     {
       id: "gold",
-      nameAr: "برق الذهبي",
-      nameEn: "Barq Gold",
+      nameAr: "برق الذهبي (الأصلي)",
+      nameEn: "Barq Gold (Original)",
       accent: "#e8af47",
       bg: "#17242d",
       iconSvg: ICONS.bolt
     },
     {
-      id: "carbon",
-      nameAr: "كاربون مونوكروم",
-      nameEn: "Carbon Minimal",
-      accent: "#f8fafc",
-      bg: "#111317",
-      iconSvg: ICONS.contrast
+      id: "light",
+      nameAr: "الوضع الفاتح",
+      nameEn: "Light Mode",
+      accent: "#e8af47",
+      bg: "#f8fafc",
+      iconSvg: ICONS.sun
     }
   ];
 
-  // 1. Initial Load from LocalStorage
+  // 1. Initial Load from LocalStorage (normalize 'carbon' to 'light')
   var currentTheme = localStorage.getItem("barq_theme") || "gold";
-  if (currentTheme !== "gold" && currentTheme !== "carbon") currentTheme = "gold";
+  if (currentTheme === "carbon") currentTheme = "light";
+  if (currentTheme !== "gold" && currentTheme !== "light") currentTheme = "gold";
 
   // Apply immediately before DOM render to prevent flash of wrong theme
   document.documentElement.setAttribute("data-theme", currentTheme);
 
   function applyTheme(themeId) {
-    if (themeId !== "gold" && themeId !== "carbon") themeId = "gold";
+    if (themeId === "carbon") themeId = "light";
+    if (themeId !== "gold" && themeId !== "light") themeId = "gold";
 
     currentTheme = themeId;
     document.documentElement.setAttribute("data-theme", themeId);
@@ -54,9 +59,9 @@
     }
   }
 
-  // Fast direct toggle: switches immediately between Gold and Carbon without any modal
+  // Fast direct toggle: switches immediately between Gold (Original) and Light Mode
   function toggleBarqTheme() {
-    var nextTheme = (currentTheme === "gold") ? "carbon" : "gold";
+    var nextTheme = (currentTheme === "gold") ? "light" : "gold";
     applyTheme(nextTheme);
     showThemeFlashBadge(nextTheme);
   }
@@ -68,11 +73,11 @@
 
     if (btn) {
       if (currentTheme === "gold") {
-        btn.title = isAr ? "المظهر: برق الذهبي (انقر للتبديل السريع إلى كاربون مونوكروم)" : "Theme: Barq Gold (Click to switch to Carbon Minimal)";
+        btn.title = isAr ? "المظهر: برق الذهبي الأصلي (انقر للتبديل إلى الوضع الفاتح Light)" : "Theme: Barq Gold Original (Click to switch to Light Mode)";
         btn.setAttribute("aria-label", isAr ? "برق الذهبي" : "Barq Gold");
       } else {
-        btn.title = isAr ? "المظهر: كاربون مونوكروم (انقر للتبديل السريع إلى برق الذهبي)" : "Theme: Carbon Minimal (Click to switch to Barq Gold)";
-        btn.setAttribute("aria-label", isAr ? "كاربون مونوكروم" : "Carbon Minimal");
+        btn.title = isAr ? "المظهر: الوضع الفاتح (انقر للتبديل إلى برق الذهبي الأصلي)" : "Theme: Light Mode (Click to switch to Barq Gold Original)";
+        btn.setAttribute("aria-label", isAr ? "الوضع الفاتح" : "Light Mode");
       }
     }
 
@@ -81,17 +86,17 @@
         dot.style.background = "#e8af47";
         dot.style.boxShadow = "0 0 8px #e8af47";
       } else {
-        dot.style.background = "#f8fafc";
-        dot.style.boxShadow = "0 0 8px rgba(255, 255, 255, 0.85)";
+        dot.style.background = "#e8af47";
+        dot.style.boxShadow = "0 0 8px rgba(232, 175, 71, 0.75)";
       }
     }
   }
 
-  // Brief non-blocking toast badge (fades in & out in 1s, pointer-events: none, no popup window)
+  // Brief non-blocking toast badge (fades in & out in 1s, pointer-events: none, zero popups)
   var toastTimer = null;
   function showThemeFlashBadge(themeId) {
     var isAr = (document.documentElement.lang === "ar" || document.documentElement.dir === "rtl");
-    var tObj = (themeId === "carbon") ? BARQ_THEMES[1] : BARQ_THEMES[0];
+    var tObj = (themeId === "light") ? BARQ_THEMES[1] : BARQ_THEMES[0];
 
     var badge = document.getElementById("barq-theme-quick-toast");
     if (!badge) {
@@ -136,7 +141,7 @@
   // Global APIs
   window.toggleBarqTheme = toggleBarqTheme;
   window.selectBarqTheme = function (themeId) { applyTheme(themeId); };
-  window.openThemeModal = toggleBarqTheme; // Alias directly to toggle to prevent any popup
+  window.openThemeModal = toggleBarqTheme; // Direct instant toggle without any popup
   window.closeThemeModal = function () {};
   window.applyBarqTheme = applyTheme;
 

@@ -507,9 +507,10 @@ function mapCharToVkId(ch, lang) {
     var arToEn = {
       'ذ': 'tilda', '١': '1', '٢': '2', '٣': '3', '٤': '4', '٥': '5', '٦': '6', '٧': '7', '٨': '8', '٩': '9', '٠': '0',
       'ض': 'q', 'ص': 'w', 'ث': 'e', 'ق': 'r', 'ف': 't', 'غ': 'y', 'ع': 'u', 'ه': 'i', 'هـ': 'i', 'خ': 'o', 'ح': 'p', 'ج': 'left-center-bracket', 'د': 'right-center-bracket',
-      'ش': 'a', 'س': 's', 'ي': 'd', 'ب': 'f', 'ل': 'g', 'ا': 'h', 'أ': 'h', 'إ': 'h', 'آ': 'h', 'ت': 'j', 'ن': 'k', 'م': 'l', 'ك': 'semicolon', 'ط': 'single-quote',
+      'ش': 'a', 'س': 's', 'ي': 'd', 'ب': 'f', 'ل': 'g', 'ا': 'h', 'أ': 'h', 'إ': 'y', 'آ': 'n', 'ت': 'j', 'ن': 'k', 'م': 'l', 'ك': 'semicolon', 'ط': 'single-quote',
       'ئ': 'z', 'ء': 'x', 'ؤ': 'c', 'ر': 'v', 'لا': 'b', 'ى': 'n', 'ة': 'm', 'و': 'comma', 'ز': 'dot', 'ظ': 'slash',
-      '،': 'comma', '؟': 'slash', '.': 'dot'
+      'لإ': 't', 'لأ': 'g', 'لآ': 'b',
+      '،': 'comma', '؛': 'semicolon', '؟': 'slash', '.': 'dot', 'ّ': 'tilda'
     };
     return arToEn[ch] || 'neutral';
   } else {
@@ -545,7 +546,38 @@ function loadProgress() {
   } catch (e) {
     console.warn("Storage load error:", e);
   }
+  syncLearnWithCloud();
 }
+
+function syncLearnWithCloud() {
+  if (typeof window !== 'undefined' && window.BarqAPI && window.BarqAPI.isLoggedIn && window.BarqAPI.isLoggedIn()) {
+    window.BarqAPI.getLearnProgress().then(function (res) {
+      if (res && res.progress && Array.isArray(res.progress)) {
+        res.progress.forEach(function (p) {
+          var l = p.lang || 'ar';
+          if (!USER_PROGRESS[l]) return;
+          USER_PROGRESS[l].completed[p.lesson_id] = true;
+          if (!USER_PROGRESS[l].bestWpm[p.lesson_id] || p.best_wpm > USER_PROGRESS[l].bestWpm[p.lesson_id]) {
+            USER_PROGRESS[l].bestWpm[p.lesson_id] = p.best_wpm;
+          }
+          if (!USER_PROGRESS[l].bestAcc[p.lesson_id] || p.best_acc > USER_PROGRESS[l].bestAcc[p.lesson_id]) {
+            USER_PROGRESS[l].bestAcc[p.lesson_id] = p.best_acc;
+          }
+          if (!USER_PROGRESS[l].stars[p.lesson_id] || p.stars > USER_PROGRESS[l].stars[p.lesson_id]) {
+            USER_PROGRESS[l].stars[p.lesson_id] = p.stars;
+          }
+        });
+        saveProgress();
+        if (typeof renderStagesGrid === 'function' && document.getElementById('view-stages').style.display !== 'none') {
+          renderStagesGrid();
+        }
+      }
+    }).catch(function (e) {
+      console.warn("Cloud learn sync error:", e);
+    });
+  }
+}
+window.syncLearnWithCloud = syncLearnWithCloud;
 
 function saveProgress() {
   try {
@@ -763,7 +795,7 @@ var LESSON_STATE = {
 };
 
 function setLanguage(lang) {
-  CURRENT_LANG = lang;
+  CURRENT_LANG = lang; try { localStorage.setItem("barqtype_lang", lang); var ts2 = JSON.parse(localStorage.getItem("ts2") || "{}"); ts2.lang = lang; localStorage.setItem("ts2", JSON.stringify(ts2)); } catch(e){}
   document.documentElement.lang = lang;
   document.documentElement.dir = (lang === "ar" ? "rtl" : "ltr");
 
@@ -781,7 +813,7 @@ function setLanguage(lang) {
   var navLearn = document.getElementById("txt-nav-learn");
   if (navTest) navTest.textContent = isAr ? "تدريب" : "Practice";
   if (navStats) navStats.textContent = isAr ? "إحصاءات" : "Stats";
-  if (navLearn) navLearn.textContent = isAr ? "تعلم" : "Learn";
+  if (navLearn) navLearn.textContent = isAr ? "تعلم" : "Learn"; var navDictation = document.getElementById("txt-nav-dictation"); if (navDictation) navDictation.textContent = isAr ? "إملاء" : "Dictation"; var navRace = document.getElementById("txt-nav-race"); if (navRace) navRace.textContent = isAr ? "سباق" : "Race";
 
   document.getElementById("hero-title").textContent = isAr ? "مسار التعلم الذكي لطباعة اللمس" : "Smart Bilingual Touch-Typing Curriculum";
   document.getElementById("hero-desc").textContent = isAr
@@ -854,10 +886,29 @@ function renderStagesGrid() {
   var prog = USER_PROGRESS[CURRENT_LANG];
   var totalLessons = stages.length * 3;
   var completedCount = Object.keys(prog.completed).length;
+  var isAr = (CURRENT_LANG === "ar");
 
-  document.getElementById("overall-progress-text").textContent = completedCount + " / " + totalLessons;
+  document.getElementById("overall-progress-text").textContent = isAr ? (completedCount + " من " + totalLessons + " درساً") : (completedCount + " of " + totalLessons + " lessons");
   var pct = Math.round((completedCount / totalLessons) * 100);
   document.getElementById("overall-bar").style.width = pct + "%";
+
+  var currentStageIdx = 0;
+  for (var s = 0; s < stages.length; s++) {
+    var sComp = 0;
+    for (var l = 0; l < stages[s].lessons.length; l++) {
+      if (prog.completed[stages[s].lessons[l].id]) sComp++;
+    }
+    if (sComp < stages[s].lessons.length) {
+      currentStageIdx = s;
+      break;
+    }
+    if (s === stages.length - 1) currentStageIdx = stages.length - 1;
+  }
+
+  var checkSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-inline-end:3px"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+  var lockSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-inline-end:3px"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
+  var playSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-inline-end:3px"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+  var kbSvg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-inline-end:3px"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="6" y1="8" x2="6.01" y2="8"></line><line x1="10" y1="8" x2="10.01" y2="8"></line><line x1="14" y1="8" x2="14.01" y2="8"></line><line x1="18" y1="8" x2="18.01" y2="8"></line><line x1="6" y1="12" x2="6.01" y2="12"></line><line x1="18" y1="12" x2="18.01" y2="12"></line><line x1="10" y1="16" x2="14" y2="16"></line></svg>';
 
   for (var i = 0; i < stages.length; i++) {
     var stage = stages[i];
@@ -867,20 +918,25 @@ function renderStagesGrid() {
     }
 
     var isCompleted = (stageCompleted === stage.lessons.length);
-    var isStarted = (stageCompleted > 0);
+    var isCurrent = (i === currentStageIdx && !isCompleted);
+    var isLocked = (i > currentStageIdx);
     var stagePct = Math.round((stageCompleted / stage.lessons.length) * 100);
 
     var card = document.createElement("div");
-    card.className = "stage-card" + (isCompleted ? " completed" : "");
+    card.className = "stage-card" + (isCompleted ? " completed" : (isCurrent ? " is-current" : (isLocked ? " is-locked" : "")));
     card.onclick = (function (sId) { return function () { showStageLessonsView(sId); }; })(stage.id);
 
     var statusHtml = "";
+    var btnText = "";
     if (isCompleted) {
-      statusHtml = '<span class="stage-status-badge status-completed">✓ ' + (CURRENT_LANG === "ar" ? "مكتمل (100%)" : "Completed (100%)") + '</span>';
-    } else if (isStarted) {
-      statusHtml = '<span class="stage-status-badge status-progress">⏳ ' + stageCompleted + '/3 (' + stagePct + '%)</span>';
+      statusHtml = '<span class="stage-status-badge status-completed">' + checkSvg + (isAr ? "مكتمل (3 من 3)" : "Completed (3/3)") + '</span>';
+      btnText = isAr ? "مراجعة المرحلة" : "Review Stage";
+    } else if (isCurrent) {
+      statusHtml = '<span class="stage-status-badge status-progress">' + playSvg + (stageCompleted > 0 ? (isAr ? (stageCompleted + " من 3 دروس") : (stageCompleted + " of 3 done")) : (isAr ? "المرحلة الحالية" : "Current Stage")) + '</span>';
+      btnText = stageCompleted > 0 ? (isAr ? "متابعة المرحلة" : "Continue") : (isAr ? "بدء المرحلة" : "Start Stage");
     } else {
-      statusHtml = '<span class="stage-status-badge status-locked">🎯 ' + (CURRENT_LANG === "ar" ? "متاح للبدء" : "Ready") + '</span>';
+      statusHtml = '<span class="stage-status-badge status-locked">' + lockSvg + (isAr ? "مرحلة مقفلة" : "Locked") + '</span>';
+      btnText = isAr ? "مقفلة" : "Locked";
     }
 
     card.innerHTML =
@@ -891,10 +947,11 @@ function renderStagesGrid() {
       '<div class="stage-card-body">' +
       '<h3>' + stage.title + '</h3>' +
       '<p>' + stage.desc + '</p>' +
+      '<div class="stage-mini-progress"><div class="stage-mini-bar" style="width:' + stagePct + '%"></div></div>' +
       '</div>' +
       '<div class="stage-card-footer">' +
-      '<span class="stage-lessons-count">📚 3 ' + (CURRENT_LANG === "ar" ? "دروس منهجية" : "Lessons") + '</span>' +
-      '<button class="stage-action-btn">' + (isStarted ? (CURRENT_LANG === "ar" ? "متابعة" : "Continue") : (CURRENT_LANG === "ar" ? "بدء المرحلة" : "Start Stage")) + '</button>' +
+      '<span class="stage-lessons-count">' + kbSvg + (isAr ? (stageCompleted + " من " + stage.lessons.length + " دروس") : (stageCompleted + " of " + stage.lessons.length + " lessons")) + '</span>' +
+      '<button class="stage-action-btn">' + btnText + '</button>' +
       '</div>';
 
     container.appendChild(card);
@@ -910,6 +967,7 @@ function renderStageLessons(stageId) {
   if (!stage) return;
 
   var prog = USER_PROGRESS[CURRENT_LANG];
+  var isAr = (CURRENT_LANG === "ar");
   document.getElementById("stage-banner-title").textContent = stage.title;
   document.getElementById("stage-banner-desc").textContent = stage.desc;
 
@@ -917,7 +975,16 @@ function renderStageLessons(stageId) {
   for (var j = 0; j < stage.lessons.length; j++) {
     if (prog.completed[stage.lessons[j].id]) doneCount++;
   }
-  document.getElementById("stage-lessons-progress-badge").textContent = doneCount + " / 3 " + (CURRENT_LANG === "ar" ? "مكتمل" : "Completed");
+  document.getElementById("stage-lessons-progress-badge").textContent = isAr ? (doneCount + " من 3 مكتمل") : (doneCount + " of 3 done");
+
+  var activeLessonIdx = -1;
+  for (var a = 0; a < stage.lessons.length; a++) {
+    if (!prog.completed[stage.lessons[a].id]) {
+      activeLessonIdx = a;
+      break;
+    }
+  }
+  if (activeLessonIdx === -1) activeLessonIdx = 0;
 
   var list = document.getElementById("lessons-container");
   list.innerHTML = "";
@@ -925,19 +992,25 @@ function renderStageLessons(stageId) {
   for (var k = 0; k < stage.lessons.length; k++) {
     var lesson = stage.lessons[k];
     var isDone = !!prog.completed[lesson.id];
+    var isActive = (k === activeLessonIdx);
     var bestWpm = prog.bestWpm[lesson.id] || 0;
     var bestAcc = prog.bestAcc[lesson.id] || 0;
     var stars = prog.stars[lesson.id] || 0;
     var starsStr = "★".repeat(stars) + "☆".repeat(Math.max(0, 3 - stars));
 
     var row = document.createElement("div");
-    row.className = "lesson-row-card" + (isDone ? " done" : "");
+    row.className = "lesson-row-card" + (isDone ? " done" : (isActive ? " is-active-lesson" : ""));
     row.onclick = (function (les) { return function () { showActiveLessonView(les); }; })(lesson);
 
     var keysChips = "";
     for (var m = 0; m < Math.min(lesson.keys.length, 6); m++) {
-      keysChips += '<span class="key-chip">' + lesson.keys[m] + '</span>';
+      keysChips += '<kbd class="mini-keycap">' + lesson.keys[m] + '</kbd>';
     }
+
+    var btnClass = isActive && !isDone ? "btn-start-lesson is-primary" : "btn-start-lesson is-secondary";
+    var btnLabel = isDone ?
+      (isAr ? "إعادة التمرين" : "Practice Again") :
+      (isActive ? (isAr ? "ابدأ الآن ↵" : "Start Now ↵") : (isAr ? "بدء" : "Start"));
 
     row.innerHTML =
       '<div class="lesson-row-main">' +
@@ -951,10 +1024,10 @@ function renderStageLessons(stageId) {
       '<div class="lesson-row-stats">' +
       (isDone ? (
         '<div class="stat-pill"><span class="val">' + bestWpm + '</span><span class="lbl">WPM</span></div>' +
-        '<div class="stat-pill"><span class="val">' + bestAcc + '%</span><span class="lbl">' + (CURRENT_LANG === "ar" ? "دقة" : "Acc") + '</span></div>' +
+        '<div class="stat-pill"><span class="val">' + bestAcc + '%</span><span class="lbl">' + (isAr ? "دقة" : "Acc") + '</span></div>' +
         '<div class="stars-display">' + starsStr + '</div>'
       ) : '') +
-      '<button class="btn-start-lesson">' + (isDone ? (CURRENT_LANG === "ar" ? "إعادة" : "Practice") : (CURRENT_LANG === "ar" ? "بدء الدرس" : "Start")) + '</button>' +
+      '<button class="' + btnClass + '">' + btnLabel + '</button>' +
       '</div>';
 
     list.appendChild(row);
@@ -1050,11 +1123,16 @@ function highlightTargetKey(targetChar) {
     targetEl.classList.add("key-target");
   }
 
+  var isUpperEn = targetChar && (targetChar >= "A" && targetChar <= "Z");
+  var isShiftSym = targetChar && ('~!@#$%^&*()_+{}|:"<>?'.indexOf(targetChar) >= 0);
+  var isShiftAr = targetChar && ('أإآلألإلآ،؛؟ّ'.indexOf(targetChar) >= 0);
+  var needsShift = !!(isUpperEn || isShiftSym || isShiftAr);
+
   var vkId = mapCharToVkId(targetChar, CURRENT_LANG);
-  setVkHandPose(vkId);
+  setVkHandPose(vkId, needsShift);
 }
 
-function setVkHandPose(vkKey) {
+function setVkHandPose(vkKey, needsShift) {
   var svg = document.getElementById("hand-both");
   if (!svg) return;
 
@@ -1081,13 +1159,27 @@ function setVkHandPose(vkKey) {
   var targetId = "hand-" + vkKey;
 
   if (side === "l") {
-    _showVkGroup(targetId);
-    _showVkGroup("hand-neutral-right");
+    if (!_showVkGroup(targetId)) {
+      _showVkGroup("hand-neutral-left");
+    }
+    if (needsShift) {
+      _showVkGroup("hand-shift-right");
+    } else {
+      _showVkGroup("hand-neutral-right");
+    }
   } else if (side === "r") {
-    _showVkGroup(targetId);
-    _showVkGroup("hand-neutral-left");
+    if (!_showVkGroup(targetId)) {
+      _showVkGroup("hand-neutral-right");
+    }
+    if (needsShift) {
+      _showVkGroup("hand-shift-left");
+    } else {
+      _showVkGroup("hand-neutral-left");
+    }
   } else {
-    _showVkGroup(targetId);
+    if (!_showVkGroup(targetId)) {
+      _showVkGroup("hand-neutral-left");
+    }
     _showVkGroup("hand-neutral-right");
   }
 }
@@ -1097,7 +1189,9 @@ function _showVkGroup(id) {
   if (el) {
     el.classList.remove("st0");
     el.classList.add("show-hand");
+    return true;
   }
+  return false;
 }
 
 function animateHandTap(ok) {
@@ -1361,10 +1455,23 @@ function completeLesson() {
   prog.lastLesson = CURRENT_LESSON.id;
   saveProgress();
 
+  if (window.BarqAPI && window.BarqAPI.syncLearnProgress) {
+    window.BarqAPI.syncLearnProgress([{
+      lang: CURRENT_LANG,
+      lesson_id: CURRENT_LESSON.id,
+      best_wpm: wpm,
+      best_acc: acc,
+      stars: stars
+    }]);
+  }
+
   var isAr = (CURRENT_LANG === "ar");
-  document.getElementById("modal-trophy").textContent = stars === 3 ? "👑" : (stars === 2 ? "🏆" : "⭐");
+  var trophyEl = document.getElementById("modal-trophy");
+  if (trophyEl) {
+    trophyEl.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"></path><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7v2h10v-2h-2c-.55 0-1-.45-1-1v-2.34"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>';
+  }
   document.getElementById("modal-title").textContent = passed
-    ? (isAr ? "تم إكمال الدرس بنجاح! 🎉" : "Lesson Completed! 🎉")
+    ? (isAr ? "تم إكمال الدرس بنجاح!" : "Lesson Completed!")
     : (isAr ? "تمرين جيد، استمر في التقدم!" : "Good Practice, Keep Going!");
   document.getElementById("modal-stars").textContent = "★".repeat(stars) + "☆".repeat(3 - stars);
   document.getElementById("m-wpm").textContent = wpm;
@@ -1424,5 +1531,5 @@ function goToNextLesson() {
 window.addEventListener("DOMContentLoaded", function () {
   loadProgress();
   buildKeyboard();
-  setLanguage("ar");
+  var _initLang = "ar"; try { _initLang = localStorage.getItem("barqtype_lang") || JSON.parse(localStorage.getItem("ts2") || "{}").lang || "ar"; } catch(e){} setLanguage(_initLang);
 });

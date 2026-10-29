@@ -2,7 +2,7 @@
 // 0. VECTOR SVG ICONS SYSTEM (ZERO CASUAL EMOJIS)
 // ==============================================================
 var TM_ICONS = {
-  trophy: '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 3H18V9C18 12.3137 15.3137 15 12 15C8.68629 15 6 12.3137 6 9V3Z" fill="url(#tmTrophyGrad)" stroke="#f59e0b" stroke-width="1.5"/><path d="M6 5H3C2.44772 5 2 5.44772 2 6V7C2 9.20914 3.79086 11 6 11V11" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/><path d="M18 5H21C21.5523 5 22 5.44772 22 6V7C22 9.20914 20.2091 11 18 11V11" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/><path d="M12 15V19" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><path d="M8 21H16" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/><path d="M12 7L12.9 8.8L15 9.1L13.5 10.5L13.9 12.5L12 11.5L10.1 12.5L10.5 10.5L9 9.1L11.1 8.8L12 7Z" fill="#fff"/><defs><linearGradient id="tmTrophyGrad" x1="6" y1="3" x2="18" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#fde047"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>',
+  trophy: '<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 3H18V9C18 12.3137 15.3137 15 12 15C8.68629 15 6 12.3137 6 9V3Z" fill="url(#tmTrophyGrad)" stroke="#f59e0b" stroke-width="1.5"/><path d="M6 5H3C2.44772 5 2 5.44772 2 6V7C2 9.20914 3.79086 11 6 11V11" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/><path d="M18 5H21C21.5523 5 22 5.44772 22 6V7C22 9.20914 20.2091 11 18 11V11" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/><path d="M12 15V19" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/><path d="M8 21H16" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/><path d="M12 7L12.9 8.8L15 9.1L13.5 10.5L13.9 12.5L12 11.5L10.1 12.5L10.5 10.5L9 9.1L11.1 8.8L12 7Z" fill="#fff"/><defs><linearGradient id="tmTrophyGrad" x1="6" y1="3" x2="18" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#fde047"/><stop offset="1" stop-color="#e8af47"/></linearGradient></defs></svg>',
   crown: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="display:inline-block;vertical-align:-2px"><path d="M2 19h20v2H2v-2zM2 5l4 3.5 6-4.5 6 4.5 4-3.5v12H2V5zm6.5 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm7 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',
   medalGold: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="14" r="7" fill="#f59e0b" stroke="#fde047" stroke-width="1.5"/><path d="M9 3l3 5 3-5h3l-4 7h-4L6 3h3z" fill="#3b82f6"/><text x="12" y="17.5" font-size="9" font-weight="900" text-anchor="middle" fill="#1f2937" font-family="system-ui, sans-serif">1</text></svg>',
   medalSilver: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="14" r="7" fill="#94a3b8" stroke="#e2e8f0" stroke-width="1.5"/><path d="M9 3l3 5 3-5h3l-4 7h-4L6 3h3z" fill="#0ea5e9"/><text x="12" y="17.5" font-size="9" font-weight="900" text-anchor="middle" fill="#0f172a" font-family="system-ui, sans-serif">2</text></svg>',
@@ -13,7 +13,7 @@ var TM_ICONS = {
   globe: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
   gear: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
   flag: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="currentColor" style="display:inline-block;vertical-align:-2px"><path d="M4 2v20h2v-8h6l1 2h7V4h-7l-1-2H4zm8 4h3v2h-3V6zm3 2h3v2h-3V8zm-3 2h3v2h-3v-2zm-5-4h3v2H7V6zm0 4h3v2H7v-2z"/></svg>',
-  car1: '<svg viewBox="0 0 32 18" width="28" height="16" fill="none" style="display:inline-block;vertical-align:middle;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))"><path d="M2 11C2 9 4 8 7 8L11 4C13 2 17 2 22 4L27 8C30 9 31 10 31 12C31 14 30 15 28 15H4C2.5 15 2 13.5 2 11Z" fill="url(#tmCarMeGrad)"/><path d="M12 5H20L24 8H10L12 5Z" fill="#1e293b"/><path d="M2 5H5V7H2V5Z" fill="#e8af47"/><circle cx="8" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="8" cy="14" r="1.2" fill="#cbd5e1"/><circle cx="24" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="24" cy="14" r="1.2" fill="#cbd5e1"/><path d="M29 10L31 11L29 12V10Z" fill="#fef08a"/><defs><linearGradient id="tmCarMeGrad" x1="2" y1="8" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#fbbf24"/><stop offset="1" stop-color="#d97706"/></linearGradient></defs></svg>',
+  car1: '<svg viewBox="0 0 32 18" width="28" height="16" fill="none" style="display:inline-block;vertical-align:middle;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))"><path d="M2 11C2 9 4 8 7 8L11 4C13 2 17 2 22 4L27 8C30 9 31 10 31 12C31 14 30 15 28 15H4C2.5 15 2 13.5 2 11Z" fill="url(#tmCarMeGrad)"/><path d="M12 5H20L24 8H10L12 5Z" fill="#1e293b"/><path d="M2 5H5V7H2V5Z" fill="#e8af47"/><circle cx="8" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="8" cy="14" r="1.2" fill="#cbd5e1"/><circle cx="24" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="24" cy="14" r="1.2" fill="#cbd5e1"/><path d="M29 10L31 11L29 12V10Z" fill="#fef08a"/><defs><linearGradient id="tmCarMeGrad" x1="2" y1="8" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#fbbf24"/><stop offset="1" stop-color="#e8af47"/></linearGradient></defs></svg>',
   car2: '<svg viewBox="0 0 32 18" width="28" height="16" fill="none" style="display:inline-block;vertical-align:middle;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))"><path d="M2 11C2 9 4 8 7 8L11 4C13 2 17 2 22 4L27 8C30 9 31 10 31 12C31 14 30 15 28 15H4C2.5 15 2 13.5 2 11Z" fill="url(#tmCarOppGrad)"/><path d="M12 5H20L24 8H10L12 5Z" fill="#0f172a"/><path d="M2 5H5V7H2V5Z" fill="#38bdf8"/><circle cx="8" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="8" cy="14" r="1.2" fill="#cbd5e1"/><circle cx="24" cy="14" r="3" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/><circle cx="24" cy="14" r="1.2" fill="#cbd5e1"/><path d="M29 10L31 11L29 12V10Z" fill="#7dd3fc"/><defs><linearGradient id="tmCarOppGrad" x1="2" y1="8" x2="30" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#0284c7"/></linearGradient></defs></svg>',
   plus: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
   link: '<svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>',
@@ -403,12 +403,39 @@ function _animateKeyPress(el, ok) {
 }
 
 var BADGES = [
-  { id: "ft", ic: "🌱", n: "أول خطوة", d: "أكمل أول اختبار لك" },
-  { id: "w50", ic: "⚡", n: "50 WPM", d: "حقق 50 كلمة/دقيقة" },
-  { id: "w80", ic: "🚀", n: "80 WPM", d: "حقق 80 كلمة/دقيقة" },
-  { id: "a100", ic: "✨", n: "الكمال", d: "دقة 100%" },
-  { id: "t10", ic: "🏅", n: "المداوم", d: "أكمل 10 اختبارات" }
+  { id: "ft", ic: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>', n: "أول خطوة", d: "أكمل أول اختبار لك" },
+  { id: "w50", ic: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M4.93 4.93l2.83 2.83M2 12h4M20 12h2M19.07 4.93l-2.83 2.83M12 14l3-3"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>', n: "50 WPM", d: "حقق 50 كلمة/دقيقة" },
+  { id: "w80", ic: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>', n: "80 WPM", d: "حقق 80 كلمة/دقيقة" },
+  { id: "a100", ic: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>', n: "الكمال", d: "دقة 100%" },
+  { id: "t10", ic: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2"/><path d="M18 9h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1 .45-1 1v1h12v-1c0-.55-.45-1-1-1h-2c-.55 0-1-.45-1-1v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>', n: "المداوم", d: "أكمل 10 اختبارات" }
 ];
+var ACHS = BADGES;
+window.ACHS = ACHS;
+window.BADGES = BADGES;
+var ACHS_I18N = {
+  ar: {
+    ft: { n: "أول خطوة", d: "أكمل أول اختبار كتابة لك" },
+    w50: { n: "سرعة 50 WPM", d: "حقق سرعة 50 كلمة/دقيقة أو أعلى" },
+    w80: { n: "سرعة 80 WPM", d: "حقق سرعة 80 كلمة/دقيقة أو أعلى" },
+    a100: { n: "دقة خارقة (100%)", d: "أكمل اختباراً كاملاً بدون أي خطأ" },
+    t10: { n: "المثابر (10 جولات)", d: "أكمل 10 اختبارات كتابة بنجاح" }
+  },
+  en: {
+    ft: { n: "First Step", d: "Complete your first typing test" },
+    w50: { n: "50 WPM Club", d: "Reach 50 words per minute or more" },
+    w80: { n: "80 WPM Speedster", d: "Reach 80 words per minute or more" },
+    a100: { n: "Flawless Precision", d: "Complete a test with 100% accuracy" },
+    t10: { n: "Dedicated Typist", d: "Complete 10 typing sessions" }
+  }
+};
+var KR_AR = [
+  ["ض", "ص", "ث", "ق", "ف", "غ", "ع", "ه", "خ", "ح", "ج", "د"],
+  ["ش", "س", "ي", "ب", "ل", "ا", "ت", "ن", "م", "ك", "ط"],
+  ["ئ", "ء", "ؤ", "ر", "لا", "ى", "ة", "و", "ز", "ظ"]
+];
+window.ACHS_I18N = ACHS_I18N;
+window.KR_AR = KR_AR;
+
 
 var KR = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -443,8 +470,8 @@ var OM = {
 // Local storage
 function gR() { try { return JSON.parse(localStorage.getItem("tm2") || "[]") } catch (e) { return [] } }
 function pR(r) { var a = gR(); a.unshift(r); localStorage.setItem("tm2", JSON.stringify(a.slice(0, 200))) }
-function gS() { try { return JSON.parse(localStorage.getItem("ts2") || "{}") } catch (e) { return {} } }
-function pS(o) { localStorage.setItem("ts2", JSON.stringify(o)) }
+function gS() { try { var raw = JSON.parse(localStorage.getItem("ts2") || "{}"); var sl = localStorage.getItem("barqtype_lang"); if (sl) raw.lang = sl; return raw; } catch (e) { return {} } }
+function pS(o) { try { if (o && o.lang) localStorage.setItem("barqtype_lang", o.lang); localStorage.setItem("ts2", JSON.stringify(o)); } catch(e){} }
 function gA() { try { return JSON.parse(localStorage.getItem("ta2") || "[]") } catch (e) { return [] } }
 function pA(a) { localStorage.setItem("ta2", JSON.stringify(a)) }
 
@@ -469,6 +496,26 @@ var QWERTY_TO_AR = {
   "z": "ئ", "Z": "~", "x": "ء", "X": "ْ", "c": "ؤ", "C": "}", "v": "ر", "V": "{",
   "b": "لا", "B": "لآ", "n": "ى", "N": "آ", "m": "ة", "M": "’", ",": "و", "<": ",",
   ".": "ز", ">": ".", "/": "ظ", "?": "؟", " ": " "
+};
+
+var AR_SHIFT_CHARS = {
+  'أ': true, 'إ': true, 'آ': true,
+  'لأ': true, 'لإ': true, 'لآ': true,
+  '،': true, '؛': true, '؟': true, 'ـ': true,
+  'َ': true, 'ً': true, 'ُ': true, 'ٌ': true,
+  'ِ': true, 'ٍ': true, 'ْ': true, 'ّ': true,
+  '’': true
+};
+
+var AR_KEY_SHIFT_MAP = {
+  "q": "َ", "w": "ً", "e": "ُ", "r": "ٌ", "t": "لإ",
+  "y": "إ", "u": "‘", "i": "÷", "o": "×", "p": "؛",
+  "[{": "<", "]}": ">",
+  "a": "ِ", "s": "ٍ", "d": "]", "f": "[", "g": "لأ",
+  "h": "أ", "j": "ـ", "k": "،", "l": "/", ";:": ":", "'\"": "\"",
+  "z": "~", "x": "ْ", "c": "}", "v": "{", "b": "لآ",
+  "n": "آ", "m": "’", ",<": ",", ".>": ".", "/?": "؟",
+  "~`": "ّ"
 };
 
 function normalizeAr(c) {
@@ -640,7 +687,8 @@ function buildKeyboard() {
       } else {
         if (isAr) {
           mainLbl = kd.ar;
-          subLbl = kd.k.length === 1 ? kd.k.toLowerCase() : kd.k[0];
+          var arShift = AR_KEY_SHIFT_MAP[kd.k] || "";
+          subLbl = arShift || (kd.k.length === 1 ? kd.k.toLowerCase() : kd.k[0]);
         } else {
           mainLbl = kd.k.length === 1 ? kd.k.toLowerCase() : kd.k[0];
           subLbl = kd.ar;
@@ -673,7 +721,7 @@ function buildKeyboard() {
   }
 
   buildLegend();
-  if (window.initHandsOverlay) initHandsOverlay();
+  if (window.initHandsOverlay) initHandsOverlay(); rebuildKbCache();
   updateTargetKey();
 }
 
@@ -699,61 +747,130 @@ function buildLegend() {
   leg.innerHTML = h;
 }
 
+var _kbCache = {
+  keys: [],
+  charMap: {},
+  arMap: {},
+  mainLabels: [],
+  shifts: []
+};
+
+function rebuildKbCache() {
+  _kbCache.keys = Array.from(document.querySelectorAll(".kb-key"));
+  _kbCache.charMap = {};
+  _kbCache.arMap = {};
+  _kbCache.mainLabels = [];
+  _kbCache.shifts = [];
+
+  for (var i = 0; i < _kbCache.keys.length; i++) {
+    var el = _kbCache.keys[i];
+    var k = el.dataset.k;
+    var ar = el.dataset.ar;
+    if (k === "Shift") {
+      _kbCache.shifts.push(el);
+    }
+    if (k === "Space") {
+      _kbCache.charMap[" "] = el;
+      _kbCache.charMap["space"] = el;
+    }
+    if (k) {
+      _kbCache.charMap[k] = el;
+      _kbCache.charMap[k.toLowerCase()] = el;
+      if (k.length === 2) {
+        _kbCache.charMap[k[0]] = el;
+        _kbCache.charMap[k[1]] = el;
+      }
+    }
+    if (ar) {
+      _kbCache.arMap[ar] = el;
+      _kbCache.arMap[normalizeAr(ar)] = el;
+    }
+    var mainLblEl = el.querySelector(".kb-lbl-main");
+    if (mainLblEl && k && !el.classList.contains("special")) {
+      _kbCache.mainLabels.push({
+        el: el,
+        lbl: mainLblEl,
+        k: k,
+        ar: ar
+      });
+    }
+  }
+}
+
 // Find key element corresponding to target character
 function findKeyElForChar(char) {
   if (!char) return null;
   var isAr = (S.lang === "ar");
-  var all = document.querySelectorAll(".kb-key");
+  if (!_kbCache.keys || !_kbCache.keys.length) rebuildKbCache(); if (char === " ") return _kbCache.charMap[" "] || null; var all = _kbCache.keys;
 
   if (char === " ") {
     for (var i = 0; i < all.length; i++) if (all[i].dataset.k === "Space") return all[i];
   }
 
-  for (var j = 0; j < all.length; j++) {
-    var el = all[j];
-    var k = el.dataset.k;
-    var ar = el.dataset.ar;
-    if (isAr) {
-      if (ar === char || normalizeAr(ar) === normalizeAr(char)) return el;
-      if (QWERTY_TO_AR[k] === char || normalizeAr(QWERTY_TO_AR[k]) === normalizeAr(char)) return el;
-    } else {
-      if (k.toLowerCase() === char.toLowerCase()) return el;
-      if (k.length === 2 && (k[0] === char || k[1] === char)) return el;
+  if (isAr) { if (_kbCache.arMap[char]) return _kbCache.arMap[char]; var _nChar = normalizeAr(char); if (_kbCache.arMap[_nChar]) return _kbCache.arMap[_nChar];
+    // 1. Direct exact match on key.ar (e.g. 'ل' matches key G, 'ذ' matches key ~`, 'ا' matches key H)
+    for (var j = 0; j < all.length; j++) {
+      if (all[j].dataset.ar === char) return all[j];
     }
-  }
-
-  // Fallback check
-  for (var m = 0; m < all.length; m++) {
-    var k2 = all[m].dataset.k;
-    if (k2.toLowerCase() === char.toLowerCase()) return all[m];
+    // 2. Exact match in AR_KEY_SHIFT_MAP (e.g. 'أ' -> key 'h', 'إ' -> key 'y', 'آ' -> key 'n')
+    for (var s = 0; s < all.length; s++) {
+      var kS = all[s].dataset.k;
+      if (kS && AR_KEY_SHIFT_MAP[kS] === char) return all[s];
+    }
+    // 3. Exact match in QWERTY_TO_AR
+    for (var q = 0; q < all.length; q++) {
+      var kQ = all[q].dataset.k;
+      if (kQ && (QWERTY_TO_AR[kQ] === char || QWERTY_TO_AR[kQ.toUpperCase()] === char)) return all[q];
+    }
+    // 4. Normalized match fallback (for variations)
+    for (var n = 0; n < all.length; n++) {
+      var elN = all[n];
+      if (normalizeAr(elN.dataset.ar) === normalizeAr(char)) return elN;
+    }
+  } else { if (_kbCache.charMap[char]) return _kbCache.charMap[char]; if (_kbCache.charMap[char.toLowerCase()]) return _kbCache.charMap[char.toLowerCase()];
+    for (var m = 0; m < all.length; m++) {
+      var elM = all[m];
+      var kM = elM.dataset.k;
+      if (!kM) continue;
+      if (kM.toLowerCase() === char.toLowerCase()) return elM;
+      if (kM.length === 2 && (kM[0] === char || kM[1] === char)) return elM;
+    }
   }
   return null;
 }
 
-function updateKeyboardCasing(isShiftActive) {
-  if (S.lang === "ar") return;
-  var allKeys = document.querySelectorAll(".kb-key");
+var _lastCasingShiftActive = null; function updateKeyboardCasing(isShiftActive) { if (_lastCasingShiftActive === isShiftActive) return; _lastCasingShiftActive = isShiftActive;
+  var allKeys = _kbCache.keys || [];
+  var isAr = (S.lang === "ar");
+
   for (var i = 0; i < allKeys.length; i++) {
     var el = allKeys[i];
     var k = el.dataset.k;
     if (!k || el.classList.contains("special")) continue;
     var mainLblEl = el.querySelector(".kb-lbl-main");
     if (!mainLblEl) continue;
-    if (k.length === 1 && k.toLowerCase() >= 'a' && k.toLowerCase() <= 'z') {
-      mainLblEl.textContent = isShiftActive ? k.toUpperCase() : k.toLowerCase();
-    } else if (k.length === 2) {
-      // Pairs like "1!", "2@", "-_", "=+", "[{", "]}", ";:", "'\"", ",<", ".>", "/?"
-      mainLblEl.textContent = isShiftActive ? k[1] : k[0];
+
+    if (isAr) {
+      var arShiftChar = AR_KEY_SHIFT_MAP[k];
+      if (arShiftChar) {
+        mainLblEl.textContent = isShiftActive ? arShiftChar : el.dataset.ar;
+      }
+    } else {
+      if (k.length === 1 && k.toLowerCase() >= 'a' && k.toLowerCase() <= 'z') {
+        mainLblEl.textContent = isShiftActive ? k.toUpperCase() : k.toLowerCase();
+      } else if (k.length === 2) {
+        mainLblEl.textContent = isShiftActive ? k[1] : k[0];
+      }
     }
   }
 }
 
 // Update Target Key in EdClub style (pulsing glow + finger indicator)
-function updateTargetKey() {
-  var prev = document.querySelectorAll(".kb-key.target-key, .kb-key.shift-needed");
-  for (var i = 0; i < prev.length; i++) {
-    prev[i].classList.remove("target-key", "shift-needed");
-  }
+var _activeTargetKeyEl = null; var _activeShiftKeyEls = []; function updateTargetKey() {
+  if (_activeTargetKeyEl) { _activeTargetKeyEl.classList.remove("target-key"); _activeTargetKeyEl = null; } if (_activeShiftKeyEls.length) { for (var _si = 0; _si < _activeShiftKeyEls.length; _si++) _activeShiftKeyEls[_si].classList.remove("shift-needed"); _activeShiftKeyEls.length = 0; }
+
+
+
 
   var badge = document.getElementById("kb-next-badge");
   var fBadge = document.getElementById("kb-finger-badge");
@@ -778,13 +895,14 @@ function updateTargetKey() {
 
   var isUpperEn = (nextCh >= "A" && nextCh <= "Z");
   var isShiftSym = '~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0;
-  var needsShift = (isUpperEn || isShiftSym);
+  var isShiftAr = !!(nextCh && AR_SHIFT_CHARS[nextCh]);
+  var needsShift = (isUpperEn || isShiftSym || isShiftAr);
 
   // Dynamic casing: displays lowercase for lowercase text, uppercase for uppercase text
   updateKeyboardCasing(needsShift);
 
   if (el) {
-    el.classList.add("target-key");
+    el.classList.add("target-key"); _activeTargetKeyEl = el;
     var fCode = el.dataset.f;
     var fInfo = FINGER_DATA[fCode] || FINGER_DATA.th;
     if (fDot) fDot.style.background = fInfo.color;
@@ -797,10 +915,10 @@ function updateTargetKey() {
     // Shift helper
     if (needsShift) {
       var oppSide = (fInfo.hand === "L") ? "right" : "left";
-      var shifts = document.querySelectorAll(".kb-key[data-k='Shift']");
+      var shifts = _kbCache.shifts || [];
       for (var s = 0; s < shifts.length; s++) {
         if (shifts[s].dataset.side === oppSide) {
-          shifts[s].classList.add("shift-needed");
+          shifts[s].classList.add("shift-needed"); _activeShiftKeyEls.push(shifts[s]);
         }
       }
     }
@@ -813,9 +931,9 @@ function updateTargetKey() {
 
 // Highlight key on press (ok / err)
 function highlightPressedKey(evKey, ok) {
-  var all = document.querySelectorAll(".kb-key");
+  if (!_kbCache.keys || !_kbCache.keys.length) rebuildKbCache(); var all = _kbCache.keys;
   var evL = evKey.toLowerCase();
-  var matchedKeyEl = null;
+  var matchedKeyEl = (evKey === " ") ? _kbCache.charMap[" "] : (_kbCache.charMap[evKey] || _kbCache.charMap[evL] || _kbCache.arMap[evKey] || _kbCache.arMap[normalizeAr(evKey)] || null); if (matchedKeyEl) { _animateKeyPress(matchedKeyEl, ok); } else {
 
   for (var i = 0; i < all.length; i++) {
     var el = all[i];
@@ -835,7 +953,7 @@ function highlightPressedKey(evKey, ok) {
       _animateKeyPress(el, ok);
       break;
     }
-  }
+  } }
 
   // Educational Hand Kinematics:
   if (ok) {
@@ -854,7 +972,7 @@ function _animateKeyPress(el, ok) {
     _kbTimeouts[id] = null;
   }
   el.classList.remove("pressed-ok", "pressed-err");
-  void el.offsetWidth;
+
   el.classList.add(ok ? "pressed-ok" : "pressed-err");
 
   _kbTimeouts[id] = setTimeout(function () {
@@ -895,22 +1013,42 @@ var VK_FINGER_MAP = {
 function mapKeyToVkHandId(rawKey) {
   if (!rawKey) return 'neutral';
   var k = String(rawKey).toLowerCase();
+
+  // 1. Direct Arabic character mapping if passed directly
+  var arMap = {
+    'ذ': 'tilda', 'ض': 'q', 'ص': 'w', 'ث': 'e', 'ق': 'r', 'ف': 't', 'غ': 'y', 'ع': 'u',
+    'ه': 'i', 'خ': 'o', 'ح': 'p', 'ج': 'left-center-bracket', 'د': 'right-center-bracket',
+    'ش': 'a', 'س': 's', 'ي': 'd', 'ب': 'f', 'ل': 'g', 'ا': 'h', 'أ': 'h', 'إ': 'y', 'آ': 'n',
+    'ت': 'j', 'ن': 'k', 'م': 'l', 'ك': 'semicolon', 'ط': 'single-quote',
+    'ئ': 'z', 'ء': 'x', 'ؤ': 'c', 'ر': 'v', 'لا': 'b', 'ى': 'n', 'ة': 'm', 'و': 'comma',
+    'ز': 'dot', 'ظ': 'slash', '،': 'comma', '؛': 'semicolon', '؟': 'slash', 'ّ': 'tilda'
+  };
+  if (arMap[rawKey]) return arMap[rawKey];
+  if (arMap[k]) return arMap[k];
+
+  // 2. Control keys
   if (k === ' ' || k === 'space') return 'space';
   if (k === 'backspace') return 'backspace';
   if (k === 'enter') return 'enter';
   if (k === 'tab') return 'tab';
   if (k === 'caps' || k === 'capslock') return 'capslock';
-  if (k === '`' || k === '~' || k === '`~') return 'tilda';
-  if (k === '-' || k === '_' || k === '-_') return 'minus';
-  if (k === '=' || k === '+' || k === '=+') return 'equal';
-  if (k === '[' || k === '{' || k === '[{') return 'left-center-bracket';
-  if (k === ']' || k === '}' || k === ']}') return 'right-center-bracket';
-  if (k === '\\' || k === '|' || k === '\\|') return 'backslash';
-  if (k === ';' || k === ':' || k === ';:') return 'semicolon';
-  if (k === "'" || k === '"' || k === "'\"") return 'single-quote';
-  if (k === ',' || k === '<' || k === ',<') return 'comma';
-  if (k === '.' || k === '>' || k === '.>') return 'dot';
-  if (k === '/' || k === '?' || k === '/?') return 'slash';
+
+  // 3. Tilda / ` / ~ / ذ key (handles "~`", "`~", "`", "~", "ذ")
+  if (k === '`' || k === '~' || k.indexOf('`') >= 0 || k.indexOf('~') >= 0 || k === 'ذ') return 'tilda';
+
+  // 4. Symbols and punctuation
+  if (k === '-' || k === '_' || k.indexOf('-') >= 0 || k.indexOf('_') >= 0) return 'minus';
+  if (k === '=' || k === '+' || k.indexOf('=') >= 0 || k.indexOf('+') >= 0) return 'equal';
+  if (k === '[' || k === '{' || k.indexOf('[') >= 0 || k.indexOf('{') >= 0) return 'left-center-bracket';
+  if (k === ']' || k === '}' || k.indexOf(']') >= 0 || k.indexOf('}') >= 0) return 'right-center-bracket';
+  if (k === '\\' || k === '|' || k.indexOf('\\') >= 0 || k.indexOf('|') >= 0) return 'backslash';
+  if (k === ';' || k === ':' || k.indexOf(';') >= 0 || k.indexOf(':') >= 0) return 'semicolon';
+  if (k === "'" || k === '"' || k.indexOf("'") >= 0 || k.indexOf('"') >= 0) return 'single-quote';
+  if (k === ',' || k === '<' || k.indexOf(',') >= 0 || k.indexOf('<') >= 0) return 'comma';
+  if (k === '.' || k === '>' || k.indexOf('.') >= 0 || k.indexOf('>') >= 0) return 'dot';
+  if (k === '/' || k === '?' || k.indexOf('/') >= 0 || k.indexOf('?') >= 0) return 'slash';
+
+  // 5. Number row
   if (k.length === 2 && k[0] >= '0' && k[0] <= '9') return k[0];
   return k;
 }
@@ -928,7 +1066,8 @@ function updateHandTargetFinger(fingerCode, targetKeyEl) {
   var nextCh = (typeof S !== 'undefined' && S.text && S.idx < S.text.length) ? S.text[S.idx] : null;
   var isUpperEn = nextCh && (nextCh >= 'A' && nextCh <= 'Z');
   var isShiftSym = nextCh && ('~!@#$%^&*()_+{}|:"<>?'.indexOf(nextCh) >= 0);
-  var needsShift = !!(isUpperEn || isShiftSym);
+  var isShiftAr = !!(nextCh && AR_SHIFT_CHARS[nextCh]);
+  var needsShift = !!(isUpperEn || isShiftSym || isShiftAr);
 
   _currentHandTargetKey = vkKey;
   _currentHandTargetFinger = fingerCode || VK_FINGER_MAP[vkKey] || 'th';
@@ -936,16 +1075,30 @@ function updateHandTargetFinger(fingerCode, targetKeyEl) {
   setVkHandPose(vkKey, needsShift);
 }
 
+var _activeVkGroups = [];
+function _clearActiveVkGroups() {
+  if (_activeVkGroups.length > 0) {
+    for (var i = 0; i < _activeVkGroups.length; i++) {
+      var g = _activeVkGroups[i];
+      if (g) {
+        g.classList.add('st0');
+        g.classList.remove('show-hand');
+      }
+    }
+    _activeVkGroups.length = 0;
+  }
+}
+
 function setVkHandPose(vkKey, needsShift) {
   var svg = document.getElementById('hand-both');
   if (!svg) return;
 
   // 1. Hide all groups
-  var allG = svg.querySelectorAll('g[id]');
-  for (var i = 0; i < allG.length; i++) {
-    allG[i].classList.add('st0');
-    allG[i].classList.remove('show-hand');
-  }
+  _clearActiveVkGroups();
+
+
+
+
 
   // 2. Neutral resting state
   if (!vkKey || vkKey === 'neutral') {
@@ -977,7 +1130,9 @@ function setVkHandPose(vkKey, needsShift) {
 
   if (side === 'l') {
     // Left hand performs key reach
-    _showVkGroup(targetId);
+    if (!_showVkGroup(targetId)) {
+      _showVkGroup('hand-neutral-left');
+    }
     if (needsShift) {
       _showVkGroup('hand-shift-right');
     } else {
@@ -985,14 +1140,18 @@ function setVkHandPose(vkKey, needsShift) {
     }
   } else if (side === 'r') {
     // Right hand performs key reach
-    _showVkGroup(targetId);
+    if (!_showVkGroup(targetId)) {
+      _showVkGroup('hand-neutral-right');
+    }
     if (needsShift) {
       _showVkGroup('hand-shift-left');
     } else {
       _showVkGroup('hand-neutral-left');
     }
   } else {
-    _showVkGroup(targetId);
+    if (!_showVkGroup(targetId)) {
+      _showVkGroup('hand-neutral-left');
+    }
     _showVkGroup('hand-neutral-right');
   }
 }
@@ -1001,8 +1160,10 @@ function _showVkGroup(id) {
   var el = document.getElementById(id);
   if (el) {
     el.classList.remove('st0');
-    el.classList.add('show-hand');
+    el.classList.add('show-hand'); _activeVkGroups.push(el);
+    return true;
   }
+  return false;
 }
 
 function animateHandFinger(fingerCode, ok) {
@@ -1017,14 +1178,14 @@ function animateHandFinger(fingerCode, ok) {
 
   if (ok) {
     svg.classList.remove('hf-error', 'hf-pressed');
-    void svg.offsetWidth;
+
     svg.classList.add('hf-pressed');
     _handFeedbackTimeout = setTimeout(function () {
       if (svg) svg.classList.remove('hf-pressed');
     }, 120);
   } else {
     svg.classList.remove('hf-error', 'hf-pressed');
-    void svg.offsetWidth;
+
     svg.classList.add('hf-error');
     _handFeedbackTimeout = setTimeout(function () {
       if (svg) svg.classList.remove('hf-error');
@@ -1082,9 +1243,9 @@ function toggleKeyboard() {
 }
 
 // ==============================================================
-// 4. ZERO-LATENCY RAZER GREEN MECHANICAL SWITCH AUDIO
+// 4. GENUINE HARD LAPTOP KEYBOARD AUDIO (SCISSOR-SWITCH / CHICLET)
 // ==============================================================
-var _actx = null, _masterGain = null;
+var _actx = null, _masterGain = null; var _laptopSounds = [], _laptopSpaceSound = null, _laptopErrSound = null, _laptopBackspaceSound = null;
 var _rgSounds = [], _spaceSound = null, _errSound = null, _backspaceSound = null;
 
 function _initAudio() {
@@ -1109,22 +1270,93 @@ function _initAudio() {
     silentSrc.connect(_actx.destination);
     silentSrc.start(0);
 
-    _rgSounds = [
-      _synthesizeRGSound(_actx, 0),
-      _synthesizeRGSound(_actx, 1),
-      _synthesizeRGSound(_actx, 2),
-      _synthesizeRGSound(_actx, 3),
-      _synthesizeRGSound(_actx, 4),
-      _synthesizeRGSound(_actx, 5)
-    ];
-    _spaceSound = _synthesizeSpaceSound(_actx);
-    _backspaceSound = _synthesizeRGSound(_actx, 2, false, true);
-    _errSound = _synthesizeErrorSound(_actx);
+    _laptopSounds = []; for (var _lv = 0; _lv < 8; _lv++) _laptopSounds.push(_synthesizeHardLaptopSwitch(_actx, _lv, false, false)); _laptopSpaceSound = _synthesizeHardLaptopSwitch(_actx, 0, true, false); _laptopBackspaceSound = _synthesizeHardLaptopSwitch(_actx, 3, false, true); _laptopErrSound = _synthesizeHardLaptopErrorSound(_actx); _rgSounds = _laptopSounds; _spaceSound = _laptopSpaceSound; _backspaceSound = _laptopBackspaceSound; _errSound = _laptopErrSound;
+
+
+
+
+
+
+
+
+
+
   } catch (e) { }
 }
 
+function _synthesizeHardLaptopSwitch(actx, variant, isSpace, isBackspace) {
+  var sr = actx.sampleRate || 44100;
+  var dur = isSpace ? 0.030 : (isBackspace ? 0.018 : 0.022);
+  var len = Math.floor(sr * dur);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+
+  var vPitch = 1.0 + ((variant % 8) - 3.5) * 0.038;
+  if (isSpace) vPitch *= 0.72;
+  if (isBackspace) vPitch *= 1.18;
+
+  var plateFreq = (isSpace ? 150 : (isBackspace ? 260 : 215)) * vPitch;
+  var plateDecay = isSpace ? 130 : 210;
+
+  var scissorFreq = (isSpace ? 1800 : (isBackspace ? 3600 : 2900)) * vPitch;
+  var scissorDecay = isSpace ? 500 : 750;
+
+  var clickFreq = (isSpace ? 3200 : (isBackspace ? 5500 : 4600)) * vPitch;
+  var clickDecay = isSpace ? 900 : 1300;
+
+  var wireFreq = 1350 * vPitch;
+  var wireDecay = 420;
+
+  var seed = (variant + 1) * 7919;
+  function rnd() {
+    seed = (seed * 9301 + 49297) % 233280;
+    return (seed / 233280) * 2 - 1;
+  }
+
+  for (var i = 0; i < len; i++) {
+    var t = i / sr;
+    var strike = (i === 0) ? 0.8 : (i === 1) ? -0.6 : (i === 2) ? 0.4 : (i === 3) ? -0.2 : 0;
+    var friction = rnd() * Math.exp(-t * 1100) * 0.16;
+
+    var plateTap = Math.sin(2 * Math.PI * plateFreq * t) * Math.exp(-t * plateDecay);
+    var scissorSnap = Math.cos(2 * Math.PI * scissorFreq * t) * Math.exp(-t * scissorDecay);
+    var plasticTick = Math.sin(2 * Math.PI * clickFreq * t) * Math.exp(-t * clickDecay);
+    var wireClack = isSpace ? (Math.sin(2 * Math.PI * wireFreq * t) * Math.exp(-t * wireDecay) * 0.28) : 0;
+
+    var sample = (strike * 0.35) +
+                 (plateTap * 0.48) +
+                 (scissorSnap * 0.34) +
+                 (plasticTick * 0.24) +
+                 friction +
+                 wireClack;
+
+    var env = (t < 0.0002) ? (t / 0.0002) : Math.exp(-t * (isSpace ? 110 : 160));
+    sample *= env;
+
+    d[i] = Math.max(-0.95, Math.min(0.95, sample * 1.02));
+  }
+  return buf;
+}
+
+function _synthesizeHardLaptopErrorSound(actx) {
+  var sr = actx.sampleRate || 44100;
+  var dur = 0.026;
+  var len = Math.floor(sr * dur);
+  var buf = actx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+  for (var i = 0; i < len; i++) {
+    var t = i / sr;
+    var impulse = (i === 0) ? 0.45 : (i === 1) ? -0.3 : 0;
+    var dullTap = Math.sin(2 * Math.PI * 155 * t) * Math.exp(-t * 150) * 0.45;
+    var friction = (Math.random() * 2 - 1) * Math.exp(-t * 450) * 0.12;
+    var sample = (impulse * 0.25 + dullTap + friction) * Math.exp(-t * 100);
+    d[i] = Math.max(-0.8, Math.min(0.8, sample));
+  }
+  return buf;
+}
+
 function _synthesizeRGSound(actx, variant, isSpace, isBackspace) {
-  return _createRealMechanicalSwitch(actx, variant, isSpace, isBackspace);
+  return _synthesizeHardLaptopSwitch(actx, variant, isSpace, isBackspace);
 }
 function _createRealMechanicalSwitch(actx, variant, isSpace, isBackspace) {
   var sr = actx.sampleRate;
@@ -1215,7 +1447,7 @@ function _oldRGSound(actx, variant) {
 }
 
 function _synthesizeSpaceSound(actx) {
-  return _createRealMechanicalSwitch(actx, 0, true, false);
+  return _synthesizeHardLaptopSwitch(actx, 0, true, false);
 }
 function _oldSpaceSound(actx) {
   var sr = actx.sampleRate;
@@ -1234,7 +1466,7 @@ function _oldSpaceSound(actx) {
   return buf;
 }
 
-function _synthesizeErrorSound(actx) {
+function _synthesizeErrorSound(actx) { return _synthesizeHardLaptopErrorSound(actx); } function _oldSynthesizeErrorSound(actx) {
   var sr = actx.sampleRate;
   var len = Math.floor(sr * 0.062);
   var buf = actx.createBuffer(1, len, sr);
@@ -1373,7 +1605,7 @@ function initTest() {
   S.tk = 0;
   S._rendered = false;
   // Reset caret to blink state
-  var _c = document.getElementById('caret');
+  var _c = document.getElementById('caret'); lastCaretY = -1; _cachedCardRect = null;
   if (_c) { _c.classList.add('blink'); _c.style.opacity = '1'; }
 
   document.getElementById("xwpm").innerHTML = "&mdash;";
@@ -1444,8 +1676,12 @@ function renderChars() {
   if (curEl) {
     var cardH = wordsEl.clientHeight;
     var topPos = curEl.offsetTop;
-    if (topPos > cardH * 0.55) wordsEl.scrollTop = topPos - cardH * 0.28;
-    else wordsEl.scrollTop = 0;
+    var targetScroll = (topPos > cardH * 0.55) ? Math.round(topPos - cardH * 0.28) : 0;
+    if (Math.abs(wordsEl.scrollTop - targetScroll) > 2) {
+      _isInternalScrolling = true;
+      wordsEl.scrollTop = targetScroll;
+      requestAnimationFrame(function () { _isInternalScrolling = false; });
+    }
   }
   // Move sliding caret to current character position
   moveCaret();
@@ -1454,7 +1690,7 @@ function renderChars() {
 // ── SMOOTH SLIDING CARET ──────────────────────────────────────
 // Reads current char's rect and slides #caret to it with GPU transition
 var caretIdleTimer = null;
-var lastCaretY = -1;
+var lastCaretY = -1; var _cachedCardRect = null; var _isInternalScrolling = false;
 
 function moveCaret(instant) {
   var caretEl = document.getElementById('caret');
@@ -1466,7 +1702,7 @@ function moveCaret(instant) {
 
   var curEl = S._charEls && S._charEls[S.idx] ? S._charEls[S.idx] : null;
   if (!curEl) {
-    caretEl.style.opacity = '0';
+    if (S._charEls && S._charEls.length && S.idx >= S._charEls.length) { var lastEl = S._charEls[S._charEls.length - 1], isArEnd = S.lang === 'ar', cardR = card.getBoundingClientRect(), charR = lastEl.getBoundingClientRect(), cH = Math.round(charR.height * 0.88), cY = Math.round(charR.top - cardR.top + (charR.height - cH) / 2), cX = isArEnd ? Math.round(charR.left - cardR.left - 2) : Math.round(charR.right - cardR.left); caretEl.style.height = cH + 'px'; caretEl.style.transform = 'translate3d(' + cX + 'px,' + cY + 'px, 0)'; return; } caretEl.style.opacity = '0';
     return;
   }
 
@@ -1480,36 +1716,51 @@ function moveCaret(instant) {
     if (!S.fin) {
       caretEl.classList.add('blink');
     }
-  }, 550);
+  }, 500);
 
-  var cardRect = card.getBoundingClientRect();
+  var cardRect = _cachedCardRect || (_cachedCardRect = card.getBoundingClientRect());
   var charRect = curEl.getBoundingClientRect();
 
   var isAr = S.lang === 'ar';
   var caretX, caretY, caretH;
 
-  caretH = Math.round(charRect.height * 0.92);
-  caretY = charRect.top - cardRect.top + (charRect.height - caretH) / 2;
+  caretH = Math.round(charRect.height * 0.88);
+  caretY = Math.round(charRect.top - cardRect.top + (charRect.height - caretH) / 2);
 
   if (isAr) {
-    caretX = charRect.right - cardRect.left - 1.5;
+    caretX = Math.round(charRect.right - cardRect.left - 1.5);
   } else {
-    caretX = charRect.left - cardRect.left - 1.5;
+    caretX = Math.round(charRect.left - cardRect.left - 1);
   }
 
   // 3. حركة سلسة ومرنة وسريعة بدون انقطاع أو قفز قطري عند الانتقال لسطر جديد
-  if (instant || (lastCaretY !== -1 && Math.abs(caretY - lastCaretY) > 15)) {
+  if (instant || (lastCaretY !== -1 && Math.abs(caretY - lastCaretY) > 12)) {
     caretEl.style.transition = 'none';
     caretEl.style.height = caretH + 'px';
-    caretEl.style.transform = 'translate(' + caretX + 'px,' + caretY + 'px)';
-    void caretEl.offsetWidth;
-    caretEl.style.transition = 'transform 70ms cubic-bezier(0.2, 0.9, 0.3, 1), height 70ms ease, opacity 0.15s ease';
+    caretEl.style.transform = 'translate3d(' + caretX + 'px,' + caretY + 'px, 0)';
+
+    requestAnimationFrame(function () { caretEl.style.transition = 'transform 0.055s cubic-bezier(0.2, 0.9, 0.4, 1), height 0.055s ease'; });
   } else {
     caretEl.style.height = caretH + 'px';
-    caretEl.style.transform = 'translate(' + caretX + 'px,' + caretY + 'px)';
+    caretEl.style.transform = 'translate3d(' + caretX + 'px,' + caretY + 'px, 0)';
   }
   lastCaretY = caretY;
 }
+
+window.addEventListener('resize', function () {
+  _cachedCardRect = null;
+  moveCaret(true);
+}, { passive: true });
+
+document.addEventListener('DOMContentLoaded', function () {
+  var w = document.getElementById('words');
+  if (w) {
+    w.addEventListener('scroll', function () {
+      if (_isInternalScrolling) return;
+      moveCaret();
+    }, { passive: true });
+  }
+});
 
 function updRing(l, t) {
   var r = document.getElementById("ring");
@@ -1589,38 +1840,38 @@ function finishTest() {
   // Speed Tier Determination
   var isAr = (S.lang === "ar");
   var tier = {
-    name: isAr ? "⚡ فئة البرق الخاطف" : "⚡ Supersonic Flash",
+    name: isAr ? "فئة البرق الخاطف" : "Supersonic Flash",
     color: "var(--accent)",
     glow: "var(--accent-glow)",
     percentile: isAr ? "سرعة قياسية خارقة تفوق 90% من الطباعين" : "Elite pace! Top 10% speed"
   };
   if (finalWpm >= 110) {
     tier = {
-      name: isAr ? "⚡ البرق الخارق (Supersonic)" : "⚡ Supersonic Champion",
+      name: isAr ? "البرق الخارق (Supersonic)" : "Supersonic Champion",
       color: "#c084fc", glow: "rgba(192,132,252,0.45)",
       percentile: isAr ? "مستوى أسطوري! أسرع من 99% من المتسابقين" : "God tier! Faster than 99% of racers"
     };
   } else if (finalWpm >= 85) {
     tier = {
-      name: isAr ? "⚡ البرق الخاطف (Lightning)" : "⚡ Lightning Fast",
+      name: isAr ? "البرق الخاطف (Lightning)" : "Lightning Fast",
       color: "var(--accent)", glow: "var(--accent-glow)",
       percentile: isAr ? "سرعة قياسية خارقة تفوق 90% من الطباعين" : "Elite pace! Top 10% speed"
     };
   } else if (finalWpm >= 65) {
     tier = {
-      name: isAr ? "🚀 الصاروخ المنطلق (Rocket)" : "🚀 Rocket Swift",
+      name: isAr ? "الصاروخ المنطلق (Rocket)" : "Rocket Swift",
       color: "#38bdf8", glow: "rgba(56,189,248,0.4)",
       percentile: isAr ? "سرعة متقدمة ومنافسة قوية في السباقات" : "Advanced competitive racer speed"
     };
   } else if (finalWpm >= 45) {
     tier = {
-      name: isAr ? "🦅 الصقر الطائر (Falcon)" : "🦅 Flying Falcon",
+      name: isAr ? "الصقر الطائر (Falcon)" : "Flying Falcon",
       color: "#4ade80", glow: "rgba(74,222,128,0.4)",
       percentile: isAr ? "سرعة جيدة جداً وتفوق المعدل العالمي" : "Solid typing pace above global average"
     };
   } else {
     tier = {
-      name: isAr ? "🎯 المتدرب الواعد (Rising Star)" : "🎯 Rising Star",
+      name: isAr ? "المتدرب الواعد (Rising Star)" : "Rising Star",
       color: "#94a3b8", glow: "rgba(148,163,184,0.3)",
       percentile: isAr ? "بداية ممتازة، التمرين المنتظم سيضاعف سرعتك" : "Great start, keep practicing to boost speed"
     };
@@ -1657,10 +1908,41 @@ function finishTest() {
   pR(res);
   showResult(res);
   chkAch();
+
+  if (window.BarqAPI && window.BarqAPI.saveTestResult) {
+    window.BarqAPI.saveTestResult({
+      lang: S.lang,
+      mode: S.mode || 'common',
+      duration: Math.round(S.dur || el),
+      wpm: finalWpm,
+      raw_wpm: calcWPM(S.ks.length, el * 1000),
+      accuracy: calcAcc(cor, S.ks.length),
+      error_count: errs,
+      keystrokes: S.ks.length,
+      consistency: consistency,
+      error_map: em
+    });
+  }
 }
 
 // ── SHOWCASE RESULT DASHBOARD ─────────────────────────────────
-// ── SHOWCASE RESULT DASHBOARD ─────────────────────────────────
+// ── SHOWCASE RESULT DASHBOARD (3-LEVEL ARCHITECTURE) ───────────
+function toggleResultDetails() {
+  var drawer = document.getElementById("r-details-drawer");
+  var btn = document.getElementById("r-details-toggle-btn");
+  if (!drawer || !btn) return;
+  var isClosed = drawer.style.display === "none";
+  if (isClosed) {
+    drawer.style.display = "block";
+    btn.setAttribute("aria-expanded", "true");
+    btn.classList.add("active");
+  } else {
+    drawer.style.display = "none";
+    btn.setAttribute("aria-expanded", "false");
+    btn.classList.remove("active");
+  }
+}
+
 function showResult(r) {
   document.getElementById("p-test").className = "page";
   var rp = document.getElementById("p-result");
@@ -1668,125 +1950,149 @@ function showResult(r) {
 
   var isAr = (S.lang === "ar");
 
-  // 1. Text Labels
   var setTxt = function (id, txt) {
     var el = document.getElementById(id);
     if (el) el.textContent = txt;
   };
-  setTxt("r-status-badge-txt", isAr ? "انتهت المحاولة بنجاح" : "Attempt completed successfully");
-  setTxt("r-hero-subheading", isAr ? "كل حرف تكتبه يجعلك أفضل من الأمس، استمر في التطور." : "Every key you type makes you better than yesterday. Keep pushing forward.");
-  setTxt("r-retry-title", isAr ? "تحدَّ نفسك مرة أخرى" : "Challenge yourself again");
-  setTxt("r-btn-retest-txt", isAr ? "إعادة الاختبار" : "Retest");
-  setTxt("r-lbl-speed", isAr ? "السرعة" : "Speed");
-  setTxt("r-lbl-acc", isAr ? "الدقة" : "Accuracy");
-  setTxt("r-chart-title", isAr ? "معدل السرعة خلال الاختبار" : "Speed rate during test");
+
+  // 1. Level 1: Numbers & Raw values
+  setTxt("rw", r.wpm);
+  setTxt("ra", r.acc + "%");
+  setTxt("r-lbl-hero-speed", isAr ? "السرعة الصافية" : "Net Speed");
+  setTxt("r-lbl-hero-acc", isAr ? "الدقة" : "Accuracy");
+  setTxt("r-btn-replay-lbl", isAr ? "اختبار جديد" : "New Test");
+  setTxt("r-btn-copy-lbl", isAr ? "نسخ" : "Copy");
+
+  // 2. Comparison calculation (Clean, direction-safe, no duplicate negatives)
+  var prevRuns = gR(); // prevRuns[0] is current run
+  var allPrevious = prevRuns.length > 1 ? prevRuns.slice(1) : [];
+
+  var userBestWpm = 0;
+  var sumWpm = 0;
+  for (var pi = 0; pi < allPrevious.length; pi++) {
+    var pw = allPrevious[pi].wpm || 0;
+    if (pw > userBestWpm) userBestWpm = pw;
+    sumWpm += pw;
+  }
+  var userAvgWpm = allPrevious.length > 0 ? Math.round(sumWpm / allPrevious.length) : 0;
+  var isPersonalBest = allPrevious.length > 0 && r.wpm > userBestWpm;
+
+  var compPill = document.getElementById("r-comp-pill");
+  var compArrow = document.getElementById("r-comp-arrow");
+
+  if (allPrevious.length === 0) {
+    if (compPill) compPill.className = "res-comp-pill neutral";
+    if (compArrow) compArrow.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:-1px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>';
+    setTxt("r-comp-text", isAr ? "أول اختبار مكتمل! بداية ممتازة لرحلتك" : "First test completed! Great start");
+  } else if (isPersonalBest) {
+    if (compPill) compPill.className = "res-comp-pill best";
+    if (compArrow) compArrow.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"></path></svg>';
+    setTxt("r-comp-text", isAr ? ("أفضل نتيجة شخصية جديدة! (السابق: " + userBestWpm + " WPM)") : ("New Personal Best! (Previous: " + userBestWpm + " WPM)"));
+  } else {
+    var wDiff = r.wpm - userAvgWpm;
+    var absDiff = Math.abs(wDiff);
+    if (wDiff >= 0) {
+      if (compPill) compPill.className = "res-comp-pill up";
+      if (compArrow) compArrow.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>';
+      setTxt("r-comp-text", isAr ? ("+" + absDiff + " WPM مقارنة بمتوسطك (" + userAvgWpm + " WPM)") : ("+" + absDiff + " WPM compared to your average (" + userAvgWpm + " WPM)"));
+    } else {
+      if (compPill) compPill.className = "res-comp-pill down";
+      if (compArrow) compArrow.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>';
+      setTxt("r-comp-text", isAr ? ("-" + absDiff + " WPM مقارنة بمتوسطك (" + userAvgWpm + " WPM)") : ("-" + absDiff + " WPM compared to your average (" + userAvgWpm + " WPM)"));
+    }
+  }
+
+  // 3. Dynamic Headline & Subheading based on real performance
+  var dynTitle = "";
+  var dynSub = "";
+
+  if (isPersonalBest) {
+    dynTitle = isAr ? "رقم قياسي شخصي جديد!" : "New Personal Record!";
+    dynSub = isAr ? "أداء استثنائي تفوقت به على جميع محاولاتك السابقة!" : "Outstanding performance beating all your previous sessions!";
+  } else if (r.acc === 100 && r.wpm >= 30) {
+    dynTitle = isAr ? "دقة أسطورية كاملة 100%!" : "Flawless 100% Accuracy!";
+    dynSub = isAr ? "كتابة متقنة بلا أي خطأ! هذه الدقة الثابتة هي سرعة المستقبل." : "Not a single typo! High precision is the true foundation of speed.";
+  } else if (userAvgWpm > 0 && r.wpm >= userAvgWpm + 3) {
+    dynTitle = isAr ? "أداء متقدم وممتاز!" : "Outstanding Performance!";
+    dynSub = isAr ? ("سرعتك اليوم تفوقت على متوسطك العام (" + userAvgWpm + " WPM)، تقدم ملحوظ!") : ("You beat your overall average (" + userAvgWpm + " WPM). Solid momentum!");
+  } else if (r.wpm >= 65) {
+    dynTitle = isAr ? "سرعة مذهلة وفائقة!" : "Blazing Fast Speed!";
+    dynSub = isAr ? "أنت الآن في فئة الطباعة التنافسية المتقدمة، استمر في الحفاظ على هذا الإيقاع." : "You're in the advanced competitive typing tier. Keep this flow!";
+  } else if (r.errs > 4) {
+    dynTitle = isAr ? "ركّز على الدقة أولاً" : "Focus on Accuracy First";
+    dynSub = isAr ? "لا تستعجل، تمهل قليلاً في الضربات، فالسرعة تأتي تلقائياً مع استقرار اليدين." : "Slow down slightly. Consistent accuracy naturally unlocks fast speed.";
+  } else {
+    dynTitle = isAr ? "محاولة جيدة، استمر في التدريب" : "Solid Effort, Keep Going";
+    dynSub = isAr ? "كل جولة تبني الذاكرة العضلية لأصابعك وتقربك من هدفك القادم." : "Every test strengthens muscle memory and sharpens your flow.";
+  }
+
+  setTxt("r-dyn-title", dynTitle);
+  setTxt("r-dyn-sub", dynSub);
+  setTxt("r-status-badge-txt", isAr ? "اكتمل الاختبار" : "Test Completed");
+
+  // 4. Level 2: Dynamic SVG Speed Curve (Adaptive Y-Axis, No X marks)
+  setTxt("r-chart-title", isAr ? "مسار السرعة والإحصائيات" : "Speed Flow & Statistics");
   setTxt("r-leg-actual", isAr ? "السرعة الفعلية" : "Actual Speed");
-  setTxt("r-leg-avg", isAr ? "السرعة المتوسطة" : "Average Speed");
-  setTxt("r-lbl-dur", isAr ? "مدة الاختبار" : "Duration");
-  setTxt("r-lbl-tot", isAr ? "عدد الأحرف الكلي" : "Total Characters");
-  setTxt("r-lbl-cor", isAr ? "الأحرف الصحيحة" : "Correct Characters");
-  setTxt("r-lbl-err", isAr ? "الأخطاء" : "Errors");
-  setTxt("r-lbl-cons", isAr ? "الالتزام" : "Consistency");
-  setTxt("r-lbl-next-goal", isAr ? "الهدف القادم" : "Next Goal");
-  setTxt("r-btn-replay-lbl", isAr ? "تحدَّ نفسك من جديد" : "Challenge yourself again");
-  setTxt("r-btn-copy-lbl", isAr ? "نسخ النتيجة" : "Copy Result");
-  setTxt("r-diag-title", isAr ? "الحروف الأكثر تعثراً (Mistake Keys):" : "Mistake Keys:");
-  setTxt("r-drill-lbl", isAr ? "تدريب الأخطاء" : "Drill Mistakes");
-
-  // Buttons titles & hints
-  var btnReplay = document.getElementById("r-btn-replay");
-  if (btnReplay) btnReplay.title = isAr ? "إعادة نفس النص (Tab)" : "Restart same test (Tab)";
-  var btnCopy = document.getElementById("r-btn-copy");
-  if (btnCopy) btnCopy.title = isAr ? "نسخ النتيجة للمشاركة" : "Copy result to share";
-
-  // 2. Metrics & Gauge
-  var rw = document.getElementById("rw");
-  var ra = document.getElementById("ra");
-  var rCons = document.getElementById("r-consistency");
-  var rCor = document.getElementById("r-cor-cnt");
-  var re = document.getElementById("re");
-  var rTot = document.getElementById("r-tot-cnt");
-  var rt = document.getElementById("rt");
-
-  if (rw) rw.textContent = r.wpm;
-  if (ra) ra.textContent = r.acc + "%";
-  if (rCons) rCons.textContent = (r.consistency || 90) + "%";
-  if (rCor) rCor.textContent = r.cor;
-  if (re) re.textContent = r.errs;
-  if (rTot) rTot.textContent = r.tot;
-  if (rt) rt.textContent = Math.round(r.dur) + "s";
-
-  // Circular gauge animation
-  var arc = document.getElementById("r-gauge-arc");
-  if (arc) {
-    var wpmRatio = Math.min(1, Math.max(0.05, r.wpm / 110));
-    arc.style.strokeDashoffset = 330 * (1 - wpmRatio);
-  }
-
-  // Trends comparison
-  var prevRuns = gR();
-  var wDiff = 4, aDiff = 5;
-  if (prevRuns.length > 1) {
-    var last = prevRuns[prevRuns.length - 2];
-    wDiff = r.wpm - last.wpm;
-    aDiff = r.acc - last.acc;
-  }
-  var wDiffEl = document.getElementById("r-wpm-diff");
-  if (wDiffEl) {
-    wDiffEl.textContent = (wDiff >= 0 ? "+" : "") + wDiff;
-    var wTrend = document.getElementById("r-wpm-trend");
-    if (wTrend) wTrend.className = wDiff < 0 ? "res-gauge-trend down" : "res-gauge-trend";
-  }
-  var aDiffEl = document.getElementById("r-acc-diff");
-  if (aDiffEl) aDiffEl.textContent = (aDiff >= 0 ? "+" : "") + aDiff + "%";
-
-  // Evaluation badge
-  var evalText = document.getElementById("r-eval-text");
-  if (evalText) {
-    if (r.wpm >= 85) evalText.textContent = isAr ? "أداء أسطوري! سرعة خارقة تفوق 90% 🏆" : "God tier speed! Top 10% 🏆";
-    else if (r.wpm >= 60) evalText.textContent = isAr ? "سرعة متقدمة ومنافسة قوية جداً! 🚀" : "Advanced competitive racer speed! 🚀";
-    else if (r.wpm >= 35) evalText.textContent = isAr ? "نتيجة ممتازة، بداية انطلاقة قوية! ⚡" : "Great result, solid foundation! ⚡";
-    else evalText.textContent = isAr ? "نتيجة جيدة، يمكنك أفضل! 🏆" : "Good result, you can do better! 🏆";
-  }
-
-  // Next Goal calculation
-  var nextTarget = Math.max(r.wpm + 1, Math.ceil((r.wpm + 1) / 5) * 5);
-  if (nextTarget === r.wpm) nextTarget = r.wpm + 5;
-  setTxt("r-next-target-wpm", nextTarget + " WPM");
-  setTxt("r-goal-target-num", nextTarget + " WPM");
-  setTxt("r-goal-ratio", r.wpm + " / " + nextTarget);
-  var goalPct = Math.min(100, Math.round((r.wpm / nextTarget) * 100));
-  var goalFill = document.getElementById("r-goal-bar-fill");
-  if (goalFill) goalFill.style.width = goalPct + "%";
-
-  // Dynamic SVG Chart
+  setTxt("r-leg-avg", isAr ? "المتوسط" : "Average");
   renderBarqChart(r);
 
-  // Diagnostics: Mistake Keys
+  // 5. Level 2: Mistake Keys & Drill Box
+  setTxt("r-diag-title", isAr ? "الحروف الأكثر خطأً" : "Most Mistyped Keys");
+  setTxt("r-drill-lbl", isAr ? "تدرّب عليها" : "Drill Mistakes");
+
   var te = [];
   for (var c in r.em) te.push([c, r.em[c]]);
   te.sort(function (a, b) { return b[1] - a[1]; });
   te = te.slice(0, 8);
+
   var ec = document.getElementById("rerr");
   var drillBtn = document.getElementById("r-drill-btn");
-  var mistWrap = document.getElementById("r-mistakes-wrap");
+  var zeroMsg = document.getElementById("r-zero-errors");
+
   if (te.length && ec) {
-    if (mistWrap) mistWrap.style.display = "block";
+    if (zeroMsg) zeroMsg.style.display = "none";
+    ec.style.display = "flex";
     var h = "";
     for (var i = 0; i < te.length; i++) {
-      var ch = te[i][0] === " " ? "⎵" : te[i][0];
-      h += "<div class='barq-chip'><div class='ch2'>" + ch + "</div><div class='cn'>x" + te[i][1] + "</div></div>";
+      var ch = te[i][0] === " " ? "␣ مسافة" : te[i][0];
+      h += "<div class='res-mistake-pill'><span class='pill-char'>" + ch + "</span><span class='pill-count'>×" + te[i][1] + "</span></div>";
     }
     ec.innerHTML = h;
     if (drillBtn) drillBtn.style.display = "inline-flex";
   } else {
-    if (mistWrap) mistWrap.style.display = "none";
+    if (ec) {
+      ec.innerHTML = "";
+      ec.style.display = "none";
+    }
+    if (drillBtn) drillBtn.style.display = "none";
+    if (zeroMsg) zeroMsg.style.display = "flex";
   }
 
-  if (window.initAllVectorIcons) initAllVectorIcons();
+  // 6. Level 3: Collapsed Details Drawer
+  setTxt("r-details-toggle-lbl", isAr ? "تفاصيل إضافية للإحصائيات" : "More Statistics Details");
+  setTxt("r-lbl-dur", isAr ? "مدة الاختبار" : "Duration");
+  setTxt("r-lbl-tot", isAr ? "عدد الأحرف الكلي" : "Total Characters");
+  setTxt("r-lbl-cor", isAr ? "الأحرف الصحيحة" : "Correct Characters");
+  setTxt("r-lbl-err", isAr ? "الأخطاء" : "Errors");
+  setTxt("r-lbl-raw", isAr ? "السرعة الخام (RAW)" : "Raw Speed");
+
+  setTxt("rt", Math.round(r.dur) + "s");
+  setTxt("r-tot-cnt", r.tot);
+  setTxt("r-cor-cnt", r.cor);
+  setTxt("re", r.errs);
+  setTxt("r-raw-wpm", (r.raw || calcWPM(r.tot, r.dur * 1000)) + " WPM");
+
+  // Keep drawer collapsed initially on each test finish
+  var drawer = document.getElementById("r-details-drawer");
+  var toggleBtn = document.getElementById("r-details-toggle-btn");
+  if (drawer) drawer.style.display = "none";
+  if (toggleBtn) {
+    toggleBtn.setAttribute("aria-expanded", "false");
+    toggleBtn.classList.remove("active");
+  }
 }
 
-// ── DYNAMIC PURE SVG SPEED CURVE CHART ─────────────────────────
+// ── DYNAMIC PURE SVG SPEED CURVE CHART (ADAPTIVE Y-AXIS, NO X MARKS) ──
 function renderBarqChart(r) {
   var svg = document.getElementById("r-speed-chart");
   var emptyMsg = document.getElementById("barq-chart-empty");
@@ -1796,44 +2102,62 @@ function renderBarqChart(r) {
   if (timeline.length < 2) {
     var durSec = Math.max(1, Math.round(r.dur));
     timeline = [
-      { sec: 1, wpm: Math.round(r.wpm * 0.82), raw: Math.round(r.raw * 0.85), errs: 0 },
-      { sec: durSec, wpm: r.wpm, raw: r.raw, errs: r.errs }
+      { sec: 1, wpm: Math.round(r.wpm * 0.88), raw: Math.round(r.raw || r.wpm), errs: 0 },
+      { sec: durSec, wpm: r.wpm, raw: r.raw || r.wpm, errs: r.errs }
     ];
   }
   if (emptyMsg) emptyMsg.style.display = "none";
 
-  var W = 880, H = 230;
-  var padL = 48, padR = 32, padT = 32, padB = 34;
+  var W = 980, H = 200;
+  var padL = 44, padR = 24, padT = 24, padB = 28;
   var plotW = W - padL - padR;
   var plotH = H - padT - padB;
 
-  var maxVal = 30;
+  // 1. Adaptive Y-Axis calculation
+  var minW = Infinity;
+  var maxW = -Infinity;
   for (var i = 0; i < timeline.length; i++) {
-    if (timeline[i].wpm > maxVal) maxVal = timeline[i].wpm;
-    if (timeline[i].raw > maxVal) maxVal = timeline[i].raw;
+    var w = timeline[i].wpm;
+    if (w < minW) minW = w;
+    if (w > maxW) maxW = w;
   }
-  var yMax = Math.ceil((maxVal + 6) / 10) * 10;
-  if (yMax < 30) yMax = 30;
+  if (minW === Infinity) minW = 0;
+  if (maxW === -Infinity) maxW = 30;
 
+  // Include final WPM
+  if (r.wpm < minW) minW = r.wpm;
+  if (r.wpm > maxW) maxW = r.wpm;
+
+  // Adaptive range:
+  var yMin = Math.max(0, Math.floor((minW - 4) / 5) * 5);
+  var yMax = Math.max(yMin + 15, Math.ceil((maxW + 4) / 5) * 5);
+  var yRange = Math.max(10, yMax - yMin);
+
+  window._lastRes = r;
+  var isLight = (document.documentElement.getAttribute('data-theme') === 'light' || document.documentElement.getAttribute('data-theme') === 'carbon');
   var themeAccent = (getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#e8af47').trim();
+  var gridStroke = isLight ? '#e2e8f0' : 'rgba(255,255,255,0.06)';
+  var textFill = isLight ? '#475569' : '#64748b';
+  var avgStroke = isLight ? '#0284c7' : '#38bdf8';
+
   var html = "";
   html += '<defs>';
   html += '<linearGradient id="barqAreaGrad" x1="0" y1="0" x2="0" y2="1">';
-  html += '<stop offset="0%" stop-color="' + themeAccent + '" stop-opacity="0.28"/>';
+  html += '<stop offset="0%" stop-color="' + themeAccent + '" stop-opacity="0.22"/>';
   html += '<stop offset="100%" stop-color="' + themeAccent + '" stop-opacity="0"/>';
   html += '</linearGradient>';
   html += '<filter id="barqGlow" x="-20%" y="-20%" width="140%" height="140%">';
-  html += '<feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="' + themeAccent + '" flood-opacity="0.5"/>';
+  html += '<feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="' + themeAccent + '" flood-opacity="0.4"/>';
   html += '</filter>';
   html += '</defs>';
 
-  // Horizontal grid lines (0, 10, 20, 30...)
-  var numSteps = Math.min(5, Math.floor(yMax / 10));
+  // Grid lines
+  var numSteps = 4;
   for (var g = 0; g <= numSteps; g++) {
-    var stepVal = Math.round((g / numSteps) * yMax);
-    var yPos = padT + plotH - ((stepVal / yMax) * plotH);
-    html += '<line x1="' + padL + '" y1="' + yPos + '" x2="' + (padL + plotW) + '" y2="' + yPos + '" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>';
-    html += '<text x="' + (padL - 10) + '" y="' + (yPos + 4) + '" fill="#64748b" font-size="10" font-family="var(--fen)" text-anchor="end">' + stepVal + '</text>';
+    var stepVal = Math.round(yMin + (g / numSteps) * yRange);
+    var yPos = padT + plotH - (((stepVal - yMin) / yRange) * plotH);
+    html += '<line x1="' + padL + '" y1="' + yPos + '" x2="' + (padL + plotW) + '" y2="' + yPos + '" stroke="' + gridStroke + '" stroke-width="1"/>';
+    html += '<text x="' + (padL - 10) + '" y="' + (yPos + 4) + '" fill="' + textFill + '" font-size="10" font-family="var(--fen)" text-anchor="end">' + stepVal + '</text>';
   }
 
   var totalSec = timeline[timeline.length - 1].sec || Math.max(1, Math.round(r.dur));
@@ -1841,11 +2165,12 @@ function renderBarqChart(r) {
   for (var j = 0; j < timeline.length; j++) {
     var item = timeline[j];
     var x = padL + ((item.sec / totalSec) * plotW);
-    var y = padT + plotH - ((item.wpm / yMax) * plotH);
+    var clampedVal = Math.max(yMin, Math.min(yMax, item.wpm));
+    var y = padT + plotH - (((clampedVal - yMin) / yRange) * plotH);
     pts.push({ x: x, y: y, item: item });
   }
 
-  // Smooth Curve path
+  // Smooth Bézier Curve
   var pathD = "M " + pts[0].x + " " + pts[0].y;
   for (var k = 0; k < pts.length - 1; k++) {
     var p0 = pts[k];
@@ -1859,57 +2184,39 @@ function renderBarqChart(r) {
   html += '<path d="' + pathD + '" fill="none" stroke="' + themeAccent + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#barqGlow)"/>';
 
   // Dashed blue average speed line
-  var yAvgPos = padT + plotH - ((r.wpm / yMax) * plotH);
-  html += '<line x1="' + padL + '" y1="' + yAvgPos + '" x2="' + (padL + plotW) + '" y2="' + yAvgPos + '" stroke="#38bdf8" stroke-dasharray="5,4" stroke-width="1.8"/>';
+  var clampedAvg = Math.max(yMin, Math.min(yMax, r.wpm));
+  var yAvgPos = padT + plotH - (((clampedAvg - yMin) / yRange) * plotH);
+  html += '<line x1="' + padL + '" y1="' + yAvgPos + '" x2="' + (padL + plotW) + '" y2="' + yAvgPos + '" stroke="' + avgStroke + '" stroke-dasharray="4,4" stroke-width="1.6"/>';
 
-  // Error markers: red ✕ marks
-  for (var m = 0; m < pts.length; m++) {
-    var pt = pts[m];
-    if (pt.item.errs > 0) {
-      var sz = 4.5;
-      html += '<g transform="translate(' + pt.x + ',' + pt.y + ')">';
-      html += '<line x1="-' + sz + '" y1="-' + sz + '" x2="' + sz + '" y2="' + sz + '" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round"/>';
-      html += '<line x1="-' + sz + '" y1="' + sz + '" x2="' + sz + '" y2="-' + sz + '" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round"/>';
-      html += '</g>';
-    }
-  }
-
-  // Peak / Pause highlight marker
+  // Peak indicator
   if (pts.length > 2) {
     var maxPt = pts[0];
     for (var pi = 0; pi < pts.length; pi++) {
       if (pts[pi].item.wpm > maxPt.item.wpm) maxPt = pts[pi];
     }
     if (maxPt.item.wpm > 0) {
-      html += '<line x1="' + maxPt.x + '" y1="' + padT + '" x2="' + maxPt.x + '" y2="' + (padT + plotH) + '" stroke="' + themeAccent + '" stroke-opacity="0.45" stroke-dasharray="3,3" stroke-width="1.2"/>';
-      html += '<circle cx="' + maxPt.x + '" cy="' + maxPt.y + '" r="5" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="2"/>';
-      var tipW = 80, tipH = 26;
-      var tipX = Math.max(padL, Math.min(padL + plotW - tipW, maxPt.x - tipW / 2));
-      var tipY = Math.max(padT, maxPt.y - 34);
-      html += '<rect x="' + tipX + '" y="' + tipY + '" width="' + tipW + '" height="' + tipH + '" rx="6" fill="#1e293b" stroke="' + themeAccent + '" stroke-opacity="0.5" stroke-width="1"/>';
-      html += '<text x="' + (tipX + tipW / 2) + '" y="' + (tipY + 17) + '" fill="#ffffff" font-size="11" font-weight="700" font-family="var(--fen)" text-anchor="middle">' + maxPt.item.wpm + ' WPM</text>';
+      html += '<circle cx="' + maxPt.x + '" cy="' + maxPt.y + '" r="4" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="1.8"/>';
     }
   }
 
-  // Final point dot
+  // End point marker
   var lastPt = pts[pts.length - 1];
-  html += '<circle cx="' + lastPt.x + '" cy="' + lastPt.y + '" r="4.5" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="2"/>';
+  html += '<circle cx="' + lastPt.x + '" cy="' + lastPt.y + '" r="4" fill="' + themeAccent + '" stroke="#ffffff" stroke-width="1.8"/>';
 
-  // X-Axis time intervals (e.g. 0:00, 0:05, 0:10, 0:15, 0:20, 0:24)
-  var numIntervals = Math.min(6, Math.max(3, totalSec));
+  // X-Axis time intervals
+  var numIntervals = Math.min(5, Math.max(2, totalSec));
   for (var xi = 0; xi <= numIntervals; xi++) {
     var sVal = Math.round((xi / numIntervals) * totalSec);
     var xPos = padL + ((sVal / totalSec) * plotW);
     var mTime = Math.floor(sVal / 60);
     var sTime = sVal % 60;
     var timeStr = mTime + ":" + (sTime < 10 ? "0" : "") + sTime;
-    html += '<text x="' + xPos + '" y="' + (H - 8) + '" fill="#64748b" font-size="10" font-family="var(--fen)" text-anchor="middle">' + timeStr + '</text>';
+    html += '<text x="' + xPos + '" y="' + (H - 6) + '" fill="' + textFill + '" font-size="10" font-family="var(--fen)" text-anchor="middle">' + timeStr + '</text>';
   }
-  var isAr = (S.lang === "ar");
-  html += '<text x="' + (padL + plotW) + '" y="' + (padT + plotH + 16) + '" fill="#64748b" font-size="10" font-family="var(--far)" text-anchor="end">' + (isAr ? "الوقت" : "Time") + '</text>';
 
   svg.innerHTML = html;
 }
+window.renderBarqChart = renderBarqChart;
 
 // ── RESULT ACTIONS & SHORTCUT HANDLERS ─────────────────────────
 function repeatCurrentTest() {
@@ -1928,7 +2235,7 @@ function repeatCurrentTest() {
   for (var i = 0; i < S.text.length; i++) S.ch.push({ c: S.text[i], s: i === 0 ? "now" : "w" });
 
   var _c = document.getElementById('caret');
-  if (_c) { _c.classList.add('blink'); _c.style.opacity = '1'; }
+  if (_c) { lastCaretY = -1; _c.classList.add('blink'); _c.style.opacity = '1'; }
 
   document.getElementById("xwpm").innerHTML = "&mdash;";
   document.getElementById("xacc").innerHTML = "&mdash;";
@@ -2010,7 +2317,7 @@ function drillMissedKeys() {
   S._rendered = false;
 
   var _c = document.getElementById('caret');
-  if (_c) { _c.classList.add('blink'); _c.style.opacity = '1'; }
+  if (_c) { lastCaretY = -1; _c.classList.add('blink'); _c.style.opacity = '1'; }
 
   document.getElementById("xwpm").innerHTML = "&mdash;";
   document.getElementById("xacc").innerHTML = "&mdash;";
@@ -2059,18 +2366,18 @@ function copyBarqResult() {
   var tier = (window._lastRes && window._lastRes.tier) ? window._lastRes.tier.name : "";
 
   var text = isAr ?
-    ("⚡ Barqtype // نتيجة السباق الخاطف\n" +
+    ("Barqtype // نتيجة السباق\n" +
       "━━━━━━━━━━━━━━━━━━━━━\n" +
-      "⚡ السرعة الصافية: " + w + " WPM (Raw: " + r + ")\n" +
-      "🎯 الدقة: " + a + " | الاتساق: " + c + "\n" +
-      "⏱ المدة: " + t + " | الفئة: " + tier + "\n" +
+      "السرعة الصافية: " + w + " WPM (Raw: " + r + ")\n" +
+      "الدقة: " + a + " | الاتساق: " + c + "\n" +
+      "المدة: " + t + " | الفئة: " + tier + "\n" +
       "━━━━━━━━━━━━━━━━━━━━━\n" +
       "تحداني في سباقات Barqtype!") :
-    ("⚡ Barqtype // Lightning Typing Result\n" +
+    ("Barqtype // Typing Result\n" +
       "━━━━━━━━━━━━━━━━━━━━━\n" +
-      "⚡ Net Speed: " + w + " WPM (Raw: " + r + ")\n" +
-      "🎯 Accuracy: " + a + " | Consistency: " + c + "\n" +
-      "⏱ Duration: " + t + " | Tier: " + tier + "\n" +
+      "Net Speed: " + w + " WPM (Raw: " + r + ")\n" +
+      "Accuracy: " + a + " | Consistency: " + c + "\n" +
+      "Duration: " + t + " | Tier: " + tier + "\n" +
       "━━━━━━━━━━━━━━━━━━━━━\n" +
       "Challenge me on Barqtype!");
 
@@ -2087,7 +2394,7 @@ function copyBarqResult() {
 
 
 /* UNIFIED SHARED INPUT ENGINE (DESKTOP + MOBILE) */
-var _lastMismatchToastTime = 0;
+var _lastMismatchToastTime = 0; var _statsRafPending = false;
 
 function handleCharacterTyped(inputKey, isBackspace) {
   if (S.fin) return;
@@ -2154,21 +2461,22 @@ function handleCharacterTyped(inputKey, isBackspace) {
   S.idx++;
   if (S.idx < S.ch.length) S.ch[S.idx].s = "now";
 
-  // Batch DOM stat updates via rAF
-  var _el2 = now - S.t0;
-  var _cor2 = S.cor;
-  var _ks_len = S.ks.length;
-  var _ec = S.ec;
-  requestAnimationFrame(function () {
-    var w = calcWPM(_cor2, _el2);
-    var a = calcAcc(_cor2, _ks_len);
-    var wEl = document.getElementById("xwpm");
-    var aEl = document.getElementById("xacc");
-    var eEl = document.getElementById("xerr");
-    if (wEl) { wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
-    if (aEl) { aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
-    if (eEl) { eEl.textContent = _ec; eEl.style.color = _ec > 0 ? "var(--err)" : "var(--text)"; }
-  });
+  // Batch DOM stat updates via rAF (debounced per display frame)
+  if (!_statsRafPending) {
+    _statsRafPending = true;
+    requestAnimationFrame(function () {
+      _statsRafPending = false;
+      var nowT = performance.now();
+      var w = calcWPM(S.cor, nowT - S.t0);
+      var a = calcAcc(S.cor, S.ks.length);
+      var wEl = document.getElementById("xwpm");
+      var aEl = document.getElementById("xacc");
+      var eEl = document.getElementById("xerr");
+      if (wEl) { wEl.textContent = w; wEl.style.color = w >= 80 ? "var(--ok)" : w >= 50 ? "var(--accent)" : "var(--text)"; }
+      if (aEl) { aEl.textContent = a; aEl.style.color = a >= 95 ? "var(--ok)" : a >= 85 ? "var(--accent)" : "var(--err)"; }
+      if (eEl) { eEl.textContent = S.ec; eEl.style.color = S.ec > 0 ? "var(--err)" : "var(--text)"; }
+    });
+  }
 
   renderChars();
   updateTargetKey();
@@ -2309,7 +2617,7 @@ function updateUILanguage(l) {
     if (el("n-test")) el("n-test").textContent = isAr ? "تدريب" : "Practice";
     if (el("n-stats")) el("n-stats").textContent = isAr ? "إحصاءات" : "Stats";
     if (el("n-learn")) el("n-learn").textContent = isAr ? "تعلم" : "Learn";
-    if (el("n-race")) el("n-race").innerHTML = TM_ICONS.flag + ' ' + (isAr ? "سباق" : "Race");
+    if (el("n-dictation")) el("n-dictation").textContent = isAr ? "إملاء" : "Dictation"; if (el("n-race")) el("n-race").innerHTML = TM_ICONS.flag + ' ' + (isAr ? "سباق" : "Race");
     if (el("n-online")) el("n-online").innerHTML = TM_ICONS.globe + ' ' + (isAr ? "شبكي" : "Online");
     if (el("n-online-lbl")) el("n-online-lbl").textContent = isAr ? "شبكي" : "Online";
 
@@ -2529,7 +2837,14 @@ function showTab(t) {
     var pg = document.getElementById("p-" + tabs[i]);
     if (pg) pg.className = "page" + (tabs[i] === t ? " show" : "");
   }
-  document.getElementById("p-result").className = "page";
+  var resPage = document.getElementById("p-result");
+  if (resPage) resPage.className = "page";
+
+  var durPg = document.getElementById("dur-pg");
+  var msel = document.getElementById("msel");
+  if (durPg) durPg.style.display = (t === "test") ? "flex" : "none";
+  if (msel) msel.style.display = (t === "test") ? "inline-block" : "none"; try { updateUILanguage(S.lang); } catch (e) { }
+
   if (t === "test") initTest();
   if (t === "stats") renderStats();
   if (t === "learn") { window.location.href = "learn.html"; return; }
@@ -2541,8 +2856,15 @@ function renderStats() {
   var rs = gR();
   var con = document.getElementById("scon");
   var emp = document.getElementById("semp");
-  if (!rs.length) { emp.style.display = "block"; con.style.display = "none"; return; }
-  emp.style.display = "none"; con.style.display = "block";
+  var isAr = (S.lang === "ar");
+
+  if (!rs || rs.length === 0) {
+    if (emp) emp.style.display = "block";
+    if (con) con.style.display = "none";
+    return;
+  }
+  if (emp) emp.style.display = "none";
+  if (con) con.style.display = "block";
 
   var best = 0, sum = 0, sumA = 0;
   for (var i = 0; i < rs.length; i++) {
@@ -2555,16 +2877,23 @@ function renderStats() {
   var tt = 0;
   for (var j = 0; j < rs.length; j++) tt += rs[j].dur;
 
-  document.getElementById("sb").textContent = best;
-  document.getElementById("sb").style.color = "var(--accent)";
-  document.getElementById("sa").textContent = avg;
-  document.getElementById("sac").textContent = avgA + "%";
-  document.getElementById("st").textContent = rs.length;
-  document.getElementById("stm").textContent = tt < 3600 ? Math.round(tt / 60) + "m" : (tt / 3600).toFixed(1) + "h";
+  var sbEl = document.getElementById("sb");
+  if (sbEl) sbEl.innerHTML = best + " <span style='font-size:14px;font-weight:600;color:var(--sub)'>WPM</span>";
+  var saEl = document.getElementById("sa");
+  if (saEl) saEl.innerHTML = avg + " <span style='font-size:14px;font-weight:600;color:var(--sub)'>WPM</span>";
+  var sacEl = document.getElementById("sac");
+  if (sacEl) sacEl.innerHTML = avgA + " <span style='font-size:14px;font-weight:600;color:var(--sub)'>%</span>";
+  var stEl = document.getElementById("st");
+  if (stEl) stEl.innerHTML = rs.length + " <span style='font-size:13px;font-weight:600;color:var(--sub)'>" + (isAr ? "اختبار" : "tests") + "</span>";
+  var stmEl = document.getElementById("stm");
+  if (stmEl) {
+    var timeStr = tt < 3600 ? Math.round(tt / 60) + " " + (isAr ? "دقيقة" : "min") : (tt / 3600).toFixed(1) + " " + (isAr ? "ساعة" : "hr");
+    stmEl.innerHTML = timeStr;
+  }
 
   var l20 = rs.slice(0, 20).reverse();
   drawChart("cwpm", l20.map(function (r) { return r.wpm; }), "var(--accent)");
-  drawChart("cacc", l20.map(function (r) { return r.acc }), "var(--ok)");
+  drawChart("cacc", l20.map(function (r) { return r.acc; }), "var(--ok)");
 
   var ge = {}, gt = {};
   for (var k = 0; k < rs.length; k++) {
@@ -2579,20 +2908,29 @@ function renderStats() {
   renderAch();
 
   var rl = document.getElementById("rlist");
-  var rh = "";
-  var sl = rs.slice(0, 10);
-  for (var n = 0; n < sl.length; n++) {
-    var d = new Date(sl[n].ts);
-    var ds = d.getDate() + "/" + (d.getMonth() + 1) + " " + d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
-    var acl = sl[n].acc >= 95 ? "var(--ok)" : sl[n].acc >= 85 ? "var(--accent)" : "var(--err)";
-    rh += "<div class='recrow'><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + ds + "</span><span style='font-family:monospace;font-weight:700;color:var(--accent)'>" + sl[n].wpm + " WPM</span><span style='font-family:monospace;color:" + acl + "'>" + sl[n].acc + "%</span><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + Math.round(sl[n].dur) + "s</span><span style='font-size:11px;color:var(--sub);font-family:monospace'>" + (sl[n].lang || "en").toUpperCase() + "</span></div>";
+  if (rl) {
+    var rh = "";
+    var sl = rs.slice(0, 10);
+    for (var n = 0; n < sl.length; n++) {
+      var d = new Date(sl[n].ts);
+      var ds = d.getDate() + "/" + (d.getMonth() + 1) + " " + d.getHours() + ":" + String(d.getMinutes()).padStart(2, "0");
+      var acl = sl[n].acc >= 95 ? "var(--ok)" : sl[n].acc >= 85 ? "var(--accent)" : "var(--err)";
+      rh += "<div class='recrow'><span style='font-size:11px;color:var(--sub);font-family:var(--fnum)'>" + ds + "</span><span style='font-family:var(--fnum);font-weight:700;color:var(--accent)'>" + sl[n].wpm + " WPM</span><span style='font-family:var(--fnum);color:" + acl + "'>" + sl[n].acc + "%</span><span style='font-size:11px;color:var(--sub);font-family:var(--fnum)'>" + Math.round(sl[n].dur) + "s</span><span style='font-size:11px;color:var(--sub);font-family:var(--fnum)'>" + (sl[n].lang || "en").toUpperCase() + "</span></div>";
+    }
+    rl.innerHTML = rh;
   }
-  rl.innerHTML = rh;
 }
 
 function drawChart(id, data, color) {
   var svg = document.getElementById(id);
-  if (!data || data.length < 2) { svg.innerHTML = ""; return; }
+  if (!svg) return;
+  var isAr = (S.lang === "ar");
+  if (!data || data.length < 2) {
+    svg.innerHTML = "<text x='150' y='44' text-anchor='middle' fill='#64748b' font-size='12' font-weight='500' font-family='var(--far)'>" +
+      (isAr ? "اكتب أول اختبارين ليظهر منحناك هنا" : "Complete 2 tests to display your curve") +
+      "</text>";
+    return;
+  }
   var W = 300, H = 80;
   var max = data[0], min = data[0];
   for (var i = 1; i < data.length; i++) {
@@ -2603,10 +2941,10 @@ function drawChart(id, data, color) {
   var pts = "";
   for (var j = 0; j < data.length; j++) {
     var x = (j / (data.length - 1)) * W;
-    var y = H - ((data[j] - min) / range) * (H - 10) - 5;
+    var y = H - ((data[j] - min) / range) * (H - 14) - 7;
     pts += x + "," + y + " ";
   }
-  svg.innerHTML = "<defs><linearGradient id='g" + id + "' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='" + color + "' stop-opacity='.3'/><stop offset='100%' stop-color='" + color + "' stop-opacity='0'/></linearGradient></defs><polygon points='0," + H + " " + pts + W + "," + H + "' fill='url(#g" + id + ")'/><polyline points='" + pts + "' fill='none' stroke='" + color + "' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>";
+  svg.innerHTML = "<defs><linearGradient id='g" + id + "' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='" + color + "' stop-opacity='.3'/><stop offset='100%' stop-color='" + color + "' stop-opacity='0'/></linearGradient></defs><polygon points='0," + H + " " + pts + W + "," + H + "' fill='url(#g" + id + ")'/><polyline points='" + pts + "' fill='none' stroke='" + color + "' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/>";
 }
 
 function mastery(e, ts) {
@@ -2627,20 +2965,22 @@ function renderHeatmap(em, tm) {
   var w = document.getElementById("hmap");
   if (!w) return;
   var isAr = (S.lang === "ar");
+  var rows = isAr ? KR_AR : KR;
   var h = "";
-  for (var ri = 0; ri < KR.length; ri++) {
-    h += "<div class='hmrow' style='padding-left:" + (ri * 14) + "px'>";
-    for (var ci = 0; ci < KR[ri].length; ci++) {
-      var k = KR[ri][ci];
+  for (var ri = 0; ri < rows.length; ri++) {
+    var stagger = ri === 0 ? 0 : (ri === 1 ? 16 : 32);
+    h += "<div class='hmrow' style='margin-inline-start:" + stagger + "px'>";
+    for (var ci = 0; ci < rows[ri].length; ci++) {
+      var k = rows[ri][ci];
       var e = em[k] || 0;
       var ts = tm[k] || [];
       var m = mastery(e, ts);
       var has = (e > 0 || ts.length > 0);
       var bg, bd;
-      if (m >= 80) { bg = "rgba(76,175,125,.4)"; bd = "rgba(76,175,125,.6)"; }
-      else if (m >= 60) { bg = "rgba(226,183,20,.35)"; bd = "rgba(226,183,20,.6)"; }
-      else if (m >= 40) { bg = "rgba(229,146,86,.45)"; bd = "rgba(229,146,86,.7)"; }
-      else { bg = "rgba(229,86,86,.5)"; bd = "rgba(229,86,86,.7)"; }
+      if (m >= 80) { bg = "rgba(72,187,120,.28)"; bd = "rgba(72,187,120,.65)"; }
+      else if (m >= 60) { bg = "rgba(232,175,71,.26)"; bd = "rgba(232,175,71,.65)"; }
+      else if (m >= 40) { bg = "rgba(234,147,82,.28)"; bd = "rgba(234,147,82,.65)"; }
+      else { bg = "rgba(229,86,86,.32)"; bd = "rgba(229,86,86,.7)"; }
       var sty = has ? "background:" + bg + ";border-color:" + bd : "";
       var avg2 = 0;
       if (ts.length) {
@@ -2663,15 +3003,33 @@ function renderAch() {
   var ul = gA();
   var g = document.getElementById("achg");
   if (!g) return;
+  var isAr = (S.lang === "ar");
   var h = "";
-  for (var i = 0; i < ACHS.length; i++) {
-    var a = ACHS[i];
-    var trans = (ACHS_I18N[S.lang] && ACHS_I18N[S.lang][a.id]) ? ACHS_I18N[S.lang][a.id] : { n: a.n, d: a.d };
+  var lockSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-inline-end:3px"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
+  var checkSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-inline-end:3px"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+
+  var achList = (typeof ACHS !== "undefined" ? ACHS : (window.ACHS || []));
+  var achI18n = (typeof ACHS_I18N !== "undefined" ? ACHS_I18N : (window.ACHS_I18N || {}));
+
+  for (var i = 0; i < achList.length; i++) {
+    var a = achList[i];
+    var trans = (achI18n[S.lang] && achI18n[S.lang][a.id]) ? achI18n[S.lang][a.id] : { n: a.n, d: a.d };
     var u = null;
     for (var j = 0; j < ul.length; j++) {
       if (ul[j].id === a.id) { u = ul[j]; break; }
     }
-    h += "<div class='ach" + (u ? " got" : "") + "'><div class='ico'>" + a.ic + "</div><div class='nm'>" + trans.n + "</div><div class='ds'>" + trans.d + "</div></div>";
+    var statusBadge = u ?
+      ('<span class="ach-status-badge got">' + checkSvg + (isAr ? 'مكتمل' : 'Unlocked') + '</span>') :
+      ('<span class="ach-status-badge locked">' + lockSvg + (isAr ? 'مقفل' : 'Locked') + '</span>');
+
+    h += "<div class='ach" + (u ? " got" : " locked") + "'>" +
+      "<div class='ico'>" + a.ic + "</div>" +
+      "<div class='ach-info'>" +
+        "<div class='nm'>" + trans.n + "</div>" +
+        "<div class='ds'>" + trans.d + "</div>" +
+        statusBadge +
+      "</div>" +
+    "</div>";
   }
   g.innerHTML = h;
 }
@@ -2708,10 +3066,12 @@ function chkAch() {
 
 function showAchToast(id) {
   var a = null;
-  for (var i = 0; i < ACHS.length; i++) if (ACHS[i].id === id) a = ACHS[i];
+  var achList = (typeof ACHS !== "undefined" ? ACHS : (window.ACHS || []));
+  var achI18n = (typeof ACHS_I18N !== "undefined" ? ACHS_I18N : (window.ACHS_I18N || {}));
+  for (var i = 0; i < achList.length; i++) if (achList[i].id === id) a = achList[i];
   if (!a) return;
   var isAr = (S.lang === "ar");
-  var trans = (ACHS_I18N[S.lang] && ACHS_I18N[S.lang][a.id]) ? ACHS_I18N[S.lang][a.id] : { n: a.n, d: a.d };
+  var trans = (achI18n[S.lang] && achI18n[S.lang][a.id]) ? achI18n[S.lang][a.id] : { n: a.n, d: a.d };
   var con = document.getElementById("toasts");
   var d = document.createElement("div");
   d.className = "toast2";
@@ -2830,7 +3190,12 @@ function initRace() {
   document.getElementById("rp2-pct").textContent = "0%";
   document.getElementById("race-timer").textContent = "—";
 
+  var p1Box = document.getElementById("race-player-1");
+  var p2Box = document.getElementById("race-player-2");
+
   if (RACE.modeType === "ghost") {
+    if (p1Box) p1Box.classList.remove("is-waiting");
+    if (p2Box) p2Box.classList.add("is-waiting");
     document.getElementById("rp1-name").textContent = isAr ? "اللاعب 1 (أنت)" : "Player 1 (You)";
     document.getElementById("rp2-name").textContent = isAr ? "اللاعب 2 (المنافس)" : "Player 2 (Opponent)";
     document.getElementById("rp2-avatar").textContent = "2";
@@ -2845,6 +3210,8 @@ function initRace() {
     document.getElementById("r-turn-sub").textContent = isAr ? "اضغط أي حرف للانطلاق" : "Press any key to start";
   } else {
     // Bot mode
+    if (p1Box) p1Box.classList.remove("is-waiting");
+    if (p2Box) p2Box.classList.remove("is-waiting");
     document.getElementById("rp1-name").textContent = isAr ? "أنت (السيارة الصفراء)" : "You (Yellow Car)";
     document.getElementById("rp2-name").textContent = (isAr ? "الروبوت الذكي (" : "AI Bot (") + RACE.botSpeed + " WPM)";
     document.getElementById("rp2-avatar").innerHTML = TM_ICONS.robot;
@@ -3120,6 +3487,10 @@ function finishPlayerRun(playerNum, player) {
         renderRaceWords();
 
         // Reset track 1 back to 0 for replay
+        var p1Box = document.getElementById("race-player-1");
+        var p2Box = document.getElementById("race-player-2");
+        if (p1Box) p1Box.classList.add("is-waiting");
+        if (p2Box) p2Box.classList.remove("is-waiting");
         document.getElementById("rbar1").style.width = "0%";
         updateCarPosition("rcar1", 0);
         document.getElementById("rp1-pct").textContent = "0%";
@@ -3623,16 +3994,19 @@ function omCreateRoom() {
   if (errEl) errEl.textContent = '';
   OM.myName = document.getElementById('om-name-c').value.trim() || (S.lang === 'ar' ? 'لاعب 1' : 'Player 1');
 
+  var curUser = (window.BarqAPI && window.BarqAPI.getCurrentUser) ? window.BarqAPI.getCurrentUser() : null;
+  var myUserId = curUser ? curUser.id : null;
+
   if (!OM.socket || !OM.socket.connected) {
     if (errEl) {
       errEl.textContent = S.lang === 'ar' ? 'جارِ الاتصال بالخادم...' : 'Connecting to server...';
       errEl.dataset.isConnWait = '1';
     }
     omConnect(function () {
-      OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration });
+      OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration, userId: myUserId });
     });
   } else {
-    OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration });
+    OM.socket.emit('create_room', { name: OM.myName, lang: S.lang, duration: OM.raceDuration, userId: myUserId });
   }
 }
 
@@ -3647,16 +4021,19 @@ function omJoinRoom() {
   }
   OM.myName = document.getElementById('om-name-j').value.trim() || (S.lang === 'ar' ? 'لاعب 2' : 'Player 2');
 
+  var curUser = (window.BarqAPI && window.BarqAPI.getCurrentUser) ? window.BarqAPI.getCurrentUser() : null;
+  var myUserId = curUser ? curUser.id : null;
+
   if (!OM.socket || !OM.socket.connected) {
     if (errEl) {
       errEl.textContent = S.lang === 'ar' ? 'جارِ الاتصال بالخادم...' : 'Connecting to server...';
       errEl.dataset.isConnWait = '1';
     }
     omConnect(function () {
-      OM.socket.emit('join_room', { code: code, name: OM.myName });
+      OM.socket.emit('join_room', { code: code, name: OM.myName, userId: myUserId });
     });
   } else {
-    OM.socket.emit('join_room', { code: code, name: OM.myName });
+    OM.socket.emit('join_room', { code: code, name: OM.myName, userId: myUserId });
   }
 }
 
@@ -4251,11 +4628,11 @@ function omShareResults() {
     ('نتيجة سباق Barqtype:\n' +
       'الفائز: ' + (winner ? winner.name : '—') + ' (' + (winner ? winner.wpm : 0) + ' WPM)\n' +
       'سرعتي: ' + (me ? me.wpm : 0) + ' WPM | الدقة: ' + (me ? me.acc : 100) + '%\n' +
-      'تحداني الآن في Barqtype! ⚡') :
+      'تحداني الآن في Barqtype!') :
     ('Barqtype Race Result:\n' +
       'Winner: ' + (winner ? winner.name : '—') + ' (' + (winner ? winner.wpm : 0) + ' WPM)\n' +
       'My Speed: ' + (me ? me.wpm : 0) + ' WPM | Accuracy: ' + (me ? me.acc : 100) + '%\n' +
-      'Challenge me on Barqtype! ⚡');
+      'Challenge me on Barqtype!');
 
   if (navigator.clipboard) {
     navigator.clipboard.writeText(text).then(function () {
@@ -4294,10 +4671,10 @@ function omShowToast(msg, isErr) {
 // ══════════════════════════════════════════════════════════════
 window.addEventListener('load', function () {
   var h = window.location.hash;
-  if (h === '#stats') showTab('stats');
+  if (h === '#stats') { if (window.history && window.history.replaceState) { window.history.replaceState(null, '', window.location.pathname + window.location.search); } showTab('test'); }
   else if (h === '#race') showTab('race');
   else if (h === '#online') {
     showTab('race');
     setTimeout(function () { if (window.openOnlineRace) openOnlineRace(); }, 200);
-  }
+  } else { showTab('test'); }
 });
